@@ -86,9 +86,10 @@ a {
   padding: 1rem;
   width: 100%;
   width: fit-content;
+  pointer-events: none;
 
   &__title {
-    width: fit-content;
+    width: 100%;
     border: none;
     margin: 0;
     padding: 0;
@@ -109,7 +110,7 @@ a {
     font-size: 14px;
     line-height: 1;
     color: var(--color-text-3);
-    pointer-events: none;
+    pointer-events: auto;
   }
 
   &__categories {
@@ -137,6 +138,7 @@ a {
         align-items: center;
         gap: 0.25rem;
         border-radius: 0.25rem;
+        pointer-events: auto;
 
         &::before {
           content: "\e865";
@@ -161,6 +163,7 @@ a {
         align-items: center;
         gap: 0.25rem;
         border-radius: 0.25rem;
+        pointer-events: auto;
 
         &::before {
           content: "\f05b";
