@@ -20,37 +20,40 @@ const props = withDefaults(
 </script>
 
 <template>
-  <div class="toc-list">
-    <a class="toc-list__title--link" :href="content.url.slice(1)">{{
-      content.frontmatter.title
-    }}</a>
-    <p class="toc-list__description" v-if="content.frontmatter.description">
-      {{ content.frontmatter.description }}
-    </p>
-    <div class="toc-list__categories">
-      <div
-        class="toc-list__categories__series"
-        v-if="
-          content.frontmatter.series && content.frontmatter.series.length > 0
-        "
-      >
-        <span
-          v-for="series in content.frontmatter.series"
-          class="toc-list__categories__series--series"
-          >
-          {{ series.name }}-{{ (series.part + "").padStart(2, "0") }}
-        </span>
-      </div>
-      <div
-        class="toc-list__categories__tags"
-        v-if="content.frontmatter.tags && content.frontmatter.tags.length > 0"
-      >
+  <div class="toc-container">
+    <a class="toc-container--link" :href="content.url.slice(1)"></a>
+    <div class="toc-list">
+      <a class="toc-list__title" :href="content.url.slice(1)">{{
+        content.frontmatter.title
+      }}</a>
+      <p class="toc-list__description" v-if="content.frontmatter.description">
+        {{ content.frontmatter.description }}
+      </p>
+      <div class="toc-list__categories">
         <div
-          v-for="tag in content.frontmatter.tags"
-          :key="tag"
-          class="toc-list__categories__tags--tag"
+          class="toc-list__categories__series"
+          v-if="
+            content.frontmatter.series && content.frontmatter.series.length > 0
+          "
         >
-          <span>{{ tag }}</span>
+          <span
+            v-for="series in content.frontmatter.series"
+            class="toc-list__categories__series--series"
+            >
+            {{ series.name }}-{{ (series.part + "").padStart(2, "0") }}
+          </span>
+        </div>
+        <div
+          class="toc-list__categories__tags"
+          v-if="content.frontmatter.tags && content.frontmatter.tags.length > 0"
+        >
+          <div
+            v-for="tag in content.frontmatter.tags"
+            :key="tag"
+            class="toc-list__categories__tags--tag"
+          >
+            <span>{{ tag }}</span>
+          </div>
         </div>
       </div>
     </div>
@@ -58,18 +61,39 @@ const props = withDefaults(
 </template>
 
 <style scoped lang="scss">
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.toc-container {
+  display: grid;
+  grid-template-areas: "placeholder";
+  border-radius: 0.5rem;
+  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+
+  &--link {
+    grid-area: placeholder;
+  }
+}
+
 .toc-list {
+  grid-area: placeholder;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  border-radius: 0.5rem;
-  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.1);
   padding: 1rem;
+  width: 100%;
+  width: fit-content;
 
-  &__title--link {
+  &__title {
+    width: fit-content;
+    border: none;
+    margin: 0;
+    padding: 0;
     font-size: 1.25rem;
     color: var(--vp-c-brand-1);
-    text-decoration: none;
     transition: color 0.3s;
     font-weight: 700;
     font-family: "Wix Madefor Display", var(--vp-font-family-base);
@@ -80,17 +104,21 @@ const props = withDefaults(
   }
 
   &__description {
+    width: fit-content;
     margin: 0;
     font-size: 14px;
     line-height: 1;
     color: var(--color-text-3);
+    pointer-events: none;
   }
 
   &__categories {
+    width: fit-content;
     display: flex;
     gap: 0.5rem;
 
     &__series {
+      width: fit-content;
       display: flex;
       gap: 0.5rem;
 
@@ -118,6 +146,7 @@ const props = withDefaults(
     }
 
     &__tags {
+      width: fit-content;
       display: flex;
       gap: 0.5rem;
 
