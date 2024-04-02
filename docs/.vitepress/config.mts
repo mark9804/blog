@@ -14,6 +14,12 @@ export default defineConfig({
   title: "今天没有早睡",
   description: "",
   lastUpdated: true,
+  markdown: {
+    math: true,
+    headers: {
+      level: [0, 0],
+    }
+  },
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     // lastUpdated: {
