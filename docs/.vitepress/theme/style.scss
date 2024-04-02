@@ -35,6 +35,10 @@ body {
     font-family: "Wix Madefor Display", var(--vp-font-family-base);
   }
 
+  p {
+    text-align: justify;
+  }
+
   table {
     display: table;
     width: 100%;
