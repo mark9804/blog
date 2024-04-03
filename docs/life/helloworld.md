@@ -1,12 +1,13 @@
 ---
 title: 'Hello, "World"'
 description: 你好，“世界”
-series: 
+series:
   - name: 生活
     part: 2
 tags:
   - 生活
 ---
+
 # Hello, "World"
 
 当我打下这些文字的时候，我已经硕士毕业了——其实还是有点百感交集的。

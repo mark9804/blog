@@ -2,7 +2,7 @@
 import { ArticleInfo } from "../types/ArticleInfo";
 import { data as usePosts } from "../helper/posts.data";
 import { computed } from "vue";
-import TableOfContent from './TableOfContent.vue';
+import TableOfContent from "./TableOfContent.vue";
 const useContents = computed(() =>
   usePosts.filter((el: ArticleInfo) => !el.frontmatter?.meta?.hidden)
 );

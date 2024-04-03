@@ -9,4 +9,4 @@ export interface ArticleInfo {
     };
   };
   url: string;
-};
+}

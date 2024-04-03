@@ -2,7 +2,7 @@
 import { useData } from "vitepress";
 import { nextTick, onBeforeMount, provide } from "vue";
 import DefaultTheme from "vitepress/theme";
-import { ArticleInfo } from "../../src/types/ArticleInfo"
+import { ArticleInfo } from "../../src/types/ArticleInfo";
 
 const { isDark } = useData();
 
