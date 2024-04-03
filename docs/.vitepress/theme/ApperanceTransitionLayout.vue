@@ -2,7 +2,7 @@
 import { useData } from "vitepress";
 import { nextTick, onBeforeMount, provide } from "vue";
 import DefaultTheme from "vitepress/theme";
-// import "virtual:uno.css";
+import { ArticleInfo } from "../../src/types/ArticleInfo"
 
 const { isDark } = useData();
 
@@ -10,12 +10,13 @@ const enableTransitions = () =>
   "startViewTransition" in document &&
   window.matchMedia("(prefers-reduced-motion: no-preference)").matches;
 
-provide("toggle-appearance", async ({ clientX: x, clientY: y }: MouseEvent) => {
+provide("toggle-appearance", async () => {
   if (!enableTransitions()) {
     isDark.value = !isDark.value;
     return;
   }
 
+  // @ts-ignore
   await document.startViewTransition(async () => {
     isDark.value = !isDark.value;
     await nextTick();
@@ -23,7 +24,7 @@ provide("toggle-appearance", async ({ clientX: x, clientY: y }: MouseEvent) => {
 
   document
     .querySelector("body")
-    .setAttribute("arco-theme", isDark.value ? "dark" : "");
+    ?.setAttribute("arco-theme", isDark.value ? "dark" : "");
 
   document.documentElement.animate(
     { opacity: isDark.value ? [1, 0] : [0, 1] },
@@ -38,12 +39,12 @@ provide("toggle-appearance", async ({ clientX: x, clientY: y }: MouseEvent) => {
 onBeforeMount(() => {
   document
     .querySelector("body")
-    .setAttribute("arco-theme", isDark.value ? "dark" : "");
+    ?.setAttribute("arco-theme", isDark.value ? "dark" : "");
 });
 
 const data = useData();
 const { Layout } = DefaultTheme;
-const { frontmatter } = data;
+const frontmatter = data.frontmatter as unknown as ArticleInfo["frontmatter"];
 </script>
 
 <template>
