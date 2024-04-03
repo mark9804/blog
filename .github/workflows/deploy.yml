@@ -4,6 +4,10 @@ on:
   push:
     branches:
       - master
+    paths:
+      - "docs/**"
+      - ".github/workflows/deploy.yml"
+      - "pnpm-lock.yaml"
 
 concurrency:
   group: "blog"
