@@ -2,6 +2,7 @@
 import { useData } from "vitepress";
 import { nextTick, onBeforeMount, provide } from "vue";
 import DefaultTheme from "vitepress/theme";
+import DiscussionWidget from "./DiscussionWidget.vue";
 import { ArticleInfo } from "../../src/types/ArticleInfo";
 
 const { isDark } = useData();
@@ -66,6 +67,9 @@ const frontmatter = data.frontmatter as unknown as ArticleInfo["frontmatter"];
           </span>
         </div>
       </div>
+    </template>
+    <template #doc-after>
+      <DiscussionWidget />
     </template>
   </Layout>
 </template>
