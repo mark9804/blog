@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ArticleInfo } from "../types/ArticleInfo";
 
-const props = withDefaults(
+withDefaults(
   defineProps<{
     content: ArticleInfo;
   }>(),
@@ -39,7 +39,7 @@ const props = withDefaults(
           <span
             v-for="series in content.frontmatter.series"
             class="toc-list__categories__series--series"
-            >
+          >
             {{ series.name }}-{{ (series.part + "").padStart(2, "0") }}
           </span>
         </div>
