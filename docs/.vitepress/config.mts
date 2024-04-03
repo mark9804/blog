@@ -1,12 +1,13 @@
 import { HeadConfig, defineConfig } from "vitepress";
-import AutoSidebar from 'vite-plugin-vitepress-auto-sidebar';
+import AutoSidebar from "vite-plugin-vitepress-auto-sidebar";
 import px2rem from "postcss-plugin-px2rem";
 import tailwindcss from "tailwindcss";
 import tailwindConfig from "../../tailwind.config.js";
 import AutoImport from "unplugin-auto-import/vite";
 import { ArcoResolver } from "unplugin-vue-components/resolvers";
 import Components from "unplugin-vue-components/vite";
-import { vitePluginForArco } from '@arco-plugins/vite-vue'
+import { vitePluginForArco } from "@arco-plugins/vite-vue";
+import { generateSidebar } from 'vitepress-sidebar';
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -18,7 +19,7 @@ export default defineConfig({
     math: true,
     headers: {
       level: [0, 0],
-    }
+    },
   },
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
@@ -30,15 +31,52 @@ export default defineConfig({
     //     forceLocale: true,
     //   }
     // },
+
+    sidebar: generateSidebar({
+      documentRootPath: '/docs',
+      useTitleFromFileHeading: true,
+      useTitleFromFrontmatter: true,
+      useFolderTitleFromIndexFile: true,
+      // useFolderLinkFromIndexFile: false,
+      // hyphenToSpace: true,
+      // underscoreToSpace: true,
+      capitalizeFirst: true,
+      capitalizeEachWords: true,
+      collapsed: true,
+      collapseDepth: 2,
+      // sortMenusByName: false,
+      // sortMenusByFrontmatterOrder: false,
+      // sortMenusByFrontmatterDate: false,
+      // sortMenusOrderByDescending: false,
+      // sortMenusOrderNumericallyFromTitle: false,
+      // sortMenusOrderNumericallyFromLink: false,
+      // frontmatterOrderDefaultValue: 0,
+      // manualSortFileNameByPriority: ['first.md', 'second', 'third.md'],
+      // removePrefixAfterOrdering: false,
+      // prefixSeparator: '.',
+      // excludeFiles: ['first.md', 'secret.md'],
+      // excludeFilesByFrontmatter: false,
+      // excludeFolders: ['secret-folder'],
+      // includeDotFiles: false,
+      // includeRootIndexFile: false,
+      // includeFolderIndexFile: false,
+      // includeEmptyFolder: false,
+      // rootGroupText: 'Contents',
+      // rootGroupLink: 'https://github.com/jooy2',
+      // rootGroupCollapsed: false,
+      // convertSameNameSubFileToGroupIndexPage: false,
+      // folderLinkNotIncludesFileName: false,
+      // keepMarkdownSyntaxFromTitle: false,
+      // debugPrint: true,
+    }),
+
     search: {
       provider: "local",
     },
 
     nav: [{ text: "Home", link: "/" }],
 
-    socialLinks: [
-      { icon: "github", link: "https://github.com/mark9804" },
-    ],
+    socialLinks: [{ icon: "github", link: "https://github.com/mark9804" }],
 
     vite: {
       ssr: { noExternal: ["@arco-design/web-vue"] },
@@ -47,16 +85,12 @@ export default defineConfig({
           resolvers: [ArcoResolver()],
         }),
         Components({
-          // include: [/\.vue$/, /\.md$/],
+          include: [/\.vue$/, /\.md$/],
           resolvers: [ArcoResolver({ sideEffect: true })],
         }),
-        AutoSidebar({
-          ignoreList: ["src", "components", "node_modules", ".git", ".vitepress"],
-          titleFromFile: true,
-        }),
         vitePluginForArco({
-          style: 'css'
-        })
+          style: "css",
+        }),
       ],
       css: {
         postcss: {

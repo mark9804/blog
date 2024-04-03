@@ -32,6 +32,7 @@
     "tailwindcss": "^3.4.3",
     "unplugin-auto-import": "^0.17.5",
     "vitepress": "1.0.2",
+    "vitepress-sidebar": "^1.22.0",
     "vue": "3.2.44"
   },
   "pnpm": {
@@ -54,7 +55,6 @@
     "postcss-plugin-px2rem": "^0.8.1",
     "radash": "^12.1.0",
     "sass": "^1.72.0",
-    "unplugin-vue-components": "^0.26.0",
-    "vite-plugin-vitepress-auto-sidebar": "^1.6.3"
+    "unplugin-vue-components": "^0.26.0"
   }
 }

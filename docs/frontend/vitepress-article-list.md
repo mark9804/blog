@@ -19,7 +19,9 @@ tags:
 :::
 
 :::tip
-也可以用 `createContentLoader` 实现自动侧边栏功能。
+如果你喜欢折腾，也可以用 `createContentLoader` 自己实现一个自动侧边栏功能（如果你需要在 `config.{js,ts,mts}` 中使用，应该异步调用 `createContentLoader`）；
+
+如果你和我一样喜欢偷懒，可以使用 [现成的插件](https://vitepress-sidebar.jooy2.com/getting-started)。
 :::
 
 ## 使用方法
