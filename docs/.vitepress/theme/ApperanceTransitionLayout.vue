@@ -4,6 +4,7 @@ import { nextTick, onBeforeMount, provide } from "vue";
 import DefaultTheme from "vitepress/theme";
 import DiscussionWidget from "./DiscussionWidget.vue";
 import { ArticleInfo } from "../../src/types/ArticleInfo";
+import { useRoute } from 'vitepress';
 
 const { isDark } = useData();
 
@@ -44,6 +45,7 @@ onBeforeMount(() => {
 });
 
 const data = useData();
+const route = useRoute();
 const { Layout } = DefaultTheme;
 const frontmatter = data.frontmatter as unknown as ArticleInfo["frontmatter"];
 </script>
@@ -68,7 +70,7 @@ const frontmatter = data.frontmatter as unknown as ArticleInfo["frontmatter"];
         </div>
       </div>
     </template>
-    <template #doc-after>
+    <template #doc-after v-if="'/blog/' !== route.path">
       <DiscussionWidget />
     </template>
   </Layout>
