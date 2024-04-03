@@ -36,9 +36,10 @@ withDefaults(
             content.frontmatter.series && content.frontmatter.series.length > 0
           "
         >
+          <!-- eslint-disable vue/require-v-for-key -->
           <span
             v-for="series in content.frontmatter.series"
-            class="toc-list__categories__series--series"
+            class="toc-list__categories__series span-series"
           >
             {{ series.name }}-{{ (series.part + "").padStart(2, "0") }}
           </span>
@@ -49,9 +50,9 @@ withDefaults(
         >
           <div
             v-for="tag in content.frontmatter.tags"
-            :key="tag"
-            class="toc-list__categories__tags--tag"
+            class="toc-list__categories__tags span-tag"
           >
+            <!-- eslint-enable vue/require-v-for-key -->
             <span>{{ tag }}</span>
           </div>
         </div>
@@ -122,54 +123,12 @@ a {
       width: fit-content;
       display: flex;
       gap: 0.5rem;
-
-      &--series {
-        font-size: 14px;
-        line-height: 1.2;
-        color: var(--color-text-3);
-        background-color: var(--color-bg-2);
-        padding: 0.25rem 0.5rem;
-        border-radius: 0.25rem;
-        color: var(--vp-c-brand-1);
-        background-color: var(--arona-blue-1);
-        padding: 0.25rem 0.5rem;
-        border-radius: 0.25rem;
-        display: flex;
-        align-items: center;
-        gap: 0.25rem;
-        border-radius: 0.25rem;
-        pointer-events: auto;
-
-        &::before {
-          content: "\e865";
-          font-family: "Material Symbols Outlined";
-        }
-      }
     }
 
     &__tags {
       width: fit-content;
       display: flex;
       gap: 0.5rem;
-
-      &--tag {
-        font-size: 14px;
-        line-height: 1.2;
-        color: var(--vp-c-brand-1);
-        background-color: var(--arona-blue-1);
-        padding: 0.25rem 0.5rem;
-        border-radius: 0.25rem;
-        display: flex;
-        align-items: center;
-        gap: 0.25rem;
-        border-radius: 0.25rem;
-        pointer-events: auto;
-
-        &::before {
-          content: "\f05b";
-          font-family: "Material Symbols Outlined";
-        }
-      }
     }
   }
 }

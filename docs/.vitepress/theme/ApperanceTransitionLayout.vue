@@ -2,6 +2,7 @@
 import { useData } from "vitepress";
 import { nextTick, onBeforeMount, provide } from "vue";
 import DefaultTheme from "vitepress/theme";
+// import "virtual:uno.css";
 
 const { isDark } = useData();
 
@@ -39,10 +40,33 @@ onBeforeMount(() => {
     .querySelector("body")
     .setAttribute("arco-theme", isDark.value ? "dark" : "");
 });
+
+const data = useData();
+const { Layout } = DefaultTheme;
+const { frontmatter } = data;
 </script>
 
 <template>
-  <DefaultTheme.Layout />
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,1,0"
+  />
+  <Layout>
+    <template #doc-footer-before>
+      <div class="flex gap-4">
+        <div class="flex gap-2" v-if="frontmatter?.series?.length">
+          <span class="span-series" v-for="series in frontmatter?.series">
+            {{ series.name }}-{{ (series.part + "").padStart(2, "0") }}
+          </span>
+        </div>
+        <div class="flex gap-2" v-if="frontmatter?.tags?.length">
+          <span class="span-tag" v-for="tag in frontmatter?.tags">
+            {{ tag }}
+          </span>
+        </div>
+      </div>
+    </template>
+  </Layout>
 </template>
 
 <style>

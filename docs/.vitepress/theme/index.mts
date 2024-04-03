@@ -3,7 +3,6 @@ import { Message } from "@arco-design/web-vue";
 import Theme from "vitepress/theme";
 import ApperanceTransitionLayout from "./ApperanceTransitionLayout.vue";
 import "./style.scss";
-import "./tailwind.postcss";
 
 export default {
   ...Theme,

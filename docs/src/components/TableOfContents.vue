@@ -10,7 +10,6 @@ const useContents = computed(() =>
 
 <template>
   <ul class="toc">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,1,0" />
     <li v-for="content in useContents" :key="content.url">
       <table-of-content :content="content"></table-of-content>
     </li>

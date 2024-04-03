@@ -1,13 +1,11 @@
 import { HeadConfig, defineConfig } from "vitepress";
-import AutoSidebar from "vite-plugin-vitepress-auto-sidebar";
 import px2rem from "postcss-plugin-px2rem";
-import tailwindcss from "tailwindcss";
-import tailwindConfig from "../../tailwind.config.js";
 import AutoImport from "unplugin-auto-import/vite";
 import { ArcoResolver } from "unplugin-vue-components/resolvers";
 import Components from "unplugin-vue-components/vite";
 import { vitePluginForArco } from "@arco-plugins/vite-vue";
-import { generateSidebar } from 'vitepress-sidebar';
+import { generateSidebar } from "vitepress-sidebar";
+import UnoCSS from "unocss/vite";
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -33,7 +31,7 @@ export default defineConfig({
     // },
 
     sidebar: generateSidebar({
-      documentRootPath: '/docs',
+      documentRootPath: "/docs",
       useTitleFromFileHeading: true,
       useTitleFromFrontmatter: true,
       useFolderTitleFromIndexFile: true,
@@ -88,6 +86,7 @@ export default defineConfig({
           include: [/\.vue$/, /\.md$/],
           resolvers: [ArcoResolver({ sideEffect: true })],
         }),
+        UnoCSS(),
         vitePluginForArco({
           style: "css",
         }),
@@ -100,7 +99,6 @@ export default defineConfig({
               propBlackList: ["font-size", "border", "border-width"],
               exclude: /(node_module)/,
             }),
-            tailwindcss(tailwindConfig),
           ],
         },
       },
