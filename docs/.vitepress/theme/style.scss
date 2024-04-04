@@ -39,35 +39,6 @@ body {
   gap: 1rem;
 }
 
-.span-series,
-.span-tag {
-  font-size: 14px;
-  line-height: 1.2;
-  color: var(--color-text-3);
-  background-color: var(--color-bg-2);
-  padding: 0.25rem 0.5rem;
-  border-radius: 0.25rem;
-  color: var(--vp-c-brand-1);
-  background-color: var(--arona-blue-1);
-  padding: 0.25rem 0.5rem;
-  border-radius: 0.25rem;
-  display: flex;
-  align-items: center;
-  gap: 0.25rem;
-  border-radius: 0.25rem;
-  pointer-events: auto;
-}
-
-.span-series::before {
-  content: "\e865";
-  font-family: "Material Symbols Outlined";
-}
-
-.span-tag::before {
-  content: "\f05b";
-  font-family: "Material Symbols Outlined";
-}
-
 .vp-doc {
   h1,
   h2,

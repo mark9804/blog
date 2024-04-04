@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ArticleInfo } from "../types/ArticleInfo";
-
+import AronaTag from "../components/AronaTag.vue";
 withDefaults(
   defineProps<{
     content: ArticleInfo;
@@ -36,25 +36,19 @@ withDefaults(
             content.frontmatter.series && content.frontmatter.series.length > 0
           "
         >
-          <!-- eslint-disable vue/require-v-for-key -->
-          <span
-            v-for="series in content.frontmatter.series"
-            class="toc-list__categories__series span-series"
-          >
+          <!-- eslint-disable vue/valid-v-for -->
+          <arona-tag v-for="series in content.frontmatter.series" series>
             {{ series.name }}-{{ (series.part + "").padStart(2, "0") }}
-          </span>
+          </arona-tag>
         </div>
         <div
           class="toc-list__categories__tags"
           v-if="content.frontmatter.tags && content.frontmatter.tags.length > 0"
         >
-          <div
-            v-for="tag in content.frontmatter.tags"
-            class="toc-list__categories__tags span-tag"
-          >
-            <!-- eslint-enable vue/require-v-for-key -->
+          <arona-tag v-for="tag in content.frontmatter.tags" tag>
+            <!-- eslint-enable vue/valid-v-for -->
             <span>{{ tag }}</span>
-          </div>
+          </arona-tag>
         </div>
       </div>
     </div>

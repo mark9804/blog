@@ -3,6 +3,7 @@ import { useData } from "vitepress";
 import { nextTick, onBeforeMount, provide } from "vue";
 import DefaultTheme from "vitepress/theme";
 import DiscussionWidget from "./DiscussionWidget.vue";
+import AronaTag from '../../src/components/AronaTag.vue';
 import { ArticleInfo } from "../../src/types/ArticleInfo";
 import { useRoute } from 'vitepress';
 
@@ -59,14 +60,14 @@ const frontmatter = data.frontmatter as unknown as ArticleInfo["frontmatter"];
     <template #doc-footer-before>
       <div class="flex gap-4">
         <div class="flex gap-2" v-if="frontmatter?.series?.length">
-          <span class="span-series" v-for="series in frontmatter?.series">
+          <arona-tag v-for="series in frontmatter?.series" series>
             {{ series.name }}-{{ (series.part + "").padStart(2, "0") }}
-          </span>
+          </arona-tag>
         </div>
         <div class="flex gap-2" v-if="frontmatter?.tags?.length">
-          <span class="span-tag" v-for="tag in frontmatter?.tags">
+          <arona-tag class="span-tag" v-for="tag in frontmatter?.tags">
             {{ tag }}
-          </span>
+          </arona-tag>
         </div>
       </div>
     </template>
