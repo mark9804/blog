@@ -3,6 +3,10 @@ import { Message } from "@arco-design/web-vue";
 import Theme from "vitepress/theme";
 import ApperanceTransitionLayout from "./ApperanceTransitionLayout.vue";
 import "./style.scss";
+import { createPinia } from 'pinia';
+import piniaPluginPersistedstate from 'pinia-plugin-persistedstate';
+const pinia = createPinia();
+pinia.use(piniaPluginPersistedstate);
 
 export default {
   ...Theme,
@@ -10,6 +14,7 @@ export default {
   Layout: ApperanceTransitionLayout,
   enhanceApp({ app, router, siteData }) {
     // ...
+    app.use(pinia);
     Message._context = app._context;
   },
 };

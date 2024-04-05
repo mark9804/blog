@@ -1,9 +1,8 @@
 import { HeadConfig, defineConfig } from "vitepress";
 import px2rem from "postcss-plugin-px2rem";
 import AutoImport from "unplugin-auto-import/vite";
-import { ArcoResolver } from "unplugin-vue-components/resolvers";
+// import { ArcoResolver } from "unplugin-vue-components/resolvers";
 import Components from "unplugin-vue-components/vite";
-import { vitePluginForArco } from "@arco-plugins/vite-vue";
 import { generateSidebar } from "vitepress-sidebar";
 import UnoCSS from "unocss/vite";
 
@@ -38,14 +37,14 @@ export default defineConfig({
   },
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
-    // lastUpdated: {
-    //   text: '最后更新于',
-    //   formatOptions: {
-    //     dateStyle: 'medium',
-    //     timeStyle: 'short',
-    //     forceLocale: true,
-    //   }
-    // },
+    lastUpdated: {
+      text: '最后更新于',
+      formatOptions: {
+        dateStyle: 'medium',
+        timeStyle: 'short',
+        forceLocale: true,
+      }
+    },
 
     sidebar: generateSidebar({
       documentRootPath: "/docs",
@@ -120,21 +119,22 @@ export default defineConfig({
     ],
 
     socialLinks: [{ icon: "github", link: "https://github.com/mark9804" }],
-
+    // @ts-ignore
     vite: {
       ssr: { noExternal: ["@arco-design/web-vue"] },
       plugins: [
         AutoImport({
-          resolvers: [ArcoResolver()],
+          resolvers: [
+            // ArcoResolver(),
+          ],
         }),
         Components({
           include: [/\.vue$/, /\.md$/],
-          resolvers: [ArcoResolver({ sideEffect: true })],
+          resolvers: [
+            // ArcoResolver({ sideEffect: true })
+          ],
         }),
         UnoCSS(),
-        vitePluginForArco({
-          style: "css",
-        }),
       ],
       css: {
         postcss: {
