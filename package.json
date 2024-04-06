@@ -47,7 +47,7 @@
     "@arco-plugins/vite-vue": "^1.4.5",
     "@typescript-eslint/eslint-plugin": "^7.5.0",
     "@vue/eslint-config-typescript": "^13.0.0",
-    "eslint": "^8.57.0",
+    "eslint": "^9.0.0",
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-sort-exports": "^0.9.1",
     "eslint-plugin-vue": "^9.24.0",
