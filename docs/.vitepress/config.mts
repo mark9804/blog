@@ -1,10 +1,18 @@
 import { HeadConfig, defineConfig } from "vitepress";
 import px2rem from "postcss-plugin-px2rem";
 import AutoImport from "unplugin-auto-import/vite";
-// import { ArcoResolver } from "unplugin-vue-components/resolvers";
+import { ArcoResolver } from "unplugin-vue-components/resolvers";
 import Components from "unplugin-vue-components/vite";
 import { generateSidebar } from "vitepress-sidebar";
 import UnoCSS from "unocss/vite";
+import {
+  presetAttributify,
+  presetIcons,
+  presetUno,
+  transformerDirectives,
+} from "unocss";
+
+import type { UserProfile } from "../src/types/UserProfile";
 
 export function tokenize(text: string): Array<string> {
   // Firefox doesn't support Intl.Segmenter currently
@@ -35,17 +43,24 @@ export default defineConfig({
       level: [0, 0],
     },
   },
+
   themeConfig: {
+    // @ts-ignore
+    userProfile:{
+      name: "今天早睡了吗",
+      email: "mail@blue-archive.io",
+      avatar: "avatar.webp",
+      bio: "To chase the bright moonlight",
+    } as UserProfile,
     // https://vitepress.dev/reference/default-theme-config
     lastUpdated: {
-      text: '最后更新于',
+      text: "最后更新于",
       formatOptions: {
-        dateStyle: 'medium',
-        timeStyle: 'short',
+        dateStyle: "medium",
+        timeStyle: "short",
         forceLocale: true,
-      }
+      },
     },
-
     sidebar: generateSidebar({
       documentRootPath: "/docs",
       useTitleFromFileHeading: true,
@@ -91,9 +106,9 @@ export default defineConfig({
         miniSearch: {
           options: {
             tokenize,
-          }
-        }
-      }
+          },
+        },
+      },
     },
 
     nav: [
@@ -119,33 +134,50 @@ export default defineConfig({
     ],
 
     socialLinks: [{ icon: "github", link: "https://github.com/mark9804" }],
-    // @ts-ignore
-    vite: {
-      ssr: { noExternal: ["@arco-design/web-vue"] },
-      plugins: [
-        AutoImport({
-          resolvers: [
-            // ArcoResolver(),
-          ],
-        }),
-        Components({
-          include: [/\.vue$/, /\.md$/],
-          resolvers: [
-            // ArcoResolver({ sideEffect: true })
-          ],
-        }),
-        UnoCSS(),
-      ],
-      css: {
-        postcss: {
-          plugins: [
-            px2rem({
-              rootValue: 16,
-              propBlackList: ["font-size", "border", "border-width"],
-              exclude: /(node_module)/,
-            }),
-          ],
-        },
+  },
+
+  vite: {
+    ssr: { noExternal: ["@arco-design/web-vue"] },
+    plugins: [
+      AutoImport({
+        resolvers: [
+          ArcoResolver(),
+        ],
+      }),
+      Components({
+        include: [/\.vue$/, /\.md$/],
+        resolvers: [
+          ArcoResolver({ sideEffect: true })
+        ],
+      }),
+      
+      UnoCSS({
+        presets: [
+          // @ts-ignore
+          presetUno(),
+          // @ts-ignore
+          presetIcons({
+            extraProperties: {
+              display: "inline-block",
+              "vertical-align": "middle",
+            },
+          }),
+          // @ts-ignore
+          presetAttributify(),
+        ],
+        // @ts-ignore
+        transformers: [transformerDirectives()],
+      }),
+    ],
+    css: {
+      postcss: {
+        plugins: [
+          px2rem({
+            rootValue: 16,
+            propBlackList: ["font-size", "border", "border-width"],
+            exclude: /(node_module)/,
+          }),
+        ],
       },
     },
   },

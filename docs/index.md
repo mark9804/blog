@@ -1,5 +1,5 @@
 ---
-layout: doc
+layout: page
 lastUpdated: false
 sidebar: false
 prev: false
@@ -10,7 +10,7 @@ meta:
 ---
 
 <script setup>
-  import TableOfContents from "./src/components/TableOfContents.vue";
+  import HomePage from "./src/components/HomePage.vue";
 </script>
 
-<TableOfContents />
+<HomePage />

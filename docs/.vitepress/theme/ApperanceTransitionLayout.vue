@@ -3,9 +3,9 @@ import { useData } from "vitepress";
 import { nextTick, onBeforeMount, provide } from "vue";
 import DefaultTheme from "vitepress/theme";
 import DiscussionWidget from "./DiscussionWidget.vue";
-import AronaTag from '../../src/components/AronaTag.vue';
 import { ArticleInfo } from "../../src/types/ArticleInfo";
 import { useRoute } from 'vitepress';
+import { IconTag, IconBook } from '@arco-design/web-vue/es/icon';
 
 const { isDark } = useData();
 
@@ -60,14 +60,20 @@ const frontmatter = data.frontmatter as unknown as ArticleInfo["frontmatter"];
     <template #doc-footer-before>
       <div class="flex gap-4">
         <div class="flex gap-2" v-if="frontmatter?.series?.length">
-          <arona-tag v-for="series in frontmatter?.series" series>
+          <a-tag color="arcoblue" v-for="series in frontmatter?.series" series>
+            <template #icon>
+              <icon-book />
+            </template>
             {{ series.name }}-{{ (series.part + "").padStart(2, "0") }}
-          </arona-tag>
+          </a-tag>
         </div>
         <div class="flex gap-2" v-if="frontmatter?.tags?.length">
-          <arona-tag class="span-tag" v-for="tag in frontmatter?.tags">
+          <a-tag color="arcoblue" class="span-tag" v-for="tag in frontmatter?.tags">
+            <template #icon>
+              <icon-tag />
+            </template>
             {{ tag }}
-          </arona-tag>
+          </a-tag>
         </div>
       </div>
     </template>

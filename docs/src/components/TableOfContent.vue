@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ArticleInfo } from "../types/ArticleInfo";
-import AronaTag from "../components/AronaTag.vue";
+import { IconTag, IconBook } from '@arco-design/web-vue/es/icon';
 withDefaults(
   defineProps<{
     content: ArticleInfo;
@@ -37,18 +37,24 @@ withDefaults(
           "
         >
           <!-- eslint-disable vue/valid-v-for -->
-          <arona-tag v-for="series in content.frontmatter.series" series>
+          <a-tag color="arcoblue" v-for="series in content.frontmatter.series" class="pointer-events-auto">
+            <template #icon>
+              <icon-book />
+            </template>
             {{ series.name }}-{{ (series.part + "").padStart(2, "0") }}
-          </arona-tag>
+          </a-tag>
         </div>
         <div
           class="toc-list__categories__tags"
           v-if="content.frontmatter.tags && content.frontmatter.tags.length > 0"
         >
-          <arona-tag v-for="tag in content.frontmatter.tags" tag>
+          <a-tag color="arcoblue" v-for="tag in content.frontmatter.tags" class="pointer-events-auto">
             <!-- eslint-enable vue/valid-v-for -->
+            <template #icon>
+              <icon-tag />
+            </template>
             <span>{{ tag }}</span>
-          </arona-tag>
+          </a-tag>
         </div>
       </div>
     </div>

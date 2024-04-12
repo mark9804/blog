@@ -1,6 +1,30 @@
-import { defineConfig, presetUno } from "unocss";
-import presetIcons from "@unocss/preset-icons";
+import {
+  defineConfig,
+  presetIcons,
+  presetUno,
+  presetWebFonts,
+  transformerDirectives,
+  transformerVariantGroup,
+} from "unocss";
 
 export default defineConfig({
-  presets: [presetUno(), presetIcons()],
+  rules: [
+    ["shadow-std", { "box-shadow": "0 0 0.5rem rgba(0, 0, 0, 0.1)" }],
+    ["align-self-center", { "align-self": "center" }],
+  ],
+  presets: [
+    presetUno(),
+    presetIcons({
+      scale: 1.2,
+      warn: true,
+      unit: "em",
+    }),
+    presetWebFonts({
+      provider: "bunny",
+      fonts: {
+        sans: "Inter",
+      },
+    }),
+  ],
+  transformers: [transformerDirectives(), transformerVariantGroup()],
 });
