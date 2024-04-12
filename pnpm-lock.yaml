@@ -17,6 +17,9 @@ dependencies:
   '@vue/eslint-config-typescript':
     specifier: ^13.0.0
     version: 13.0.0(eslint-plugin-vue@9.24.1)(eslint@9.0.0)(typescript@5.4.5)
+  '@vueuse/core':
+    specifier: ^10.9.0
+    version: 10.9.0(vue@3.4.21)
   eslint:
     specifier: ^9.0.0
     version: 9.0.0
@@ -93,7 +96,7 @@ devDependencies:
     version: 0.59.0(postcss@8.4.38)(vite@5.2.8)
   unplugin-auto-import:
     specifier: ^0.17.5
-    version: 0.17.5
+    version: 0.17.5(@vueuse/core@10.9.0)
   vitepress:
     specifier: 1.1.0
     version: 1.1.0(@types/node@20.12.6)(markdown-it-mathjax3@4.3.2)(postcss@8.4.38)(sass@1.74.1)(search-insights@2.13.0)(typescript@5.4.5)
@@ -4656,7 +4659,7 @@ packages:
       - supports-color
     dev: true
 
-  /unplugin-auto-import@0.17.5:
+  /unplugin-auto-import@0.17.5(@vueuse/core@10.9.0):
     resolution: {integrity: sha512-fHNDkDSxv3PGagX1wmKBYBkgaM4AKAgZmdJw/bxjhNljx9KSXSgHpGfX0MwUrq9qw6q1bhHIZVWyOwoY2koo4w==}
     engines: {node: '>=14'}
     peerDependencies:
@@ -4670,6 +4673,7 @@ packages:
     dependencies:
       '@antfu/utils': 0.7.7
       '@rollup/pluginutils': 5.1.0
+      '@vueuse/core': 10.9.0(vue@3.4.21)
       fast-glob: 3.3.2
       local-pkg: 0.5.0
       magic-string: 0.30.8
