@@ -11,6 +11,7 @@ import {
   presetUno,
   transformerDirectives,
 } from "unocss";
+import { vitePluginForArco } from "@arco-plugins/vite-vue";
 
 import type { UserProfile } from "../src/types/UserProfile";
 
@@ -46,7 +47,7 @@ export default defineConfig({
 
   themeConfig: {
     // @ts-ignore
-    userProfile:{
+    userProfile: {
       name: "今天早睡了吗",
       email: "mail@blue-archive.io",
       avatar: "avatar.webp",
@@ -140,17 +141,13 @@ export default defineConfig({
     ssr: { noExternal: ["@arco-design/web-vue"] },
     plugins: [
       AutoImport({
-        resolvers: [
-          ArcoResolver(),
-        ],
+        resolvers: [ArcoResolver()],
       }),
       Components({
         include: [/\.vue$/, /\.md$/],
-        resolvers: [
-          ArcoResolver({ sideEffect: true })
-        ],
+        resolvers: [ArcoResolver({ sideEffect: true, resolveIcons: true })],
       }),
-      
+
       UnoCSS({
         presets: [
           // @ts-ignore
@@ -176,6 +173,9 @@ export default defineConfig({
             rootValue: 16,
             propBlackList: ["font-size", "border", "border-width"],
             exclude: /(node_module)/,
+          }),
+          vitePluginForArco({
+            style: "css",
           }),
         ],
       },
