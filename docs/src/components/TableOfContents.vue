@@ -9,20 +9,11 @@ const useContents = computed(() =>
 </script>
 
 <template>
-  <ul class="toc">
+  <ul class="flex flex-col gap-[20px] w-full list-none p-0 m-0">
     <li v-for="content in useContents" :key="content.url">
       <table-of-content :content="content"></table-of-content>
     </li>
   </ul>
 </template>
 
-<style scoped lang="scss">
-ul.toc {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-</style>
+<style scoped lang="scss"></style>

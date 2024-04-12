@@ -14,23 +14,15 @@ if (theme.value.userProfile) {
 </script>
 
 <template>
-  <div class="home-page flex p-[24px] gap-[48px]">
-    <ProfileCard :props="props"/>
-    <TableOfContents class="home-page__toc" />
+  <div class="home-page w-[100dvw] pl-[48px] pr-[48px] pt-[24px] flex flex-col items-center">
+    <div class="max-w-[1200px] flex gap-[48px] w-full">
+      <ProfileCard :props="props"/>
+      <TableOfContents class="home-page__toc" />
+    </div>
   </div>
 </template>
 
 <style scoped lang="scss">
-.home-page {
-  display: flex;
-  width: 100vw;
-  width: 100dvw;
-
-  &__toc {
-    flex: 1;
-  }
-}
-
 @media (max-width: 475px) {
   .home-page {
     flex-direction: row;

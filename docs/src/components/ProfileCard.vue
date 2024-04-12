@@ -5,7 +5,7 @@ defineProps<{
 </script>
 
 <template>
-  <div class="flex flex-col items-center gap-[24px] p-[24px] rounded-lg shadow-std h-full">
+  <div class="flex flex-col items-center gap-[24px] p-[24px] rounded-lg shadow-std h-full w-fit min-w-[256px]">
     <img
       class="w-[100px] h-[100px] rounded-full"
       :src="props.avatar"
