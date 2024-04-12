@@ -8,6 +8,8 @@ import piniaPluginPersistedstate from 'pinia-plugin-persistedstate';
 const pinia = createPinia();
 pinia.use(piniaPluginPersistedstate);
 import 'uno.css';
+import '@arco-design/web-vue/dist/arco.css';
+import ArcoVue from '@arco-design/web-vue';
 
 export default {
   ...Theme,
@@ -16,6 +18,7 @@ export default {
   enhanceApp({ app, router, siteData }) {
     // ...
     app.use(pinia);
+    app.use(ArcoVue);
     Message._context = app._context;
   },
 };

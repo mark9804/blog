@@ -11,8 +11,8 @@ import {
   presetUno,
   transformerDirectives,
 } from "unocss";
-import { vitePluginForArco } from "@arco-plugins/vite-vue";
-
+// import { vitePluginForArco } from "@arco-plugins/vite-vue";
+// @ts-ignore
 import type { UserProfile } from "../src/types/UserProfile";
 
 export function tokenize(text: string): Array<string> {
@@ -141,7 +141,7 @@ export default defineConfig({
     ssr: { noExternal: ["@arco-design/web-vue"] },
     plugins: [
       AutoImport({
-        resolvers: [ArcoResolver()],
+        resolvers: [ArcoResolver({ sideEffect: true, resolveIcons: true })],
       }),
       Components({
         include: [/\.vue$/, /\.md$/],
@@ -174,9 +174,9 @@ export default defineConfig({
             propBlackList: ["font-size", "border", "border-width"],
             exclude: /(node_module)/,
           }),
-          vitePluginForArco({
-            style: "css",
-          }),
+          // vitePluginForArco({
+          //   style: "css",
+          // }),
         ],
       },
     },
