@@ -4,8 +4,8 @@ import { nextTick, onBeforeMount, provide } from "vue";
 import DefaultTheme from "vitepress/theme";
 import DiscussionWidget from "./DiscussionWidget.vue";
 import { ArticleInfo } from "../../src/types/ArticleInfo";
-import { useRoute } from 'vitepress';
-import { IconTag, IconBook } from '@arco-design/web-vue/es/icon';
+import { useRoute } from "vitepress";
+import { IconTag, IconBook } from "@arco-design/web-vue/es/icon";
 
 const { isDark } = useData();
 
@@ -68,7 +68,11 @@ const frontmatter = data.frontmatter as unknown as ArticleInfo["frontmatter"];
           </a-tag>
         </div>
         <div class="flex gap-2" v-if="frontmatter?.tags?.length">
-          <a-tag color="arcoblue" class="span-tag" v-for="tag in frontmatter?.tags">
+          <a-tag
+            color="arcoblue"
+            class="span-tag"
+            v-for="tag in frontmatter?.tags"
+          >
             <template #icon>
               <icon-tag />
             </template>

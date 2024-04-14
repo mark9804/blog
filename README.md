@@ -9,3 +9,4 @@
 - 自动导入
 - 自动构建和部署
 - 自制主题
+- `husky@v9` + `lint-staged` + `prettier` + `eslint@v9`

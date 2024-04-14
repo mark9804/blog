@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ArticleInfo } from "../types/ArticleInfo";
-import { IconTag, IconBook } from '@arco-design/web-vue/es/icon';
+import { IconTag, IconBook } from "@arco-design/web-vue/es/icon";
 withDefaults(
   defineProps<{
     content: ArticleInfo;
@@ -37,7 +37,11 @@ withDefaults(
           "
         >
           <!-- eslint-disable vue/valid-v-for -->
-          <a-tag color="arcoblue" v-for="series in content.frontmatter.series" class="pointer-events-auto">
+          <a-tag
+            color="arcoblue"
+            v-for="series in content.frontmatter.series"
+            class="pointer-events-auto"
+          >
             <template #icon>
               <icon-book />
             </template>
@@ -48,7 +52,11 @@ withDefaults(
           class="toc-list__categories__tags"
           v-if="content.frontmatter.tags && content.frontmatter.tags.length > 0"
         >
-          <a-tag color="arcoblue" v-for="tag in content.frontmatter.tags" class="pointer-events-auto">
+          <a-tag
+            color="arcoblue"
+            v-for="tag in content.frontmatter.tags"
+            class="pointer-events-auto"
+          >
             <!-- eslint-enable vue/valid-v-for -->
             <template #icon>
               <icon-tag />

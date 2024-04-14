@@ -10,7 +10,7 @@
     "prepare": "husky"
   },
   "lint-staged": {
-    "src/**/*.{ts,js,vue}": [
+    "**/*.{ts,js,vue}": [
       "prettier --config .prettierrc.json --write",
       "git add"
     ],

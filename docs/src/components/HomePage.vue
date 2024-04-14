@@ -21,7 +21,7 @@ if (theme.value.userProfile) {
     class="w-[100dvw] pl-[48px] pr-[48px] pt-[24px] flex flex-col items-center"
   >
     <div class="home-page max-w-[1200px] flex gap-[48px] w-full">
-      <ProfileCard :props="props" v-if="width >= 425"/>
+      <ProfileCard :props="props" v-if="width >= 425" />
       <TableOfContents class="home-page__toc" />
     </div>
   </div>

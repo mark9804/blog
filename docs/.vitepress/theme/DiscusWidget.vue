@@ -6,7 +6,7 @@ onMounted(() => {
   script.src = "https://mark9804.disqus.com/embed.js";
   script.setAttribute("data-timestamp", String(+new Date()));
   document.head.appendChild(script);
-})
+});
 </script>
 
 <template>
