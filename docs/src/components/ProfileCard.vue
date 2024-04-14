@@ -13,7 +13,7 @@ defineProps<{
     />
     <div class="flex flex-col gap-[8px]">
       <h1 class="text-2xl font-bold text-center">{{ props.name }}</h1>
-      <p class="text-center">{{ props.bio }}</p>
+      <p class="text-gray text-center">{{ props.bio }}</p>
       <a class="text-center" :href="'mailto:' + props.email">{{
         props.email
       }}</a>

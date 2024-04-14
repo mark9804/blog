@@ -12,6 +12,9 @@ export default defineConfig({
     ["shadow-std", { "box-shadow": "0 0 0.5rem rgba(0, 0, 0, 0.1)" }],
     ["align-self-center", { "align-self": "center" }],
   ],
+  shortcuts: {
+    "card-float": "shadow-std rounded-lg gap-[24px] p-[24px]",
+  },
   presets: [
     presetUno(),
     presetIcons({
