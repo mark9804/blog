@@ -150,19 +150,15 @@ export default defineConfig({
 
       UnoCSS({
         presets: [
-          // @ts-ignore
           presetUno(),
-          // @ts-ignore
           presetIcons({
             extraProperties: {
               display: "inline-block",
               "vertical-align": "middle",
             },
           }),
-          // @ts-ignore
           presetAttributify(),
         ],
-        // @ts-ignore
         transformers: [transformerDirectives()],
       }),
     ],
