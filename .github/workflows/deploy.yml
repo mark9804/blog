@@ -44,6 +44,7 @@ jobs:
         uses: actions/upload-pages-artifact@main
         with:
           path: ./docs/.vitepress/dist
+          retention-days: 1
 
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@main
