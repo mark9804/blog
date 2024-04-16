@@ -23,20 +23,23 @@ body {
   font-family: var(--vp-font-family-base) !important;
 }
 
-.flex {
+figure {
   display: flex;
-}
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  gap: 8px;
 
-.gap-1 {
-  gap: 0.25rem;
-}
+  img {
+    max-width: 100%;
+    border-radius: 4px;
+  }
 
-.gap-2 {
-  gap: 0.5rem;
-}
-
-.gap-4 {
-  gap: 1rem;
+  figcaption {
+    font-size: 14px;
+    line-height: 20px;
+    color: var(--color-text-3);
+  }
 }
 
 .vp-doc {
