@@ -4,7 +4,6 @@ export default [
       browser: true,
       es2021: true,
     },
-    parser: "vue-eslint-parser",
     rules: {
       "vue/no-multiple-template-root": "off",
       "vue/multi-word-component-names": "off",
