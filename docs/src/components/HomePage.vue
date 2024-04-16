@@ -1,10 +1,8 @@
 <script setup lang="ts">
 import TableOfContents from "./TableOfContents.vue";
 import ProfileCard from "./ProfileCard.vue";
-import { useWindowSize } from "@vueuse/core";
 
-const { width } = useWindowSize();
-
+// ts-ignore
 import { useData } from "vitepress";
 
 const { theme } = useData();
@@ -21,7 +19,7 @@ if (theme.value.userProfile) {
     class="w-[100dvw] pl-[48px] pr-[48px] pt-[24px] flex flex-col items-center"
   >
     <div class="home-page max-w-[1200px] flex gap-[48px] w-full">
-      <ProfileCard :props="props" v-if="width >= 425" />
+      <ProfileCard :props="props" />
       <TableOfContents class="home-page__toc" />
     </div>
   </div>
