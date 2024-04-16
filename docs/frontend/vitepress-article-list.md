@@ -1,9 +1,6 @@
 ---
 title: 在 Vitepress 中获取全部文章列表
 description:
-series:
-  - name: Vitepress
-    part: 1
 tags:
   - 前端
   - Vitepress

@@ -1,16 +1,16 @@
 <script setup lang="ts">
 import { ArticleInfo } from "../types/ArticleInfo";
-import { IconTag, IconBook } from "@arco-design/web-vue/es/icon";
+import { IconTag } from "@arco-design/web-vue/es/icon";
 withDefaults(
   defineProps<{
     content: ArticleInfo;
   }>(),
   {
     content: {
+      // @ts-ignore
       frontmatter: {
         title: "无题",
         description: "",
-        series: [],
         tags: [],
       },
       url: "",
@@ -20,50 +20,35 @@ withDefaults(
 </script>
 
 <template>
-  <div class="toc-container">
+  <div class="toc-container grid shadow-std rounded-lg overflow-hidden">
     <a class="toc-container--link" :href="content.url.slice(1)"></a>
-    <div class="toc-list">
-      <a class="toc-list__title" :href="content.url.slice(1)">{{
-        content.frontmatter.title
-      }}</a>
-      <p class="toc-list__description" v-if="content.frontmatter.description">
+    <div class="toc-list flex flex-col gap-2 p-4 w-fit pointer-events-none">
+      <a
+        class="toc-list__title w-full border-none m-0 p-0 text-xl font-700"
+        :href="content.url.slice(1)"
+        >{{ content.frontmatter.title }}</a
+      >
+      <p
+        class="text-3 w-fit m-0 text-sm pointer-events-auto"
+        v-if="content.frontmatter.description"
+      >
         {{ content.frontmatter.description }}
       </p>
-      <div class="toc-list__categories">
-        <div
-          class="toc-list__categories__series"
-          v-if="
-            content.frontmatter.series && content.frontmatter.series.length > 0
-          "
+      <div
+        class="flex gap-2"
+        v-if="content.frontmatter.tags && content.frontmatter.tags.length > 0"
+      >
+        <a-tag
+          color="arcoblue"
+          v-for="tag in content.frontmatter.tags"
+          class="pointer-events-auto"
         >
-          <!-- eslint-disable vue/valid-v-for -->
-          <a-tag
-            color="arcoblue"
-            v-for="series in content.frontmatter.series"
-            class="pointer-events-auto"
-          >
-            <template #icon>
-              <icon-book />
-            </template>
-            {{ series.name }}-{{ (series.part + "").padStart(2, "0") }}
-          </a-tag>
-        </div>
-        <div
-          class="toc-list__categories__tags"
-          v-if="content.frontmatter.tags && content.frontmatter.tags.length > 0"
-        >
-          <a-tag
-            color="arcoblue"
-            v-for="tag in content.frontmatter.tags"
-            class="pointer-events-auto"
-          >
-            <!-- eslint-enable vue/valid-v-for -->
-            <template #icon>
-              <icon-tag />
-            </template>
-            <span>{{ tag }}</span>
-          </a-tag>
-        </div>
+          <!-- eslint-enable vue/valid-v-for -->
+          <template #icon>
+            <icon-tag />
+          </template>
+          <span>{{ tag }}</span>
+        </a-tag>
       </div>
     </div>
   </div>
@@ -76,11 +61,7 @@ a {
 }
 
 .toc-container {
-  display: grid;
   grid-template-areas: "placeholder";
-  border-radius: 0.5rem;
-  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.1);
-  overflow: hidden;
 
   &--link {
     grid-area: placeholder;
@@ -89,54 +70,14 @@ a {
 
 .toc-list {
   grid-area: placeholder;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  padding: 1rem;
-  width: 100%;
-  width: fit-content;
-  pointer-events: none;
 
   &__title {
-    width: 100%;
-    border: none;
-    margin: 0;
-    padding: 0;
-    font-size: 1.25rem;
     color: var(--vp-c-brand-1);
     transition: color 0.3s;
-    font-weight: 700;
     font-family: "Wix Madefor Display", var(--vp-font-family-base);
 
     &:hover {
       color: var(--vp-c-brand-2);
-    }
-  }
-
-  &__description {
-    width: fit-content;
-    margin: 0;
-    font-size: 14px;
-    line-height: 1;
-    color: var(--color-text-3);
-    pointer-events: auto;
-  }
-
-  &__categories {
-    width: fit-content;
-    display: flex;
-    gap: 0.5rem;
-
-    &__series {
-      width: fit-content;
-      display: flex;
-      gap: 0.5rem;
-    }
-
-    &__tags {
-      width: fit-content;
-      display: flex;
-      gap: 0.5rem;
     }
   }
 }

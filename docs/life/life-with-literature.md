@@ -1,9 +1,6 @@
 ---
 title: 我和文字的故事
 description: 原文是写在B站上的，但是我觉得这里也可以放一下。
-series:
-  - name: 生活
-    part: 1
 tags:
   - 生活
   - 写作

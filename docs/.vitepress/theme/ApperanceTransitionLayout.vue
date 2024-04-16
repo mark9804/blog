@@ -5,7 +5,7 @@ import DefaultTheme from "vitepress/theme";
 import DiscussionWidget from "./DiscussionWidget.vue";
 import { ArticleInfo } from "../../src/types/ArticleInfo";
 import { useRoute } from "vitepress";
-import { IconTag, IconBook } from "@arco-design/web-vue/es/icon";
+import { IconTag } from "@arco-design/web-vue/es/icon";
 
 const { isDark } = useData();
 
@@ -58,27 +58,17 @@ const frontmatter = data.frontmatter as unknown as ArticleInfo["frontmatter"];
   />
   <Layout>
     <template #doc-footer-before>
-      <div class="flex gap-4">
-        <div class="flex gap-2" v-if="frontmatter?.series?.length">
-          <a-tag color="arcoblue" v-for="series in frontmatter?.series" series>
-            <template #icon>
-              <icon-book />
-            </template>
-            {{ series.name }}-{{ (series.part + "").padStart(2, "0") }}
-          </a-tag>
-        </div>
-        <div class="flex gap-2" v-if="frontmatter?.tags?.length">
-          <a-tag
-            color="arcoblue"
-            class="span-tag"
-            v-for="tag in frontmatter?.tags"
-          >
-            <template #icon>
-              <icon-tag />
-            </template>
-            {{ tag }}
-          </a-tag>
-        </div>
+      <div class="flex gap-2" v-if="frontmatter?.tags?.length">
+        <a-tag
+          color="arcoblue"
+          class="span-tag"
+          v-for="tag in frontmatter?.tags"
+        >
+          <template #icon>
+            <icon-tag />
+          </template>
+          {{ tag }}
+        </a-tag>
       </div>
     </template>
     <template #doc-after v-if="'/blog/' !== route.path">
