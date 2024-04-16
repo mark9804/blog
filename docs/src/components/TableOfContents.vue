@@ -4,8 +4,12 @@ import { data as usePosts } from "../helper/posts.data";
 import { computed } from "vue";
 import TableOfContent from "./TableOfContent.vue";
 const useContents = computed(() =>
-  usePosts.filter((el: ArticleInfo) => !el.frontmatter?.meta?.hidden)
+  usePosts.filter(
+    (el: ArticleInfo) => !el.frontmatter?.meta?.hidden && !el.url.endsWith("/")
+  )
 );
+
+console.log(useContents);
 </script>
 
 <template>

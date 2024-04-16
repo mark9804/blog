@@ -58,7 +58,7 @@ const frontmatter = data.frontmatter as unknown as ArticleInfo["frontmatter"];
   />
   <Layout>
     <template #doc-footer-before>
-      <div class="flex gap-2" v-if="frontmatter?.tags?.length">
+      <div class="flex gap-2 pb-4" v-if="frontmatter?.tags?.length">
         <a-tag
           color="arcoblue"
           class="span-tag"

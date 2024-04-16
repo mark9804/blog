@@ -11,6 +11,7 @@ import {
   presetUno,
   transformerDirectives,
 } from "unocss";
+import implicitFigures from "markdown-it-implicit-figures";
 // import { vitePluginForArco } from "@arco-plugins/vite-vue";
 // @ts-ignore
 import type { UserProfile } from "../src/types/UserProfile";
@@ -41,7 +42,13 @@ export default defineConfig({
   markdown: {
     math: true,
     headers: {
-      level: [0, 0],
+      level: [2, 6],
+    },
+    config: md => {
+      md.use(implicitFigures, {
+        figcaption: true,
+        copyAttrs: "^class$",
+      });
     },
   },
 
