@@ -106,27 +106,65 @@ defaults write com.apple.finder CreateDesktop -bool false && killall Finder
 
 ![隐藏后的效果](https://raw.githubusercontent.com/mark9804/typora-image-repo/master/uPic/Snipaste_2024-04-17_02-32-35.jpg)
 
-### 更改文件名时不再显示警告
+### 更改文件扩展名时不再显示警告
+
+在默认设置下，如果你更改了文件扩展名（`.txt` 之类的），macOS 会弹出一个对话框，询问你是否确定要更改。既然你都看到这了，那这个对话框对你来说可能就是多余的了——真正需要这个对话框的人是不会有心思折腾这些的。
+
+接受参数类型：`bool`
+
+默认值：`true`
+
+调整后：`false`
 
 ```bash
-defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
+defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false && killall Finder
 ```
+
+注意你需要重启 Finder 之后，这个设置才会生效。
 
 ### 允许在 QuickLook 预览中选择文本
 
+macOS 提供了一个非常好用的空格预览功能（顺便强烈推荐 [Syntax Highlight](https://github.com/sbarex/SourceCodeSyntaxHighlight) 这个插件，可以让 QuickLook 预览代码时高亮显示），但是默认情况下你无法在 QuickLook 预览中选择文本。这行命令可以允许你在预览图片时选择其中的文本（可能要 Apple Silicon 芯片的 Mac 才有效，我没测试过 Intel 芯片的情况）
+
+接受参数类型：`bool`
+
+默认值：`false`
+
+调整后：`true`
+
 ```bash
-defaults write com.apple.finder QLEnableTextSelection -bool true
+defaults write com.apple.finder QLEnableTextSelection -bool true && killall Finder
 ```
 
 ## 修改系统行为
 
 ### 阻止 macOS 在网络存储设备上创建 `.DS_Store`
 
+macOS 文件管理系统被喷的最多的一个地方就是宛如牛皮癣一样的 `.DS_Store` 文件。这个文件是 Finder 用来存储文件夹的自定义属性的，但是在网络存储设备还有 USB 设备里这个文件会变得非常碍眼。毕竟不是人人都用苹果，而且有一部分文件遍历脚本会因为 `.DS_Store` 文件而出错。
+
+虽然我们不能阻止 macOS 在本地磁盘上创建 `.DS_Store` 文件，但是我们可以阻止 macOS 在网络存储设备和 USB 存储设备上创建这个文件。
+
+接受参数类型：`bool`
+
+默认值：`false`
+
+调整后：`true`
+
 ```bash
 defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 ```
 
+注意这个设置可能需要登出后重新登入才会生效。
+
 ### 阻止 macOS 在 USB 设备上创建 `.DS_Store`
+
+同上，只是这次是针对 USB 设备。
+
+接受参数类型：`bool`
+
+默认值：`false`
+
+调整后：`true`
 
 ```bash
 defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
