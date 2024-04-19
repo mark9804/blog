@@ -81,6 +81,22 @@ defaults write com.apple.dock show-process-indicators -bool true && killall Dock
 defaults write com.apple.dock showhidden -bool true && killall Dock
 ```
 
+### 在 Dock 应用图标上滚动触发 Exposé
+
+App Exposé 是 macOS 的一个……一个比较曲线救国的功能。大家都知道 Mac 并没有所谓的 Dock 窗口预览，因此靠着 App Exposé 来半替代这个功能。（可以用第三方软件来实现，目前主要有两个，一个是 [HyperDock](https://bahoom.com/hyperdock)，另一个是 [DockView](https://noteifyapp.com/dockview/)。前者是 Intel 时代的软件了，一直没有更新；后者是近两年开发的，不过 bug 奇多，效率很低）
+
+通常 App Expose 是通过触控板手势（在应用图标上用力按压）来触发的，但是这个命令可以让你在应用图标上滚动鼠标滚轮来触发 App Exposé，对鼠标用户比较友好（虽然这个功能对我来说没什么用，Expose 只能显示最小化的窗口，但是我平时用的是隐藏）
+
+接受参数类型：`bool`
+
+默认值：`false`
+
+调整后：`true`
+
+```bash
+defaults write com.apple.dock "scroll-to-open" -bool true && killall Dock
+```
+
 ## 修改 Finder 行为
 
 ### 显示/隐藏桌面图标
