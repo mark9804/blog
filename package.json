@@ -46,18 +46,21 @@
     "@arco-design/web-vue": "^2.55.1",
     "@arco-plugins/vite-vue": "^1.4.5",
     "@vueuse/core": "^10.9.0",
+    "cross-spawn": "^7.0.3",
     "element-plus": "^2.7.0",
     "eslint": "^9.0.0",
     "eslint-plugin-vue": "^9.25.0",
     "husky": "^9.0.11",
     "lint-staged": "^15.2.2",
     "markdown-it-implicit-figures": "^0.12.0",
+    "p-map": "^7.0.2",
     "pinia": "^2.1.7",
     "pinia-plugin-persistedstate": "^3.2.1",
     "postcss-plugin-px2rem": "^0.8.1",
     "radash": "^12.1.0",
     "radix-vue": "^1.6.2",
     "sass": "^1.72.0",
-    "unplugin-vue-components": "^0.26.0"
+    "unplugin-vue-components": "^0.26.0",
+    "words-count": "^2.0.2"
   }
 }

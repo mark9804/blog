@@ -17,6 +17,9 @@ importers:
       '@vueuse/core':
         specifier: ^10.9.0
         version: 10.9.0(vue@3.4.23)
+      cross-spawn:
+        specifier: ^7.0.3
+        version: 7.0.3
       element-plus:
         specifier: ^2.7.0
         version: 2.7.0(vue@3.4.23)
@@ -35,6 +38,9 @@ importers:
       markdown-it-implicit-figures:
         specifier: ^0.12.0
         version: 0.12.0
+      p-map:
+        specifier: ^7.0.2
+        version: 7.0.2
       pinia:
         specifier: ^2.1.7
         version: 2.1.7(vue@3.4.23)
@@ -56,6 +62,9 @@ importers:
       unplugin-vue-components:
         specifier: ^0.26.0
         version: 0.26.0(@babel/parser@7.24.4)(rollup@4.14.3)(vue@3.4.23)
+      words-count:
+        specifier: ^2.0.2
+        version: 2.0.2
     devDependencies:
       '@types/node':
         specifier: ^20.12.2
@@ -1817,6 +1826,10 @@ packages:
     resolution: {integrity: sha512-LaNjtRWUBY++zB5nE/NwcaoMylSPk+S+ZHNB1TzdbMJMny6dynpAGt7X/tl/QYq3TIeE6nxHppbo2LGymrG5Pw==}
     engines: {node: '>=10'}
 
+  p-map@7.0.2:
+    resolution: {integrity: sha512-z4cYYMMdKHzw4O5UkWJImbZynVIo0lSGTXc7bzB1e/rrDqkgGUNysK/o4bTr+0+xKvvLoTyGqYC4Fgljy9qe1Q==}
+    engines: {node: '>=18'}
+
   parent-module@1.0.1:
     resolution: {integrity: sha512-GQ2EWRpQV8/o+Aw8YqtfZZPfNRWZYkbidE9k5rpl/hC3vtHHBfGm2Ifi6qWV+coDGkrUKZAxE3Lot5kcsRlh+g==}
     engines: {node: '>=6'}
@@ -2303,6 +2316,9 @@ packages:
 
   wicked-good-xpath@1.3.0:
     resolution: {integrity: sha512-Gd9+TUn5nXdwj/hFsPVx5cuHHiF5Bwuc30jZ4+ronF1qHK5O7HD0sgmXWSEgwKquT3ClLoKPVbO6qGwVwLzvAw==}
+
+  words-count@2.0.2:
+    resolution: {integrity: sha512-u0LFfJPhnR0xXu/5WoqWIkgdGJst5GahS4lYy4G5TIX4JAQgeNKD33HpmMoxveVBWNS6W6YZV2OQjVIVLL4K7Q==}
 
   wrap-ansi@9.0.0:
     resolution: {integrity: sha512-G8ura3S+3Z2G+mkgNRq8dqaFZAuxfsxpBB8OCTGRTCtp+l/v9nbFNmCUP1BZMts3G1142MsZfn6eeUKrr4PD1Q==}
@@ -4171,6 +4187,8 @@ snapshots:
     dependencies:
       p-limit: 3.1.0
 
+  p-map@7.0.2: {}
+
   parent-module@1.0.1:
     dependencies:
       callsites: 3.1.0
@@ -4695,6 +4713,8 @@ snapshots:
       isexe: 2.0.0
 
   wicked-good-xpath@1.3.0: {}
+
+  words-count@2.0.2: {}
 
   wrap-ansi@9.0.0:
     dependencies:
