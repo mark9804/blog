@@ -141,6 +141,11 @@ export default defineConfig({
       },
     ],
 
+    footer: {
+      message: "We improve our products and advertising by using Microsoft Clarity to see how you use our website. By using our site, you agree that we and Microsoft can collect and use this data.",
+      copyright: "© 2024-present Mark Chen",
+    },
+
     socialLinks: [{ icon: "github", link: "https://github.com/mark9804" }],
   },
 
@@ -186,36 +191,47 @@ export default defineConfig({
   },
 
   transformHead: () => {
-    const head: HeadConfig[] = [];
-    head.push([
-      "link",
-      {
-        rel: "prefetch",
-        href: "https://fonts.blue-archive.io/harmonyos-sans-webfont/harmonyos-sans-sc-400.css",
-        as: "style",
-        onload: "this.rel='stylesheet';this.onload=null;",
-      },
-    ]);
-    head.push([
-      "link",
-      {
-        rel: "prefetch",
-        href: "https://fonts.blue-archive.io/harmonyos-sans-webfont/harmonyos-sans-sc-700.css",
-        as: "style",
-        onload: "this.rel='stylesheet';this.onload=null;",
-      },
-    ]);
-    //  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,1,0" />
-    head.push([
-      "link",
-      {
-        rel: "prefetch",
-        href: "https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,1,0",
-        as: "style",
-        onload: "this.rel='stylesheet';this.onload=null;",
-      },
-    ]);
-
-    return head;
+    return [
+      [
+        "link",
+        {
+          rel: "prefetch",
+          href: "https://fonts.blue-archive.io/harmonyos-sans-webfont/harmonyos-sans-sc-400.css",
+          as: "style",
+          onload: "this.rel='stylesheet';this.onload=null;",
+        },
+      ],
+      [
+        "link",
+        {
+          rel: "prefetch",
+          href: "https://fonts.blue-archive.io/harmonyos-sans-webfont/harmonyos-sans-sc-700.css",
+          as: "style",
+          onload: "this.rel='stylesheet';this.onload=null;",
+        },
+      ],
+      [
+        "link",
+        {
+          rel: "prefetch",
+          href: "https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,1,0",
+          as: "style",
+          onload: "this.rel='stylesheet';this.onload=null;",
+        },
+      ],
+      [
+        "script",
+        {
+          async: true,
+          defer: true,
+          type: "text/javascript",
+        },
+        `(function(c,l,a,r,i,t,y){
+          c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+          t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+          y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+      })(window, document, "clarity", "script", "m0pjwvqh46");`,
+      ],
+    ] as HeadConfig[];
   },
 });
