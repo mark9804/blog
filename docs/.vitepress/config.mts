@@ -143,7 +143,7 @@ export default defineConfig({
 
     footer: {
       message: "We improve our products and advertising by using Microsoft Clarity to see how you use our website. By using our site, you agree that we and Microsoft can collect and use this data.",
-      copyright: "© 2024-present Mark Chen",
+      copyright: `© 2024-${new Date().getFullYear()} Mark Chen`,
     },
 
     socialLinks: [{ icon: "github", link: "https://github.com/mark9804" }],
