@@ -156,7 +156,7 @@ export default defineConfig({
         resolvers: [ArcoResolver({ sideEffect: true, resolveIcons: true })],
       }),
       Components({
-        include: [/\.vue$/, /\.md$/],
+        include: [/\.vue$/, /\.md$/, /\.ts$/],
         resolvers: [ArcoResolver({ sideEffect: true, resolveIcons: true })],
       }),
 

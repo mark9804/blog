@@ -8,7 +8,7 @@
 - 自动更新依赖（通过 [Mend Renovate](https://www.mend.io/renovate-free/)）
 - [Arco Design Vue](https://arco.design/vue/) 组件库
 - [UnoCss](https://unocss.dev/)
-- ~~自动导入~~ 正在排查 Arco 为什么在生产环境下无法正常工作
+- 自动导入（通过 [unplugin-auto-import](https://github.com/unplugin/unplugin-auto-import#readme)）
 - 自动构建和部署
 - 自制主题
 - 自动侧边栏
