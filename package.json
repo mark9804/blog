@@ -58,7 +58,6 @@
     "pinia-plugin-persistedstate": "^3.2.1",
     "postcss-plugin-px2rem": "^0.8.1",
     "radash": "^12.1.0",
-    "radix-vue": "^1.6.2",
     "sass": "^1.72.0",
     "unplugin-vue-components": "^0.27.0",
     "words-count": "^2.0.2"
