@@ -31,7 +31,7 @@
     "prettier": "^3.2.5",
     "unocss": "0.60.3",
     "unplugin-auto-import": "^0.17.5",
-    "vitepress": "1.2.0",
+    "vitepress": "1.2.2",
     "vitepress-sidebar": "^1.22.0",
     "vue": "3.4.27"
   },
