@@ -5,7 +5,6 @@ import DefaultTheme from "vitepress/theme";
 import DiscussionWidget from "./DiscussionWidget.vue";
 import { ArticleInfo } from "../../src/types/ArticleInfo";
 import { useRoute } from "vitepress";
-import { IconTag } from "@arco-design/web-vue/es/icon";
 
 const { isDark } = useData();
 

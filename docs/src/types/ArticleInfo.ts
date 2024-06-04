@@ -7,5 +7,8 @@ export interface ArticleInfo {
       hidden?: boolean;
     };
   };
+  lastUpdated?: number | string;
+  readingTime: number;
+  wordsCount: number;
   url: string;
 }

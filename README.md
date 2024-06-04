@@ -12,5 +12,5 @@
 - 自动构建和部署
 - 自制主题
 - 自动侧边栏
-- 基于 `contentLoader` 的字数统计（暂未实现 UI）
-- 基于 `contentLoader` 和 `git log` 的最后编辑时间获取（暂未实现 UI）
+- 基于 `contentLoader` 的前端字数和阅读时间统计
+- 基于 `contentLoader` 和 `git log` 的最后编辑时间获取

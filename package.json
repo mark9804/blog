@@ -45,8 +45,9 @@
   "dependencies": {
     "@arco-design/web-vue": "^2.55.1",
     "@arco-plugins/vite-vue": "^1.4.5",
-    "@vueuse/core": "^10.9.0",
+    "@vueuse/core": "^10.10.0",
     "cross-spawn": "^7.0.3",
+    "dayjs": "^1.11.11",
     "element-plus": "^2.7.0",
     "eslint": "^9.0.0",
     "eslint-plugin-vue": "^9.25.0",

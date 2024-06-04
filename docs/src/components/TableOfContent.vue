@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { ArticleInfo } from "../types/ArticleInfo";
-import { IconTag } from "@arco-design/web-vue/es/icon";
 withDefaults(
   defineProps<{
     content: ArticleInfo;
@@ -20,9 +19,13 @@ withDefaults(
 </script>
 
 <template>
-  <div class="toc-container grid shadow-std rounded-lg overflow-hidden">
+  <div
+    class="toc-container grid mb-2 border-1 border-fill border-solid rounded-lg overflow-hidden"
+  >
     <a class="toc-container--link" :href="content.url.slice(1)"></a>
-    <div class="toc-list flex flex-col gap-2 p-4 w-fit pointer-events-none">
+    <div
+      class="toc-list flex flex-col gap-2 p-3 pl-4 w-fit pointer-events-none"
+    >
       <a
         class="toc-list__title w-full border-none m-0 p-0 text-xl font-700"
         :href="content.url.slice(1)"
@@ -41,7 +44,7 @@ withDefaults(
         <a-tag
           color="arcoblue"
           v-for="tag in content.frontmatter.tags"
-          class="pointer-events-auto"
+          class="pointer-events-auto cursor-pointer"
         >
           <!-- eslint-enable vue/valid-v-for -->
           <template #icon>
@@ -50,6 +53,10 @@ withDefaults(
           <span>{{ tag }}</span>
         </a-tag>
       </div>
+      <p class="text-xs text-3 select-none">
+        <icon-clock-circle />
+        {{ content.wordsCount }} 字 | {{ content.readingTime }} 分钟
+      </p>
     </div>
   </div>
 </template>

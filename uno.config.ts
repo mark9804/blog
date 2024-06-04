@@ -12,6 +12,7 @@ export default defineConfig({
     ["shadow-std", { "box-shadow": "0 0 0.5rem rgba(0, 0, 0, 0.1)" }],
     ["align-self-center", { "align-self": "center" }],
     ["text-3", { color: "var(--color-text-3)" }],
+    ["border-fill", { "border-color": "var(--color-fill-2)" }],
   ],
   shortcuts: {
     "card-float": "shadow-std rounded-lg gap-[24px] p-[24px]",

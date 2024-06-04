@@ -15,11 +15,14 @@ importers:
         specifier: ^1.4.5
         version: 1.4.5
       '@vueuse/core':
-        specifier: ^10.9.0
+        specifier: ^10.10.0
         version: 10.10.0(vue@3.4.27)
       cross-spawn:
         specifier: ^7.0.3
         version: 7.0.3
+      dayjs:
+        specifier: ^1.11.11
+        version: 1.11.11
       element-plus:
         specifier: ^2.7.0
         version: 2.7.3(vue@3.4.27)

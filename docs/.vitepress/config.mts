@@ -58,7 +58,7 @@ export default defineConfig({
       name: "今天早睡了吗",
       email: "mail@blue-archive.io",
       avatar: "avatar.webp",
-      bio: "To chase the bright moonlight",
+      bio: "To trace the bright moonlight",
     } as UserProfile,
     // https://vitepress.dev/reference/default-theme-config
     lastUpdated: {

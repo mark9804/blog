@@ -3,23 +3,40 @@ import { ArticleInfo } from "../types/ArticleInfo";
 import { data as usePosts } from "../helper/posts.data";
 import { computed } from "vue";
 import TableOfContent from "./TableOfContent.vue";
+import dayjs from "dayjs";
+import { useWindowSize } from "@vueuse/core";
 
 const useContents = computed(() =>
   // @ts-ignore
-  usePosts.filter(
-    (el: ArticleInfo) => !el.frontmatter?.meta?.hidden && !el.url.endsWith("/")
-  )
+  (usePosts as ArticleInfo[])
+    .filter(
+      (el: ArticleInfo) =>
+        !el.frontmatter?.meta?.hidden && !el.url.endsWith("/")
+    )
+    .map((el: ArticleInfo) => {
+      el.lastUpdated = dayjs(el.lastUpdated ?? new Date()).format("YYYY-MM-DD");
+      return el;
+    })
+    .sort((a: ArticleInfo, b: ArticleInfo) =>
+      dayjs(a.lastUpdated).isBefore(dayjs(b.lastUpdated)) ? 1 : -1
+    )
 );
 
-console.log(useContents);
+const { width } = useWindowSize();
 </script>
 
 <template>
-  <ul class="flex flex-col gap-[20px] w-full list-none p-0 m-0">
-    <li v-for="content in useContents" :key="content.url">
+  <a-timeline
+    class="w-full mb-4"
+    :label-position="width <= 475 ? 'same' : 'relative'"
+  >
+    <a-timeline-item v-for="content in useContents" :key="content.url">
       <table-of-content :content="content"></table-of-content>
-    </li>
-  </ul>
+      <template #label>
+        <p class="mb-4">{{ content.lastUpdated }}</p>
+      </template>
+    </a-timeline-item>
+  </a-timeline>
 </template>
 
 <style scoped lang="scss"></style>

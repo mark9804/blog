@@ -2,7 +2,6 @@
 import { ref } from "vue";
 import { useWindowSize } from "@vueuse/core";
 import { ClickOutside as vClickOutside } from "element-plus";
-import { IconEmail } from "@arco-design/web-vue/es/icon";
 const { width } = useWindowSize();
 
 defineProps<{
@@ -37,7 +36,7 @@ function onClickOutside() {
       >
     </div>
   </div>
-  <div v-else class="fixed top-[84px] right-[24px] shadow-std rounded-full">
+  <div v-else class="fixed top-[84px] right-[24px] shadow-std rounded-full z-2">
     <transition name="namecard-transition">
       <img
         class="w-[48px] h-[48px] rounded-full"
