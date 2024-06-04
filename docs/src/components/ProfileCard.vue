@@ -17,7 +17,7 @@ function onClickOutside() {
 <template>
   <div
     v-if="width >= 475"
-    class="flex flex-col items-center gap-[24px] p-[24px] rounded-lg shadow-std h-full w-fit min-w-[256px]"
+    class="flex flex-col items-center gap-[24px] p-[24px] rounded-lg border-1 border-solid border-fill h-full w-fit min-w-[256px]"
   >
     <img
       class="w-[100px] h-[100px] rounded-full"
