@@ -61,7 +61,7 @@ importers:
         version: 1.77.6
       unplugin-vue-components:
         specifier: ^0.27.0
-        version: 0.27.1(@babel/parser@7.24.7)(rollup@4.14.3)(vue@3.4.30)
+        version: 0.27.2(@babel/parser@7.24.7)(rollup@4.14.3)(vue@3.4.30)
       words-count:
         specifier: ^2.0.2
         version: 2.0.2
@@ -1780,9 +1780,6 @@ packages:
   mj-context-menu@0.6.1:
     resolution: {integrity: sha512-7NO5s6n10TIV96d4g2uDpG7ZDpIhMh0QNfGdJw/W47JswFcosz457wqz/b5sAKvl12sxINGFCn80NZHKwxQEXA==}
 
-  mlly@1.7.0:
-    resolution: {integrity: sha512-U9SDaXGEREBYQgfejV97coK0UL1r+qnF2SyO9A3qcI8MzKnsIFKHNVEkrDyNncQTKQQumsasmeq84eNMdBfsNQ==}
-
   mlly@1.7.1:
     resolution: {integrity: sha512-rrVRZRELyQzrIUAVMHxP97kv+G786pHmOKzuFII8zDYahFBS7qnHh2AlYSl1GAHhaMPCz6/oHjVMcfFYgFYHgA==}
 
@@ -2212,8 +2209,8 @@ packages:
       '@vueuse/core':
         optional: true
 
-  unplugin-vue-components@0.27.1:
-    resolution: {integrity: sha512-ximoYPwT9A5fc0ozy40IZbXR/XMRlTy69u4JfeqBMlsyuKHckQRisRqgzqve6m/ZeOh7eCHjEQP1WnBPW+YI+g==}
+  unplugin-vue-components@0.27.2:
+    resolution: {integrity: sha512-YifnsmslMRNt+JRQiCG4ZX1+xUQuubUZm76K7Qtg8dmchZJkHIDxZSyfZb5/jqrLWMTm/TUjGJ3ZDlzO6SFnSQ==}
     engines: {node: '>=14'}
     peerDependencies:
       '@babel/parser': ^7.15.8
@@ -2981,12 +2978,12 @@ snapshots:
   '@iconify/utils@2.1.24':
     dependencies:
       '@antfu/install-pkg': 0.1.1
-      '@antfu/utils': 0.7.8
+      '@antfu/utils': 0.7.10
       '@iconify/types': 2.0.0
       debug: 4.3.5
       kolorist: 1.8.0
       local-pkg: 0.5.0
-      mlly: 1.7.0
+      mlly: 1.7.1
     transitivePeerDependencies:
       - supports-color
 
@@ -4233,13 +4230,6 @@ snapshots:
 
   mj-context-menu@0.6.1: {}
 
-  mlly@1.7.0:
-    dependencies:
-      acorn: 8.11.3
-      pathe: 1.1.2
-      pkg-types: 1.1.1
-      ufo: 1.5.3
-
   mlly@1.7.1:
     dependencies:
       acorn: 8.12.0
@@ -4659,7 +4649,7 @@ snapshots:
     transitivePeerDependencies:
       - rollup
 
-  unplugin-vue-components@0.27.1(@babel/parser@7.24.7)(rollup@4.14.3)(vue@3.4.30):
+  unplugin-vue-components@0.27.2(@babel/parser@7.24.7)(rollup@4.14.3)(vue@3.4.30):
     dependencies:
       '@antfu/utils': 0.7.10
       '@rollup/pluginutils': 5.1.0(rollup@4.14.3)
