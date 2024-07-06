@@ -33,7 +33,7 @@
     "unplugin-auto-import": "^0.17.5",
     "vitepress": "1.2.3",
     "vitepress-sidebar": "^1.22.0",
-    "vue": "3.4.30"
+    "vue": "3.4.31"
   },
   "pnpm": {
     "peerDependencyRules": {
