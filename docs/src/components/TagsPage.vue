@@ -4,7 +4,6 @@ import { data as usePosts } from "../helper/posts.data";
 import { ArticleInfo } from "../types/ArticleInfo";
 import { sift } from "radash";
 import TableOfContent from "./TableOfContent.vue";
-import { useRoute } from "vitepress";
 
 function shouldShowInResult(el: ArticleInfo) {
   return !el.url.endsWith("/") && !el.frontmatter?.meta?.hidden;
@@ -32,9 +31,9 @@ const allTags = computed<string[]>(() =>
   Array.from(new Set(useTags.value.map(tagRaw => tagRaw.tags))).flat()
 );
 
-const initKeyword = decodeURIComponent(
-  window.location.search.split("?")[1].split("=")[1]
-);
+const initKeyword = window.location.search
+  ? decodeURIComponent(window.location.search.split("?")[1].split("=")[1])
+  : null;
 
 const searchValue = ref<string[]>(initKeyword ? [initKeyword] : []);
 const recommendations = ref<string[]>([]);
