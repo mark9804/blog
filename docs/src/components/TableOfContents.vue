@@ -7,8 +7,7 @@ import dayjs from "dayjs";
 import { useWindowSize } from "@vueuse/core";
 
 const useContents = computed(() =>
-  // @ts-ignore
-  (usePosts as ArticleInfo[])
+  (usePosts as unknown as ArticleInfo[])
     .filter(
       (el: ArticleInfo) =>
         !el.frontmatter?.meta?.hidden && !el.url.endsWith("/")

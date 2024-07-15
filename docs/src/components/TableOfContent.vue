@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ArticleInfo } from "../types/ArticleInfo";
+import { useRouter } from "vitepress";
 withDefaults(
   defineProps<{
     content: ArticleInfo;
@@ -16,6 +17,14 @@ withDefaults(
     },
   }
 );
+
+const router = useRouter();
+
+const baseUrl = "/blog/";
+
+function searchTags(tag: string) {
+  router.go(`${baseUrl}tags/?keyword=${encodeURIComponent(tag)}`);
+}
 </script>
 
 <template>
@@ -43,6 +52,7 @@ withDefaults(
       >
         <a-tag
           color="arcoblue"
+          @click="searchTags(tag)"
           v-for="tag in content.frontmatter.tags"
           class="pointer-events-auto cursor-pointer"
         >

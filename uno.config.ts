@@ -13,6 +13,7 @@ export default defineConfig({
     ["align-self-center", { "align-self": "center" }],
     ["text-3", { color: "var(--color-text-3)" }],
     ["border-fill", { "border-color": "var(--color-fill-2)" }],
+    ["text-match", { color: "var(--arona-blue-6)", "font-weight": "bold" }],
   ],
   shortcuts: {
     "card-float": "shadow-std rounded-lg gap-[24px] p-[24px]",
