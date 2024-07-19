@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useData } from "vitepress";
-import { nextTick, onBeforeMount, provide } from "vue";
+import { nextTick, onBeforeMount, provide, ComputedRef } from "vue";
 import DefaultTheme from "vitepress/theme";
 import DiscussionWidget from "./DiscussionWidget.vue";
 import { ArticleInfo } from "../../src/types/ArticleInfo";
@@ -47,7 +47,9 @@ onBeforeMount(() => {
 const data = useData();
 const route = useRoute();
 const { Layout } = DefaultTheme;
-const frontmatter = data.frontmatter as unknown as ArticleInfo["frontmatter"];
+const frontmatter = data.frontmatter as unknown as ComputedRef<
+  ArticleInfo["frontmatter"]
+>;
 </script>
 
 <template>

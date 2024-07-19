@@ -2,7 +2,7 @@
 import { ArticleInfo } from "../types/ArticleInfo";
 import { data as usePosts } from "../helper/posts.data";
 import { computed } from "vue";
-import TableOfContent from "./TableOfContent.vue";
+import ArticleCard from "./ArticleCard.vue";
 import dayjs from "dayjs";
 import { useWindowSize } from "@vueuse/core";
 
@@ -30,7 +30,7 @@ const { width } = useWindowSize();
     :label-position="width <= 475 ? 'same' : 'relative'"
   >
     <a-timeline-item v-for="content in useContents" :key="content.url">
-      <table-of-content :content="content"></table-of-content>
+      <article-card :content="content" />
       <template #label>
         <p class="mb-4">{{ content.lastUpdated }}</p>
       </template>

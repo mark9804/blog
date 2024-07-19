@@ -3,7 +3,7 @@ import { computed, ref } from "vue";
 import { data as usePosts } from "../helper/posts.data";
 import { ArticleInfo } from "../types/ArticleInfo";
 import { sift } from "radash";
-import TableOfContent from "./TableOfContent.vue";
+import ArticleCard from "./ArticleCard.vue";
 
 function shouldShowInResult(el: ArticleInfo) {
   return !el.url.endsWith("/") && !el.frontmatter?.meta?.hidden;
@@ -97,7 +97,7 @@ const displayedArticles = computed(() => {
       </template>
     </a-dropdown>
     <div class="flex flex-col gap-2 w-full">
-      <TableOfContent
+      <article-card
         v-for="article in displayedArticles"
         :key="article.url"
         :content="{

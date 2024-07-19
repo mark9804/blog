@@ -3,6 +3,7 @@ export interface ArticleInfo {
     title?: string;
     description?: string;
     tags?: string[];
+    cover?: string;
     meta?: {
       hidden?: boolean;
     };

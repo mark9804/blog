@@ -2,7 +2,6 @@ import {
   defineConfig,
   presetIcons,
   presetUno,
-  presetWebFonts,
   transformerDirectives,
   transformerVariantGroup,
 } from "unocss";
@@ -25,12 +24,12 @@ export default defineConfig({
       warn: true,
       unit: "em",
     }),
-    presetWebFonts({
-      provider: "bunny",
-      fonts: {
-        sans: "Inter",
-      },
-    }),
+    // presetWebFonts({
+    //   provider: "bunny",
+    //   fonts: {
+    //     sans: "Inter",
+    //   },
+    // }),
   ],
   transformers: [transformerDirectives(), transformerVariantGroup()],
 });
