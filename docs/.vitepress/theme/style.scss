@@ -33,11 +33,13 @@ figure {
   img {
     max-width: 100%;
     border-radius: 4px;
+    margin-top: 8px;
   }
 
   figcaption {
     font-size: 14px;
     line-height: 20px;
+    margin-bottom: 8px;
     color: var(--color-text-3);
   }
 }

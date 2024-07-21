@@ -96,8 +96,9 @@ const displayedArticles = computed(() => {
         </a-doption>
       </template>
     </a-dropdown>
-    <div class="flex flex-col gap-2 w-full">
+    <div class="flex flex-col gap-2 w-full items-center">
       <article-card
+        class="w-full max-w-[1280px]"
         v-for="article in displayedArticles"
         :key="article.url"
         :content="{
