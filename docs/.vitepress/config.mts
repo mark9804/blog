@@ -11,6 +11,8 @@ import {
   presetUno,
   transformerDirectives,
 } from "unocss";
+import Icons from 'unplugin-icons/vite'
+import IconsResolver from 'unplugin-icons/resolver'
 import implicitFigures from "markdown-it-implicit-figures";
 import vueDevTools from "vite-plugin-vue-devtools";
 // import { vitePluginForArco } from "@arco-plugins/vite-vue";
@@ -162,8 +164,16 @@ export default defineConfig({
       }),
       Components({
         include: [/\.vue$/, /\.md$/, /\.ts$/],
-        resolvers: [ArcoResolver({ sideEffect: true, resolveIcons: true })],
+        resolvers: [
+          ArcoResolver({ sideEffect: true, resolveIcons: true }), 
+          IconsResolver({
+            alias: {
+              park: 'icon-park',
+            }
+        })
+        ],
       }),
+      Icons(),
       vueDevTools(),
 
       UnoCSS({

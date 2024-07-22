@@ -46,6 +46,7 @@
   "dependencies": {
     "@arco-design/web-vue": "^2.55.1",
     "@arco-plugins/vite-vue": "^1.4.5",
+    "@icon-park/vue-next": "^1.4.2",
     "@vueuse/core": "^10.10.0",
     "cross-spawn": "^7.0.3",
     "dayjs": "^1.11.11",
@@ -61,6 +62,7 @@
     "postcss-plugin-px2rem": "^0.8.1",
     "radash": "^12.1.0",
     "sass": "^1.72.0",
+    "unplugin-icons": "^0.19.0",
     "unplugin-vue-components": "^0.27.0",
     "words-count": "^2.0.2"
   }

@@ -11,5 +11,6 @@ export interface ArticleInfo {
   lastUpdated?: number | string;
   readingTime: number;
   wordsCount: number;
+  imgCount?: number;
   url: string;
 }

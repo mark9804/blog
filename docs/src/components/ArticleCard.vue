@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { ArticleInfo } from "../types/ArticleInfo";
 import { useRouter } from "vitepress";
+import { HourglassFull } from "@icon-park/vue-next";
+import { ViewGridDetail } from "@icon-park/vue-next";
 withDefaults(
   defineProps<{
     content: ArticleInfo;
@@ -63,10 +65,17 @@ function searchTags(tag: string) {
           <span>{{ tag }}</span>
         </a-tag>
       </div>
-      <p class="text-xs text-3 select-none">
-        <icon-clock-circle />
-        {{ content.wordsCount }} 字 | {{ content.readingTime }} 分钟
-      </p>
+      <div class="text-xs text-3 select-none flex items-center gap-1">
+        <view-grid-detail fill="#86909c" />
+        <span
+          >{{ content.wordsCount }} 字<span v-if="!!content.imgCount"
+            >，{{ content.imgCount }} 张图片</span
+          ></span
+        >
+        <span>|</span>
+        <hourglass-full fill="#86909c" />
+        <span>{{ content.readingTime }} 分钟</span>
+      </div>
     </div>
   </div>
 </template>

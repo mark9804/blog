@@ -49,8 +49,15 @@ function getWordCount(url) {
   return (wordsCount as unknown as WordsCount).wordsCount(postContent);
 }
 
+function getImgCount(url) {
+  const file = transformUrlToPath(url);
+  const content = fs.readFileSync(file, "utf-8");
+  return content.match(/!\[.*?\]\(.*?\)/g)?.length || 0;
+}
+
 function getReadingTime(url, wpms = 200) {
-  return Math.ceil(getWordCount(url) / wpms);
+  // 将样本图片输入 CLIP 得到描述，平均词数约为 229
+  return Math.ceil((getWordCount(url) + getImgCount(url) * 229) / wpms);
 }
 
 // Define the custom loader using createContentLoader
@@ -58,14 +65,16 @@ const loader = createContentLoader("**/*.md", {
   async transform(rawData) {
     const data = await pMap(
       rawData,
+      // FIXME: 重复读取文件
       async item => {
         const lastUpdated = (await getLastUpdated(
           item.url
         )) as unknown as number;
         const wordsCount = getWordCount(item.url);
+        const imgCount = getImgCount(item.url);
         const readingTime = getReadingTime(item.url);
 
-        return { ...item, lastUpdated, wordsCount, readingTime };
+        return { ...item, lastUpdated, wordsCount, imgCount, readingTime };
       },
       { concurrency: 64 }
     );
