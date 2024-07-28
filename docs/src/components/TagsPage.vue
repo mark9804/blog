@@ -46,7 +46,7 @@ function getResiduals(inputValue: string) {
     residuals.value = inputValue;
     allTags.value.forEach(
       tag =>
-        tag.includes(inputValue) &&
+        tag.toLowerCase().includes(inputValue.toLowerCase()) &&
         !searchValue.value.includes(tag) &&
         !recommendations.value.includes(tag) &&
         recommendations.value.push(tag)
@@ -61,7 +61,11 @@ function addTag(tag: string) {
 }
 
 function renderTagText(tag: string, matches: string) {
-  return tag.replace(matches, `<span class="text-match">${matches}</span>`);
+  const matchingReg = new RegExp(matches, "gi");
+  return tag.replace(
+    matchingReg,
+    (match: string) => `<span class="text-match">${match}</span>`
+  );
 }
 
 const displayedArticles = computed(() => {
