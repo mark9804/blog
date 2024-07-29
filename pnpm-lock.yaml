@@ -17,6 +17,27 @@ importers:
       '@icon-park/vue-next':
         specifier: ^1.4.2
         version: 1.4.2(vue@3.4.34)
+      '@mdit/plugin-img-lazyload':
+        specifier: ^0.12.0
+        version: 0.12.0
+      '@mdit/plugin-img-size':
+        specifier: ^0.12.0
+        version: 0.12.0
+      '@mdit/plugin-mark':
+        specifier: ^0.12.0
+        version: 0.12.0
+      '@mdit/plugin-ruby':
+        specifier: ^0.12.0
+        version: 0.12.0
+      '@mdit/plugin-spoiler':
+        specifier: ^0.12.0
+        version: 0.12.0
+      '@mdit/plugin-sub':
+        specifier: ^0.12.0
+        version: 0.12.0
+      '@mdit/plugin-sup':
+        specifier: ^0.12.0
+        version: 0.12.0
       '@vueuse/core':
         specifier: ^10.10.0
         version: 10.11.0(vue@3.4.34)
@@ -44,6 +65,9 @@ importers:
       markdown-it-implicit-figures:
         specifier: ^0.12.0
         version: 0.12.0
+      medium-zoom:
+        specifier: ^1.1.0
+        version: 1.1.0
       p-map:
         specifier: ^7.0.2
         version: 7.0.2
@@ -745,6 +769,69 @@ packages:
   '@jsdevtools/ez-spawn@3.0.4':
     resolution: {integrity: sha512-f5DRIOZf7wxogefH03RjMPMdBF7ADTWUMoOs9kaJo06EfwF+aFhMZMDZxHg/Xe12hptN9xoZjGso2fdjapBRIA==}
     engines: {node: '>=10'}
+
+  '@mdit/plugin-img-lazyload@0.12.0':
+    resolution: {integrity: sha512-6R42ieXzwkB5BKKZi+ZefqeP/fBG5qo7Sqtl72ewSVqEQ30bgxpk6nkrPI2orRob4tb6z0F/c+R8h6PW5MkTOw==}
+    engines: {node: '>= 18'}
+    peerDependencies:
+      markdown-it: ^14.1.0
+    peerDependenciesMeta:
+      markdown-it:
+        optional: true
+
+  '@mdit/plugin-img-size@0.12.0':
+    resolution: {integrity: sha512-fCcF5gc+ba6gQ5ebrKuI8bK/gFbj8mbeN45FHmBsFDFsfTHa0Xij2v8iok0nP8YEIVj71y8XYojsqCWs6avong==}
+    engines: {node: '>= 18'}
+    peerDependencies:
+      markdown-it: ^14.1.0
+    peerDependenciesMeta:
+      markdown-it:
+        optional: true
+
+  '@mdit/plugin-mark@0.12.0':
+    resolution: {integrity: sha512-BDFwbV/tbgUGL8KF2ymYNLEXT2KNBLe8D0rshDrbB4Iko1U2DywACQkmaUbYBJ1VCn7/dff35at9fWrm3QjrwQ==}
+    engines: {node: '>= 18'}
+    peerDependencies:
+      markdown-it: ^14.1.0
+    peerDependenciesMeta:
+      markdown-it:
+        optional: true
+
+  '@mdit/plugin-ruby@0.12.0':
+    resolution: {integrity: sha512-ZLDCqSK+/olq55F9zjYGBlG9woIJrDDba9YCA75UtpBC8bqYD7junFY1DrgpoxZVh/0xYiXPpRhMqyQVxYcOxg==}
+    engines: {node: '>= 18'}
+    peerDependencies:
+      markdown-it: ^14.1.0
+    peerDependenciesMeta:
+      markdown-it:
+        optional: true
+
+  '@mdit/plugin-spoiler@0.12.0':
+    resolution: {integrity: sha512-7yu+Gz000O0OxGnGYOoj77Am3WgH4GwzOvwCp7tPLexkJwTve8MyT9In/NEPFaRw8fmgXwthC0gKq4Ubh1+8DA==}
+    engines: {node: '>= 18'}
+    peerDependencies:
+      markdown-it: ^14.1.0
+    peerDependenciesMeta:
+      markdown-it:
+        optional: true
+
+  '@mdit/plugin-sub@0.12.0':
+    resolution: {integrity: sha512-27kKkSVkymc+2RNc5XOYkeXip5PgHZPUnHpxUvkpnairLwyHsXb8/gzr9zd5arVkip86rcdy9LIvnF7zO0dNVQ==}
+    engines: {node: '>= 18'}
+    peerDependencies:
+      markdown-it: ^14.1.0
+    peerDependenciesMeta:
+      markdown-it:
+        optional: true
+
+  '@mdit/plugin-sup@0.12.0':
+    resolution: {integrity: sha512-3bEDW5/y1UDVU8LVbFsqUvNcMW6orp16uCdRGYCNZ3/IeK7Qj1/9a3wfhScIoI8xRUE6M3JLv41sGBFXLHwi1w==}
+    engines: {node: '>= 18'}
+    peerDependencies:
+      markdown-it: ^14.1.0
+    peerDependenciesMeta:
+      markdown-it:
+        optional: true
 
   '@nodelib/fs.scandir@2.1.5':
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
@@ -1931,6 +2018,9 @@ packages:
 
   mdn-data@2.0.30:
     resolution: {integrity: sha512-GaqWWShW4kv/G9IEucWScBx9G1/vsFZZJUO+tD26M8J8z3Kw5RDQjaoZe03YAClgeS/SWPOcb4nkFBTEi5DUEA==}
+
+  medium-zoom@1.1.0:
+    resolution: {integrity: sha512-ewyDsp7k4InCUp3jRmwHBRFGyjBimKps/AJLjRSox+2q/2H4p/PNpQf+pwONWlJiOudkBXtbdmVbFjqyybfTmQ==}
 
   memoize-one@6.0.0:
     resolution: {integrity: sha512-rkpe71W0N0c0Xz6QD0eJETuWAJGnJ9afsl1srmwPrI+yBCkge5EycXXbYRyvL29zZVUWQCY7InPRCv3GDXuZNw==}
@@ -3411,6 +3501,34 @@ snapshots:
       string-argv: 0.3.2
       type-detect: 4.0.8
 
+  '@mdit/plugin-img-lazyload@0.12.0':
+    dependencies:
+      '@types/markdown-it': 14.1.1
+
+  '@mdit/plugin-img-size@0.12.0':
+    dependencies:
+      '@types/markdown-it': 14.1.1
+
+  '@mdit/plugin-mark@0.12.0':
+    dependencies:
+      '@types/markdown-it': 14.1.1
+
+  '@mdit/plugin-ruby@0.12.0':
+    dependencies:
+      '@types/markdown-it': 14.1.1
+
+  '@mdit/plugin-spoiler@0.12.0':
+    dependencies:
+      '@types/markdown-it': 14.1.1
+
+  '@mdit/plugin-sub@0.12.0':
+    dependencies:
+      '@types/markdown-it': 14.1.1
+
+  '@mdit/plugin-sup@0.12.0':
+    dependencies:
+      '@types/markdown-it': 14.1.1
+
   '@nodelib/fs.scandir@2.1.5':
     dependencies:
       '@nodelib/fs.stat': 2.0.5
@@ -4704,6 +4822,8 @@ snapshots:
       speech-rule-engine: 4.0.7
 
   mdn-data@2.0.30: {}
+
+  medium-zoom@1.1.0: {}
 
   memoize-one@6.0.0: {}
 

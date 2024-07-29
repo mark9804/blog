@@ -11,11 +11,18 @@ import {
   presetUno,
   transformerDirectives,
 } from "unocss";
-import Icons from 'unplugin-icons/vite'
-import IconsResolver from 'unplugin-icons/resolver'
+import Icons from "unplugin-icons/vite";
+import IconsResolver from "unplugin-icons/resolver";
+
 import implicitFigures from "markdown-it-implicit-figures";
+import { mark } from "@mdit/plugin-mark";
+import { ruby } from "@mdit/plugin-ruby";
+import { spoiler } from "@mdit/plugin-spoiler";
+import { imgSize } from "@mdit/plugin-img-size";
+import { sub } from "@mdit/plugin-sub";
+import { sup } from "@mdit/plugin-sup";
+
 import vueDevTools from "vite-plugin-vue-devtools";
-// import { vitePluginForArco } from "@arco-plugins/vite-vue";
 // @ts-ignore
 import type { UserProfile } from "../src/types/UserProfile";
 
@@ -54,7 +61,13 @@ export default defineConfig({
       md.use(implicitFigures, {
         figcaption: true,
         copyAttrs: "^class$",
-      });
+      })
+        .use(mark)
+        .use(ruby)
+        .use(spoiler)
+        .use(imgSize)
+        .use(sub)
+        .use(sup);
     },
   },
 
@@ -97,7 +110,7 @@ export default defineConfig({
       // manualSortFileNameByPriority: ['first.md', 'second', 'third.md'],
       // removePrefixAfterOrdering: false,
       // prefixSeparator: '.',
-      // excludeFiles: ['first.md', 'secret.md'],
+      excludeFiles: ['tags.md'],
       // excludeFilesByFrontmatter: false,
       // excludeFolders: ['secret-folder'],
       // includeDotFiles: false,
@@ -165,12 +178,12 @@ export default defineConfig({
       Components({
         include: [/\.vue$/, /\.md$/, /\.ts$/],
         resolvers: [
-          ArcoResolver({ sideEffect: true, resolveIcons: true }), 
+          ArcoResolver({ sideEffect: true, resolveIcons: true }),
           IconsResolver({
             alias: {
-              park: 'icon-park',
-            }
-        })
+              park: "icon-park",
+            },
+          }),
         ],
       }),
       Icons(),

@@ -17,6 +17,14 @@
   font-display: swap;
 }
 
+.medium-zoom-image--opened {
+  z-index: 100;
+}
+
+.medium-zoom-overlay {
+  z-index: 99;
+}
+
 body {
   font-size: 16px !important;
   line-height: 24px;
@@ -51,6 +59,27 @@ figure {
     margin-bottom: 8px;
     color: var(--color-text-3);
     text-align: center;
+  }
+}
+
+mark {
+  background-color: var(--vp-c-brand-soft);
+  padding: 0 4px;
+  border-radius: 4px;
+}
+.spoiler {
+  color: transparent;
+  background-color: var(--vp-c-brand-3);
+  padding: 0 4px;
+  border-radius: 4px;
+  transition: all 0.3s ease-in-out;
+  cursor: help;
+
+  &:hover,
+  &:focus,
+  &:active {
+    color: inherit;
+    background-color: transparent;
   }
 }
 
