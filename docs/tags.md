@@ -13,4 +13,6 @@ meta:
   import TagsPage from "./src/components/TagsPage.vue";
 </script>
 
-<TagsPage />
+<ClientOnly>
+  <TagsPage />
+</ClientOnly>
