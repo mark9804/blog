@@ -14,6 +14,9 @@ importers:
       '@arco-plugins/vite-vue':
         specifier: ^1.4.5
         version: 1.4.5
+      '@formkit/auto-animate':
+        specifier: ^0.8.2
+        version: 0.8.2
       '@icon-park/vue-next':
         specifier: ^1.4.2
         version: 1.4.2(vue@3.4.34)
@@ -727,6 +730,9 @@ packages:
 
   '@floating-ui/utils@0.2.4':
     resolution: {integrity: sha512-dWO2pw8hhi+WrXq1YJy2yCuWoL20PddgGaqTgVe4cOS9Q6qklXCiA1tJEqX6BEwRNSCP84/afac9hd4MS+zEUA==}
+
+  '@formkit/auto-animate@0.8.2':
+    resolution: {integrity: sha512-SwPWfeRa5veb1hOIBMdzI+73te5puUBHmqqaF1Bu7FjvxlYSz/kJcZKSa9Cg60zL0uRNeJL2SbRxV6Jp6Q1nFQ==}
 
   '@humanwhocodes/module-importer@1.0.1':
     resolution: {integrity: sha512-bxveV4V8v5Yb4ncFTT3rPSgZBOpCkjfK0y4oVVVJwIuDVBRMDXrPyXRL988i5ap9m9bnyEEjWfm5WkBmtffLfA==}
@@ -3454,6 +3460,8 @@ snapshots:
       '@floating-ui/utils': 0.2.4
 
   '@floating-ui/utils@0.2.4': {}
+
+  '@formkit/auto-animate@0.8.2': {}
 
   '@humanwhocodes/module-importer@1.0.1': {}
 

@@ -8,6 +8,7 @@ import piniaPluginPersistedstate from "pinia-plugin-persistedstate";
 import mediumZoom from "medium-zoom";
 import { onMounted, watch, nextTick } from "vue";
 import { useData } from "vitepress";
+import { autoAnimatePlugin } from '@formkit/auto-animate/vue'
 
 import "./style.scss";
 import "uno.css";
@@ -43,7 +44,7 @@ export default {
   Layout: ApperanceTransitionLayout,
   enhanceApp({ app, router, siteData }) {
     // ...
-    app.use(pinia);
+    app.use(pinia).use(autoAnimatePlugin);
     Message._context = app._context;
   },
 };
