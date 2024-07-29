@@ -23,6 +23,15 @@ body {
   font-family: var(--vp-font-family-base) !important;
 }
 
+html.dark {
+  figure img {
+    filter: brightness(0.8);
+  }
+  .medium-zoom-image--opened {
+    filter: brightness(1);
+  }
+}
+
 figure {
   display: flex;
   flex-direction: column;
