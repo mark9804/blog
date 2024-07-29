@@ -27,9 +27,6 @@ export default {
     }
     onMounted(() => {
       const zoomInstance = initZoom();
-      zoomInstance.on("close", () => {
-        zoomInstance.getZoomedImage().style.filter = "brightness(80%)";
-      });
       zoomInstance.on("open", e => {
         const target = e.target as HTMLElement;
         const figCaption = (target.parentNode?.lastChild as HTMLElement)

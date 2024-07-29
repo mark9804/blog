@@ -19,6 +19,7 @@ import { mark } from "@mdit/plugin-mark";
 import { ruby } from "@mdit/plugin-ruby";
 import { spoiler } from "@mdit/plugin-spoiler";
 import { imgSize } from "@mdit/plugin-img-size";
+import { imgLazyload } from "@mdit/plugin-img-lazyload";
 import { sub } from "@mdit/plugin-sub";
 import { sup } from "@mdit/plugin-sup";
 
@@ -66,6 +67,7 @@ export default defineConfig({
         .use(ruby)
         .use(spoiler)
         .use(imgSize)
+        .use(imgLazyload)
         .use(sub)
         .use(sup);
     },
