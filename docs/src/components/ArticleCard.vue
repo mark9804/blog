@@ -67,13 +67,14 @@ function searchTags(tag: string) {
       </div>
       <div class="text-xs text-3 select-none flex items-center gap-1">
         <view-grid-detail fill="#86909c" size="12" />
+        <!-- <icon-info-circle /> -->
         <span
           >{{ content.wordsCount }} 字<span v-if="!!content.imgCount"
             >，{{ content.imgCount }} 张图片</span
           ></span
         >
         <span>|</span>
-        <hourglass-full fill="#86909c" size="10" />
+        <!-- <hourglass-full fill="#86909c" size="10" /> -->
         <span>全部读完约 {{ content.readingTime }} 分钟</span>
       </div>
     </div>
