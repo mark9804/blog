@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { ArticleInfo } from "../types/ArticleInfo";
 import { useRouter } from "vitepress";
-import { HourglassFull } from "@icon-park/vue-next";
+import { computed } from "vue";
 import { ViewGridDetail } from "@icon-park/vue-next";
-withDefaults(
+const props = withDefaults(
   defineProps<{
     content: ArticleInfo;
   }>(),
@@ -27,15 +27,28 @@ const baseUrl = "/blog/";
 function searchTags(tag: string) {
   router.go(`${baseUrl}tags/?keyword=${encodeURIComponent(tag)}`);
 }
+
+const hasCover = computed(() => !!props.content.frontmatter.cover);
 </script>
 
 <template>
   <div
     class="toc-container grid mb-2 border-1 border-fill border-solid rounded-lg overflow-hidden"
   >
+    <div
+      v-if="hasCover"
+      class="toc-container__cover pointer-events-none absolute h-full w-full overflow-hidden z-[-1] rounded-lg overflow-hidden top-0 left-0"
+    >
+      <img
+        class="toc-container__cover--img object-cover w-full h-full block align-bottom"
+        :src="content.frontmatter.cover"
+      />
+    </div>
     <a class="toc-container--link" :href="content.url.slice(1)"></a>
+
     <div
       class="toc-list flex flex-col gap-2 p-3 pl-4 w-fit pointer-events-none"
+      :class="{ 'has-cover': hasCover }"
     >
       <a
         class="toc-list__title w-full border-none m-0 p-0 text-xl font-700"
@@ -65,8 +78,10 @@ function searchTags(tag: string) {
           <span>{{ tag }}</span>
         </a-tag>
       </div>
-      <div class="text-xs text-3 select-none flex items-center gap-1">
-        <view-grid-detail fill="#86909c" size="12" />
+      <div
+        class="toc-list__info text-xs text-3 select-none flex items-center gap-1"
+      >
+        <view-grid-detail :fill="hasCover ? '#fff' : '#86909c'" size="12" />
         <!-- <icon-info-circle /> -->
         <span
           >{{ content.wordsCount }} 字<span v-if="!!content.imgCount"
@@ -89,9 +104,25 @@ a {
 
 .toc-container {
   grid-template-areas: "placeholder";
+  filter: blur(0); // stacking context
 
-  &--link {
+  &--link,
+  &__cover {
     grid-area: placeholder;
+  }
+
+  &__cover::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      rgba(29, 33, 41, 0.75) 0%,
+      rgba(29, 33, 41, 0) 100%
+    );
   }
 }
 
@@ -106,6 +137,11 @@ a {
     &:hover {
       color: var(--vp-c-brand-2);
     }
+  }
+
+  .has-cover &__title,
+  .has-cover &__info {
+    color: #ffffff;
   }
 }
 </style>

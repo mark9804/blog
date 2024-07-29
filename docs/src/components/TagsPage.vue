@@ -17,6 +17,7 @@ const useTags = computed(() => {
           ? {
               tags: el.frontmatter.tags ?? [],
               title: el.frontmatter.title,
+              cover: el.frontmatter.cover,
               url: el.url,
               readingTime: el.readingTime,
               wordsCount: el.wordsCount,
@@ -109,6 +110,7 @@ const displayedArticles = computed(() => {
           frontmatter: {
             title: article.title,
             tags: article.tags,
+            cover: article.cover,
           },
           url: article.url,
           readingTime: article.readingTime,

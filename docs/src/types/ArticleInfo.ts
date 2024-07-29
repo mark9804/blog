@@ -1,4 +1,4 @@
-export interface ArticleInfo {
+export type ArticleInfo = {
   frontmatter: {
     title?: string;
     description?: string;
@@ -13,4 +13,4 @@ export interface ArticleInfo {
   wordsCount: number;
   imgCount?: number;
   url: string;
-}
+};
