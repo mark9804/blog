@@ -2,7 +2,7 @@
 import { computed, ref } from "vue";
 import { data as usePosts } from "../helper/posts.data";
 import { ArticleInfo } from "../types/ArticleInfo";
-import { sift } from "radash";
+import { sift, unique } from "radash";
 import ArticleCard from "./ArticleCard.vue";
 
 function shouldShowInResult(el: ArticleInfo) {
@@ -56,6 +56,7 @@ function getResiduals(inputValue: string) {
 }
 
 function addTag(tag: string) {
+  if (searchValue.value.includes(tag)) return;
   searchValue.value.push(tag);
   residuals.value = "";
   recommendations.value = [];
@@ -78,6 +79,19 @@ const displayedArticles = computed(() => {
 
 <template>
   <div class="flex flex-col w-full p-5 items-center gap-4">
+    <div class="flex flex-nowrap gap-4 w-full max-w-[1280px] overflow-x-scroll">
+      <a-tag
+        class="cursor-pointer"
+        color="arcoblue"
+        v-for="tag in unique(allTags)"
+        @click="addTag(tag)"
+      >
+        <template #icon>
+          <icon-tag />
+        </template>
+        {{ tag }}
+      </a-tag>
+    </div>
     <a-dropdown
       :popup-visible="recommendations.length > 0"
       class="w-full max-w-[1280px]"
@@ -117,7 +131,6 @@ const displayedArticles = computed(() => {
           wordsCount: article.wordsCount,
         }"
       />
-      <a-empty v-if="displayedArticles.length === 0" />
     </div>
   </div>
 </template>
