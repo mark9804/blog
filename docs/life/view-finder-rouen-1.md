@@ -1,0 +1,168 @@
+---
+title: View Finder：法国鲁昂（1）
+cover: https://raw.githubusercontent.com/mark9804/typora-image-repo/master/uPic/_DSF3854.webp
+tags:
+  - 生活
+  - 旅游
+  - View Finder
+---
+
+# View Finder：法国鲁昂（Day 1-3）
+
+这次借着参加学会的机会来法国和捷克各一周时间。虽然说是参加学会，但是现在我也已经毕业了，所以这次主要还是以体验生活为主。
+
+这次因为是整个研究室的人~~自费~~参加学会，~~（而且教授自己坐直飞航班跑路了不带学生一起，）~~ 所以我和另一个中国人博士生朋友还有剩下三个日本人一起从浦东转机去巴黎戴高乐机场。
+
+## 第一天：集体？什么集体？
+
+降落在巴黎那天正好是法国的国庆日，法国对日本免签所以几个日本人先走快速通道过了安检。我们在边检处认识了一个准备入境自驾游的大哥，从他那边知道了今天凯旋门附近会举行阅兵式的事情。大哥还说晚上 11 点半还有灯光秀，但是因为第二天的学会在鲁昂，所以实在是没办法看了。当时是早上七点钟，我和博士生计算了一下，从机场坐 Roissybus 到市区大概 50 分钟左右，阅兵式是九点钟开始，所以应该是完全来得及看到的。
+
+一切都是如此完美，只可惜我们确确实实低估了同研究室那三个日本人的弱智程度——还有他们声称的“我有个朋友在法国留学所以今天他会带我们玩”的那个朋友的抽象水平。
+
+总而言之，在接下来的两个小时里，（在他们朋友扔下一句“我们巴黎市内见”就没声了的情况下）尽管我和博士生朋友告诉他们可以在手机上下载好 Île-de-France Mobilités 买电子票直接照着路标指引去 RoissyBus 上车地点乘车，这三个弱智一直「念のため」在机场里足足绕了两整圈愣是不敢张口问工作人员（为什么我们不问？我们问了，但是几个弱智不听），App 下载了看不懂法语也找不到切换语言的地方就愣是不说，我和博士生两个人买好票了一问，什么你们还没注册完？
+
+被三个小可爱硬控三个多小时（机场 city walk 两小时 + 注册买票半小时 + 卡地铁闸机五分钟）后，我们终于在阅兵式快结束的时候到了凯旋门。这时候小可爱们惊讶地发现因为人流管制，导游被隔在了凯旋门另一边。
+
+![警察荷枪管制，是不是实弹不知道也不敢试](https://raw.githubusercontent.com/mark9804/typora-image-repo/master/uPic/_DSF3787.webp)
+
+![阅兵式当天，凯旋门人山人海](https://raw.githubusercontent.com/mark9804/typora-image-repo/master/uPic/_DSF3783.webp)
+
+听到这个消息之后，小可爱们纷纷发挥了日本人特有的集体抱团技能，表示那我们就站在街上不走了，等阅兵式结束再说吧！
+
+我和朋友一合计，决定不参与三个人的站街行为，直接打了个招呼坐进旁边咖啡店里去了。
+
+![两个人点了杯卡布奇诺（左）和拿铁（右）](https://raw.githubusercontent.com/mark9804/typora-image-repo/master/uPic/IMG_2007.webp)
+
+喝咖啡的时候也很幸运地赶上了阅兵式末尾的空军飞行表演。
+
+![雷达预警机飞过凯旋门上空](https://raw.githubusercontent.com/mark9804/typora-image-repo/master/uPic/_DSF3802-Enhanced-NR.jpg)
+
+飞行表演结束后，我们终于见到了日本人说的那个（自己看阅兵式才懒得管亲爱同学死活的）好同学。经过一番友好交流之后，亲爱的导游先生决定带我们去体验巴黎著名的景点——香榭丽舍大街和埃菲尔铁塔。
+
+于是我们穿过香榭丽舍大街——旁边的 Rue du Colisée，来到埃菲尔铁塔——旁边的一座桥上，沿着塞纳河畔——的林荫土路一路暴走，终于在下午三点半左右来到了我们的终点：一辆刷着 Toyota 的小型挖掘机前面，大家一起在这大概两米不到的日本工业的伟大结晶面前合影留念。
+
+导游同学：哎呀你们今天下午还要去鲁昂，只能先这样啦。今天玩的开心吗？
+
+我替安倍晋三感到开心。
+
+![路过的店面](https://raw.githubusercontent.com/mark9804/typora-image-repo/master/uPic/_DSF3847-Enhanced-NR.webp)
+
+![红绿灯和路标](https://raw.githubusercontent.com/mark9804/typora-image-repo/master/uPic/_DSF3851-Enhanced-NR.webp)
+
+坐了一个半小时火车（中途经历了小可爱们不批量买票非得花十分钟一张一张买居然还有人想用 JCB 卡付款还好欧洲火车在晚点方面一向给力一路狂奔剩两分钟的时候赶上车）后，我们一行人到达了 Rouen Rive Droite 附近预先定好的民宿，结果发现当天最抽象的一集出现了：民宿没有空调（按法律装不起）也没有防虫纱窗（按法律不让装）。在十点下山的法国太阳的照耀下关窗蒸桑拿和开窗喂虫子极限二选一的情况下，我和博士生果断选择了两个人迅速找了一家带空调的酒店跑路，从此开始了快乐的不用管日本人那该死的集体精神的鲁昂四日游。
+
+## 第二天：请问这里是德国汉堡吗
+
+第二天学会正式开始了，早餐吃家乐福的汉堡，午餐吃学校的汉堡，晚餐吃麦当劳的汉堡，夜宵吃晚餐没吃完的麦当劳汉堡。
+
+朋友：这汉堡加料是真实诚啊。
+
+我：你要不换算一下汇率？
+
+朋友算完：我测，这群法国佬赚疯了
+
+![晚上交际会的弹琴小哥在弹《 !!残酷天使的行动纲领!! 》](https://raw.githubusercontent.com/mark9804/typora-image-repo/master/uPic/Snipaste_2024-07-29_09-01-34.webp)
+
+![鲁昂大学](https://raw.githubusercontent.com/mark9804/typora-image-repo/master/uPic/IMG_2042.webp)
+
+## 第三天：学会？什么学会？
+
+第三天，和朋友两个人的学术报告都做完了，直接爽玩。
+
+![单程票](https://raw.githubusercontent.com/mark9804/typora-image-repo/master/uPic/_DSF3854.webp)
+
+欧盟这地方公交系统突出一个对眼缘，一路上看到了无数大哥逃票。。。。。。
+
+为了图方便我们的住宿就定在学会发表的鲁昂大学旁边，所以我们计划了一个反向 city walk 行程：从酒店坐车到{达米埃特街: Rue Damiette}，沿着老街一路走到{鲁昂主教大教堂: Cathédrale Notre-Dame de l'Assomption
+de Rouen}，再顺着{大时钟: Le Gros-Horloge}一路走到市政厅旁边的{福楼拜与医学史博物馆: Musée Flaubert d'Histoire de la Médecine}，就近回酒店睡个午觉，晚上起来去 La Couronne（要在 [The Fork](https://www.thefork.fr/restaurant/la-couronne-r630775) 上预约，想吃血鸭的话要写明 Will order "Le véritable canard à la rouennaise"）吃晚餐。
+
+![路线图](https://raw.githubusercontent.com/mark9804/typora-image-repo/master/uPic/Snipaste_2024-07-21_23-43-08.jpg)
+
+实际上我们下车之后先 walk 了一圈，真实行程是从{圣旺教堂:Abbatiale Saint-Ouen} 开始的。很不幸圣旺教堂正在维修，所以等于没去过。
+
+<details>
+  <summary>圣旺教堂</summary>
+
+![维修中的圣旺教堂](https://raw.githubusercontent.com/mark9804/typora-image-repo/master/uPic/_DSF3877.webp)
+
+![圣旺教堂旁的拿破仑一世雕像](https://raw.githubusercontent.com/mark9804/typora-image-repo/master/uPic/_DSF3878.webp)
+
+</details>
+
+之后从圣旺教堂走小路（特地选了看起来比较有时代感的小路）回到了达米埃特街。
+
+![路上顺路经过一家小超市，进去看看物价](https://raw.githubusercontent.com/mark9804/typora-image-repo/master/uPic/_DSF3890.webp)
+
+达米埃特街是鲁昂比较有名的老街区之一，街道两边的建筑都保留了中世纪木质建筑的风格，建筑外层都有条纹状装饰，很有特色。
+
+![路边的店铺招牌](https://raw.githubusercontent.com/mark9804/typora-image-repo/master/uPic/_DSF3856.webp)
+
+![](https://raw.githubusercontent.com/mark9804/typora-image-repo/master/uPic/_DSF3863.webp)
+
+![{达米埃特街:Rue Damitte}](https://raw.githubusercontent.com/mark9804/typora-image-repo/master/uPic/_DSF3855.webp)
+
+沿着达米埃特街一路走到头就是鲁昂主教大教堂。教堂内侧的每扇玻璃窗都有不同彩绘。
+
+![教堂外部](https://raw.githubusercontent.com/mark9804/typora-image-repo/master/uPic/_DSF3967.webp)
+
+![教堂四角设有烛台，2.5 欧一根](https://raw.githubusercontent.com/mark9804/typora-image-repo/master/uPic/_DSF3939-Enhanced-NR.jpg)
+
+![教堂内部](https://raw.githubusercontent.com/mark9804/typora-image-repo/master/uPic/_DSF3924-Enhanced-NR-Edit.webp)
+
+![](https://raw.githubusercontent.com/mark9804/typora-image-repo/master/uPic/_DSF3949.jpg)
+
+![一些窗上的彩绘](https://raw.githubusercontent.com/mark9804/typora-image-repo/master/uPic/_DSF3941.jpg)
+
+出了教堂之后就近找了一家越南米粉（事后证明这是我们在鲁昂吃的第二好的一餐，，，感觉欧洲餐馆里的东西大部分时候真能和国内的猪食掰掰手腕），吃完之后继续沿着街道走去大时钟。
+
+![越南米粉加牛肉，13.5 欧](https://raw.githubusercontent.com/mark9804/typora-image-repo/master/uPic/IMG_2054.webp)
+
+下午一点钟街上的人依然相当多，思考了一下打算第二天凌晨没人的时候来补上。
+
+![大时钟所在街道](https://raw.githubusercontent.com/mark9804/typora-image-repo/master/uPic/_DSF3970-Enhanced-NR.webp)
+
+![上方的月相和下方的浮雕？都是可以转动的](https://raw.githubusercontent.com/mark9804/typora-image-repo/master/uPic/_DSF3973.webp)
+
+离开大时钟之后堪堪下午一点出头，规划里面的地点就只剩下一个福楼拜故居了，感觉要翻车，希望福楼拜故居能撑久一点吧（）
+
+![](https://raw.githubusercontent.com/mark9804/typora-image-repo/master/uPic/_DSF3991.webp)
+
+![鲁昂街道](https://raw.githubusercontent.com/mark9804/typora-image-repo/master/uPic/_DSF3998.webp)
+
+![前往福楼拜故居路上的街景，路上全是狗屎💩](https://raw.githubusercontent.com/mark9804/typora-image-repo/master/uPic/_DSF4007-Edit.webp)
+
+到福楼拜故居的时候是下午1:48，故居下午两点钟才开放，只能和朋友两个人在外面流浪。1:58 的时候工作人员才来上班，该死的欧洲佬虽然会早退但是绝不早到。
+
+![没有走错，这个破破烂烂的门就是福楼拜故居入口，旁边那个看起来更像博物馆入口的是县厅大门](https://raw.githubusercontent.com/mark9804/typora-image-repo/master/uPic/_DSF4008.webp)
+
+进去之后……嗯……我……你……他……
+
+我算是理解这个地方为什么叫“福楼拜故居**与医学**博物馆”了，福楼拜哥们他老爹是个医生，家里从蟒蛇皮到微缩头骨到木乃伊那是一应俱全，给小弟这种大学只拿鼠鼠做解剖的小卡拉米给整不会了。
+
+博物馆不大，但是东西一件件都挺直击心灵。参观一般从二楼开始，一进门先来两墙动物标本做好铺垫，再来一柜微缩人头骨练练胆子，最后摆两具木乃伊和一柜子解剖工具主打一个心跳体验。一楼进去先是当年的产科用品和器械，再是当年的牙科工具（机床旁边的麻药好像是真货，味道特别浓）以及一系列展示这些工具是如何大力出奇迹的插画。文学类的东西倒是基本没看见，只有一楼纪念品店里在卖一些福楼拜相关的书记和生平传记。参观免费。
+
+![](https://raw.githubusercontent.com/mark9804/typora-image-repo/master/uPic/_DSF4009-Enhanced-NR.jpg)
+
+![找两张能发的](https://raw.githubusercontent.com/mark9804/typora-image-repo/master/uPic/_DSF4011-Enhanced-NR.jpg)
+
+参观完福楼拜故居之后，我们就~~找不到事做了只能~~回酒店休息到晚上，七点半到了 La Couronne 吃晚餐。
+
+La Couronne 是法国最古老的餐厅之一，从 1345 年就开始营业了。鲁昂的特色菜是血鸭，但是我们没点到——服务员说因为准备需要大约一个小时，所以不仅要提前约座位还要写明要吃血鸭——就只能来了两份 impressionnistes 套餐。
+
+套餐包含一道前菜，一道主菜，一道奶酪（快跑，真的是臭脚丫子味），一道甜点。四种类别都可以在提供的菜单里自由选择各一样。朋友本来想点牡蛎前菜的，被服务员按住了（“现在不是牡蛎的季节，所以可能牡蛎的味道没有那么好”），就跟我点了一样的鹅肝。主菜我们两个人都点了牛排，甜点我点了一个{舒芙蕾:Soufflé normand}，朋友来了一个{米布丁: Riz au lait vanillé}。
+
+![鹅肝](https://raw.githubusercontent.com/mark9804/typora-image-repo/master/uPic/IMG_2073.webp)
+
+![La Couronne 的牛排，好吃，爱吃](https://raw.githubusercontent.com/mark9804/typora-image-repo/master/uPic/IMG_2074.webp)
+
+我们一致认为鹅肝吃起来像极了腐乳，但是牛排是真的好吃。好吃到之后几天其他牛肉和这次的比起来都像在嚼塑料。奶酪臭脚丫子味实在是太重了没吃下。
+
+来甜点的时候我的舒芙蕾狠狠翻车了，一口下去居然是苦的……我还以为是我这种土狗没见过世面的问题嗯炫了半个，结果服务员过来：先生我们舒芙蕾烤过头了给您换一个哦。🤡
+
+又等了大概十分钟左右，服务员端着一个新的舒芙蕾过来了。这次的更是苦到发麻。实在是不敢再吃了，不然怕吃完回去天花板上要跳小人了🤡🤡🤡
+
+![舒芙蕾（我没拍，The Fork 上偷的图 @Sandra G.）](https://raw.githubusercontent.com/mark9804/typora-image-repo/master/uPic/11564a64-3dcb-4e89-80e7-d0bd1102d2d7.webp)
+
+吃完已经是十点半了（上第一道菜的时候是八点），太阳才刚下山，天还是亮的。和朋友沿着河边走回了酒店（路边都是狗屎和翻倒的垃圾桶，还有三个哥们在路边拿汽油桶当桌子站着喝），然后洗洗睡觉。
+
+![晚上十点半的鲁昂，天还没黑，一群人在 drink](https://raw.githubusercontent.com/mark9804/typora-image-repo/master/uPic/IMG_2079.jpg)
