@@ -55,7 +55,7 @@
     "@mdit/plugin-spoiler": "^0.13.0",
     "@mdit/plugin-sub": "^0.13.0",
     "@mdit/plugin-sup": "^0.13.0",
-    "@vueuse/core": "^10.10.0",
+    "@vueuse/core": "^11.0.0",
     "cross-spawn": "^7.0.3",
     "dayjs": "^1.11.11",
     "element-plus": "^2.7.0",
