@@ -104,7 +104,7 @@ a {
 
 .toc-container {
   grid-template-areas: "placeholder";
-  filter: blur(0); // stacking context
+  position: relative; // stacking context
 
   &--link,
   &__cover {
