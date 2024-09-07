@@ -67,7 +67,7 @@
     "medium-zoom": "^1.1.0",
     "p-map": "^7.0.2",
     "pinia": "^2.1.7",
-    "pinia-plugin-persistedstate": "^3.2.1",
+    "pinia-plugin-persistedstate": "^4.0.0",
     "postcss-plugin-px2rem": "^0.8.1",
     "radash": "^12.1.0",
     "sass": "^1.72.0",
