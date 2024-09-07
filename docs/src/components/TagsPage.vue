@@ -21,6 +21,7 @@ const useTags = computed(() => {
               url: el.url,
               readingTime: el.readingTime,
               wordsCount: el.wordsCount,
+              imgCount: el?.imgCount,
             }
           : null;
       })
@@ -128,6 +129,7 @@ const displayedArticles = computed(() => {
           },
           url: article.url,
           readingTime: article.readingTime,
+          imgCount: article?.imgCount,
           wordsCount: article.wordsCount,
         }"
       />
