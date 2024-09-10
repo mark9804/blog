@@ -51,6 +51,62 @@ export function tokenize(text: string): Array<string> {
 export default defineConfig({
   base: "/blog/",
   title: "今天没有早睡",
+  head: [
+    [
+      "link",
+      {
+        rel: "icon",
+        href: "/blog/favicon.ico",
+      },
+    ],
+    [
+      "link",
+      {
+        rel: "manifest",
+        href: "/blog/manifest.json",
+      },
+    ],
+    [
+      "link",
+      {
+        rel: "prefetch",
+        href: "https://fonts.blue-archive.io/harmonyos-sans-webfont/harmonyos-sans-sc-400.css",
+        as: "style",
+        onload: "this.rel='stylesheet';this.onload=null;",
+      },
+    ],
+    [
+      "link",
+      {
+        rel: "prefetch",
+        href: "https://fonts.blue-archive.io/harmonyos-sans-webfont/harmonyos-sans-sc-700.css",
+        as: "style",
+        onload: "this.rel='stylesheet';this.onload=null;",
+      },
+    ],
+    [
+      "link",
+      {
+        rel: "prefetch",
+        href: "https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,1,0",
+        as: "style",
+        onload: "this.rel='stylesheet';this.onload=null;",
+      },
+    ],
+    [
+      "script",
+      {
+        async: "",
+        defer: "",
+        type: "text/javascript",
+      },
+      `(function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "m0pjwvqh46");`,
+    ],
+  ],
   description: "",
   lastUpdated: true,
   markdown: {
@@ -112,7 +168,7 @@ export default defineConfig({
       // manualSortFileNameByPriority: ['first.md', 'second', 'third.md'],
       // removePrefixAfterOrdering: false,
       // prefixSeparator: '.',
-      excludeFiles: ['tags.md'],
+      excludeFiles: ["tags.md"],
       // excludeFilesByFrontmatter: false,
       // excludeFolders: ['secret-folder'],
       // includeDotFiles: false,
@@ -219,50 +275,5 @@ export default defineConfig({
         ],
       },
     },
-  },
-
-  transformHead: () => {
-    return [
-      [
-        "link",
-        {
-          rel: "prefetch",
-          href: "https://fonts.blue-archive.io/harmonyos-sans-webfont/harmonyos-sans-sc-400.css",
-          as: "style",
-          onload: "this.rel='stylesheet';this.onload=null;",
-        },
-      ],
-      [
-        "link",
-        {
-          rel: "prefetch",
-          href: "https://fonts.blue-archive.io/harmonyos-sans-webfont/harmonyos-sans-sc-700.css",
-          as: "style",
-          onload: "this.rel='stylesheet';this.onload=null;",
-        },
-      ],
-      [
-        "link",
-        {
-          rel: "prefetch",
-          href: "https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,1,0",
-          as: "style",
-          onload: "this.rel='stylesheet';this.onload=null;",
-        },
-      ],
-      [
-        "script",
-        {
-          async: true,
-          defer: true,
-          type: "text/javascript",
-        },
-        `(function(c,l,a,r,i,t,y){
-          c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-          t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-          y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-      })(window, document, "clarity", "script", "m0pjwvqh46");`,
-      ],
-    ] as HeadConfig[];
   },
 });
