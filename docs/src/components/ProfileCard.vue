@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import { useWindowSize } from "@vueuse/core";
 import { ClickOutside as vClickOutside } from "element-plus";
-const { width } = useWindowSize();
 
 defineProps<{
   props: { name: string; avatar: string; bio: string; email: string };
@@ -16,7 +14,7 @@ function onClickOutside() {
 </script>
 <template>
   <div
-    v-if="width >= 475"
+    id="profile-card-desktop"
     class="flex flex-col items-center gap-[24px] p-[24px] rounded-lg border-1 border-solid border-fill h-full w-fit min-w-[256px]"
   >
     <img
@@ -36,7 +34,10 @@ function onClickOutside() {
       >
     </div>
   </div>
-  <div v-else class="fixed top-[84px] right-[24px] shadow-std rounded-full z-2">
+  <div
+    class="fixed top-[84px] right-[24px] shadow-std rounded-full z-2"
+    id="profile-card-mobile"
+  >
     <transition name="namecard-transition">
       <img
         class="w-[48px] h-[48px] rounded-full"
@@ -72,6 +73,24 @@ function onClickOutside() {
 </template>
 
 <style scoped lang="scss">
+@media (min-width: 475px) {
+  #profile-card-desktop {
+    display: flex !important;
+  }
+  #profile-card-mobile {
+    display: none !important;
+  }
+}
+
+@media (max-width: 475px) {
+  #profile-card-desktop {
+    display: none !important;
+  }
+  #profile-card-mobile {
+    display: flex !important;
+  }
+}
+
 .mobile-profile-card {
   background-color: var(--color-fill-base);
 }
