@@ -4,17 +4,16 @@
 @import url("./color-variable.scss");
 
 @font-face {
-  src: url("https://fonts.blue-archive.io/WixMadeforText-VariableFont_wght.ttf")
-    format("truetype");
-  font-family: "Wix Madefor Text";
+  font-family: "Wix Madefor";
+  src:
+    url("https://fonts.blue-archive.io/wix-madefor-adjusted/WixMadeforVF.woff2")
+      format("woff2"),
+    url("https://fonts.blue-archive.io/wix-madefor-adjusted/WixMadeforVF.woff")
+      format("woff"),
+    url("https://fonts.blue-archive.io/wix-madefor-adjusted/WixMadeforVF.ttf")
+      format("truetype");
   font-display: swap;
-}
-
-@font-face {
-  src: url("https://fonts.blue-archive.io/WixMadeforDisplay-VariableFont_wght.ttf")
-    format("truetype");
-  font-family: "Wix Madefor Display";
-  font-display: swap;
+  font-weight: 400 800;
 }
 
 @font-face {
@@ -94,7 +93,7 @@ a.title span,
 .item h2.text,
 .font-bold {
   font-weight: 700;
-  font-family: "Wix Madefor Display", "HarmonyOS Sans SC Bold",
+  font-family: "Wix Madefor", "HarmonyOS Sans SC Bold",
     var(--vp-font-family-base);
 }
 
@@ -107,7 +106,7 @@ a.title span,
   h6,
   .title {
     font-weight: 700;
-    font-family: "Wix Madefor Display", "HarmonyOS Sans SC Bold",
+    font-family: "Wix Madefor", "HarmonyOS Sans SC Bold",
       var(--vp-font-family-base);
   }
 
@@ -137,7 +136,7 @@ a.title span,
 }
 
 :root {
-  --vp-font-family-base: "Wix Madefor Text", "HarmonyOS Sans SC",
+  --vp-font-family-base: "Wix Madefor", "HarmonyOS Sans SC",
     "Microsoft YaHei", "PingFang SC", -apple-system, system-ui, "Segoe UI",
     Roboto, Ubuntu, Cantarell, "Noto Sans", BlinkMacSystemFont, "Helvetica Neue",
     "Hiragino Sans GB", Arial, sans-serif;
