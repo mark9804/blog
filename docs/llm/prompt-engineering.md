@@ -60,11 +60,11 @@ GPT 也学不会世界上所有职业的特定思考方式和语言习惯——�
 
 那么它是怎么做到的呢？
 
-![是你啊！我亲爱的面具……](https://raw.githubusercontent.com/mark9804/typora-image-repo/master/uPic/1280X1280.PNG)
+![是你啊！我亲爱的面具……](https://cdn.sa.net/2024/09/13/bSkzmh4t6VUxNfD.png)
 
 不好意思放错了，是这张，混合专家模型（<strong>M</strong>ixture <strong>o</strong>f <strong>E</strong>xperts, MoE）。
 
-![混合专家模型](https://raw.githubusercontent.com/mark9804/typora-image-repo/master/uPic/0_3_a2_VSLTYtSA0sS.png)
+![混合专家模型](https://cdn.sa.net/2024/09/13/FiQWAZzh5Ievqwr.png)
 
 ChatGPT 并不是一个模型，它（根据大家猜测）是一个混合专家模型。每个专家模型都使用特定的语料训练，让它的回答更接近某种特定标签的群体的思维方式与语言习惯。用户的请求抵达模型之前，会由一个路由进行分析，决定应该激活哪几个专家模型，并且应该以什么样的权重采信这些模型的答案。
 

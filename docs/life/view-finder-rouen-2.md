@@ -1,6 +1,6 @@
 ---
 title: View Finder：法国鲁昂（2）
-cover: https://raw.githubusercontent.com/mark9804/typora-image-repo/master/uPic/_DSF3854.webp
+cover: https://s2.loli.net/2024/09/13/SwDBj29XgdbMAsv.webp
 tags:
   - 生活
   - 旅游
@@ -15,13 +15,13 @@ tags:
 
 昨天因为{大时钟: Le Gros Horloge}附近人太多了，而且天气环境也不是很好（下午一点钟的光板阴天），于是在 [Planit!](https://www.planitphoto.cn/) 上看了一下第二天早上的蓝调时间在凌晨 5:10-5:43，于是决定 5:20 起床去再试一次。在 Apple Watch 上定了个 5:15 的闹钟（定手机闹钟的话怕被朋友一枕头闷过去了），然后精致睡眠。
 
-![Planit 数据，5:10 蓝调时刻开始，6:56 黄金时间结束](https://raw.githubusercontent.com/mark9804/typora-image-repo/master/uPic/IMG_2209.webp =360x)
+![Planit 数据，5:10 蓝调时刻开始，6:56 黄金时间结束](https://s2.loli.net/2024/09/13/dUCcufvrVZG8y4L.webp =360x)
 
 第二天早上被闹钟叫醒，悄咪咪出门。酒店旁边有一片{公园:荒地}，远远看去能看到一个我们前几天以为是县厅的建筑（不开门，晚上也不怎么开灯），早上看其实还行，大晚上的不开灯就有点阴间了。
 
-![](https://raw.githubusercontent.com/mark9804/typora-image-repo/master/uPic/_DSF4021.webp)
+![](https://s2.loli.net/2024/09/13/qzfZLcAOPHUC2Qr.webp)
 
-![白天看是这样的](https://raw.githubusercontent.com/mark9804/typora-image-repo/master/uPic/_DSF4019.webp)
+![白天看是这样的](https://s2.loli.net/2024/09/13/JxTVrtocRlYMEwi.webp)
 
 因为起的有点晚了，所以没有过分看路上的景色，直接去了大时钟旁边。到达的时候是 5:50 左右，错过了早上的蓝调时刻，只能等接下来的日出和黄金时间。可惜天气依旧是光板天，好在街上也很安静，没有一个人，和下午差别很大。
 

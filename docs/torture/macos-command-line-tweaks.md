@@ -55,7 +55,7 @@ defaults write com.apple.dock autohide-time-modifier -float 0.15 && killall Dock
 
 默认情况下，Dock 当中运行中的应用程序、未启动的应用程序和隐藏的应用程序在表现上没有任何区分。接下来的两个命令会分别在运行中的应用程序下方显示一个黑色指示点（官方叫 process indicator），以及用半透明图标显示已启动但被隐藏到后台的应用程序。
 
-![从左到右：运行中的应用；隐藏的应用；未启动的应用](https://raw.githubusercontent.com/mark9804/typora-image-repo/master/uPic/image-20240417015632606.png)
+![从左到右：运行中的应用；隐藏的应用；未启动的应用](https://cdn.sa.net/2024/09/13/Rih7DfIo1rCtZHO.png)
 
 首先是显示 process indicator，隐藏应用程序的命令在下一条。
 
@@ -120,7 +120,7 @@ macOS 允许隐藏桌面上的图标——事实上我更推荐一个叫 [OneSwi
 defaults write com.apple.finder CreateDesktop -bool false && killall Finder
 ```
 
-![隐藏后的效果](https://raw.githubusercontent.com/mark9804/typora-image-repo/master/uPic/Snipaste_2024-04-17_02-32-35.jpg)
+![隐藏后的效果](https://cdn.sa.net/2024/09/13/FXZ3jB5ESx7IzL8.jpg)
 
 ### 更改文件扩展名时不再显示警告
 
