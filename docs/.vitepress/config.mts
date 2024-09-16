@@ -228,6 +228,10 @@ export default defineConfig({
   },
 
   vite: {
+    server: {
+      port: 5500,
+      open: true,
+    },
     ssr: { noExternal: ["@arco-design/web-vue"] },
     plugins: [
       AutoImport({
