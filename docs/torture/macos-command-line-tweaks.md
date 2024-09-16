@@ -1,4 +1,5 @@
 ---
+outline: deep
 title: 用命令行调教 macOS 系统行为
 description: 一部分更改 macOS 行为的命令行
 tags:
