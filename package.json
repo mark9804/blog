@@ -32,9 +32,9 @@
     "unocss": "0.63.4",
     "unplugin-auto-import": "^0.18.0",
     "vite-plugin-vue-devtools": "^7.3.6",
-    "vitepress": "1.4.0",
+    "vitepress": "1.4.1",
     "vitepress-sidebar": "^1.22.0",
-    "vue": "3.5.11"
+    "vue": "3.5.12"
   },
   "pnpm": {
     "peerDependencyRules": {
