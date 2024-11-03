@@ -32,7 +32,7 @@
     "unocss": "0.63.6",
     "unplugin-auto-import": "^0.18.0",
     "vite-plugin-vue-devtools": "^7.3.6",
-    "vitepress": "1.4.2",
+    "vitepress": "1.4.3",
     "vitepress-sidebar": "^1.22.0",
     "vue": "3.5.12"
   },
@@ -71,7 +71,7 @@
     "postcss-plugin-px2rem": "^0.8.1",
     "radash": "^12.1.0",
     "sass": "^1.72.0",
-    "unplugin-icons": "^0.19.0",
+    "unplugin-icons": "^0.20.0",
     "unplugin-vue-components": "^0.27.0",
     "words-count": "^2.0.2"
   }
