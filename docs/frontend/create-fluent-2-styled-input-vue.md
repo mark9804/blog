@@ -55,7 +55,7 @@ tags:
 
 因此最终想到了 inset box shadow + 伪元素 的方案，通过把 `box-shadow` 的 spread 控制成 1px，类型设置为 inset 来模拟边框，并且通过伪元素来实现底部的横线。最后在外层套一个 `overflow: clip` 来实现边缘的 mask 效果。
 
-```vue
+```vue{26-43}
 <template>
   <span
     class="eden-ui eden-ui__input eden-ui__input--wrapper rounded flex gap-1 overflow-clip"
@@ -81,7 +81,7 @@ tags:
     box-shadow: inset 0 0 0 1px transparent;
     position: relative; // stacking context
 
-    &::before,  // [!code focus:18]
+    &::before,
     &::after {
       content: "";
       position: absolute;
