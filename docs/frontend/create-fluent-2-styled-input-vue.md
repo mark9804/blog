@@ -55,7 +55,15 @@ tags:
 
 因此最终想到了 inset box shadow + 伪元素 的方案，通过把 `box-shadow` 的 spread 控制成 1px，类型设置为 inset 来模拟边框，并且通过伪元素来实现底部的横线。最后在外层套一个 `overflow: clip` 来实现边缘的 mask 效果。
 
-```vue{26-43}
+<script setup>
+  import FluentInputExample from "@/components/FluentInputExample.vue";
+</script>
+
+<div class="flex w-full justify-center p-4 border-1 border-solid border-[var(--arona-blue-6)] rounded-md">
+  <FluentInputExample class="w-full h-[32px]"/>
+</div>
+
+```vue{28-45}
 <template>
   <span
     class="eden-ui eden-ui__input eden-ui__input--wrapper rounded flex gap-1 overflow-clip"
@@ -63,11 +71,13 @@ tags:
     <input
       type="text"
       class="eden-ui eden-ui__input--input flex flex-1 items-end"
+      placeholder="测试输入框"
     />
   </span>
 </template>
 
 <style scoped lang="scss">
+@use "@style/color-variable.scss" as *;
 .eden-ui__input {
   $border-width: 1px;
 
@@ -89,26 +99,27 @@ tags:
       bottom: 0px;
       width: 100%;
       height: $border-width;
-      background: $border-3;
+      background: var(--color-border-3);
       transition: all 0.3s ease-in-out;
     }
 
     &::after {
       will-change: transform;
       height: 2 * $border-width;
-      background: $arona-blue-6;
+      background: var(--arona-blue-6);
       transform: rotate3d(0, 1, 0, 90deg);
     }
 
     &:hover,
     &:focus,
     &:focus-within {
-      box-shadow: inset 0 0 0 1px $border-3;
+      transition: box-shadow 0.3s ease-in-out;
+      box-shadow: inset 0 0 0 1px var(--color-border-3);
     }
 
     &:focus,
     &:focus-within {
-      background-color: $fill-base;
+      background-color: var(--color-fill-base);
 
       &::after {
         transform: rotate3d(0, 1, 0, 0deg);

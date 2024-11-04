@@ -227,6 +227,11 @@ export default defineConfig({
   },
 
   vite: {
+    resolve: {
+      alias: {
+        "@": "/src",
+      },
+    },
     server: {
       port: 5500,
       open: true,
@@ -265,6 +270,11 @@ export default defineConfig({
       }),
     ],
     css: {
+      preprocessorOptions: {
+        scss: {
+          additionalData: "@use '@/style/color-variable.scss' as *;",
+        },
+      },
       postcss: {
         plugins: [
           px2rem({
@@ -275,7 +285,7 @@ export default defineConfig({
           // vitePluginForArco({
           //   style: "css",
           // }),
-        ],
+        ]
       },
     },
   },
