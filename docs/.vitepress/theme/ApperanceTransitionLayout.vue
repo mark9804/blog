@@ -1,10 +1,9 @@
 <script setup lang="ts">
-import { useData } from "vitepress";
+import { useData, withBase, useRoute, useRouter } from "vitepress";
 import { nextTick, onBeforeMount, provide, ComputedRef } from "vue";
 import DefaultTheme from "vitepress/theme";
 import DiscussionWidget from "./DiscussionWidget.vue";
 import { ArticleInfo } from "../../src/types/ArticleInfo";
-import { useRoute, useRouter } from "vitepress";
 
 const { isDark } = useData();
 
@@ -53,10 +52,8 @@ const frontmatter = data.frontmatter as unknown as ComputedRef<
 
 const router = useRouter();
 
-const baseUrl = "/blog/";
-
 function searchTags(tag: string) {
-  router.go(`${baseUrl}tags/?keyword=${encodeURIComponent(tag)}`);
+  router.go(withBase(`/tags/?keyword=${encodeURIComponent(tag)}`));
 }
 </script>
 
@@ -81,7 +78,7 @@ function searchTags(tag: string) {
         </a-tag>
       </div>
     </template>
-    <template #doc-after v-if="'/blog/' !== route.path">
+    <template #doc-after v-if="withBase('/') !== route.path">
       <DiscussionWidget />
     </template>
   </Layout>

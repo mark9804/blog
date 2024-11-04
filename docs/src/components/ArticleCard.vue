@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ArticleInfo } from "../types/ArticleInfo";
-import { useRouter } from "vitepress";
+import { useRouter, withBase } from "vitepress";
 import { computed } from "vue";
 import { ViewGridDetail } from "@icon-park/vue-next";
 const props = withDefaults(
@@ -22,10 +22,8 @@ const props = withDefaults(
 
 const router = useRouter();
 
-const baseUrl = "/blog/";
-
 function searchTags(tag: string) {
-  router.go(`${baseUrl}tags/?keyword=${encodeURIComponent(tag)}`);
+  router.go(withBase(`/tags/?keyword=${encodeURIComponent(tag)}`));
 }
 
 const hasCover = computed(() => !!props.content.frontmatter.cover);
