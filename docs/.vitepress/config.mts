@@ -26,8 +26,26 @@ import { sup } from "@mdit/plugin-sup";
 import vueDevTools from "vite-plugin-vue-devtools";
 // @ts-ignore
 import type { UserProfile } from "../src/types/UserProfile";
+import { RSSOptions, RssPlugin } from "vitepress-plugin-rss";
 
 const BASE_URL = "/blog/";
+const DOMAIN = "https://mark9804.github.io";
+
+const RSS: RSSOptions = {
+  title: "今天没有早睡",
+  baseUrl: DOMAIN,
+  copyright: "Copyright (c) 2024-present, Mark Chen",
+  description: "To trace the bright moonlight",
+  language: "zh-cn",
+  author: {
+    name: "Mark Chen",
+    email: "mark_chen@blue-archive.io",
+    link: "https://github.com/mark9804",
+  },
+  icon: true,
+  filename: "feed.rss",
+  ignoreHome: true,
+};
 
 const SPACE_OR_PUNCTUATION = new RegExp(
   // ts-ignore
@@ -271,6 +289,7 @@ export default defineConfig({
         ],
         transformers: [transformerDirectives()],
       }),
+      RssPlugin(RSS),
     ],
     css: {
       preprocessorOptions: {
@@ -288,7 +307,7 @@ export default defineConfig({
           // vitePluginForArco({
           //   style: "css",
           // }),
-        ]
+        ],
       },
     },
   },

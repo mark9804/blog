@@ -7,6 +7,7 @@ next: false
 title: 搜索标签
 meta:
   hidden: true
+publish: false
 ---
 
 <script setup>

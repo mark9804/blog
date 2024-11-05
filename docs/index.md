@@ -7,6 +7,7 @@ next: false
 title: 首页
 meta:
   hidden: true
+publish: false
 ---
 
 <script setup>
