@@ -22,6 +22,7 @@ import { imgSize } from "@mdit/plugin-img-size";
 import { imgLazyload } from "@mdit/plugin-img-lazyload";
 import { sub } from "@mdit/plugin-sub";
 import { sup } from "@mdit/plugin-sup";
+import { footnote } from "@mdit/plugin-footnote";
 
 import vueDevTools from "vite-plugin-vue-devtools";
 // @ts-ignore
@@ -146,7 +147,8 @@ export default defineConfig({
         .use(imgSize)
         .use(imgLazyload)
         .use(sub)
-        .use(sup);
+        .use(sup)
+        .use(footnote);
     },
   },
 

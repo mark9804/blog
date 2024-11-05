@@ -43,6 +43,15 @@ html.dark {
   }
 }
 
+.custom-block.info code {
+  background-color: var(--arona-blue-1);
+  border: solid 1px var(--arona-blue-3);
+}
+
+.vp-doc [class*='language-'] code .highlighted {
+  background-color: var(--arona-blue-1);
+}
+
 figure {
   display: flex;
   flex-direction: column;
@@ -201,7 +210,7 @@ a.title span,
   --vp-c-default-1: var(--color-text-5); /* default text color */
   --vp-c-default-2: var(--color-fill-5); /* hover state */
   --vp-c-default-3: var(--color-fill-2); /* solid bg */
-  --vp-c-default-soft: var(--color-fill-2); /* soft bg */
+  --vp-c-default-soft: var(--color-fill-1); /* soft bg */
 
   --vp-c-brand-1: var(--arona-blue-6); /* main brand color */
   --vp-c-brand-2: var(--arona-blue-5); /* hover state, link */
