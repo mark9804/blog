@@ -35,7 +35,7 @@ const RSS: RSSOptions = {
   title: "今天没有早睡",
   baseUrl: DOMAIN,
   copyright: "Copyright (c) 2024-present, Mark Chen",
-  description: "To trace the bright moonlight",
+  description: "To trace the bright moonlight | feedId:76559838393439232+userId:74386837603916800",
   language: "zh-cn",
   author: {
     name: "Mark Chen",
