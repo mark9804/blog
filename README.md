@@ -2,15 +2,26 @@
 
 ## Feature
 
-- Markdown 语法增强：mark、ruby、spoiler、图像尺寸、上下角标、图像标题
+- 基于 [Arco Design Vue](https://arco.design/vue/) 定制的主题
+  - 图片可点击放大
+  - 图片 lazyload 与 loading 效果
+  - 与 [@mdit/plugin-img-size](https://mdit-plugins.github.io/zh/img-size.html) 混合使用的图像尺寸自定义功能
+  - 文章信息展示自定义
+- Markdown 语法增强
+  - `mark`
+  - `ruby`
+  - `spoiler`
+  - 上标和下标
+  - 图像 caption
+  - 支持 [LaTeX 语法](https://www.latex-project.org/)
 - 基于 `contentLoader` 的纯前端字数和图片张数统计，以及阅读时间计算
 - 基于 `contentLoader` 和 `git log` 的最后编辑时间获取
 - 按标签搜索
-- 自制主题
 - 支持评论
-- 自动侧边栏
-- 正文图像默认懒加载
-- 正文图像可点击放大
+- 自动侧边栏目录生成
+- 开发者友好
+  - commit hook 自动格式化
+  - 自动导入
 
 ## 技术栈
 
@@ -25,3 +36,4 @@
 - 评论系统：[Disqus](https://disqus.com/)
 - 状态管理：[Pinia](https://pinia.vuejs.org/)
 - Icon：[IconPark](https://iconpark.bytedance.com/) / [Arco](https://arco.design/vue/component/icon)
+- 工具库：[VueUse](https://vueuse.org/)

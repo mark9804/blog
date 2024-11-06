@@ -19,7 +19,6 @@ import { mark } from "@mdit/plugin-mark";
 import { ruby } from "@mdit/plugin-ruby";
 import { spoiler } from "@mdit/plugin-spoiler";
 import { imgSize } from "@mdit/plugin-img-size";
-import { imgLazyload } from "@mdit/plugin-img-lazyload";
 import { sub } from "@mdit/plugin-sub";
 import { sup } from "@mdit/plugin-sup";
 import { footnote } from "@mdit/plugin-footnote";
@@ -28,6 +27,8 @@ import vueDevTools from "vite-plugin-vue-devtools";
 // @ts-ignore
 import type { UserProfile } from "../src/types/UserProfile";
 import { RSSOptions, RssPlugin } from "vitepress-plugin-rss";
+
+import { getImgComponent } from "./theme/utils/getImgComponent";
 
 const BASE_URL = "/blog/";
 const DOMAIN = "https://mark9804.github.io";
@@ -136,6 +137,9 @@ export default defineConfig({
     headers: {
       level: [2, 6],
     },
+    image: {
+      lazyLoading: true,
+    },
     config: md => {
       md.use(implicitFigures, {
         figcaption: true,
@@ -145,7 +149,6 @@ export default defineConfig({
         .use(ruby)
         .use(spoiler)
         .use(imgSize)
-        .use(imgLazyload)
         .use(sub)
         .use(sup)
         .use(footnote);
@@ -157,6 +160,10 @@ export default defineConfig({
           parsedResult += `\n<ClientOnly>\n<ArticleInfo />\n</ClientOnly>\n`;
         }
         return parsedResult;
+      };
+
+      md.renderer.rules.image = (tokens, idx) => {
+        return getImgComponent(tokens[idx]);
       };
     },
   },

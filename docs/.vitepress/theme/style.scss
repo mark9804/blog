@@ -20,14 +20,6 @@
   font-weight: 700;
 }
 
-.medium-zoom-image--opened {
-  z-index: 100;
-}
-
-.medium-zoom-overlay {
-  z-index: 99;
-}
-
 body {
   font-size: 16px !important;
   line-height: 24px;
@@ -48,7 +40,7 @@ html.dark {
   border: solid 1px var(--arona-blue-3);
 }
 
-.vp-doc [class*='language-'] code .highlighted {
+.vp-doc [class*="language-"] code .highlighted {
   background-color: var(--arona-blue-1);
 }
 
@@ -63,10 +55,10 @@ figure {
   align-items: center;
   gap: 8px;
 
-  img {
+  img,
+  .arco-image {
     max-width: 100%;
     border-radius: 4px;
-    margin-top: 8px;
   }
 
   figcaption {
@@ -149,9 +141,9 @@ a.title span,
 }
 
 :root {
-  --vp-font-family-base: "Wix Madefor", "HarmonyOS Sans SC",
-    "Microsoft YaHei", "PingFang SC", -apple-system, system-ui, "Segoe UI",
-    Roboto, Ubuntu, Cantarell, "Noto Sans", BlinkMacSystemFont, "Helvetica Neue",
+  --vp-font-family-base: "Wix Madefor", "HarmonyOS Sans SC", "Microsoft YaHei",
+    "PingFang SC", -apple-system, system-ui, "Segoe UI", Roboto, Ubuntu,
+    Cantarell, "Noto Sans", BlinkMacSystemFont, "Helvetica Neue",
     "Hiragino Sans GB", Arial, sans-serif;
   --vp-font-family-mono: "SFMono-Regular", "Consolas", "Liberation Mono",
     "Menlo", "Courier", "monospace";

@@ -49,7 +49,6 @@
     "@formkit/auto-animate": "^0.8.2",
     "@icon-park/vue-next": "^1.4.2",
     "@mdit/plugin-footnote": "^0.13.1",
-    "@mdit/plugin-img-lazyload": "^0.13.0",
     "@mdit/plugin-img-size": "^0.13.0",
     "@mdit/plugin-mark": "^0.13.0",
     "@mdit/plugin-ruby": "^0.13.0",

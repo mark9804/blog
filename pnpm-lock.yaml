@@ -23,9 +23,6 @@ importers:
       '@mdit/plugin-footnote':
         specifier: ^0.13.1
         version: 0.13.1(markdown-it@14.1.0)
-      '@mdit/plugin-img-lazyload':
-        specifier: ^0.13.0
-        version: 0.13.1(markdown-it@14.1.0)
       '@mdit/plugin-img-size':
         specifier: ^0.13.0
         version: 0.13.1(markdown-it@14.1.0)
@@ -702,15 +699,6 @@ packages:
     engines: {node: '>= 18'}
     peerDependencies:
       markdown-it: ^14.1.0
-
-  '@mdit/plugin-img-lazyload@0.13.1':
-    resolution: {integrity: sha512-DPzR+yabbgqHWHb8oetOj56TtZzOcn5YZjSTssoh7lY5hp/Yy7jWvlLDrSw/LiXkYEhyocUee78enhTodBEpHQ==}
-    engines: {node: '>= 18'}
-    peerDependencies:
-      markdown-it: ^14.1.0
-    peerDependenciesMeta:
-      markdown-it:
-        optional: true
 
   '@mdit/plugin-img-size@0.13.1':
     resolution: {integrity: sha512-cgihl72BNzij7GXjrqcKhl2eOqAlqWHiImOgblJPghDFNFKnnynty/Bf9nwbj8hTnhVWznFeuwawzXBfKYNbkg==}
@@ -3764,12 +3752,6 @@ snapshots:
   '@mdit/plugin-footnote@0.13.1(markdown-it@14.1.0)':
     dependencies:
       '@types/markdown-it': 14.1.2
-      markdown-it: 14.1.0
-
-  '@mdit/plugin-img-lazyload@0.13.1(markdown-it@14.1.0)':
-    dependencies:
-      '@types/markdown-it': 14.1.2
-    optionalDependencies:
       markdown-it: 14.1.0
 
   '@mdit/plugin-img-size@0.13.1(markdown-it@14.1.0)':
