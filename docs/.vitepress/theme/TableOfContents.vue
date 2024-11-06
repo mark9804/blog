@@ -1,16 +1,13 @@
 <script setup lang="ts">
-import type { ArticleInfo } from "@/types/ArticleInfo";
-import { data as usePosts } from "@/helper/posts.data";
+// import type { ArticleInfo } from "@/types/ArticleInfo";
+// import { data as usePosts } from "@/helper/posts.data";
+import type { ArticleInfo } from "../../src/types/ArticleInfo";
+import { data as usePosts } from "../../src/helper/posts.data";
 import { computed } from "vue";
 import ArticleCard from "./ArticleCard.vue";
 // @ts-ignore
 import dayjs from "dayjs";
 import { useWindowSize } from "@vueuse/core";
-import { useData } from "vitepress";
-
-const { page } = useData();
-
-console.log(page.value);
 
 const useContents = computed(() =>
   (usePosts as unknown as ArticleInfo[])
