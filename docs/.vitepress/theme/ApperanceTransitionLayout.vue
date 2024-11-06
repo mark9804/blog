@@ -53,10 +53,6 @@ const frontmatter = data.frontmatter as unknown as ComputedRef<
 </script>
 
 <template>
-  <link
-    rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,1,0"
-  />
   <Layout>
     <template #doc-footer-before>
       <div class="flex gap-2 pb-4" v-if="frontmatter?.tags?.length">

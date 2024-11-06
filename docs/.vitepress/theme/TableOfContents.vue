@@ -3,6 +3,7 @@ import type { ArticleInfo } from "@/types/ArticleInfo";
 import { data as usePosts } from "@/helper/posts.data";
 import { computed } from "vue";
 import ArticleCard from "./ArticleCard.vue";
+// @ts-ignore
 import dayjs from "dayjs";
 import { useWindowSize } from "@vueuse/core";
 import { useData } from "vitepress";
