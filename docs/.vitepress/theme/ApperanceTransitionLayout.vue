@@ -56,6 +56,9 @@ const frontmatter = data.frontmatter as unknown as ComputedRef<
   <Layout>
     <template #doc-footer-before>
       <div class="flex gap-2 pb-4" v-if="frontmatter?.tags?.length">
+        <span class="text-sm text-gray-600 @dark:text-gray-400"
+          >Tag{{ frontmatter?.tags?.length > 1 ? "s" : "" }}:
+        </span>
         <SearchTag v-for="tag in frontmatter?.tags" :tag="tag" size="small" />
       </div>
     </template>
