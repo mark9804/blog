@@ -4,6 +4,7 @@ import Theme from "vitepress/theme";
 import ApperanceTransitionLayout from "./ApperanceTransitionLayout.vue";
 import { createPinia } from "pinia";
 import piniaPluginPersistedstate from "pinia-plugin-persistedstate";
+import ArticleInfo from "./ArticleInfo.vue";
 
 import mediumZoom from "medium-zoom";
 import { onMounted, watch, nextTick } from "vue";
@@ -46,5 +47,8 @@ export default {
     // ...
     app.use(pinia).use(autoAnimatePlugin);
     Message._context = app._context;
+
+    // register your custom global components
+    app.component("ArticleInfo", ArticleInfo);
   },
 };

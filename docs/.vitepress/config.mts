@@ -149,6 +149,15 @@ export default defineConfig({
         .use(sub)
         .use(sup)
         .use(footnote);
+
+      // 在文章的第一个 h1 标签后添加 <ArticleInfo />
+      md.renderer.rules.heading_close = (tokens, idx, options, env, self) => {
+        let parsedResult = self.renderToken(tokens, idx, options);
+        if (tokens[idx].tag === "h1") {
+          parsedResult += `\n<ClientOnly>\n<ArticleInfo />\n</ClientOnly>\n`;
+        }
+        return parsedResult;
+      };
     },
   },
 
