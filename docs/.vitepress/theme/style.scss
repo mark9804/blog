@@ -112,7 +112,8 @@ a.title span,
   h5,
   h6,
   .title,
-  strong {
+  strong,
+  .custom-block-title {
     font-weight: 700;
     font-family: "Wix Madefor", "HarmonyOS Sans SC Bold",
       var(--vp-font-family-base);
