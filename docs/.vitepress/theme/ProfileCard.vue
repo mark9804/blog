@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import { ClickOutside as vClickOutside } from "element-plus";
+import { vOnClickOutside } from "@vueuse/components";
 
 defineProps<{
   props: { name: string; avatar: string; bio: string; email: string };
@@ -8,7 +8,7 @@ defineProps<{
 
 const showFullProfileCard = ref(false);
 
-function onClickOutside() {
+function handleClickOutside() {
   showFullProfileCard.value = false;
 }
 </script>
@@ -49,7 +49,7 @@ function onClickOutside() {
     </transition>
     <transition name="namecard-transition">
       <div
-        v-click-outside="onClickOutside"
+        v-on-click-outside="handleClickOutside"
         v-if="showFullProfileCard"
         class="mobile-profile-card fixed top-[72px] right-[12px] shadow-std rounded-lg p-[20px] z-10 max-w-[75vw] flex flex-col items-end"
       >

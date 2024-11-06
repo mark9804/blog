@@ -1,18 +1,22 @@
 import { defineStore } from "pinia";
+import { ref, computed } from "vue";
 
-export const useCustomStore = defineStore({
-  id: "vitepress-custom-store",
-  // @ts-ignore
-  persist: true,
-  state: () => ({
-    showComments: false,
-  }),
-  getters: {
-    getCommentsVisibility: state => state.showComments,
+export const useCustomStore = defineStore(
+  "vitepress-custom-store",
+  () => {
+    const showComments = ref(false);
+    const getCommentsVisibility = computed(() => showComments.value);
+    function toggleCommentsVisibility() {
+      showComments.value = !showComments.value;
+    }
+
+    return {
+      showComments,
+      getCommentsVisibility,
+      toggleCommentsVisibility,
+    };
   },
-  actions: {
-    toggleCommentsVisibility() {
-      this.showComments = !this.showComments;
-    },
-  },
-});
+  {
+    persist: true,
+  }
+);
