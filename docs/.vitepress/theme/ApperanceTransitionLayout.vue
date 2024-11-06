@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import { useData, withBase, useRoute, useRouter } from "vitepress";
+import { useData, withBase, useRoute } from "vitepress";
 import { nextTick, onBeforeMount, provide, ComputedRef } from "vue";
 import DefaultTheme from "vitepress/theme";
 import DiscussionWidget from "./DiscussionWidget.vue";
 import { ArticleInfo } from "../../src/types/ArticleInfo";
+import SearchTag from "./SearchTag.vue";
 
 const { isDark } = useData();
 
@@ -49,12 +50,6 @@ const { Layout } = DefaultTheme;
 const frontmatter = data.frontmatter as unknown as ComputedRef<
   ArticleInfo["frontmatter"]
 >;
-
-const router = useRouter();
-
-function searchTags(tag: string) {
-  router.go(withBase(`/tags/?keyword=${encodeURIComponent(tag)}`));
-}
 </script>
 
 <template>
@@ -65,17 +60,7 @@ function searchTags(tag: string) {
   <Layout>
     <template #doc-footer-before>
       <div class="flex gap-2 pb-4" v-if="frontmatter?.tags?.length">
-        <a-tag
-          color="arcoblue"
-          class="span-tag cursor-pointer"
-          v-for="tag in frontmatter?.tags"
-          @click="searchTags(tag)"
-        >
-          <template #icon>
-            <icon-tag />
-          </template>
-          {{ tag }}
-        </a-tag>
+        <SearchTag v-for="tag in frontmatter?.tags" :tag="tag" size="small" />
       </div>
     </template>
     <template #doc-after v-if="withBase('/') !== route.path">

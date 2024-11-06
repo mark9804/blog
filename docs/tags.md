@@ -11,7 +11,7 @@ publish: false
 ---
 
 <script setup>
-  import TagsPage from "./src/components/TagsPage.vue";
+  import TagsPage from ".vitepress/theme/TagsPage.vue";
 </script>
 
 <ClientOnly>

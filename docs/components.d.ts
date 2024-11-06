@@ -9,9 +9,9 @@ declare module "vue" {
   export interface GlobalComponents {
     ASwitch: (typeof import("@arco-design/web-vue"))["Switch"];
     ATag: (typeof import("@arco-design/web-vue"))["Tag"];
-    HomePage: (typeof import("./src/components/HomePage.vue"))["default"];
-    ProfileCard: (typeof import("./src/components/ProfileCard.vue"))["default"];
-    ArticleCard: (typeof import("./src/components/ArticleCard.vue"))["default"];
-    TableOfContents: (typeof import("./src/components/TableOfContents.vue"))["default"];
+    HomePage: (typeof import(".vitepress/theme/HomePage.vue"))["default"];
+    ProfileCard: (typeof import(".vitepress/theme/ProfileCard.vue"))["default"];
+    ArticleCard: (typeof import(".vitepress/theme/ArticleCard.vue"))["default"];
+    TableOfContents: (typeof import(".vitepress/theme/TableOfContents.vue"))["default"];
   }
 }

@@ -11,7 +11,7 @@ publish: false
 ---
 
 <script setup>
-  import HomePage from "./src/components/HomePage.vue";
+  import HomePage from ".vitepress/theme/HomePage.vue";
 </script>
 
 <HomePage />

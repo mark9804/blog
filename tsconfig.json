@@ -8,6 +8,7 @@
     "jsx": "preserve",
     "resolveJsonModule": true,
     "isolatedModules": true,
+    "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "lib": ["ESNext", "DOM"],
     "skipLibCheck": true,
@@ -16,7 +17,7 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./docs/src/*"],
-      "@style/*": ["./docs/src/style/*"]
+      "@/types/*": ["./docs/src/types/*"],
     }
   },
   "references": [
