@@ -80,9 +80,9 @@ const displayedArticles = computed(() => {
 
 <template>
   <div class="flex flex-col w-full p-5 items-center gap-4">
-    <div class="flex flex-nowrap gap-4 w-full max-w-[1280px] overflow-x-scroll">
+    <div class="flex flex-wrap gap-4 w-full max-w-[1280px] overflow-x-scroll">
       <a-tag
-        class="cursor-pointer"
+        class="cursor-pointer flex-shrink-0"
         color="arcoblue"
         v-for="tag in unique(allTags)"
         @click="addTag(tag)"
