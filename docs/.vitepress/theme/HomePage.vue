@@ -1,17 +1,17 @@
 <script setup lang="ts">
+import { computed } from "vue";
 import TableOfContents from "./TableOfContents.vue";
 import ProfileCard from "./ProfileCard.vue";
-
-// ts-ignore
 import { useData } from "vitepress";
 
 const { theme } = useData();
-// @ts-ignore
-let props;
-if (theme.value.userProfile) {
-  const { name, avatar, bio, email } = theme.value.userProfile;
-  props = { name, avatar, bio, email };
-}
+const props = computed(() => {
+  if (theme.value.userProfile) {
+    const { name, avatar, bio, email } = theme.value.userProfile;
+    return { name, avatar, bio, email };
+  }
+  return null;
+});
 </script>
 
 <template>

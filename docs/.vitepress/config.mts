@@ -272,6 +272,7 @@ export default defineConfig({
     plugins: [
       AutoImport({
         resolvers: [ArcoResolver({ sideEffect: true, resolveIcons: true })],
+        imports: ["vue"],
       }),
       Components({
         include: [/\.vue$/, /\.md$/, /\.ts$/],
