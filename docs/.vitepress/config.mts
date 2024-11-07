@@ -24,12 +24,11 @@ import { sup } from "@mdit/plugin-sup";
 import { footnote } from "@mdit/plugin-footnote";
 
 import vueDevTools from "vite-plugin-vue-devtools";
-// @ts-ignore
-import type { UserProfile } from "../src/types/UserProfile";
 import { RSSOptions, RssPlugin } from "vitepress-plugin-rss";
 
 import { generateImgComponent } from "./theme/utils/generateImgComponent";
 import { generateImgGallery } from "./theme/utils/generateImgGallery";
+import { userProfile } from "./userProfile";
 
 const BASE_URL = "/blog/";
 const DOMAIN = "https://mark9804.github.io";
@@ -184,12 +183,7 @@ export default defineConfig({
 
   themeConfig: {
     // @ts-ignore
-    userProfile: {
-      name: "今天早睡了吗",
-      email: "mail@blue-archive.io",
-      avatar: "avatar.webp",
-      bio: "To trace the bright moonlight",
-    } as UserProfile,
+    userProfile: userProfile,
     // https://vitepress.dev/reference/default-theme-config
     lastUpdated: {
       text: "最后更新于",

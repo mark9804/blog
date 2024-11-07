@@ -23,14 +23,14 @@ function handleClickOutside() {
       alt="avatar"
     />
     <div class="flex flex-col gap-[8px]">
-      <h1 class="text-2xl font-bold text-center">{{ props.name }}</h1>
-      <p class="text-3 text-center">{{ props.bio }}</p>
+      <h1 class="text-xl font-bold text-center">{{ props.name }}</h1>
+      <p class="text-sm text-2 text-center">{{ props.bio }}</p>
       <a
-        class="flex items-center justify-center gap-[4px]"
+        class="text-sm text-3 @dark:text-3 flex items-center justify-center gap-[4px]"
         :href="'mailto:' + props.email"
       >
         <icon-email />
-        {{ props.email }}</a
+        <span>{{ props.email }}</span></a
       >
     </div>
   </div>
