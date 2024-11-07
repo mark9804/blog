@@ -10,6 +10,7 @@ import ImageGallery from "./ImageGallery.vue";
 import { autoAnimatePlugin } from '@formkit/auto-animate/vue'
 
 import "@arco-design/web-vue/es/image/style/css.js"
+import "@arco-design/web-vue/es/tooltip/style/css.js"
 import "./style.scss";
 import "uno.css";
 
