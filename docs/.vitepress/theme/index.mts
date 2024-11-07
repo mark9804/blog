@@ -6,6 +6,7 @@ import { createPinia } from "pinia";
 import piniaPluginPersistedstate from "pinia-plugin-persistedstate";
 import ArticleInfo from "./ArticleInfo.vue";
 import { Image } from "@arco-design/web-vue";
+import ImageGallery from "./ImageGallery.vue";
 import { autoAnimatePlugin } from '@formkit/auto-animate/vue'
 
 import "@arco-design/web-vue/es/image/style/css.js"
@@ -28,5 +29,6 @@ export default {
     // register your custom global components
     app.component("ArticleInfo", ArticleInfo);
     app.component("ArcoImage", Image);
+    app.component("ArcoImageGallery", ImageGallery);
   },
 };

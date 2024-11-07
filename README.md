@@ -3,6 +3,7 @@
 ## Feature
 
 - 基于 [Arco Design Vue](https://arco.design/vue/) 定制的主题
+  - 自定义图库语法 `:::gallery 图库名称`
   - 图片可点击放大
   - 图片 lazyload 与 loading 效果
   - 与 [@mdit/plugin-img-size](https://mdit-plugins.github.io/zh/img-size.html) 混合使用的图像尺寸自定义功能

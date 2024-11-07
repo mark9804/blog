@@ -97,9 +97,10 @@ de Rouen}，再顺着{大时钟: Le Gros-Horloge}一路走到市政厅旁边的{
 
 ![路边的店铺招牌](https://cdn.sa.net/2024/09/13/mQX4MAGZRkTuLx9.webp)
 
+:::gallery 达米埃特街
 ![](https://cdn.sa.net/2024/09/13/guy3iTzEUb2w5L1.webp)
-
-![{达米埃特街:Rue Damitte}](https://cdn.sa.net/2024/09/13/EPW2NLcr4OJTGif.webp)
+![](https://cdn.sa.net/2024/09/13/EPW2NLcr4OJTGif.webp)
+:::
 
 沿着达米埃特街一路走到头就是鲁昂主教大教堂。教堂内侧的每扇玻璃窗都有不同彩绘。
 
@@ -109,9 +110,10 @@ de Rouen}，再顺着{大时钟: Le Gros-Horloge}一路走到市政厅旁边的{
 
 ![教堂内部](https://cdn.sa.net/2024/09/13/DTBGZYWvdkhXS6f.webp)
 
+:::gallery 一些窗上的彩绘
 ![](https://cdn.sa.net/2024/09/13/MNkUJ1Xvw5gKyPD.jpg)
-
-![一些窗上的彩绘](https://cdn.sa.net/2024/09/13/pWOxqPvg1mFGLyz.jpg)
+![](https://cdn.sa.net/2024/09/13/pWOxqPvg1mFGLyz.jpg)
+:::
 
 出了教堂之后就近找了一家越南米粉（事后证明这是我们在鲁昂吃的第二好的一餐，，，感觉欧洲餐馆里的东西大部分时候真能和国内的猪食掰掰手腕），吃完之后继续沿着街道走去大时钟。
 
@@ -125,9 +127,10 @@ de Rouen}，再顺着{大时钟: Le Gros-Horloge}一路走到市政厅旁边的{
 
 离开大时钟之后堪堪下午一点出头，规划里面的地点就只剩下一个福楼拜故居了，感觉要翻车，希望福楼拜故居能撑久一点吧（）
 
+:::gallery 鲁昂街道
 ![](https://cdn.sa.net/2024/09/13/8QgAHoENsLDpzKF.webp)
-
-![鲁昂街道](https://cdn.sa.net/2024/09/13/Kzk13TNewVHb4aE.webp)
+![](https://cdn.sa.net/2024/09/13/Kzk13TNewVHb4aE.webp)
+:::
 
 ![前往福楼拜故居路上的街景，路上全是狗屎💩](https://cdn.sa.net/2024/09/13/WOe6akgS1bYmFCU.webp)
 
@@ -141,9 +144,10 @@ de Rouen}，再顺着{大时钟: Le Gros-Horloge}一路走到市政厅旁边的{
 
 博物馆不大，但是东西一件件都挺直击心灵。参观一般从二楼开始，一进门先来两墙动物标本做好铺垫，再来一柜微缩人头骨练练胆子，最后摆两具木乃伊和一柜子解剖工具主打一个心跳体验。一楼进去先是当年的产科用品和器械，再是当年的牙科工具（机床旁边的麻药好像是真货，味道特别浓）以及一系列展示这些工具是如何大力出奇迹的插画。文学类的东西倒是基本没看见，只有一楼纪念品店里在卖一些福楼拜相关的书记和生平传记。参观免费。
 
+:::gallery 找两张能发的
 ![](https://cdn.sa.net/2024/09/13/Wp45KFmJxjTvkcH.jpg)
-
-![找两张能发的](https://cdn.sa.net/2024/09/13/dAkcn1sDmxTrIoz.jpg)
+![](https://cdn.sa.net/2024/09/13/dAkcn1sDmxTrIoz.jpg)
+:::
 
 参观完福楼拜故居之后，我们就~~找不到事做了只能~~回酒店休息到晚上，七点半到了 La Couronne 吃晚餐。
 

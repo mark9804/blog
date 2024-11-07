@@ -28,7 +28,8 @@ import vueDevTools from "vite-plugin-vue-devtools";
 import type { UserProfile } from "../src/types/UserProfile";
 import { RSSOptions, RssPlugin } from "vitepress-plugin-rss";
 
-import { getImgComponent } from "./theme/utils/getImgComponent";
+import { generateImgComponent } from "./theme/utils/generateImgComponent";
+import { generateImgGallery } from "./theme/utils/generateImgGallery";
 
 const BASE_URL = "/blog/";
 const DOMAIN = "https://mark9804.github.io";
@@ -163,7 +164,20 @@ export default defineConfig({
       };
 
       md.renderer.rules.image = (tokens, idx) => {
-        return getImgComponent(tokens[idx]);
+        return generateImgComponent(tokens[idx]);
+      };
+
+      md.core.ruler.push("gallery", (state) => {
+        state.tokens.forEach((token, idx) => {
+          if (token?.content?.includes(":::gallery")) {
+            state.tokens[idx].type = "gallery";
+          }
+        });
+        return true;
+      });
+
+      md.renderer.rules.gallery = (tokens, idx) => {
+        return generateImgGallery(tokens[idx]);
       };
     },
   },

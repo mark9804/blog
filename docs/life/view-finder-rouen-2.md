@@ -55,9 +55,10 @@ tags:
 
 出门发现之前的教堂今天正好做完礼拜，人散的差不多了，剩下主持礼拜的绿衣主教在门口和别人聊天。我们犹豫了一下能不能进，主教很热情地说进来呀进来呀，于是进去看了一圈。
 
+:::gallery 教堂内部
 ![](https://s2.loli.net/2024/09/10/kjEiC63sDTVAg89.webp)
-
-![教堂内部](https://s2.loli.net/2024/09/10/T9dZkSgEKxqUfF5.webp)
+![](https://s2.loli.net/2024/09/10/T9dZkSgEKxqUfF5.webp)
+:::
 
 ![管风琴（的管）](https://s2.loli.net/2024/09/10/WuzveSDmfT71Ia6.webp)
 
