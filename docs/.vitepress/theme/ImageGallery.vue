@@ -10,11 +10,13 @@ withDefaults(
 </script>
 
 <template>
-  <a-image-preview-group infinite>
-    <a-space>
-      <slot />
-    </a-space>
-  </a-image-preview-group>
+  <ClientOnly>
+    <a-image-preview-group infinite>
+      <a-space>
+        <slot />
+      </a-space>
+    </a-image-preview-group>
+  </ClientOnly>
   <figcaption
     v-if="name.length > 0"
     class="text-sm text-[var(--color-text-3)] text-center"
