@@ -11,7 +11,7 @@ withDefaults(
 
 <template>
   <ClientOnly>
-    <a-image-preview-group infinite>
+    <a-image-preview-group>
       <a-space>
         <slot />
       </a-space>
