@@ -48,18 +48,18 @@ html.dark {
   display: none;
 }
 
+img,
+.arco-image {
+  max-width: 100%;
+  border-radius: 3px;
+}
+
 figure {
   display: flex;
   flex-direction: column;
   width: 100%;
   align-items: center;
   gap: 8px;
-
-  img,
-  .arco-image {
-    max-width: 100%;
-    border-radius: 4px;
-  }
 
   figcaption {
     font-size: 14px;
