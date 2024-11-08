@@ -170,6 +170,7 @@ export default defineConfig({
       md.core.ruler.push("gallery", (state) => {
         state.tokens.forEach((token, idx) => {
           if (token?.content?.includes(":::gallery")) {
+            if (state.tokens[idx].type === "fence") return true;
             state.tokens[idx].type = "gallery";
           }
         });
