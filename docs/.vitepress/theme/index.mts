@@ -7,10 +7,10 @@ import piniaPluginPersistedstate from "pinia-plugin-persistedstate";
 import ArticleInfo from "./ArticleInfo.vue";
 import { Image } from "@arco-design/web-vue";
 import ImageGallery from "./ImageGallery.vue";
-import { autoAnimatePlugin } from '@formkit/auto-animate/vue'
+import { autoAnimatePlugin } from "@formkit/auto-animate/vue";
 
-import "@arco-design/web-vue/es/image/style/css.js"
-import "@arco-design/web-vue/es/tooltip/style/css.js"
+import "@arco-design/web-vue/es/image/style/css.js";
+import "@arco-design/web-vue/es/tooltip/style/css.js";
 import "./style.scss";
 import "uno.css";
 
@@ -23,13 +23,14 @@ export default {
   setup() {},
   Layout: ApperanceTransitionLayout,
   enhanceApp({ app, router, siteData }) {
-    // ...
     app.use(pinia).use(autoAnimatePlugin);
     Message._context = app._context;
 
     // register your custom global components
-    app.component("ArticleInfo", ArticleInfo);
-    app.component("ArcoImage", Image);
-    app.component("ArcoImageGallery", ImageGallery);
+    // Space 组件已经在 ArcoImageGallery 中使用了，会自动导入
+    app
+      .component("ArticleInfo", ArticleInfo)
+      .component("ArcoImage", Image)
+      .component("ArcoImageGallery", ImageGallery);
   },
 };

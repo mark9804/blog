@@ -1,5 +1,5 @@
 import type { Token } from "../../../src/types/Token";
-import { generateImgComponent } from "./generateImgComponent";
+import { generateImgGroups } from "./generateImgGroups";
 
 export function generateImgGallery(galleryToken: Token) {
   if (!galleryToken.children || galleryToken.children.length === 0) return "";
@@ -9,5 +9,5 @@ export function generateImgGallery(galleryToken: Token) {
     .trim();
   const imgTokens = tokens.filter(token => token.type === "image");
 
-  return `\n<ArcoImageGallery name="${galleryName}">\n${imgTokens.map(generateImgComponent).join("")}\n</ArcoImageGallery>\n`;
+  return `\n<ArcoImageGallery name="${galleryName}">\n${generateImgGroups(imgTokens)}\n</ArcoImageGallery>\n`;
 }

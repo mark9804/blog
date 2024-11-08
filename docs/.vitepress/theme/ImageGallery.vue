@@ -19,7 +19,7 @@ withDefaults(
   </ClientOnly>
   <figcaption
     v-if="name.length > 0"
-    class="text-sm text-[var(--color-text-3)] text-center"
+    class="text-sm text-[var(--color-text-3)] text-center mt-2"
   >
     {{ name }}
   </figcaption>
