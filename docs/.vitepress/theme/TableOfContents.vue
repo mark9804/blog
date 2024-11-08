@@ -16,11 +16,13 @@ const useContents = computed(() =>
         !el.frontmatter?.meta?.hidden && !el.url.endsWith("/")
     )
     .map((el: ArticleInfo) => {
-      el.lastUpdated = dayjs(el.lastUpdated ?? new Date()).format("YYYY-MM-DD");
+      el.createdAt = dayjs(el.createdAt ?? el.lastUpdated ?? new Date()).format(
+        "YYYY-MM-DD"
+      );
       return el;
     })
     .sort((a: ArticleInfo, b: ArticleInfo) =>
-      dayjs(a.lastUpdated).isBefore(dayjs(b.lastUpdated)) ? 1 : -1
+      dayjs(a.createdAt).isBefore(dayjs(b.createdAt)) ? 1 : -1
     )
 );
 
@@ -35,7 +37,7 @@ const { width } = useWindowSize();
     <a-timeline-item v-for="content in useContents" :key="content.url">
       <article-card :content="content" />
       <template #label>
-        <p class="mb-4">{{ content.lastUpdated }}</p>
+        <p class="mb-4">{{ content.createdAt }}</p>
       </template>
     </a-timeline-item>
   </a-timeline>

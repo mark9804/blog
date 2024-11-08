@@ -8,6 +8,7 @@ export type ArticleInfo = {
       hidden?: boolean;
     };
   };
+  createdAt?: number;
   lastUpdated?: number | string;
   readingTime: number;
   wordsCount: number;

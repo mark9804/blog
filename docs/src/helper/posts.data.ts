@@ -24,17 +24,21 @@ function transformUrlToPath(url: string) {
   return path.join(siteConfig.srcDir, file);
 }
 
-// getLastUpdated function to fetch the last update time of a markdown file
-async function getLastUpdated(url) {
+// getCreatedAt function to fetch the created (first commit) time of a markdown file
+async function getCreatedAt(url) {
   const file = transformUrlToPath(url);
 
   return new Promise((resolve, reject) => {
     const cwd = path.dirname(file);
     if (!fs.existsSync(cwd)) return resolve(0);
     const fileName = path.basename(file);
-    const child = spawn("git", ["log", "-1", '--pretty="%ai"', fileName], {
-      cwd,
-    });
+    const child = spawn(
+      "git",
+      ["log", "--reverse", "-1", '--pretty="%ai"', fileName],
+      {
+        cwd,
+      }
+    );
     let output = "";
     child.stdout.on("data", data => (output += String(data)));
     child.on("close", () => resolve(new Date(output).getTime()));
@@ -67,19 +71,19 @@ const loader = createContentLoader("**/*.md", {
       rawData,
       // FIXME: 重复读取文件
       async item => {
-        const lastUpdated = (await getLastUpdated(
-          item.url
-        )) as unknown as number;
+        const createdAt =
+          item.frontmatter?.createdAt ??
+          ((await getCreatedAt(item.url)) as unknown as number);
         const wordsCount = getWordCount(item.url);
         const imgCount = getImgCount(item.url);
         const readingTime = getReadingTime(item.url);
 
-        return { ...item, lastUpdated, wordsCount, imgCount, readingTime };
+        return { ...item, createdAt, wordsCount, imgCount, readingTime };
       },
       { concurrency: 64 }
     );
-    // Sort the data based on the lastUpdated field
-    data.sort((a, b) => b.lastUpdated - a.lastUpdated);
+    // Sort the data based on the createdAt field
+    data.sort((a, b) => b.createdAt - a.createdAt);
     return data;
   },
 });
