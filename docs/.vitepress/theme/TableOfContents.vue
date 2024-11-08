@@ -9,7 +9,7 @@ import ArticleCard from "./ArticleCard.vue";
 import dayjs from "dayjs";
 import { useWindowSize } from "@vueuse/core";
 
-const useContents = computed(() =>
+const contents = computed(() =>
   (usePosts as unknown as ArticleInfo[])
     .filter(
       (el: ArticleInfo) =>
@@ -34,7 +34,7 @@ const { width } = useWindowSize();
     class="w-full mb-4"
     :label-position="width <= 475 ? 'same' : 'relative'"
   >
-    <a-timeline-item v-for="content in useContents" :key="content.url">
+    <a-timeline-item v-for="content in contents" :key="content.url">
       <article-card :content="content" />
       <template #label>
         <p class="mb-4">{{ content.createdAt }}</p>

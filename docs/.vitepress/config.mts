@@ -1,4 +1,5 @@
 import { defineConfig } from "vitepress";
+import vueJsx from "@vitejs/plugin-vue-jsx";
 import px2rem from "postcss-plugin-px2rem";
 import AutoImport from "unplugin-auto-import/vite";
 import { ArcoResolver } from "unplugin-vue-components/resolvers";
@@ -285,6 +286,7 @@ export default defineConfig({
     },
     ssr: { noExternal: ["@arco-design/web-vue"] },
     plugins: [
+      vueJsx(),
       AutoImport({
         resolvers: [ArcoResolver({ sideEffect: true, resolveIcons: true })],
         imports: ["vue"],

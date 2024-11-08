@@ -78,7 +78,14 @@ const loader = createContentLoader("**/*.md", {
         const imgCount = getImgCount(item.url);
         const readingTime = getReadingTime(item.url);
 
-        return { ...item, createdAt, wordsCount, imgCount, readingTime };
+        return {
+          ...item,
+          createdAt,
+          wordsCount,
+          imgCount,
+          readingTime,
+          src: item.src,
+        };
       },
       { concurrency: 64 }
     );

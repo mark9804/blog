@@ -55,6 +55,7 @@
     "@mdit/plugin-spoiler": "^0.13.0",
     "@mdit/plugin-sub": "^0.13.0",
     "@mdit/plugin-sup": "^0.13.0",
+    "@vitejs/plugin-vue-jsx": "^4.0.1",
     "@vueuse/components": "^11.2.0",
     "@vueuse/core": "^11.2.0",
     "cross-spawn": "^7.0.3",
