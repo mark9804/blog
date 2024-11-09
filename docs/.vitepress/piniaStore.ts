@@ -17,6 +17,7 @@ export const useCustomStore = defineStore(
     };
   },
   {
+    // @ts-ignore
     persist: true,
   }
 );
