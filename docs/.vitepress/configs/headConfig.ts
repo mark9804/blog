@@ -34,15 +34,6 @@ export const headConfig = [
     },
   ],
   [
-    "link",
-    {
-      rel: "prefetch",
-      href: "https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,1,0",
-      as: "style",
-      onload: "this.rel='stylesheet';this.onload=null;",
-    },
-  ],
-  [
     "script",
     {
       async: "",
