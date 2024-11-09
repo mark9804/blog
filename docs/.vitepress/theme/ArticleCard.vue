@@ -61,7 +61,7 @@ const hasCover = computed(() => !!props.content.frontmatter.cover);
         {{ content.frontmatter.description }}
       </p>
       <div
-        class="flex gap-2"
+        class="flex gap-2 flex-wrap"
         v-if="content.frontmatter.tags && content.frontmatter.tags.length > 0"
       >
         <a-tag
