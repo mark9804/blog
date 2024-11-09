@@ -7,6 +7,7 @@ export type ArticleInfo = {
     meta?: {
       hidden?: boolean;
     };
+    timeAmp?: number; // 阅读时间倍率
   };
   createdAt?: number;
   lastUpdated?: number | string;

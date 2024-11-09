@@ -46,22 +46,18 @@ async function getCreatedAt(url) {
   });
 }
 
-function getWordCount(url) {
-  const file = transformUrlToPath(url);
-  const content = readFileSync(file, "utf-8");
+function getWordCount(content: string) {
   const postContent = content.replace(/---[\s\S]*?---/, "");
   return (wordsCount as unknown as WordsCount).wordsCount(postContent);
 }
 
-function getImgCount(url) {
-  const file = transformUrlToPath(url);
-  const content = readFileSync(file, "utf-8");
+function getImgCount(content: string) {
   return content.match(/!\[.*?\]\(.*?\)/g)?.length || 0;
 }
 
-function getReadingTime(url, wpms = 200) {
-  // 将样本图片输入 CLIP 得到描述，平均词数约为 229
-  return Math.ceil((getWordCount(url) + getImgCount(url) * 229) / wpms);
+function getReadingTime(content: string, wpms = 200) {
+  // 将样本图片输入 CLIP 得到描述，平均字数约为 229 汉字，以此为标准计算图片阅读时间
+  return Math.ceil((getWordCount(content) + getImgCount(content) * 229) / wpms);
 }
 
 // Define the custom loader using createContentLoader
@@ -69,14 +65,18 @@ const loader = createContentLoader("**/*.md", {
   async transform(rawData) {
     const data = await pMap(
       rawData,
-      // FIXME: 重复读取文件
       async item => {
+        const file = transformUrlToPath(item.url);
+        const frontmatter = item.frontmatter;
+        const wpms = 200 * (frontmatter?.timeAmp ?? 1);
+        const content = readFileSync(file, "utf-8");
+
         const createdAt =
           item.frontmatter?.createdAt ??
           ((await getCreatedAt(item.url)) as unknown as number);
-        const wordsCount = getWordCount(item.url);
-        const imgCount = getImgCount(item.url);
-        const readingTime = getReadingTime(item.url);
+        const wordsCount = getWordCount(content);
+        const imgCount = getImgCount(content);
+        const readingTime = getReadingTime(content, wpms);
 
         return {
           ...item,
