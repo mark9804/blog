@@ -1,8 +1,6 @@
 <script setup lang="ts">
-// import type { ArticleInfo } from "@/types/ArticleInfo";
-// import { data as usePosts } from "@/helper/posts.data";
-import type { ArticleInfo } from "../../src/types/ArticleInfo";
-import { data as usePosts } from "../../src/helper/posts.data";
+import type { ArticleInfo } from "../types/ArticleInfo";
+import { data as usePosts } from "../loaders/posts.data";
 import { computed } from "vue";
 import ArticleCard from "./ArticleCard.vue";
 // @ts-ignore

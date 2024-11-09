@@ -64,7 +64,7 @@ export const viteConfig = {
   css: {
     preprocessorOptions: {
       scss: {
-        additionalData: "@use '@/style/color-variable.scss' as *;",
+        additionalData: "",
       },
     },
     postcss: {

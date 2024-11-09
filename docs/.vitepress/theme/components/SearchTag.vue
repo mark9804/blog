@@ -19,15 +19,17 @@ function searchTags(tag: string) {
 </script>
 
 <template>
-  <a-tag
-    color="arcoblue"
-    class="span-tag cursor-pointer"
-    @click="searchTags(props.tag)"
-    :size="props.size"
-  >
-    <template #icon>
-      <icon-tag />
-    </template>
-    {{ props.tag }}
-  </a-tag>
+  <ClientOnly>
+    <a-tag
+      color="arcoblue"
+      class="span-tag cursor-pointer"
+      @click="searchTags(props.tag)"
+      :size="props.size"
+    >
+      <template #icon>
+        <icon-tag />
+      </template>
+      {{ props.tag }}
+    </a-tag>
+  </ClientOnly>
 </template>

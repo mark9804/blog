@@ -1,6 +1,5 @@
 <script setup lang="ts">
-// import type { ArticleInfo } from "@/types/ArticleInfo";
-import type { ArticleInfo } from "../../src/types/ArticleInfo";
+import type { ArticleInfo } from "../types/ArticleInfo";
 import { useRouter, withBase } from "vitepress";
 import { computed } from "vue";
 import { ViewGridDetail } from "@icon-park/vue-next";

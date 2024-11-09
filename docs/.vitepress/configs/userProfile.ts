@@ -1,4 +1,4 @@
-import { UserProfile } from "../../src/types/UserProfile";
+import { UserProfile } from "../theme/types/UserProfile";
 
 export const userProfile: UserProfile = {
   name: "今天早睡了吗",

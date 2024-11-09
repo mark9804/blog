@@ -1,4 +1,4 @@
-import type { Token } from "../../../src/types/Token";
+import type { Token } from "../types/Token";
 import { generateImgGroups } from "./generateImgGroups";
 
 export function generateImgGallery(galleryToken: Token) {

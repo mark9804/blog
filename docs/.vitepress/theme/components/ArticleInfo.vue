@@ -6,7 +6,7 @@ import { useRoute, withBase } from "vitepress";
 // @ts-ignore
 import dayjs from "dayjs";
 import { computed } from "vue";
-import { getCreatedAt } from "./utils/getCreatedAt";
+import { getCreatedAt } from "../utils/getCreatedAt";
 
 const lastUpdatedTimestamp = computed(() => page.value.lastUpdated);
 const lastUpdated = computed(() =>

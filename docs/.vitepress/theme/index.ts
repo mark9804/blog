@@ -1,17 +1,17 @@
 // https://vitepress.dev/guide/custom-theme
 import { Message } from "@arco-design/web-vue";
 import Theme from "vitepress/theme";
-import ApperanceTransitionLayout from "./ApperanceTransitionLayout.vue";
+import ApperanceTransitionLayout from "./layouts/MainLayout.vue";
 import { createPinia } from "pinia";
 import piniaPluginPersistedstate from "pinia-plugin-persistedstate";
-import ArticleInfo from "./ArticleInfo.vue";
+import ArticleInfo from "./components/ArticleInfo.vue";
 import { Image } from "@arco-design/web-vue";
-import ImageGallery from "./ImageGallery.vue";
+import ImageGallery from "./components/ImageGallery.vue";
 import { autoAnimatePlugin } from "@formkit/auto-animate/vue";
 
 import "@arco-design/web-vue/es/image/style/css.js";
 import "@arco-design/web-vue/es/tooltip/style/css.js";
-import "./style.scss";
+import "./styles/main.scss";
 import "uno.css";
 
 const pinia = createPinia();

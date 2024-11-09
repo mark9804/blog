@@ -1,6 +1,6 @@
 import { generateImgComponent } from "./generateImgComponent";
 import { cluster } from "radash";
-import type { Token } from "../../../src/types/Token";
+import type { Token } from "../types/Token";
 
 /**
  * 生成拼接好的图片组字符串，解决直接用变量传入 non-string Object 时解析会出错的问题

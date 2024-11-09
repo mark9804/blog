@@ -1,4 +1,4 @@
-import type { Token } from "../../../src/types/Token";
+import type { Token } from "../types/Token";
 
 export function getImgInfo(imgToken: Token) {
   const src = imgToken.attrs.find(attr => attr[0] === "src")?.[1];

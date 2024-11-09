@@ -11,7 +11,6 @@
 </template>
 
 <style scoped lang="scss">
-@use "@/style/color-variable.scss" as *;
 .eden-ui__input {
   $border-width: 1px;
 
@@ -30,7 +29,7 @@
       content: "";
       position: absolute;
       left: 0;
-      bottom: 0px;
+      bottom: 0;
       width: 100%;
       height: $border-width;
       background: var(--color-border-3);
