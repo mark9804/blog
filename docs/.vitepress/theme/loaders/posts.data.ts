@@ -34,7 +34,7 @@ async function getCreatedAt(url) {
     const fileName = basename(file);
     const child = spawn(
       "git",
-      ["log", "--reverse", "-1", '--pretty="%ai"', fileName],
+      ["log", "--diff-filter=A", "--follow", "--format=%ai", "-1", fileName],
       {
         cwd,
       }
@@ -66,6 +66,7 @@ const loader = createContentLoader("**/*.md", {
     const data = await pMap(
       rawData,
       async item => {
+        if (item.url.endsWith("/")) return { ...item };
         const file = transformUrlToPath(item.url);
         const frontmatter = item.frontmatter;
         const wpms = 200 * (frontmatter?.timeAmp ?? 1);
@@ -89,8 +90,6 @@ const loader = createContentLoader("**/*.md", {
       },
       { concurrency: 64 }
     );
-    // Sort the data based on the createdAt field
-    data.sort((a, b) => b.createdAt - a.createdAt);
     return data;
   },
 });
