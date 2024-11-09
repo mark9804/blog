@@ -3,30 +3,36 @@ import { useData } from "vitepress";
 import SearchTag from "./SearchTag.vue";
 const { frontmatter, page } = useData();
 import { useRoute, withBase } from "vitepress";
-// @ts-ignore
-import dayjs from "dayjs";
-import { computed } from "vue";
+import { computed, ref, onMounted } from "vue";
 import { getCreatedAt } from "../utils/getCreatedAt";
+import { formatDateTime } from "../utils/timeUtils";
 
 const lastUpdatedTimestamp = computed(() => page.value.lastUpdated);
-const lastUpdated = computed(() =>
-  lastUpdatedTimestamp.value
-    ? dayjs(lastUpdatedTimestamp.value).format("YYYY-MM-DD hh:mm")
-    : 0
-);
+const lastUpdated = computed(() => formatDateTime(lastUpdatedTimestamp.value));
 
 const route = useRoute();
 const currentPathWithoutBase = computed(
   () => "/" + route.path.replace(withBase("/"), "")
 );
 
-const createdAtTimestamp = computed(() =>
-  getCreatedAt(currentPathWithoutBase.value)
-);
-const createdAt = computed(() =>
-  createdAtTimestamp.value
-    ? dayjs(createdAtTimestamp.value).format("YYYY-MM-DD HH:MM")
-    : 0
+const createdAtTimestamp = ref(0);
+
+async function fetchCreatedAtTimestamp() {
+  const res = await getCreatedAt(currentPathWithoutBase.value);
+  createdAtTimestamp.value = res;
+}
+
+onMounted(() => {
+  fetchCreatedAtTimestamp();
+});
+
+const createdAt = computed(() => formatDateTime(createdAtTimestamp.value));
+
+const hasPostNotUpdated = computed(
+  () =>
+    lastUpdatedTimestamp.value &&
+    createdAtTimestamp.value &&
+    lastUpdatedTimestamp.value === createdAtTimestamp.value
 );
 </script>
 
@@ -37,17 +43,13 @@ const createdAt = computed(() =>
       class="text-sm text-gray-500 @dark:text-gray-400"
     >
       <a-tooltip
-        :content="
-          lastUpdatedTimestamp !== createdAtTimestamp
-            ? `文章创建于 ${createdAt}`
-            : `文章最后更新于 ${lastUpdated}`
-        "
+        :content="`文章${hasPostNotUpdated ? '' : '初稿'}创建于 ${createdAt} (GMT+8)`"
         position="right"
       >
         <span>
-          <icon-history v-if="lastUpdatedTimestamp && createdAtTimestamp" />
-          <icon-clock-circle v-else />
-          {{ lastUpdated || createdAt }}
+          <icon-clock-circle v-if="hasPostNotUpdated" />
+          <icon-history v-else />
+          {{ lastUpdated || createdAt }} (GMT+8)
         </span>
       </a-tooltip>
     </div>

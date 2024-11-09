@@ -3,25 +3,18 @@ import type { ArticleInfo } from "../types/ArticleInfo";
 import { data as usePosts } from "../loaders/posts.data";
 import { computed } from "vue";
 import ArticleCard from "./ArticleCard.vue";
-// @ts-ignore
-import dayjs from "dayjs";
+import { formatDate, compareDates } from "../utils/timeUtils";
 import { useWindowSize } from "@vueuse/core";
 
 const contents = computed(() =>
-  (usePosts as unknown as ArticleInfo[])
-    .filter(
-      (el: ArticleInfo) =>
-        !el.frontmatter?.meta?.hidden && !el.url.endsWith("/")
-    )
-    .map((el: ArticleInfo) => {
-      el.createdAt = dayjs(el.createdAt ?? el.lastUpdated ?? new Date()).format(
-        "YYYY-MM-DD"
-      );
+  (usePosts as unknown as Array<ArticleInfo & { createdAtDate: string }>)
+    .filter(el => !el.frontmatter?.meta?.hidden && !el.url.endsWith("/"))
+    .map(el => {
+      const createdAtTimestamp = el.createdAt ?? el.lastUpdated ?? new Date();
+      el.createdAtDate = formatDate(createdAtTimestamp);
       return el;
     })
-    .sort((a: ArticleInfo, b: ArticleInfo) =>
-      dayjs(a.createdAt).isBefore(dayjs(b.createdAt)) ? 1 : -1
-    )
+    .sort((a, b) => compareDates(a.createdAt, b.createdAt))
 );
 
 const { width } = useWindowSize();
@@ -36,11 +29,9 @@ const { width } = useWindowSize();
       <a-timeline-item v-for="content in contents" :key="content.url">
         <article-card :content="content" />
         <template #label>
-          <p class="mb-4">{{ content.createdAt }}</p>
+          <p class="mb-4">{{ content.createdAtDate }}</p>
         </template>
       </a-timeline-item>
     </a-timeline>
   </ClientOnly>
 </template>
-
-<style scoped lang="scss"></style>

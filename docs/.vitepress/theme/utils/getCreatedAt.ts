@@ -1,6 +1,7 @@
 // @ts-ignore
 import { data as usePosts } from "../loaders/posts.data";
 
-export function getCreatedAt(currentPathWithoutBase: string) {
-  return usePosts.find(el => el.url === currentPathWithoutBase)?.createdAt;
+export async function getCreatedAt(currentPathWithoutBase: string) {
+  const posts = await usePosts;
+  return posts.find(el => el.url === currentPathWithoutBase)?.createdAt;
 }

@@ -66,7 +66,7 @@ const loader = createContentLoader("**/*.md", {
     const data = await pMap(
       rawData,
       async item => {
-        if (item.url.endsWith("/")) return { ...item };
+        if (item.url.endsWith("/")) return { ...item, createdAt: 0 };
         const file = transformUrlToPath(item.url);
         const frontmatter = item.frontmatter;
         const wpms = 200 * (frontmatter?.timeAmp ?? 1);
