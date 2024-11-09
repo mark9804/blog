@@ -1,7 +1,7 @@
 // https://vitepress.dev/guide/custom-theme
 import { Message } from "@arco-design/web-vue";
 import Theme from "vitepress/theme";
-import ApperanceTransitionLayout from "./layouts/MainLayout.vue";
+import MainLayout from "./layouts/MainLayout.vue";
 import { createPinia } from "pinia";
 import piniaPluginPersistedstate from "pinia-plugin-persistedstate";
 import ArticleInfo from "./components/ArticleInfo.vue";
@@ -21,7 +21,7 @@ export default {
   ...Theme,
   extends: Theme,
   setup() {},
-  Layout: ApperanceTransitionLayout,
+  Layout: MainLayout,
   enhanceApp({ app, router, siteData }) {
     app.use(pinia).use(autoAnimatePlugin);
     Message._context = app._context;
