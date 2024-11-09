@@ -1,6 +1,6 @@
 import { spawn } from "cross-spawn";
-import fs from "fs";
-import path from "path";
+import { readFileSync, existsSync } from "fs";
+import { join, dirname, basename } from "path";
 import pMap from "p-map";
 import { createContentLoader } from "vitepress";
 import wordsCount from "words-count";
@@ -21,7 +21,7 @@ function transformUrlToPath(url: string) {
 
   let file = url.replace(/(^|\/)$/, "$1index").replace(/(\.html)?$/, ".md");
   file = siteConfig.rewrites.inv[file] || file;
-  return path.join(siteConfig.srcDir, file);
+  return join(siteConfig.srcDir, file);
 }
 
 // getCreatedAt function to fetch the created (first commit) time of a markdown file
@@ -29,9 +29,9 @@ async function getCreatedAt(url) {
   const file = transformUrlToPath(url);
 
   return new Promise((resolve, reject) => {
-    const cwd = path.dirname(file);
-    if (!fs.existsSync(cwd)) return resolve(0);
-    const fileName = path.basename(file);
+    const cwd = dirname(file);
+    if (!existsSync(cwd)) return resolve(0);
+    const fileName = basename(file);
     const child = spawn(
       "git",
       ["log", "--reverse", "-1", '--pretty="%ai"', fileName],
@@ -48,14 +48,14 @@ async function getCreatedAt(url) {
 
 function getWordCount(url) {
   const file = transformUrlToPath(url);
-  const content = fs.readFileSync(file, "utf-8");
+  const content = readFileSync(file, "utf-8");
   const postContent = content.replace(/---[\s\S]*?---/, "");
   return (wordsCount as unknown as WordsCount).wordsCount(postContent);
 }
 
 function getImgCount(url) {
   const file = transformUrlToPath(url);
-  const content = fs.readFileSync(file, "utf-8");
+  const content = readFileSync(file, "utf-8");
   return content.match(/!\[.*?\]\(.*?\)/g)?.length || 0;
 }
 
