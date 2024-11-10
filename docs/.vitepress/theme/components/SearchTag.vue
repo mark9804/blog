@@ -14,22 +14,30 @@ const props = withDefaults(
 const router = useRouter();
 
 function searchTags(tag: string) {
-  router.go(withBase(`/tags/?keyword=${encodeURIComponent(tag)}`));
+  const currentUrl = new URL(window.location.href);
+  const currentKeywords =
+    currentUrl.searchParams.get("keywords")?.split(",").filter(Boolean) || [];
+
+  // 如果标签已经在搜索列表中，就不添加
+  if (!currentKeywords.includes(tag)) {
+    const newKeywords = [...currentKeywords, tag];
+    router.go(
+      withBase(`/tags/?keywords=${encodeURIComponent(newKeywords.join(","))}`)
+    );
+  }
 }
 </script>
 
 <template>
-  <ClientOnly>
-    <a-tag
-      color="arcoblue"
-      class="span-tag cursor-pointer"
-      @click="searchTags(props.tag)"
-      :size="props.size"
-    >
-      <template #icon>
-        <icon-tag />
-      </template>
-      {{ props.tag }}
-    </a-tag>
-  </ClientOnly>
+  <a-tag
+    color="arcoblue"
+    class="pointer-events-auto cursor-pointer"
+    @click="searchTags(props.tag)"
+    :size="props.size"
+  >
+    <template #icon>
+      <icon-tag />
+    </template>
+    {{ props.tag }}
+  </a-tag>
 </template>

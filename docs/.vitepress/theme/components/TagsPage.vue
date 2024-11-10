@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { computed, ref } from "vue";
+import { computed, ref, watch } from "vue";
 import { data as usePosts } from "../loaders/posts.data";
 import type { ArticleInfo } from "../types/ArticleInfo";
-import { sift, unique } from "radash";
+import { unique } from "radash";
 import ArticleCard from "./ArticleCard.vue";
 
 function shouldShowInResult(el: ArticleInfo) {
@@ -10,59 +10,81 @@ function shouldShowInResult(el: ArticleInfo) {
 }
 
 const useTags = computed(() => {
-  return sift(
-    Array.from(
-      (usePosts as unknown as ArticleInfo[]).map((el: ArticleInfo) => {
-        return shouldShowInResult(el)
-          ? {
-              tags: el.frontmatter.tags ?? [],
-              title: el.frontmatter.title,
-              cover: el.frontmatter.cover,
-              url: el.url,
-              readingTime: el.readingTime,
-              wordsCount: el.wordsCount,
-              imgCount: el?.imgCount,
-            }
-          : null;
-      })
-    )
-  );
+  const seen = new Set();
+  return (usePosts as unknown as ArticleInfo[])
+    .filter(shouldShowInResult)
+    .filter(el => {
+      const duplicate = seen.has(el.url);
+      seen.add(el.url);
+      return !duplicate;
+    })
+    .map(el => ({
+      tags: el.frontmatter.tags ?? [],
+      title: el.frontmatter.title,
+      cover: el.frontmatter.cover,
+      url: el.url,
+      readingTime: el.readingTime,
+      wordsCount: el.wordsCount,
+      imgCount: el?.imgCount,
+    }));
 });
 
 const allTags = computed<string[]>(() =>
-  Array.from(new Set(useTags.value.map(tagRaw => tagRaw.tags))).flat()
+  Array.from(new Set(useTags.value.flatMap(tagRaw => tagRaw.tags)))
 );
 
-const initKeyword = window.location.search
-  ? decodeURIComponent(window.location.search.split("?")[1].split("=")[1])
-  : null;
+const initKeywords = computed(() => {
+  const params = new URLSearchParams(window.location.search);
+  const keywordsParam = params.get("keywords");
+  return keywordsParam ? keywordsParam.split(",").filter(Boolean) : [];
+});
 
-const searchValue = ref<string[]>(initKeyword ? [initKeyword] : []);
+const searchValue = ref<string[]>(initKeywords.value);
 const recommendations = ref<string[]>([]);
 const residuals = ref("");
 
-function getResiduals(inputValue: string) {
-  if ([null, undefined, ""].includes(inputValue)) {
-    recommendations.value = [];
+function updateSearchUrl(newValue: string[]) {
+  const currentUrl = new URL(window.location.href);
+  if (newValue.length > 0) {
+    currentUrl.searchParams.set("keywords", newValue.join(","));
   } else {
-    residuals.value = inputValue;
-    allTags.value.forEach(
-      tag =>
-        tag.toLowerCase().includes(inputValue.toLowerCase()) &&
-        !searchValue.value.includes(tag) &&
-        !recommendations.value.includes(tag) &&
-        recommendations.value.push(tag)
-    );
+    currentUrl.searchParams.delete("keywords");
   }
+  history.replaceState({}, "", currentUrl.toString());
+}
+
+watch(
+  () => searchValue.value,
+  newValue => {
+    updateSearchUrl(newValue);
+  },
+  { immediate: true }
+);
+
+function getResiduals(inputValue: string) {
+  if (!inputValue?.trim()) {
+    recommendations.value = [];
+    return;
+  }
+
+  residuals.value = inputValue;
+  const inputLower = inputValue.toLowerCase();
+  recommendations.value = allTags.value.filter(
+    tag =>
+      tag.toLowerCase().includes(inputLower) && !searchValue.value.includes(tag)
+  );
 }
 
 function addTag(tag: string) {
   if (searchValue.value.includes(tag)) return;
   searchValue.value.push(tag);
+  // FIXME: 为什么添加触发不了 watch 但是删除可以？？？
+  updateSearchUrl(searchValue.value);
   residuals.value = "";
   recommendations.value = [];
 }
 
+// 添加自定义渲染函数，让标签支持匹配高亮
 function renderTagText(tag: string, matches: string) {
   const matchingReg = new RegExp(matches, "gi");
   return tag.replace(
@@ -72,8 +94,12 @@ function renderTagText(tag: string, matches: string) {
 }
 
 const displayedArticles = computed(() => {
+  if (searchValue.value.length === 0) return useTags.value;
+
   return useTags.value.filter(tagRaw => {
-    return searchValue.value.some(searchTag => tagRaw.tags.includes(searchTag));
+    return searchValue.value.every(searchTag =>
+      tagRaw.tags.includes(searchTag)
+    );
   });
 });
 </script>
@@ -136,5 +162,3 @@ const displayedArticles = computed(() => {
     </div>
   </div>
 </template>
-
-<style scoped lang="scss"></style>

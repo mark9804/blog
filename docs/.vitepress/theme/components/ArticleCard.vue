@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import type { ArticleInfo } from "../types/ArticleInfo";
-import { useRouter, withBase } from "vitepress";
 import { computed } from "vue";
 import { ViewGridDetail } from "@icon-park/vue-next";
+import SearchTag from "./SearchTag.vue";
+
 const props = withDefaults(
   defineProps<{
     content: ArticleInfo;
@@ -19,12 +20,6 @@ const props = withDefaults(
     },
   }
 );
-
-const router = useRouter();
-
-function searchTags(tag: string) {
-  router.go(withBase(`/tags/?keyword=${encodeURIComponent(tag)}`));
-}
 
 const hasCover = computed(() => !!props.content.frontmatter.cover);
 </script>
@@ -63,31 +58,23 @@ const hasCover = computed(() => !!props.content.frontmatter.cover);
         class="flex gap-2 flex-wrap"
         v-if="content.frontmatter.tags && content.frontmatter.tags.length > 0"
       >
-        <a-tag
-          color="arcoblue"
-          @click="searchTags(tag)"
+        <SearchTag
           v-for="tag in content.frontmatter.tags"
-          class="pointer-events-auto cursor-pointer"
-        >
-          <!-- eslint-enable vue/valid-v-for -->
-          <template #icon>
-            <icon-tag />
-          </template>
-          <span>{{ tag }}</span>
-        </a-tag>
+          :key="tag"
+          :tag="tag"
+          class="pointer-events-auto"
+        />
       </div>
       <div
         class="toc-list__info text-xs text-3 select-none flex items-center gap-1"
       >
         <view-grid-detail :fill="hasCover ? '#fff' : '#86909c'" size="12" />
-        <!-- <icon-info-circle /> -->
         <span
           >{{ content.wordsCount }} 字<span v-if="!!content.imgCount"
             >，{{ content.imgCount }} 张图片</span
           ></span
         >
         <span>|</span>
-        <!-- <hourglass-full fill="#86909c" size="10" /> -->
         <span>全部读完约 {{ content.readingTime }} 分钟</span>
       </div>
     </div>
