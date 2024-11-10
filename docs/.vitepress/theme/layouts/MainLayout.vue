@@ -55,7 +55,7 @@ const frontmatter = data.frontmatter as unknown as ComputedRef<
 <template>
   <Layout>
     <template #doc-footer-before>
-      <div class="flex gap-2 pb-4" v-if="frontmatter?.tags?.length">
+      <div class="flex flex-wrap gap-2 pb-4" v-if="frontmatter?.tags?.length">
         <span class="text-sm text-gray-600 @dark:text-gray-400"
           >Tag{{ frontmatter?.tags?.length > 1 ? "s" : "" }}:
         </span>
