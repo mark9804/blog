@@ -5,6 +5,9 @@ cover: https://cdn.sa.net/2024/11/07/o9R6ZSpXfJQwmk5.jpg
 tags:
   - 生活
   - 旅游
+  - 欧洲
+  - 捷克
+  - 布拉格
   - View Finder
 ---
 

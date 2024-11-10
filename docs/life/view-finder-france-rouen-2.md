@@ -4,6 +4,9 @@ cover: https://s2.loli.net/2024/09/13/SwDBj29XgdbMAsv.webp
 tags:
   - 生活
   - 旅游
+  - 欧洲
+  - 法国
+  - 鲁昂
   - View Finder
 ---
 
