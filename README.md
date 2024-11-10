@@ -32,7 +32,7 @@
   - 自动导入：[unplugin-auto-import](https://github.com/unplugin/unplugin-auto-import#readme)
   - 自动构建和部署：GitHub Actions + GitHub Pages
   - 自动更新依赖：[Mend Renovate](https://www.mend.io/renovate-free/)
-  - 自动侧边栏：[Vitepress Sidebar](https://vitepress-sidebar.jooy2.com)
+  - 自动侧边栏：[VitePress Sidebar](https://vitepress-sidebar.jooy2.com)
 - 组件库：[Arco Design Vue](https://arco.design/vue/)
 - 评论系统：[Disqus](https://disqus.com/)
 - 状态管理：[Pinia](https://pinia.vuejs.org/)

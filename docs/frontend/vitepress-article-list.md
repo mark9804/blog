@@ -1,19 +1,19 @@
 ---
-title: 在 Vitepress 中获取全部文章列表
+title: 在 VitePress 中获取全部文章列表
 description:
 tags:
   - 前端
-  - Vitepress
+  - VitePress
 ---
 
-# 在 Vitepress 中获取全部文章列表
+# 在 VitePress 中获取全部文章列表
 
-对于个人博客来说，在首页展示文章列表是很常用的一个功能。但是 Vitepress 是面向产品设计的，所以并没有提供个人博客需要的列表功能，因此我们需要借助 [createContentLoader](https://vitepress.dev/guide/data-loading#createcontentloader) 这个 helper 函数来获取全文列表。
+对于个人博客来说，在首页展示文章列表是很常用的一个功能。但是 VitePress 是面向产品设计的，所以并没有提供个人博客需要的列表功能，因此我们需要借助 [createContentLoader](https://vitepress.dev/guide/data-loading#createcontentloader) 这个 helper 函数来获取全文列表。
 
 :::warning
 
-- Vitepress 版本必须大等于 1.0.0-alpha.53 (2023-03-13) 才可以使用这个函数。
-- 请务必注意这个函数只能在文件名为 `*.data.{js,ts}` 的文件中使用，否则 Vitepress 会告诉你没有这个函数。
+- VitePress 版本必须大等于 1.0.0-alpha.53 (2023-03-13) 才可以使用这个函数。
+- 请务必注意这个函数只能在文件名为 `*.data.{js,ts}` 的文件中使用，否则 VitePress 会告诉你没有这个函数。
   :::
 
 :::tip
