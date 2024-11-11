@@ -22,9 +22,9 @@ VitePress 的设计用途是技术文档，博客功能没有 WordPress 等 CMS 
 ### 效果展示
 
 :::gallery 炼金术博物馆内部
-![](https://cdn.sa.net/2024/11/08/B6tznhbCkDWgsAE.webp)  
-![](https://cdn.sa.net/2024/11/08/C5XZL4M3NeUkWuA.webp)  
-![](https://cdn.sa.net/2024/11/08/Pzk5Y7hjS3NJ1E6.webp)  
+![](https://cdn.sa.net/2024/11/08/B6tznhbCkDWgsAE.webp)
+![](https://cdn.sa.net/2024/11/08/C5XZL4M3NeUkWuA.webp)
+![](https://cdn.sa.net/2024/11/08/Pzk5Y7hjS3NJ1E6.webp)
 ![](https://cdn.sa.net/2024/11/08/rz4AOiBUWJTFxfl.webp)
 ![](https://cdn.sa.net/2024/11/08/neQrdAT7BJ9DpkW.webp)
 :::
