@@ -21,17 +21,15 @@ const { width } = useWindowSize();
 </script>
 
 <template>
-  <ClientOnly>
-    <a-timeline
-      class="w-full mb-4"
-      :label-position="width <= 475 ? 'same' : 'relative'"
-    >
-      <a-timeline-item v-for="content in contents" :key="content.url">
-        <article-card :content="content" />
-        <template #label>
-          <p class="mb-4">{{ content.createdAtDate }}</p>
-        </template>
-      </a-timeline-item>
-    </a-timeline>
-  </ClientOnly>
+  <a-timeline
+    class="w-full mb-4"
+    :label-position="width <= 475 ? 'same' : 'relative'"
+  >
+    <a-timeline-item v-for="content in contents" :key="content.url">
+      <article-card :content="content" />
+      <template #label>
+        <p class="mb-4">{{ content.createdAtDate }}</p>
+      </template>
+    </a-timeline-item>
+  </a-timeline>
 </template>

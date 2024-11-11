@@ -63,7 +63,7 @@ function getReadingTime(content: string, wpms = 200) {
 // Define the custom loader using createContentLoader
 const loader = createContentLoader("**/*.md", {
   async transform(rawData) {
-    const data = await pMap(
+    return await pMap(
       rawData,
       async item => {
         if (item.url.endsWith("/")) return { ...item, createdAt: 0 };
@@ -90,7 +90,6 @@ const loader = createContentLoader("**/*.md", {
       },
       { concurrency: 64 }
     );
-    return data;
   },
 });
 
