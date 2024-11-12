@@ -9,5 +9,5 @@ export function generateImgGallery(galleryToken: Token) {
     .trim();
   const imgTokens = tokens.filter(token => token.type === "image");
 
-  return `\n<ArcoImageGallery name="${galleryName}">\n${generateImgGroups(imgTokens)}\n</ArcoImageGallery>\n`;
+  return `\n<ArcoImageGallery name="${galleryName}" :length="${imgTokens.length}">\n${generateImgGroups(imgTokens)}\n</ArcoImageGallery>\n`;
 }
