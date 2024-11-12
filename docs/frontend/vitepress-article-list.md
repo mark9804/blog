@@ -52,3 +52,5 @@ const useContents = usePosts;
 ```
 
 :::
+
+完整的实现可以参考 [这里](https://github.com/mark9804/blog/blob/master/docs/.vitepress/theme/loaders/posts.data.ts)。这个实现中不仅有获取创建时间的函数，还有获取文章字数、图片数和根据两者计算阅读时间的功能具体实现。

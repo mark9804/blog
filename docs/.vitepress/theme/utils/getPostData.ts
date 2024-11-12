@@ -1,4 +1,3 @@
-// @ts-ignore
 import { data as usePosts } from "../loaders/posts.data";
 
 export type Post = {
