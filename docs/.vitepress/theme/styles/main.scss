@@ -16,6 +16,13 @@ html.dark {
   }
 }
 
+kbd {
+  background-color: var(--vp-c-bg-soft);
+  border: solid 1px var(--vp-c-border);
+  border-radius: 4px;
+  padding: 0 4px;
+}
+
 .custom-block.info code {
   background-color: var(--arona-blue-1);
   border: solid 1px var(--arona-blue-3);
@@ -50,6 +57,7 @@ mark {
   padding: 0 4px;
   border-radius: 4px;
 }
+
 .spoiler {
   color: transparent;
   background-color: var(--vp-c-brand-3);
