@@ -2,7 +2,7 @@
 title: 提示工程：基于大语言模型的猫娘调教指南
 description:
 tags:
-  - 大语言模型
+  - LLM
   - 提示工程
 ---
 
