@@ -16,9 +16,18 @@
     "declaration": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./docs/src/*"],
+      "@/*": ["./docs/src/*"]
     }
   },
+  "include": [
+    "docs/src/**/*.ts",
+    "docs/src/**/*.d.ts",
+    "docs/.vitepress/**/*.ts",
+    "docs/.vitepress/**/*.d.ts",
+    "docs/auto-imports.d.ts",
+    "docs/components.d.ts",
+    "docs/**/*.vue"
+  ],
   "references": [
     {
       "path": "./tsconfig.node.json"

@@ -1,4 +1,5 @@
 import vueJsx from "@vitejs/plugin-vue-jsx";
+// @ts-ignore
 import px2rem from "postcss-plugin-px2rem";
 import AutoImport from "unplugin-auto-import/vite";
 import { ArcoResolver } from "unplugin-vue-components/resolvers";
@@ -35,6 +36,7 @@ export const viteConfig = {
     }),
     Components({
       include: [/\.vue$/, /\.md$/, /\.ts$/],
+      dirs: [".vitepress/theme/components/ElysiumUI"],
       resolvers: [
         ArcoResolver({ sideEffect: true, resolveIcons: true }),
         IconsResolver({

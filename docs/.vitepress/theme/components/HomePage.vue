@@ -7,21 +7,23 @@ import { useData } from "vitepress";
 const { theme } = useData();
 const props = computed(() => {
   if (theme.value.userProfile) {
-    const { name, avatar, bio, email } = theme.value.userProfile;
-    return { name, avatar, bio, email };
+    const { name, avatar, bio, email, social } = theme.value.userProfile;
+    return { name, avatar, bio, email, social };
   }
   return null;
 });
 </script>
 
 <template>
-  <div
-    class="w-[100dvw] pl-[48px] pr-[48px] pt-[24px] flex flex-col items-center"
-  >
-    <div class="home-page max-w-[1200px] flex gap-[48px] w-full">
-      <ProfileCard :props="props" />
-      <TableOfContents class="home-page__toc" />
-    </div>
+  <div class="w-[100dvw] flex flex-col items-center">
+    <ElyProfile
+      :name="props?.name"
+      :avatar="props?.avatar"
+      :bio="props?.bio"
+      :email="props?.email"
+      :social="props?.social"
+    />
+    <TableOfContents class="home-page__toc" />
   </div>
 </template>
 

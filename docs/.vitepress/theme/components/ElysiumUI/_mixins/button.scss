@@ -1,0 +1,49 @@
+@use "sass:map";
+@use "sass:color";
+@use "../_config/theme_colors" as colors;
+@use "../_config/layouts" as layouts;
+
+// Mixins
+@mixin button-base {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: layouts.$border-radius-sm;
+  cursor: pointer;
+  font-weight: 500;
+  transition: layouts.$transition-normal;
+  outline: none;
+  position: relative;
+  font-family: inherit;
+}
+
+@mixin button-variant($variant) {
+  $variant-colors: map.get(colors.$button-colors, $variant);
+  $background: map.get($variant-colors, "background");
+  $text: map.get($variant-colors, "text");
+  
+  background-color: $background;
+  color: $text;
+  
+  &:hover {
+    background-color: color.adjust($background, $lightness: -10%);
+  }
+}
+
+@mixin button-size($size) {
+  $size-props: map.get(layouts.$button-spaces, $size);
+  padding: map.get($size-props, "padding");
+  font-size: map.get($size-props, "font-size");
+}
+
+@mixin loading-spinner {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid currentColor;
+  border-radius: 50%;
+  border-right-color: transparent;
+  margin-right: layouts.$spinner-margin-right;
+  animation: spin 1s linear infinite;
+}
