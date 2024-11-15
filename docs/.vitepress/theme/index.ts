@@ -4,9 +4,9 @@ import Theme from "vitepress/theme";
 import MainLayout from "./layouts/MainLayout.vue";
 import { createPinia } from "pinia";
 import piniaPluginPersistedstate from "pinia-plugin-persistedstate";
-import ArticleInfo from "./components/ArticleInfo.vue";
+import ArticleInfo from "./components/deprecated/ArticleInfo.vue";
 import { Image } from "@arco-design/web-vue";
-import ImageGallery from "./components/ImageGallery.vue";
+import ImageGallery from "./components/deprecated/ImageGallery.vue";
 import { autoAnimatePlugin } from "@formkit/auto-animate/vue";
 
 import "@arco-design/web-vue/es/image/style/css.js";

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, ref, watch } from "vue";
-import { data as usePosts } from "../loaders/posts.data";
-import type { ArticleInfo } from "../types/ArticleInfo";
+import { data as usePosts } from "../../loaders/posts.data";
+import type { ArticleInfo } from "../../types/ArticleInfo";
 import { unique } from "radash";
 import ArticleCard from "./ArticleCard.vue";
 

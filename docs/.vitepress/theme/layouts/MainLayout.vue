@@ -2,9 +2,9 @@
 import { useData, withBase, useRoute } from "vitepress";
 import { nextTick, onBeforeMount, provide, ComputedRef } from "vue";
 import DefaultTheme from "vitepress/theme";
-import DiscussionWidget from "../components/DiscussionWidget.vue";
+import DiscussionWidget from "../components/deprecated/DiscussionWidget.vue";
 import type { ArticleInfo } from "../types/ArticleInfo";
-import SearchTag from "../components/SearchTag.vue";
+import SearchTag from "../components/deprecated/SearchTag.vue";
 
 const { isDark } = useData();
 

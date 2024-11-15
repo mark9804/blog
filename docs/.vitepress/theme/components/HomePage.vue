@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed } from "vue";
-import TableOfContents from "./TableOfContents.vue";
-import ProfileCard from "./ProfileCard.vue";
+import TableOfContents from "./deprecated/TableOfContents.vue";
+import ProfileCard from "./deprecated/ProfileCard.vue";
 import { useData } from "vitepress";
 
 const { theme } = useData();
