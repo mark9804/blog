@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import { computed, onMounted, ref } from "vue";
-import TableOfContents from "./deprecated/TableOfContents.vue";
-import ProfileCard from "./deprecated/ProfileCard.vue";
+import { nextTick, computed, ref, watch } from "vue";
+import { useDark, useCssVar } from "@vueuse/core";
 import { useData } from "vitepress";
 
 const { theme } = useData();
@@ -17,11 +16,24 @@ import { postData } from "../utils/getPostData";
 
 const posts = ref([]);
 
+const isDark = useDark();
+const accentColor = ref(isDark.value ? "#aa7e53" : "#d19062");
+const backgroundColor = ref(isDark.value ? "#2f2826" : "#fbfaf8");
+
 postData
   .getAllPosts(el => !el.frontmatter?.meta?.hidden && !el.url.endsWith("/"))
   .then(res => {
     posts.value = res;
   });
+
+watch(isDark, newVal => {
+  nextTick(() => {
+    accentColor.value = useCssVar("--color-accent").value;
+    backgroundColor.value = newVal
+      ? useCssVar("--color-accent-base").value
+      : useCssVar("--color-accent-quaternary").value;
+  });
+});
 </script>
 
 <template>
@@ -30,6 +42,8 @@ postData
       :name="props?.name"
       :avatar="props?.avatar"
       :bio="props?.bio"
+      :accent="accentColor"
+      :background="backgroundColor"
       :email="props?.email"
       :social="props?.social"
     />

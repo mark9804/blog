@@ -23,6 +23,13 @@ html.dark {
   }
 }
 
+.VPFooter {
+  .message,
+  .copyright {
+    color: var(--color-accent-text-tertiary);
+  }
+}
+
 kbd {
   background-color: var(--vp-c-bg-soft);
   border: solid 1px var(--vp-c-border);

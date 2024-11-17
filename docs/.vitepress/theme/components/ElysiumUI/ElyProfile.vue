@@ -1,9 +1,8 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref, computed } from "vue";
+import { onMounted, onUnmounted, ref, computed, watch } from "vue";
 import type { ProfileProps } from "./types/ProfileProps";
 import {
   useWindowSize,
-  useCssVar,
   useElementSize,
   usePreferredReducedMotion,
 } from "@vueuse/core";
@@ -11,8 +10,6 @@ import { createWaveAnimation } from "./_utils/wave";
 
 const props = defineProps<ProfileProps>();
 
-const accentColorRef = useCssVar("--color-accent");
-const backgroundColorRef = useCssVar("--color-accent-quaternary");
 const preferredMotion = usePreferredReducedMotion();
 
 const backgroundCanvas = ref<HTMLCanvasElement>();
@@ -23,29 +20,42 @@ const avatarMarginTop = computed(() => canvasHeight.value * 0.3 - 56);
 
 let waveController: ReturnType<typeof createWaveAnimation> | null = null;
 
-onMounted(() => {
-  if (backgroundCanvas.value) {
-    waveController = createWaveAnimation(
-      backgroundCanvas.value,
-      {
-        strokeStyle: props.accent ?? accentColorRef.value,
-        backgroundColor: props.background ?? backgroundColorRef.value,
-        verticalPosition: 0.3,
-        amplitudeRatio: 0.02,
-        periodMultiplier: 0.008,
-        waveCount: 5,
-      },
-      windowHeight.value,
-      preferredMotion.value === "reduce"
-    );
-
-    waveController.start();
-
-    window.addEventListener("resize", () => {
-      waveController?.resize(windowHeight.value);
-    });
-  }
+const createWaveConfig = () => ({
+  strokeStyle: props.accent,
+  backgroundColor: props.background,
+  verticalPosition: 0.3,
+  amplitudeRatio: 0.02,
+  periodMultiplier: 0.008,
+  waveCount: 5,
 });
+
+function initWaveController() {
+  if (!backgroundCanvas.value) return;
+
+  waveController?.stop();
+  waveController = createWaveAnimation(
+    backgroundCanvas.value,
+    createWaveConfig(),
+    windowHeight.value,
+    preferredMotion.value === "reduce"
+  );
+  waveController.start();
+}
+
+onMounted(() => {
+  initWaveController();
+
+  window.addEventListener("resize", () => {
+    waveController?.resize(windowHeight.value);
+  });
+});
+
+watch(
+  () => [props.accent, props.background],
+  () => {
+    initWaveController();
+  }
+);
 
 onUnmounted(() => {
   waveController?.stop();
@@ -83,10 +93,10 @@ function handleScrollIndicatorClick() {
         />
       </div>
       <div class="flex flex-col items-center gap-1">
-        <h1 class="ely-profile__name text-2xl font-bold m-0 text-[#2f2826]">
+        <h1 class="ely-profile__name text-2xl font-bold m-0 text-primary">
           {{ props.name }}
         </h1>
-        <p class="ely-profile__bio text-[#2f2826e0]">
+        <p class="ely-profile__bio text-primary">
           {{ props.bio }}
         </p>
       </div>
@@ -100,7 +110,7 @@ function handleScrollIndicatorClick() {
           props.social && Array.isArray(props.social) && props.social.length > 0
         "
         :size="0"
-        class="text-sm text-[#2f2826e0]"
+        class="text-sm text-primary"
       >
         <a
           v-for="social in props.social"
@@ -125,7 +135,7 @@ function handleScrollIndicatorClick() {
         stroke-linejoin="bevel"
         :size="36"
         :style="{
-          stroke: accentColorRef,
+          stroke: props.accent,
         }"
       />
       <span class="ely-profile__scroll-indicator-text text-sm">SCROLL</span>
