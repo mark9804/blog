@@ -1,18 +1,13 @@
 import { data as usePosts } from "../loaders/posts.data";
-
-export type Post = {
-  url: string;
-  createdAt: number;
-  readingTime: number;
-  wordsCount: number;
-  imgCount: number;
-  src: string;
-  html: string;
-  frontmatter: Record<string, any>;
-  excerpt: string;
-};
+import type { Post } from "../types/Post";
 
 export const postData = {
+  async getAllPosts(filter?: (post: Post) => boolean) {
+    const posts = (await usePosts) as Post[];
+    const sortedPosts = posts.sort((a, b) => b.createdAt - a.createdAt);
+    return filter ? sortedPosts.filter(filter) : sortedPosts;
+  },
+
   async getCreatedAt(currentPathWithoutBase: string) {
     const posts = (await usePosts) as Post[];
     return posts.find(el => el.url === currentPathWithoutBase)?.createdAt;

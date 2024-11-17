@@ -10,6 +10,16 @@ html {
   --color-accent-text-primary: #{config.$light-text-primary};
   --color-accent-text-secondary: #{config.$light-text-secondary};
   --color-accent-text-tertiary: #{config.$light-text-tertiary};
+
+  @for $i from 1 through 9 {
+    --color-accent-border-#{$i}00: #{rgba(config.$light-accent, $i * 0.1)};
+  }
+
+  @for $i from 1 through 9 {
+    --color-accent-shadow-#{$i}00: #{rgba(config.$light-accent, $i * 0.1)};
+  }
+
+  color: var(--color-accent-text-primary);
 }
 
 html.dark {
@@ -21,6 +31,14 @@ html.dark {
   --color-accent-text-primary: #{config.$dark-text-primary};
   --color-accent-text-secondary: #{config.$dark-text-secondary};
   --color-accent-text-tertiary: #{config.$dark-text-tertiary};
+
+  @for $i from 1 through 9 {
+    --color-accent-border-#{$i}00: #{rgba(config.$dark-accent, $i * 0.1)};
+  }
+
+  @for $i from 1 through 9 {
+    --color-accent-shadow-#{$i}00: #{rgba(config.$dark-accent, $i * 0.1)};
+  }
 }
 
 $color-accent: var(--color-accent);

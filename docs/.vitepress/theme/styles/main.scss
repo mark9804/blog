@@ -16,6 +16,13 @@ html.dark {
   }
 }
 
+.VPNav {
+  background-color: transparent !important;
+  .VPNavBar {
+    background-color: transparent !important;
+  }
+}
+
 kbd {
   background-color: var(--vp-c-bg-soft);
   border: solid 1px var(--vp-c-border);

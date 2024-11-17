@@ -48,6 +48,7 @@ const buttonTag = computed(() => (isLink.value ? "a" : "button"));
   <component
     :is="buttonTag"
     :class="classes"
+    class="select-none"
     :disabled="disabled"
     :href="isLink ? props.href : null"
     @click="handleClick"
@@ -55,7 +56,7 @@ const buttonTag = computed(() => (isLink.value ? "a" : "button"));
     <span v-if="loading" class="ely-button__loading">
       <span class="loading-spinner"></span>
     </span>
-    <span class="ely-button__content">
+    <span class="ely-button__content font-bold">
       <slot></slot>
     </span>
   </component>

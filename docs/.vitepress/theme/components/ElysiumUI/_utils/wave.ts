@@ -100,7 +100,7 @@ export function createWaveAnimation(
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    offset -= 0.01;
+    offset -= 0.003;
     drawWaves({
       ...config,
       ctx,

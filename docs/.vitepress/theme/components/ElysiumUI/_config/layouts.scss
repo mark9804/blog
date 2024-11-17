@@ -26,5 +26,24 @@ $button-spaces: (
   )
 );
 
+$tag-spaces: (
+  "mini": (
+    "padding": 0px 6px,
+    "font-size": 12px
+  ),
+  "small": (
+    "padding": 1px 8px,
+    "font-size": 12px
+  ),
+  "medium": (
+    "padding": 2px 10px,
+    "font-size": 14px
+  ),
+  "large": (
+    "padding": 3px 12px,
+    "font-size": 14px
+  )
+);
+
 // Component Spaces
 $spinner-margin-right: 8px;

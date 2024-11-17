@@ -31,7 +31,7 @@ onMounted(() => {
         strokeStyle: props.accent ?? accentColorRef.value,
         backgroundColor: props.background ?? backgroundColorRef.value,
         verticalPosition: 0.3,
-        amplitudeRatio: 0.03,
+        amplitudeRatio: 0.02,
         periodMultiplier: 0.008,
         waveCount: 5,
       },
@@ -50,12 +50,19 @@ onMounted(() => {
 onUnmounted(() => {
   waveController?.stop();
 });
+
+function handleScrollIndicatorClick() {
+  window.scrollTo({
+    top: windowHeight.value,
+    behavior: "smooth",
+  });
+}
 </script>
 
 <template>
   <div
     aria-label="User profile"
-    class="ely-profile w-full relative flex flex-col items-center absolute top-0 left-0"
+    class="ely-profile w-full relative flex flex-col items-center absolute top-0 left-0 select-none"
   >
     <canvas
       aria-hidden="true"
@@ -85,7 +92,7 @@ onUnmounted(() => {
       </div>
       <ElyButton wide as="link" :href="`mailto:${props.email}`"
         ><span class="flex items-center gap-2">
-          <icon-email />Contact
+          <icon-email :stroke-width="6" />Contact
         </span></ElyButton
       >
       <ElySpace
@@ -106,5 +113,38 @@ onUnmounted(() => {
         <template #divider>・</template>
       </ElySpace>
     </div>
+    <div
+      class="ely-profile__scroll-indicator absolute bottom-4 flex flex-col items-center gap-1 text-[var(--color-accent)] cursor-pointer"
+      role="button"
+      @click="handleScrollIndicatorClick"
+    >
+      <icon-double-down
+        class="ely-profile__scroll-indicator-icon"
+        :stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="bevel"
+        :size="36"
+        :style="{
+          stroke: accentColorRef,
+        }"
+      />
+      <span class="ely-profile__scroll-indicator-text text-sm">SCROLL</span>
+    </div>
   </div>
 </template>
+
+<style scoped lang="scss">
+.ely-profile__scroll-indicator {
+  animation: bounce 2s ease-in-out infinite;
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+</style>

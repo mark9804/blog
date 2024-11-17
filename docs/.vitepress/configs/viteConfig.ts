@@ -36,7 +36,10 @@ export const viteConfig = {
     }),
     Components({
       include: [/\.vue$/, /\.md$/, /\.ts$/],
-      dirs: [".vitepress/theme/components/ElysiumUI"],
+      dirs: [
+        ".vitepress/theme/components/ElysiumUI",
+        ".vitepress/theme/components",
+      ],
       resolvers: [
         ArcoResolver({ sideEffect: true, resolveIcons: true }),
         IconsResolver({

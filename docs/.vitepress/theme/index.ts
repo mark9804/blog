@@ -22,6 +22,7 @@ export default {
   extends: Theme,
   setup() {},
   Layout: MainLayout,
+  // @ts-ignore
   enhanceApp({ app, router, siteData }) {
     app.use(pinia).use(autoAnimatePlugin);
     Message._context = app._context;

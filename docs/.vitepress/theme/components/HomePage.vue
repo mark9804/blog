@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from "vue";
+import { computed, onMounted, ref } from "vue";
 import TableOfContents from "./deprecated/TableOfContents.vue";
 import ProfileCard from "./deprecated/ProfileCard.vue";
 import { useData } from "vitepress";
@@ -12,6 +12,16 @@ const props = computed(() => {
   }
   return null;
 });
+
+import { postData } from "../utils/getPostData";
+
+const posts = ref([]);
+
+postData
+  .getAllPosts(el => !el.frontmatter?.meta?.hidden && !el.url.endsWith("/"))
+  .then(res => {
+    posts.value = res;
+  });
 </script>
 
 <template>
@@ -23,7 +33,12 @@ const props = computed(() => {
       :email="props?.email"
       :social="props?.social"
     />
-    <TableOfContents class="home-page__toc" />
+    <section
+      class="w-full max-w-[1280px] flex flex-col pl-16 sm:pl-4 md:pl-8 sm:pr-4 md:pr-8 pr-16 mt-10 mb-20"
+    >
+      <h1 class="home-title mb-10">Articles</h1>
+      <ArticleWaterfallList :posts="posts" />
+    </section>
   </div>
 </template>
 

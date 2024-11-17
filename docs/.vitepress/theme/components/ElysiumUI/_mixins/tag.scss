@@ -1,0 +1,28 @@
+@use "sass:map";
+@use "../_config/layouts" as layouts;
+@use "../_config/theme_colors" as colors;
+
+@mixin tag-base {
+  display: inline-flex;
+  align-items: center;
+  border-radius: layouts.$border-radius-sm;
+  transition: layouts.$transition-normal;
+  cursor: default;
+}
+
+@mixin tag-size($size) {
+  $size-props: map.get(layouts.$tag-spaces, $size);
+  padding: map.get($size-props, "padding");
+  font-size: map.get($size-props, "font-size");
+}
+
+@mixin tag-primary {
+  color: var(--color-accent);
+  background-color: var(--color-accent-quaternary);
+}
+
+@mixin tag-secondary {
+  color: var(--color-accent);
+  background-color: transparent;
+  border: 1px solid var(--color-accent);
+}
