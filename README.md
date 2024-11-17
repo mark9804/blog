@@ -1,28 +1,35 @@
 # mark9804 的个人博客
 
+基于 VitePress，定制 [Elysium](./docs/.vitepress/theme/components/ElysiumUI) 主题，使用少量 [Arco Design](https://arco.design/vue/) 组件库和图标。
+
+视障人群友好（计划测试），晕动症患者友好（大概）。
+
+无制作主题包计划，但有一定程度的抽象，喜欢的请 fork 后自行修改样式文件。或者不修改直接把文章换成自己的也行。
+
 ## Feature
 
-- 基于 [Arco Design Vue](https://arco.design/vue/) 定制的主题
-  - 自定义图库语法 `:::gallery 图库名称`
-  - 图片可点击放大
-  - 图片 lazyload 与 loading 效果
-  - 与 [@mdit/plugin-img-size](https://mdit-plugins.github.io/zh/img-size.html) 混合使用的图像尺寸自定义功能
-  - 文章信息展示自定义
-- Markdown 语法增强
-  - `mark`
-  - `ruby`
-  - `spoiler`
-  - 上标和下标
-  - 图像 caption
-  - 支持 [LaTeX 语法](https://www.latex-project.org/)
-- 基于 `contentLoader` 的纯前端字数和图片张数统计，以及阅读时间计算
-- 基于 `contentLoader` 和 `git log` 的最后编辑时间获取
-- 按标签搜索
-- 支持评论
-- 自动侧边栏目录生成
-- 开发者友好
-  - commit hook 自动格式化
-  - 自动导入
+- 定制 [Elysium](./docs/.vitepress/theme/components/ElysiumUI) 主题，配色灵感来自黄金庭园。
+- Markdown 语法增强：
+  - 相册语法 `:::gallery 相册名称`；
+  - 图片增强：
+    - 图片可点击放大；
+    - 图片支持 lazyload，加入 loading 效果；
+    - 可控制图像尺寸；
+  - 重点标记 `mark`；
+  - 注音 `ruby`；
+  - 剧透 `spoiler`；
+  - 上标和下标；
+  - 图片 caption；
+  - 支持 [LaTeX 语法](https://www.latex-project.org/)。
+- 支持基于 `contentLoader` 在构建时统计字数和图片张数。
+- 支持基于字数和图片数量计算阅读时间。
+- 支持基于 `contentLoader` 和 `git` 获取最后编辑时间。
+- 支持按标签过滤文章。
+- 支持评论。
+- 自动生成侧边栏目录。
+- 开发者友好：
+  - 提交时自动格式化；
+  - 配置自动导入 Arco Design 组件/图标库和 Elysium UI 组件。
 
 ## 技术栈
 
@@ -33,7 +40,7 @@
   - 自动构建和部署：GitHub Actions + GitHub Pages
   - 自动更新依赖：[Mend Renovate](https://www.mend.io/renovate-free/)
   - 自动侧边栏：[VitePress Sidebar](https://vitepress-sidebar.jooy2.com)
-- 组件库：[Arco Design Vue](https://arco.design/vue/)
+- 组件库：[Elysium UI](./docs/.vitepress/theme/components/ElysiumUI)，[Arco Design Vue](https://arco.design/vue/)
 - 评论系统：[Disqus](https://disqus.com/)
 - 状态管理：[Pinia](https://pinia.vuejs.org/)
 - Icon：[IconPark](https://iconpark.bytedance.com/) / [Arco](https://arco.design/vue/component/icon)
