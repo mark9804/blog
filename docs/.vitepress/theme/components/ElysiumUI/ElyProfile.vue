@@ -110,6 +110,7 @@ function handleScrollIndicatorClick() {
           props.social && Array.isArray(props.social) && props.social.length > 0
         "
         :size="0"
+        divider="・"
         class="text-sm text-primary"
       >
         <a
@@ -120,7 +121,6 @@ function handleScrollIndicatorClick() {
           target="_blank"
           >{{ social.alias }}</a
         >
-        <template #divider>・</template>
       </ElySpace>
     </div>
     <div

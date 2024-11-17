@@ -6,7 +6,7 @@ import { useData } from "vitepress";
 const { theme } = useData();
 const props = computed(() => {
   if (theme.value.userProfile) {
-    const { name, avatar, bio, email, social } = theme.value.userProfile;
+    const { name, avatar, bio, email, social } = theme.value.userProfile || {};
     return { name, avatar, bio, email, social };
   }
   return null;

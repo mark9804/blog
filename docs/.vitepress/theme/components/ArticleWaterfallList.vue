@@ -10,7 +10,7 @@ const props = defineProps<{
 const { width } = useWindowSize();
 
 const waterfallCount = computed(() =>
-  Math.max(Math.floor(Math.min(width.value, 1280) / 320), 1)
+  Math.max(Math.floor(Math.min(width.value, 1280) / 290), 1)
 );
 
 const waterfallItemsList = computed(() => {

@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { computed, useTemplateRef } from "vue";
+import { computed } from "vue";
 import type { CardProps } from "./types/CardProps";
 import { withBase } from "vitepress";
+import { formatDate } from "../../utils/timeUtils";
 
 const props = withDefaults(defineProps<CardProps>(), {
   content: () => ({
@@ -60,9 +61,18 @@ function handleTagClick(tag: string) {
       <h2 class="elysium-ui__card--title font-bold text-lg pt-4 pl-4 pr-4">
         {{ props.content.frontmatter.title }}
       </h2>
+      <ElySpace
+        :size="2"
+        divider="・"
+        class="pt-1 pl-4 pr-4 text-tertiary text-xs"
+      >
+        <span>{{ formatDate(props.content.createdAt) }}</span>
+        <span>{{ props.content.readingTime }} 分钟</span>
+        <span>{{ props.content.wordsCount }} 字</span>
+      </ElySpace>
       <p
         v-if="props.content.frontmatter.description"
-        class="elysium-ui__card--description text-tertiary pt-4 pl-4 pr-4"
+        class="elysium-ui__card--description text-tertiary pt-4 pl-4 pr-4 text-sm"
       >
         {{ props.content.frontmatter.description }}
       </p>
