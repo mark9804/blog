@@ -1,8 +1,8 @@
 # mark9804 的个人博客
 
-基于 VitePress，定制 [Elysium](./docs/.vitepress/theme/components/ElysiumUI) 主题，使用少量 [Arco Design](https://arco.design/vue/) 组件库和图标。
+基于 VitePress，定制 [Elysium](./docs/.vitepress/theme/components/ElysiumUI) 主题，使用少量 [Arco Design](https://arco.design/vue/) 组件库和图标。~~现在还很多，会慢慢变少的~~
 
-视障人群友好（计划测试），晕动症患者友好（大概）。
+视障人群友好（尽量），晕动症患者友好（大概）。
 
 无制作主题包计划，但有一定程度的抽象，喜欢的请 fork 后自行修改样式文件。或者不修改直接把文章换成自己的也行。
 
@@ -21,15 +21,19 @@
   - 上标和下标；
   - 图片 caption；
   - 支持 [LaTeX 语法](https://www.latex-project.org/)。
-- 支持基于 `contentLoader` 在构建时统计字数和图片张数。
-- 支持基于字数和图片数量计算阅读时间。
-- 支持基于 `contentLoader` 和 `git` 获取最后编辑时间。
+- 在构建时，基于 `contentLoader` 统计字数和图片张数。
+- 在构建时，基于字数和图片数量计算阅读时间。
+- 在构建时，基于 `contentLoader` 和 `git` 获取最后编辑时间。
 - 支持按标签过滤文章。
 - 支持评论。
 - 自动生成侧边栏目录。
 - 开发者友好：
   - 提交时自动格式化；
   - 配置自动导入 Arco Design 组件/图标库和 Elysium UI 组件。
+
+## TODO
+
+- [ ] 逐渐替换掉 Arco Design 组件库
 
 ## 技术栈
 
