@@ -16,6 +16,20 @@ html.dark {
   }
 }
 
+.VPNav {
+  background-color: transparent !important;
+  .VPNavBar {
+    background-color: transparent !important;
+  }
+}
+
+.VPFooter {
+  .message,
+  .copyright {
+    color: var(--color-accent-text-tertiary);
+  }
+}
+
 kbd {
   background-color: var(--vp-c-bg-soft);
   border: solid 1px var(--vp-c-border);
@@ -26,10 +40,6 @@ kbd {
 .custom-block.info code {
   background-color: var(--arona-blue-1);
   border: solid 1px var(--arona-blue-3);
-}
-
-.vp-doc [class*="language-"] code .highlighted {
-  background-color: var(--arona-blue-1);
 }
 
 .edit-info.edit-info {
@@ -84,6 +94,15 @@ a.title span,
 }
 
 .vp-doc {
+  [class*="language-"] code .highlighted {
+    background-color: var(--arona-blue-1);
+  }
+
+  a {
+    color: #{$color-accent-text-primary};
+    text-decoration-color: #{$color-accent};
+  }
+
   img,
   .arco-image {
     max-width: 100%;
@@ -137,16 +156,16 @@ a.title span,
     td {
       border: inherit;
     }
-  }
-}
 
-.vp-doc tr:nth-child(2n) {
-  background-color: inherit;
-}
+    tr {
+      &:hover {
+        background-color: var(--vp-c-bg-soft);
+      }
 
-.vp-doc tr {
-  &:hover {
-    background-color: var(--vp-c-bg-soft);
+      &:nth-child(2n) {
+        background-color: inherit;
+      }
+    }
   }
 }
 

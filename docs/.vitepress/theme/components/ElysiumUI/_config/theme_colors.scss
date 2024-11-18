@@ -1,0 +1,32 @@
+// Light Theme Colors
+$light-accent: #d19062;
+$light-accent-secondary: #c9a785;
+$light-accent-tertiary: #e9e0d7;
+$light-accent-quaternary: #fbfaf8;
+$light-accent-base: #fff;
+$light-text-primary: rgba(47, 40, 38, 1);
+$light-text-secondary: rgba(47, 40, 38, 0.88);
+$light-text-tertiary: rgba(47, 40, 38, 0.45);
+
+// Dark Theme Colors
+$dark-accent: #ab8054;
+$dark-accent-secondary: #9e7c51;
+$dark-accent-tertiary: #837467;
+$dark-accent-quaternary: #3c3834;
+$dark-accent-base: #2f2826;
+$dark-text-primary: rgb(220, 220, 220);
+$dark-text-secondary: rgba(255, 255, 255, 0.88);
+$dark-text-tertiary: rgba(255, 255, 255, 0.45);
+
+$button-colors: (
+  "primary": (
+    "background": $light-accent,
+    "text": var(--color-accent-base)
+  ),
+  "secondary": (
+    "background": $light-accent-quaternary,
+    "text": $dark-accent
+  )
+);
+
+$disabled-opacity: 0.6;

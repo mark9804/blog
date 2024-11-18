@@ -6,16 +6,30 @@ import {
   transformerVariantGroup,
 } from "unocss";
 
+const borderAccents = [1, 2, 3, 4, 5, 6, 7, 8, 9].map(i => [
+  `border-accent-${i}00`,
+  { "border-color": `var(--color-accent-border-${i}00)` },
+]);
+
 export default defineConfig({
   rules: [
-    ["shadow-std", { "box-shadow": "0 0 0.5rem rgba(0, 0, 0, 0.1)" }],
-    ["align-self-center", { "align-self": "center" }],
-    ["text-3", { color: "var(--color-text-3)" }],
-    ["border-fill", { "border-color": "var(--color-fill-2)" }],
-    ["text-match", { color: "var(--arona-blue-6)", "font-weight": "bold" }],
+    [
+      "shadow-card",
+      { "box-shadow": "0 1rem 3rem var(--color-accent-shadow-200)" },
+    ],
+    [
+      "shadow-card-hover",
+      { "box-shadow": "0 1rem 3rem var(--color-accent-shadow-300)" },
+    ],
+    ["text-primary", { color: "var(--color-accent-text-primary)" }],
+    ["text-secondary", { color: "var(--color-accent-text-secondary)" }],
+    ["text-tertiary", { color: "var(--color-accent-text-tertiary)" }],
+    // @ts-ignore
+    ...borderAccents,
   ],
   shortcuts: {
-    "card-float": "shadow-std rounded-lg gap-[24px] p-[24px]",
+    "home-title":
+      "text-2xl font-bold decoration-underline decoration-4 underline-offset-10 decoration-[var(--color-accent)]",
   },
   presets: [
     presetUno(),

@@ -2,6 +2,7 @@
 layout: page
 lastUpdated: false
 sidebar: false
+navbar: false
 prev: false
 next: false
 title: 首页

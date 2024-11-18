@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { ArticleInfo } from "../types/ArticleInfo";
+import type { ArticleInfo } from "../../types/ArticleInfo";
 import { computed } from "vue";
 import { ViewGridDetail } from "@icon-park/vue-next";
 import SearchTag from "./SearchTag.vue";

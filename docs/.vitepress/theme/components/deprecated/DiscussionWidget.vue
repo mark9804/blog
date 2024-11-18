@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed } from "vue";
-import { useCustomStore } from "../../piniaStore";
+import { useCustomStore } from "../../../piniaStore";
 import DiscusWidget from "./DiscusWidget.vue";
 
 const customStore = useCustomStore();

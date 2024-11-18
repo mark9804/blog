@@ -25,7 +25,7 @@ function transformUrlToPath(url: string) {
 }
 
 // getCreatedAt function to fetch the created (first commit) time of a markdown file
-async function getCreatedAt(url) {
+async function getCreatedAt(url: string) {
   const file = transformUrlToPath(url);
 
   return new Promise((resolve, reject) => {
@@ -40,7 +40,7 @@ async function getCreatedAt(url) {
       }
     );
     let output = "";
-    child.stdout.on("data", data => (output += String(data)));
+    child.stdout.on("data", (data: Buffer) => (output += String(data)));
     child.on("close", () => resolve(new Date(output).getTime()));
     child.on("error", reject);
   });

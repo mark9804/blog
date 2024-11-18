@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import type { ArticleInfo } from "../types/ArticleInfo";
-import { data as usePosts } from "../loaders/posts.data";
+import type { ArticleInfo } from "../../types/ArticleInfo";
+import { data as usePosts } from "../../loaders/posts.data";
 import { computed } from "vue";
 import ArticleCard from "./ArticleCard.vue";
-import { formatDate, compareDates } from "../utils/timeUtils";
+import { formatDate, compareDates } from "../../utils/timeUtils";
 import { useWindowSize } from "@vueuse/core";
 
 const contents = computed(() =>
