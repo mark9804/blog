@@ -38,8 +38,8 @@ kbd {
 }
 
 .custom-block.info code {
-  background-color: var(--arona-blue-1);
-  border: solid 1px var(--arona-blue-3);
+  background-color: transparent;
+  border: solid 1px $color-accent;
 }
 
 .edit-info.edit-info {
