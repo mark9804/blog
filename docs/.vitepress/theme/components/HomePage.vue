@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { nextTick, computed, ref, watch } from "vue";
-import { useDark, useCssVar } from "@vueuse/core";
+import { nextTick, computed, ref, watch, useTemplateRef } from "vue";
+import { useDark, useCssVar, useElementSize } from "@vueuse/core";
 import { useData } from "vitepress";
 
 const { theme } = useData();
@@ -15,10 +15,12 @@ const props = computed(() => {
 import { postData } from "../utils/getPostData";
 
 const posts = ref([]);
-
+const articleTitleRef = useTemplateRef<HTMLHeadingElement>("articleTitleRef");
 const isDark = useDark();
 const accentColor = ref(isDark.value ? "#aa7e53" : "#d19062");
 const backgroundColor = ref(isDark.value ? "#2f2826" : "#fbfaf8");
+
+const { width: articleTitleWidth } = useElementSize(articleTitleRef);
 
 postData
   .getAllPosts(el => !el.frontmatter?.meta?.hidden && !el.url.endsWith("/"))
@@ -50,8 +52,8 @@ watch(isDark, newVal => {
     <section
       class="w-full max-w-[1280px] flex flex-col pl-16 sm:pl-4 md:pl-8 sm:pr-4 md:pr-8 pr-16 mt-10 mb-20"
     >
-      <h1 class="home-title mb-10">Articles</h1>
-      <ArticleWaterfallList :posts="posts" />
+      <h1 class="home-title mb-10" ref="articleTitleRef">Articles</h1>
+      <ArticleWaterfallList :posts="posts" :width="articleTitleWidth" />
     </section>
   </div>
 </template>

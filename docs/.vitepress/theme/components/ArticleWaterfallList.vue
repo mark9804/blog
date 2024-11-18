@@ -1,16 +1,27 @@
 <script setup lang="ts">
 import { computed } from "vue";
-import { useWindowSize } from "@vueuse/core";
 import type { Post } from "../types/Post";
 
-const props = defineProps<{
-  posts: Post[];
-}>();
-
-const { width } = useWindowSize();
+const props = withDefaults(
+  defineProps<{
+    posts: Post[];
+    width?: number;
+  }>(),
+  {
+    width: 1280,
+  }
+);
 
 const waterfallCount = computed(() =>
-  Math.max(Math.floor(Math.min(width.value, 1280) / 290), 1)
+  Math.max(Math.floor(props.width / 290), 1)
+);
+
+const cardWidth = 280;
+
+const gapSize = computed(
+  () =>
+    (props.width - waterfallCount.value * cardWidth) /
+    (waterfallCount.value - 1)
 );
 
 const waterfallItemsList = computed(() => {
@@ -25,7 +36,8 @@ const waterfallItemsList = computed(() => {
 <template>
   <div class="article-list__waterfall-container flex justify-between w-full">
     <div
-      class="article-list__waterfall-item flex flex-col gap-5"
+      class="article-list__waterfall-item flex flex-col"
+      :style="{ gap: `${gapSize}px` }"
       v-for="items in waterfallItemsList"
     >
       <ElyCard v-for="post in items" :key="post.url" :content="post" />
