@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { computed } from "vue";
+import { computed, onMounted, onUnmounted, ref } from "vue";
 import type { CardProps } from "./types/CardProps";
 import { withBase } from "vitepress";
-import { formatDate } from "../../utils/timeUtils";
+import { formatRelativeTime } from "../../utils/timeUtils";
 
 const props = withDefaults(defineProps<CardProps>(), {
   content: () => ({
@@ -31,6 +31,22 @@ const isLink = computed(() => props.as === "link");
 function handleTagClick(tag: string) {
   console.log(tag);
 }
+
+const relativeTime = ref(formatRelativeTime(props.content.createdAt));
+
+let timer: ReturnType<typeof setInterval> | null = null;
+
+onMounted(() => {
+  timer = setInterval(() => {
+    relativeTime.value = formatRelativeTime(props.content.createdAt);
+  }, 60000); // 每分钟更新一次 relativeTime
+});
+
+onUnmounted(() => {
+  if (timer !== null) {
+    clearInterval(timer);
+  }
+});
 </script>
 
 <template>
@@ -64,11 +80,15 @@ function handleTagClick(tag: string) {
       <ElySpace
         :size="2"
         divider="・"
+        wrap
         class="pt-1 pl-4 pr-4 text-tertiary text-xs"
       >
-        <span>{{ formatDate(props.content.createdAt) }}</span>
-        <span>{{ props.content.readingTime }} 分钟</span>
-        <span>{{ props.content.wordsCount }} 字</span>
+        <span>{{ relativeTime }}</span>
+        <span>{{ props.content.wordsCount }} 字{{}}</span>
+        <span v-if="props.content.imgCount > 0"
+          >{{ props.content.imgCount }} 张图片</span
+        >
+        <span>{{ props.content.readingTime }} 分钟读完</span>
       </ElySpace>
       <p
         v-if="props.content.frontmatter.description"
