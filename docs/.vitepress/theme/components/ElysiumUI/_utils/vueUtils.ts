@@ -1,3 +1,4 @@
+import { Comment } from "vue";
 import type { Component, Slots, VNode, VNodeTypes } from "vue";
 
 // https://github.com/vuejs/vue-next/blob/main/packages/shared/src/shapeFlags.ts
@@ -65,6 +66,8 @@ export function getAllElements(
 ) {
   const results: VNode[] = [];
   for (const item of children ?? []) {
+    if (item.type === Comment) continue;
+
     if (
       isElement(item) ||
       isComponent(item) ||
