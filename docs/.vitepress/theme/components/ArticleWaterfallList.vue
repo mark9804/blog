@@ -18,10 +18,12 @@ const waterfallCount = computed(() =>
 
 const cardWidth = 280;
 
-const gapSize = computed(
-  () =>
+const gapSize = computed(() =>
+  Math.max(
     (props.width - waterfallCount.value * cardWidth) /
-    (waterfallCount.value - 1)
+      (waterfallCount.value - 1),
+    24
+  )
 );
 
 const waterfallItemsList = computed(() => {
