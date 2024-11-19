@@ -3,6 +3,7 @@ import { computed, onMounted, onUnmounted, ref } from "vue";
 import type { CardProps } from "./types/CardProps";
 import { withBase } from "vitepress";
 import { formatRelativeTime } from "../../utils/timeUtils";
+import { useSearchTags } from "../../utils/tagSearchUtils";
 
 const props = withDefaults(defineProps<CardProps>(), {
   content: () => ({
@@ -29,7 +30,8 @@ const props = withDefaults(defineProps<CardProps>(), {
 const isLink = computed(() => props.as === "link");
 
 function handleTagClick(tag: string) {
-  console.log(tag);
+  const currentTags = useSearchTags.get();
+  useSearchTags.go([...currentTags, tag]);
 }
 
 const relativeTime = ref(formatRelativeTime(props.content.createdAt));
