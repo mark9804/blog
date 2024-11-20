@@ -8,7 +8,7 @@
 
 ## Feature
 
-- 定制 [Elysium](./docs/.vitepress/theme/components/ElysiumUI) 主题，配色灵感来自黄金庭园。
+- ~~正在~~定制 [Elysium](./docs/.vitepress/theme/components/ElysiumUI) 主题，配色灵感来自黄金庭园。
 - Markdown 语法增强：
   - 相册语法 `:::gallery 相册名称`；
   - 图片增强：
@@ -33,7 +33,9 @@
 
 ## TODO
 
+- [ ] 首页 NavBar
 - [ ] 逐渐替换掉 Arco Design 组件库
+- [ ] 首页文章搜索框
 
 ## 技术栈
 
