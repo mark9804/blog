@@ -33,6 +33,7 @@
 
 ## TODO
 
+- [ ] 轻量化文章 （a.k.a 朋友圈） `quavers` （八分音符）
 - [ ] 首页 NavBar
 - [ ] 逐渐替换掉 Arco Design 组件库
 - [ ] 首页文章搜索框

@@ -1,5 +1,5 @@
 export const sidebarConfig = {
-  documentRootPath: "/docs",
+  documentRootPath: "/docs/posts",
   useTitleFromFileHeading: true,
   useTitleFromFrontmatter: true,
   useFolderTitleFromIndexFile: true,

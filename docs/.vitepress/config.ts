@@ -16,6 +16,7 @@ export default defineConfig(
       title: "今天没有早睡",
       head: headConfig as HeadConfig[],
       description: "",
+      lang: "zh-CN",
       sitemap: {
         hostname: DOMAIN + BASE_URL,
       },
