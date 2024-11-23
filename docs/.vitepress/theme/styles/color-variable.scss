@@ -1,12 +1,15 @@
 @use "../components/ElysiumUI/_config" as config;
 @use "../components/ElysiumUI/_config/theme_colors" as colors;
 
+$base-opacity: 0.8;
+
 html {
   --color-accent: #{config.$light-accent};
   --color-accent-secondary: #{config.$light-accent-secondary};
   --color-accent-tertiary: #{config.$light-accent-tertiary};
   --color-accent-quaternary: #{config.$light-accent-quaternary};
   --color-accent-base: #{config.$light-accent-base};
+  --color-accent-transparent: #{rgba(config.$light-accent-base, $base-opacity)};
   --color-accent-text-primary: #{config.$light-text-primary};
   --color-accent-text-secondary: #{config.$light-text-secondary};
   --color-accent-text-tertiary: #{config.$light-text-tertiary};
@@ -28,6 +31,7 @@ html.dark {
   --color-accent-tertiary: #{config.$dark-accent-tertiary};
   --color-accent-quaternary: #{config.$dark-accent-quaternary};
   --color-accent-base: #{config.$dark-accent-base};
+  --color-accent-transparent: #{rgba(config.$dark-accent-base, $base-opacity)};
   --color-accent-text-primary: #{config.$dark-text-primary};
   --color-accent-text-secondary: #{config.$dark-text-secondary};
   --color-accent-text-tertiary: #{config.$dark-text-tertiary};
@@ -46,6 +50,7 @@ $color-accent-secondary: var(--color-accent-secondary);
 $color-accent-tertiary: var(--color-accent-tertiary);
 $color-accent-quaternary: var(--color-accent-quaternary);
 $color-accent-base: var(--color-accent-base);
+$color-accent-transparent: var(--color-accent-transparent);
 $color-accent-text-primary: var(--color-accent-text-primary);
 $color-accent-text-secondary: var(--color-accent-text-secondary);
 $color-accent-text-tertiary: var(--color-accent-text-tertiary);

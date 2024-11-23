@@ -16,10 +16,20 @@ html.dark {
   }
 }
 
+.VPImage.logo {
+  border-radius: 3px;
+}
+
 .VPNav {
-  background-color: transparent !important;
-  .VPNavBar {
-    background-color: transparent !important;
+  .VPNavBar:not(.home .top) {
+    .content-body.content-body.content-body {
+      backdrop-filter: blur(10px);
+      background: radial-gradient(
+        $color-accent-base,
+        $color-accent-transparent 2px
+      );
+      background-size: 3px 3px;
+    }
   }
 }
 
@@ -87,7 +97,9 @@ mark {
 a.title span,
 .VPNavBarMenuLink.active,
 .item h2.text,
-.font-bold {
+.font-bold,
+.pager-link .title,
+.VPSidebarItem.is-active .text {
   font-weight: 700;
   font-family: "Wix Madefor", "HarmonyOS Sans SC Bold",
     var(--vp-font-family-base);
@@ -99,8 +111,17 @@ a.title span,
   }
 
   a {
-    color: #{$color-accent-text-primary};
-    text-decoration-color: #{$color-accent};
+    color: $color-accent-text-primary;
+    text-decoration-color: $color-accent;
+
+    &::before {
+      color: $color-accent-text-tertiary;
+      transition: all 0.3s ease-in-out;
+    }
+
+    &:hover::before {
+      color: $color-accent;
+    }
   }
 
   img,
