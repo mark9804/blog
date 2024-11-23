@@ -1,5 +1,7 @@
 export const sidebarConfig = {
-  documentRootPath: "/docs/posts",
+  documentRootPath: "/docs",
+  scanStartPath: "/posts/",
+  resolvePath: "/posts/",
   useTitleFromFileHeading: true,
   useTitleFromFrontmatter: true,
   useFolderTitleFromIndexFile: true,
@@ -20,7 +22,7 @@ export const sidebarConfig = {
   // manualSortFileNameByPriority: ['first.md', 'second', 'third.md'],
   // removePrefixAfterOrdering: false,
   // prefixSeparator: '.',
-  excludePattern: ["tags.md"],
+  excludePattern: ["tags.md", "quavers"],
   // excludeFilesByFrontmatter: false,
   // includeDotFiles: false,
   // includeRootIndexFile: false,
