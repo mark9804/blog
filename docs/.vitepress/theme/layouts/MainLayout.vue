@@ -4,7 +4,10 @@ import { nextTick, onBeforeMount, provide, ComputedRef } from "vue";
 import DefaultTheme from "vitepress/theme";
 import DiscussionWidget from "../components/deprecated/DiscussionWidget.vue";
 import type { ArticleInfo } from "../types/ArticleInfo";
-import SearchTag from "../components/deprecated/SearchTag.vue";
+import { useSearchTags } from "../utils/tagSearchUtils";
+import { useCustomStore } from "../../piniaStore";
+
+const store = useCustomStore();
 
 const { isDark } = useData();
 
@@ -50,6 +53,12 @@ const { Layout } = DefaultTheme;
 const frontmatter = data.frontmatter as unknown as ComputedRef<
   ArticleInfo["frontmatter"]
 >;
+
+function handleTagClick(tag: string) {
+  store.resetTags();
+  store.pushSelectedTags(tag);
+  useSearchTags.go();
+}
 </script>
 
 <template>
@@ -59,7 +68,15 @@ const frontmatter = data.frontmatter as unknown as ComputedRef<
         <span class="text-sm text-gray-600 @dark:text-gray-400"
           >Tag{{ frontmatter?.tags?.length > 1 ? "s" : "" }}:
         </span>
-        <SearchTag v-for="tag in frontmatter?.tags" :tag="tag" size="small" />
+        <ElyTag
+          v-for="tag in frontmatter?.tags"
+          size="small"
+          :id="tag"
+          clickable
+          @click="handleTagClick(tag)"
+        >
+          {{ tag }}
+        </ElyTag>
       </div>
     </template>
     <template #doc-after v-if="withBase('/') !== route.path">

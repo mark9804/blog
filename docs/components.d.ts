@@ -12,7 +12,7 @@ declare module 'vue' {
     AImagePreviewGroup: typeof import('@arco-design/web-vue')['ImagePreviewGroup']
     AInputTag: typeof import('@arco-design/web-vue')['InputTag']
     ArticleCard: typeof import('./.vitepress/theme/components/deprecated/ArticleCard.vue')['default']
-    ArticleInfo: typeof import('./.vitepress/theme/components/deprecated/ArticleInfo.vue')['default']
+    ArticleInfo: typeof import('./.vitepress/theme/components/ArticleInfo.vue')['default']
     ArticleWaterfallList: typeof import('./.vitepress/theme/components/ArticleWaterfallList.vue')['default']
     ASpace: typeof import('@arco-design/web-vue')['Space']
     ASwitch: typeof import('@arco-design/web-vue')['Switch']

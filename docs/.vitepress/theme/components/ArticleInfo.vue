@@ -1,11 +1,14 @@
 <script setup lang="ts">
 import { useData } from "vitepress";
-import SearchTag from "./SearchTag.vue";
 import { useRoute, withBase } from "vitepress";
 import { computed, ref, onMounted } from "vue";
-import { postData } from "../../utils/usePostData";
-import { formatDateTime } from "../../utils/timeUtils";
+import { postData } from "../utils/usePostData";
+import { formatDateTime } from "../utils/timeUtils";
 import { AlarmClock } from "@icon-park/vue-next";
+import { useSearchTags } from "../utils/tagSearchUtils";
+import { useCustomStore } from "../../piniaStore";
+
+const store = useCustomStore();
 
 const { frontmatter, page, isDark } = useData();
 
@@ -48,6 +51,12 @@ const hasPostNotUpdated = computed(
     createdAtTimestamp.value &&
     lastUpdatedTimestamp.value === createdAtTimestamp.value
 );
+
+function handleTagClick(tag: string) {
+  store.resetTags();
+  store.pushSelectedTags(tag);
+  useSearchTags.go();
+}
 </script>
 
 <template>
@@ -80,7 +89,15 @@ const hasPostNotUpdated = computed(
       </span>
     </a-tooltip>
     <span v-if="frontmatter?.tags?.length" class="flex flex-wrap gap-2">
-      <SearchTag v-for="tag in frontmatter?.tags" :tag="tag" size="small" />
+      <ElyTag
+        v-for="tag in frontmatter?.tags"
+        size="small"
+        :id="tag"
+        clickable
+        @click="handleTagClick(tag)"
+      >
+        {{ tag }}
+      </ElyTag>
     </span>
   </div>
 </template>

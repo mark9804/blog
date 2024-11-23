@@ -38,7 +38,7 @@ const waterfallItemsList = computed(() => {
 <template>
   <div class="article-list__waterfall-container flex justify-between w-full">
     <div
-      class="article-list__waterfall-item flex flex-col"
+      class="article-list__waterfall-item flex flex-col w-[280px]"
       :style="{ gap: `${gapSize}px` }"
       v-for="items in waterfallItemsList"
     >

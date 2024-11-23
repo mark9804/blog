@@ -38,6 +38,7 @@ const classes = computed(() => ({
   "elysium-ui__tag--active": isActive.value,
   "elysium-ui__tag--clickable": props.clickable,
   "elysium-ui__tag--disabled": props.disabled,
+  "select-none": true,
 }));
 
 const handleClick = () => {
