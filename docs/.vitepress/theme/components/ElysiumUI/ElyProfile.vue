@@ -5,6 +5,8 @@ import {
   useWindowSize,
   useElementSize,
   usePreferredReducedMotion,
+  useIntersectionObserver,
+  useDebounceFn,
 } from "@vueuse/core";
 import { createWaveAnimation } from "./_utils/wave";
 
@@ -42,22 +44,48 @@ function initWaveController() {
   waveController.start();
 }
 
-onMounted(() => {
-  initWaveController();
+const isVisible = ref(false);
 
+const { stop } = useIntersectionObserver(
+  backgroundCanvas,
+  ([{ isIntersecting }]) => {
+    isVisible.value = isIntersecting;
+
+    if (isIntersecting) {
+      initWaveController();
+    } else {
+      waveController?.stop();
+    }
+  },
+  {
+    threshold: 0,
+    rootMargin: "50px",
+  }
+);
+
+const debouncedResize = useDebounceFn((height: number) => {
+  if (isVisible.value) {
+    waveController?.resize(height);
+  }
+}, 300);
+
+onMounted(() => {
   window.addEventListener("resize", () => {
-    waveController?.resize(windowHeight.value);
+    debouncedResize(windowHeight.value);
   });
 });
 
 watch(
   () => [props.accent, props.background],
   () => {
-    initWaveController();
+    if (isVisible.value) {
+      initWaveController();
+    }
   }
 );
 
 onUnmounted(() => {
+  stop();
   waveController?.stop();
 });
 
