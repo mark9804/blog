@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useSearchTags } from "../utils/tagSearchUtils";
 import { postData } from "../utils/usePostData";
-import { computed, ref, watch, onMounted } from "vue";
+import { computed, ref } from "vue";
 import ArticleWaterfallList from "./ArticleWaterfallList.vue";
 import ElyTag from "./ElysiumUI/ElyTag.vue";
 
@@ -30,28 +30,36 @@ const filteredPosts = computed(() => {
   );
 });
 
-onMounted(async () => {
-  allTags.value = await postData.getAllTags();
-  allPosts.value = await postData.getAllPosts();
-  selectedTags.value = useSearchTags.get();
+postData
+  .getAllPosts(el => !el.frontmatter?.meta?.hidden && !el.url.endsWith("/"))
+  .then(res => {
+    allPosts.value = res;
+  });
+
+postData.getAllTags().then(res => {
+  allTags.value = res;
 });
+
+selectedTags.value = useSearchTags.get();
 </script>
 
 <template>
-  <div class="flex flex-col w-full max-w-[1280px] p-5 items-center gap-5">
-    <div class="tags-container flex flex-wrap gap-4">
-      <ElyTag
-        clickable
-        :active="isTagActive(tag)"
-        @click="toggleTag(tag)"
-        v-for="tag in allTags"
-        :key="tag"
-        :id="tag"
-      >
-        {{ tag }}
-      </ElyTag>
+  <div class="flex flex-col w-full items-center pt-10">
+    <div class="flex flex-col w-full max-w-[1280px] p-5 items-center gap-5">
+      <div class="tags-container flex flex-wrap gap-4">
+        <ElyTag
+          clickable
+          :active="isTagActive(tag)"
+          @click="toggleTag(tag)"
+          v-for="tag in allTags"
+          :key="tag"
+          :id="tag"
+        >
+          {{ tag }}
+        </ElyTag>
+      </div>
+      <ArticleWaterfallList :posts="filteredPosts" />
     </div>
-    <ArticleWaterfallList :posts="filteredPosts" />
   </div>
 </template>
 
