@@ -1,12 +1,12 @@
 import { BASE_URL } from "../constants";
 
 export const headConfig = [
-  ["meta", { name: "theme-color", content: "#d19062" }],
+  ["meta", { name: "theme-color", content: "#fbfaf8" }],
   [
     "meta",
     {
       name: "theme-color",
-      content: "#ab8054",
+      content: "#3c3834",
       media: "(prefers-color-scheme: dark)",
     },
   ],
