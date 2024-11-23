@@ -60,7 +60,7 @@ function handleTagClick(tag: string) {
 </script>
 
 <template>
-  <div class="article-info flex flex-wrap gap-4 items-center">
+  <div class="article-info flex flex-wrap gap-4 items-center mb-5">
     <a-tooltip
       v-if="lastUpdated || createdAt"
       :content="`文章${hasPostNotUpdated ? '' : '初稿'}创建于 ${createdAt} (GMT+8)`"
