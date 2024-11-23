@@ -36,6 +36,8 @@ declare module 'vue' {
     ProfileCard: typeof import('./.vitepress/theme/components/deprecated/ProfileCard.vue')['default']
     SearchTag: typeof import('./.vitepress/theme/components/deprecated/SearchTag.vue')['default']
     TableOfContents: typeof import('./.vitepress/theme/components/deprecated/TableOfContents.vue')['default']
+    TagSearchPage: typeof import('./.vitepress/theme/components/TagSearchPage.vue')['default']
     TagsPage: typeof import('./.vitepress/theme/components/deprecated/TagsPage.vue')['default']
+    TagsSearchPage: typeof import('./.vitepress/theme/components/TagsSearchPage.vue')['default']
   }
 }

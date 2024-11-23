@@ -12,7 +12,7 @@ const props = computed(() => {
   return null;
 });
 
-import { postData } from "../utils/getPostData";
+import { postData } from "../utils/usePostData";
 
 const posts = ref([]);
 const articleTitleRef = useTemplateRef<HTMLHeadingElement>("articleTitleRef");

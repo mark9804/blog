@@ -1,5 +1,6 @@
 import { data as usePosts } from "../loaders/posts.data";
 import type { Post } from "../types/Post";
+import { unique, sift } from "radash";
 
 export const postData = {
   async getAllPosts(filter?: (post: Post) => boolean) {
@@ -26,5 +27,10 @@ export const postData = {
   async getImgCount(currentPathWithoutBase: string) {
     const posts = (await usePosts) as Post[];
     return posts.find(el => el.url === currentPathWithoutBase)?.imgCount;
+  },
+
+  async getAllTags() {
+    const posts = (await usePosts) as Post[];
+    return unique(sift(posts.map(el => el.frontmatter?.tags).flat()));
   },
 };

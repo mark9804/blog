@@ -3,7 +3,7 @@ import { useData } from "vitepress";
 import SearchTag from "./SearchTag.vue";
 import { useRoute, withBase } from "vitepress";
 import { computed, ref, onMounted } from "vue";
-import { postData } from "../../utils/getPostData";
+import { postData } from "../../utils/usePostData";
 import { formatDateTime } from "../../utils/timeUtils";
 import { AlarmClock } from "@icon-park/vue-next";
 

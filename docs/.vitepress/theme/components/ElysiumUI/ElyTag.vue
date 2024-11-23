@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { TagProps } from "./types/TagProps";
-import { useSlots, computed } from "vue";
+import { computed, ref, watch } from "vue";
 
 const props = withDefaults(defineProps<TagProps>(), {
   id: undefined,
@@ -18,6 +18,15 @@ const emit = defineEmits<{
   (e: "click", id: string): void;
 }>();
 
+const isActive = ref(props.active);
+
+watch(
+  () => props.active,
+  val => {
+    isActive.value = val;
+  }
+);
+
 const classes = computed(() => ({
   "elysium-ui__tag": true,
   "elysium-ui__tag--primary": props.primary,
@@ -26,13 +35,14 @@ const classes = computed(() => ({
   "elysium-ui__tag--small": props.size === "small",
   "elysium-ui__tag--medium": props.size === "medium",
   "elysium-ui__tag--large": props.size === "large",
-  "elysium-ui__tag--active": props.active,
+  "elysium-ui__tag--active": isActive.value,
   "elysium-ui__tag--clickable": props.clickable,
   "elysium-ui__tag--disabled": props.disabled,
 }));
 
 const handleClick = () => {
   if (!props.disabled && props.clickable) {
+    isActive.value = !isActive.value;
     emit("click", props.id);
   }
 };

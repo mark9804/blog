@@ -11,9 +11,9 @@ publish: false
 ---
 
 <script setup>
-  import TagsPage from ".vitepress/theme/components/deprecated/TagsPage.vue";
+  import TagSearchPage from ".vitepress/theme/components/TagSearchPage.vue";
 </script>
 
 <ClientOnly>
-  <TagsPage />
+  <TagSearchPage />
 </ClientOnly>
