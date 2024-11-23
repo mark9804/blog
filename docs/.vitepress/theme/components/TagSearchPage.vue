@@ -1,11 +1,15 @@
 <script setup lang="ts">
 import { postData } from "../utils/usePostData";
-import { computed, ref } from "vue";
+import { computed, ref, useTemplateRef } from "vue";
 import ArticleWaterfallList from "./ArticleWaterfallList.vue";
 import ElyTag from "./ElysiumUI/ElyTag.vue";
 import { useCustomStore } from "../../piniaStore";
+import { useElementSize } from "@vueuse/core";
 
 const store = useCustomStore();
+
+const containerRef = useTemplateRef<HTMLDivElement>("containerRef");
+const { width } = useElementSize(containerRef);
 
 const allTags = ref([]);
 const allPosts = ref([]);
@@ -41,8 +45,11 @@ postData.getAllTags().then(res => {
 </script>
 
 <template>
-  <div class="flex flex-col w-full items-center pt-10">
-    <div class="flex flex-col w-full max-w-[1280px] p-5 items-center gap-5">
+  <div class="flex flex-col w-full items-center pt-10 mb-20">
+    <div
+      class="flex flex-col gap-10 max-w-[1280px] pl-16 sm:pl-4 md:pl-8 sm:pr-4 md:pr-8 pr-16"
+      ref="containerRef"
+    >
       <div class="tags-container flex flex-wrap gap-4">
         <ElyTag
           clickable
@@ -55,7 +62,7 @@ postData.getAllTags().then(res => {
           {{ tag }}
         </ElyTag>
       </div>
-      <ArticleWaterfallList :posts="filteredPosts" />
+      <ArticleWaterfallList :posts="filteredPosts" :width="width" />
     </div>
   </div>
 </template>
