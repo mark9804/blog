@@ -4,6 +4,9 @@ import type { CardProps } from "./types/CardProps";
 import { withBase } from "vitepress";
 import { formatRelativeTime } from "../../utils/timeUtils";
 import { useSearchTags } from "../../utils/tagSearchUtils";
+import { useCustomStore } from "../../../piniaStore";
+
+const store = useCustomStore();
 
 const props = withDefaults(defineProps<CardProps>(), {
   content: () => ({
@@ -30,8 +33,9 @@ const props = withDefaults(defineProps<CardProps>(), {
 const isLink = computed(() => props.as === "link");
 
 function handleTagClick(tag: string) {
-  const currentTags = useSearchTags.get();
-  useSearchTags.go([...currentTags, tag]);
+  store.resetTags();
+  store.pushSelectedTags(tag);
+  useSearchTags.go();
 }
 
 const relativeTime = ref(formatRelativeTime(props.content.createdAt));

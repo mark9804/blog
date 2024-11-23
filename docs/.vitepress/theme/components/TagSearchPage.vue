@@ -1,23 +1,22 @@
 <script setup lang="ts">
-import { useSearchTags } from "../utils/tagSearchUtils";
 import { postData } from "../utils/usePostData";
 import { computed, ref } from "vue";
 import ArticleWaterfallList from "./ArticleWaterfallList.vue";
 import ElyTag from "./ElysiumUI/ElyTag.vue";
+import { useCustomStore } from "../../piniaStore";
+
+const store = useCustomStore();
 
 const allTags = ref([]);
 const allPosts = ref([]);
 
-const selectedTags = ref([]);
+const selectedTags = computed(() => store.getSelectedTags);
 
 const toggleTag = (tag: string) => {
-  selectedTags.value = selectedTags.value.includes(tag)
-    ? selectedTags.value.filter(t => t !== tag)
-    : [...selectedTags.value, tag];
-  if (!selectedTags.value.includes(tag)) {
-    useSearchTags.remove(tag);
+  if (selectedTags.value.includes(tag)) {
+    store.removeSelectedTags(tag);
   } else {
-    useSearchTags.push([tag]);
+    store.pushSelectedTags(tag);
   }
 };
 
@@ -26,7 +25,7 @@ const isTagActive = (tag: string) => selectedTags.value.includes(tag);
 const filteredPosts = computed(() => {
   if (selectedTags.value.length === 0) return allPosts.value;
   return allPosts.value.filter(post =>
-    selectedTags.value.every(tag => post.frontmatter?.tags?.includes(tag))
+    selectedTags.value.some(tag => post.frontmatter?.tags?.includes(tag))
   );
 });
 
@@ -39,8 +38,6 @@ postData
 postData.getAllTags().then(res => {
   allTags.value = res;
 });
-
-selectedTags.value = useSearchTags.get();
 </script>
 
 <template>
