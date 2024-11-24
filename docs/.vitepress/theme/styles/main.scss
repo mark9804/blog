@@ -111,11 +111,12 @@ a.title span,
   }
 
   a {
-    color: $color-accent-text-primary;
+    color: inherit;
     text-decoration-color: $color-accent;
+    text-decoration-thickness: 2px;
 
     &::before {
-      color: $color-accent-text-tertiary;
+      color: $color-accent-tertiary;
       transition: all 0.3s ease-in-out;
     }
 
