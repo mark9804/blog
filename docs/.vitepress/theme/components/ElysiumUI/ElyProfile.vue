@@ -153,6 +153,7 @@ function handleScrollIndicatorClick() {
     </div>
     <div
       class="ely-profile__scroll-indicator absolute bottom-4 flex flex-col items-center gap-1 text-[var(--color-accent)] cursor-pointer"
+      aria-hidden="true"
       role="button"
       @click="handleScrollIndicatorClick"
     >

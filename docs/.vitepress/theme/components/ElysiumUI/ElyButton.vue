@@ -52,6 +52,7 @@ const buttonTag = computed(() => (isLink.value ? "a" : "button"));
     :disabled="disabled"
     :href="isLink ? props.href : null"
     @click="handleClick"
+    tabindex="0"
   >
     <span v-if="loading" class="ely-button__loading">
       <span class="loading-spinner"></span>
@@ -68,6 +69,11 @@ const buttonTag = computed(() => (isLink.value ? "a" : "button"));
 
 .ely-button {
   @include button.button-base;
+
+  &:focus,
+  &:focus-visible {
+    outline: 2px solid blueviolet;
+  }
 
   // Size variants
   &--mini {

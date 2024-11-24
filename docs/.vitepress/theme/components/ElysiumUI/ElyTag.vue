@@ -57,7 +57,13 @@ const handleClose = (e: Event) => {
 </script>
 
 <template>
-  <span :class="classes" @click="handleClick">
+  <span
+    :class="classes"
+    @click="handleClick"
+    :tabindex="!props.disabled && props.clickable ? 0 : -1"
+    @keydown.space.prevent="handleClick"
+    @keydown.enter="handleClick"
+  >
     <span class="elysium-ui__tag--icon">
       <slot name="icon">
         <icon-tag />
