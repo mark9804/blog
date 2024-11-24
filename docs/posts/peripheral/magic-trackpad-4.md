@@ -1,6 +1,5 @@
 ---
 title: Magic Trackpad 4：一个让我换回旧款的触控板
-description: 除了换了 Type-C，其他都比上代拉胯
 tags:
   - 外设
   - Apple

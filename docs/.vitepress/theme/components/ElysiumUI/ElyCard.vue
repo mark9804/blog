@@ -58,7 +58,7 @@ onUnmounted(() => {
 <template>
   <component
     :is="isLink ? 'a' : 'div'"
-    class="elysium-ui__card__container rounded-[3px] overflow-hidden shadow-card hover:shadow-card-hover hover:scale-102 transition-all duration-300 relative"
+    class="elysium-ui__card__container w-full rounded-[3px] overflow-hidden shadow-card hover:shadow-card-hover hover:scale-102 transition-all duration-300 relative"
     :class="{
       'no-cover': !props.content.frontmatter.cover,
     }"

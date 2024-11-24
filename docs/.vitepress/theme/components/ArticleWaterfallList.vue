@@ -16,12 +16,12 @@ const waterfallCount = computed(() =>
   Math.max(Math.floor(props.width / 290), 1)
 );
 
-const cardWidth = 280;
+const cardWidth = computed(() => (props.width >= 375 ? 280 : props.width));
 
 const gapSize = computed(() =>
   Math.max(
-    (props.width - waterfallCount.value * cardWidth) /
-      (waterfallCount.value - 1),
+    (props.width - waterfallCount.value * cardWidth.value) /
+      (waterfallCount.value - 1 || 1),
     24
   )
 );
@@ -38,11 +38,16 @@ const waterfallItemsList = computed(() => {
 <template>
   <div class="article-list__waterfall-container flex justify-between w-full">
     <div
-      class="article-list__waterfall-item flex flex-col w-[280px]"
+      class="article-list__waterfall-item flex flex-col"
       :style="{ gap: `${gapSize}px` }"
       v-for="items in waterfallItemsList"
     >
-      <ElyCard v-for="post in items" :key="post.url" :content="post" />
+      <ElyCard
+        v-for="post in items"
+        :key="post.url"
+        :content="post"
+        :max-width="cardWidth"
+      />
     </div>
   </div>
 </template>

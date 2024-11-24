@@ -50,7 +50,7 @@ watch(isDark, newVal => {
       :social="props?.social"
     />
     <section
-      class="w-full max-w-[1280px] flex flex-col pl-16 sm:pl-4 md:pl-8 sm:pr-4 md:pr-8 pr-16 mt-10 mb-20"
+      class="w-full max-w-[1280px] flex flex-col pl-16 xs:pl-10 xs:pr-10 pr-16 mt-10 mb-20"
     >
       <h1 class="home-title mb-10" ref="articleTitleRef">Articles</h1>
       <ArticleWaterfallList :posts="posts" :width="articleTitleWidth" />
