@@ -1,6 +1,6 @@
 ---
 title: 帮微软实现一个真・Fluent 2 风格的 Input 组件
-description: 本文介绍了如何使用 Vue 3 和 UnoCSS 创建一个 Fluent 2 风格的输入组件。
+description: 使用 Vue 3 和 UnoCSS 创建一个 Fluent 2 风格的输入组件
 tags:
   - Vue
   - Fluent 2
