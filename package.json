@@ -20,6 +20,7 @@
     ]
   },
   "devDependencies": {
+    "@types/cross-spawn": "^6.0.6",
     "@types/node": "^22.0.0",
     "@unocss/preset-icons": "0.64.1",
     "autoprefixer": "^10.4.19",
