@@ -30,6 +30,13 @@ html.dark {
       );
       background-size: 3px 3px;
     }
+
+    @media (max-width: 767px) {
+      .content-body.content-body.content-body {
+        column-gap: 0.5rem;
+        background: none;
+      }
+    }
   }
 }
 
