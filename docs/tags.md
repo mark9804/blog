@@ -5,8 +5,6 @@ sidebar: false
 prev: false
 next: false
 title: 搜索标签
-meta:
-  hidden: true
 publish: false
 ---
 
@@ -14,6 +12,4 @@ publish: false
   import TagSearchPage from ".vitepress/theme/components/TagSearchPage.vue";
 </script>
 
-<ClientOnly>
-  <TagSearchPage />
-</ClientOnly>
+<TagSearchPage />

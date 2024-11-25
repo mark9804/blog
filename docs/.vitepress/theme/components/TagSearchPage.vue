@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { postData } from "../utils/usePostData";
+import { postData, defaultFilter } from "../utils/usePostData";
 import { computed, ref, useTemplateRef } from "vue";
 import ArticleWaterfallList from "./ArticleWaterfallList.vue";
 import ElyTag from "./ElysiumUI/ElyTag.vue";
@@ -33,11 +33,9 @@ const filteredPosts = computed(() => {
   );
 });
 
-postData
-  .getAllPosts(el => !el.frontmatter?.meta?.hidden && !el.url.endsWith("/"))
-  .then(res => {
-    allPosts.value = res;
-  });
+postData.getAllPosts(defaultFilter).then(res => {
+  allPosts.value = res;
+});
 
 postData.getAllTags().then(res => {
   allTags.value = res;

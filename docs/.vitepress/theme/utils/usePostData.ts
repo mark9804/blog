@@ -2,6 +2,10 @@ import { data as usePosts } from "../loaders/posts.data";
 import type { Post } from "../types/Post";
 import { unique, sift } from "radash";
 
+export function defaultFilter(post: Post) {
+  return !post.frontmatter?.publish && !post.url.endsWith("/");
+}
+
 export const postData = {
   async getAllPosts(filter?: (post: Post) => boolean) {
     const posts = (await usePosts) as Post[];

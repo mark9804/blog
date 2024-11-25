@@ -2,6 +2,7 @@
 import { nextTick, computed, ref, watch, useTemplateRef } from "vue";
 import { useDark, useCssVar, useElementSize } from "@vueuse/core";
 import { useData } from "vitepress";
+import { postData, defaultFilter } from "../utils/usePostData";
 
 const { theme } = useData();
 const props = computed(() => {
@@ -12,8 +13,6 @@ const props = computed(() => {
   return null;
 });
 
-import { postData } from "../utils/usePostData";
-
 const posts = ref([]);
 const articleTitleRef = useTemplateRef<HTMLHeadingElement>("articleTitleRef");
 const isDark = useDark();
@@ -22,11 +21,9 @@ const backgroundColor = ref(isDark.value ? "#2f2826" : "#fbfaf8");
 
 const { width: articleTitleWidth } = useElementSize(articleTitleRef);
 
-postData
-  .getAllPosts(el => !el.frontmatter?.meta?.hidden && !el.url.endsWith("/"))
-  .then(res => {
-    posts.value = res;
-  });
+postData.getAllPosts(defaultFilter).then(res => {
+  posts.value = res;
+});
 
 watch(isDark, newVal => {
   nextTick(() => {

@@ -6,8 +6,6 @@ navbar: false
 prev: false
 next: false
 title: 首页
-meta:
-  hidden: true
 publish: false
 ---
 
