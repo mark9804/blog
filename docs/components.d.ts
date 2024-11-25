@@ -11,7 +11,6 @@ declare module 'vue' {
     ADropdown: typeof import('@arco-design/web-vue')['Dropdown']
     AImagePreviewGroup: typeof import('@arco-design/web-vue')['ImagePreviewGroup']
     AInputTag: typeof import('@arco-design/web-vue')['InputTag']
-    ArticleCard: typeof import('./.vitepress/theme/components/deprecated/ArticleCard.vue')['default']
     ArticleInfo: typeof import('./.vitepress/theme/components/ArticleInfo.vue')['default']
     ArticleWaterfallList: typeof import('./.vitepress/theme/components/ArticleWaterfallList.vue')['default']
     ASpace: typeof import('@arco-design/web-vue')['Space']
@@ -33,12 +32,6 @@ declare module 'vue' {
     IconEmail: typeof import('@arco-design/web-vue/es/icon')['IconEmail']
     IconHistory: typeof import('@arco-design/web-vue/es/icon')['IconHistory']
     IconTag: typeof import('@arco-design/web-vue/es/icon')['IconTag']
-    ImageGallery: typeof import('./.vitepress/theme/components/ElysiumUI/ImageGallery.vue')['default']
-    ProfileCard: typeof import('./.vitepress/theme/components/deprecated/ProfileCard.vue')['default']
-    SearchTag: typeof import('./.vitepress/theme/components/deprecated/SearchTag.vue')['default']
-    TableOfContents: typeof import('./.vitepress/theme/components/deprecated/TableOfContents.vue')['default']
     TagSearchPage: typeof import('./.vitepress/theme/components/TagSearchPage.vue')['default']
-    TagsPage: typeof import('./.vitepress/theme/components/deprecated/TagsPage.vue')['default']
-    TagsSearchPage: typeof import('./.vitepress/theme/components/TagsSearchPage.vue')['default']
   }
 }
