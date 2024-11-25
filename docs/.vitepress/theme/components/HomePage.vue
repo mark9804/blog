@@ -3,7 +3,7 @@ import { nextTick, computed, ref, watch, useTemplateRef } from "vue";
 import { useDark, useCssVar, useElementSize } from "@vueuse/core";
 import { useData } from "vitepress";
 import { postData, defaultFilter } from "../utils/usePostData";
-
+import VPLocalSearchBox from "vitepress/dist/client/theme-default/components/VPNavBarSearch.vue";
 const { theme } = useData();
 const props = computed(() => {
   if (theme.value.userProfile) {
@@ -49,7 +49,10 @@ watch(isDark, newVal => {
     <section
       class="w-full max-w-[1280px] flex flex-col pl-16 xs:pl-10 xs:pr-10 pr-16 mt-10 mb-20"
     >
-      <h1 class="home-title mb-10" ref="articleTitleRef">Articles</h1>
+      <h1 class="mb-10 flex flex-nowrap items-end gap-5" ref="articleTitleRef">
+        <span class="home-title">Articles</span>
+        <VPLocalSearchBox />
+      </h1>
       <ArticleWaterfallList :posts="posts" :width="articleTitleWidth" />
     </section>
   </div>
@@ -60,5 +63,13 @@ watch(isDark, newVal => {
   .home-page {
     flex-direction: column;
   }
+}
+
+:deep(.VPNavBarSearch) {
+  padding: 0;
+}
+
+:deep(.DocSearch-Button) {
+  height: 36px;
 }
 </style>

@@ -29,7 +29,7 @@ export default defineConfig({
   ],
   shortcuts: {
     "home-title":
-      "text-2xl font-bold decoration-underline decoration-4 underline-offset-10 decoration-[var(--color-accent)]",
+      "text-2xl font-bold border-b-4 border-b-solid border-b-[var(--color-accent)]",
   },
   presets: [
     presetUno(),
