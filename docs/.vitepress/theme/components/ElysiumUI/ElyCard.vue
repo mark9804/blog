@@ -32,6 +32,9 @@ const props = withDefaults(defineProps<CardProps>(), {
 
 const isLink = computed(() => props.as === "link");
 
+const minWidth = computed(() => Math.min(props.maxWidth, 280));
+const maxWidth = computed(() => Math.max(props.maxWidth, 280));
+
 function handleTagClick(tag: string) {
   store.resetTags();
   store.pushSelectedTags(tag);
@@ -63,7 +66,8 @@ onUnmounted(() => {
       'no-cover': !props.content.frontmatter.cover,
     }"
     :style="{
-      maxWidth: `${props.maxWidth}px`,
+      minWidth: `${minWidth}px`,
+      maxWidth: `${maxWidth}px`,
     }"
     :href="isLink && withBase(props.content.url)"
   >
