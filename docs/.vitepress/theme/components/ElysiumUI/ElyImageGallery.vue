@@ -17,9 +17,9 @@ const el = useTemplateRef<HTMLDivElement>("imagePreviewGroup");
 const { direction } = useSwipe(el, {
   onSwipeEnd: () => {
     if (direction.value === "left") {
-      current.value = (current.value + 1) % length;
+      current.value = (current.value ?? 0 + 1) % length;
     } else if (direction.value === "right") {
-      current.value = (current.value - 1 + length) % length;
+      current.value = (current.value ?? 0 - 1 + length) % length;
     }
   },
 });
@@ -27,9 +27,9 @@ const { direction } = useSwipe(el, {
 
 <template>
   <a-image-preview-group v-model:current="current" ref="imagePreviewGroup">
-    <a-space>
+    <ElySpace size="small">
       <slot />
-    </a-space>
+    </ElySpace>
   </a-image-preview-group>
   <figcaption
     v-if="name.length > 0"

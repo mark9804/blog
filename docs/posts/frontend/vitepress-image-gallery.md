@@ -218,7 +218,7 @@ export function generateImgGallery(galleryToken: Token) {
     .trim();
   const imgTokens = tokens.filter(token => token.type === "image");
 
-  return `\n<ArcoImageGallery name="${galleryName}">\n${generateImgGroups(imgTokens)}\n</ArcoImageGallery>\n`;
+  return `\n<ElyImageGallery name="${galleryName}">\n${generateImgGroups(imgTokens)}\n</ElyImageGallery>\n`;
 }
 ```
 
@@ -313,14 +313,14 @@ withDefaults(
 
 ```ts [index.ts]
 // ...
-import ImageGallery from "./ImageGallery.vue";
+import ElyImageGallery from "./components/ElysiumUI/ElyImageGallery.vue";
 import "@arco-design/web-vue/es/tooltip/style/css.js";
 // ...
 
 export default {
   // ...
   enhanceApp({ app }) {
-    app.component("ArcoImageGallery", ImageGallery);
+    app.component("ElyImageGallery", ElyImageGallery);
   },
 };
 ```

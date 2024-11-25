@@ -6,8 +6,9 @@ import { createPinia } from "pinia";
 import piniaPluginPersistedstate from "pinia-plugin-persistedstate";
 import ArticleInfo from "./components/ArticleInfo.vue";
 import { Image } from "@arco-design/web-vue";
-import ImageGallery from "./components/deprecated/ImageGallery.vue";
+import ImageGallery from "./components/ElysiumUI/ElyImageGallery.vue";
 import { autoAnimatePlugin } from "@formkit/auto-animate/vue";
+import ElySpace from "./components/ElysiumUI/ElySpace.vue";
 
 import "@arco-design/web-vue/es/image/style/css.js";
 import "@arco-design/web-vue/es/tooltip/style/css.js";
@@ -28,10 +29,11 @@ export default {
     Message._context = app._context;
 
     // register your custom global components
-    // Space 组件已经在 ArcoImageGallery 中使用了，会自动导入
+    // Space 组件已经在 ElyImageGallery 中使用了，会自动导入
     app
       .component("ArticleInfo", ArticleInfo)
       .component("ArcoImage", Image)
-      .component("ArcoImageGallery", ImageGallery);
+      .component("ElyImageGallery", ImageGallery)
+      .component("ElySpace", ElySpace);
   },
 };

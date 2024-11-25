@@ -9,14 +9,14 @@ import type { Token } from "../types/Token";
  */
 export function generateImgGroups(imgListRaw: Token[]) {
   const imgGroups = cluster(imgListRaw, 3);
-  let result = "<a-space direction='vertical'>\n";
+  let result = "<ElySpace direction='vertical' size='small'>\n";
   for (const group of imgGroups) {
-    result += `<a-space>\n`;
+    result += `<ElySpace size='small'>\n`;
     for (const img of group) {
       result += `${generateImgComponent(img)}\n`;
     }
-    result += `</a-space>\n`;
+    result += `</ElySpace>\n`;
   }
-  result += `</a-space>\n`;
+  result += `</ElySpace>\n`;
   return result;
 }
