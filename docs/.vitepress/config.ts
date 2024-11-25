@@ -14,7 +14,7 @@ import { withSidebar } from "vitepress-sidebar";
 function processLinks(
   items: DefaultTheme.SidebarItem[]
 ): DefaultTheme.SidebarItem[] {
-  return items.map(item => {
+  const processedItems = items.map(item => {
     if (item.items) {
       item.items = processLinks(item.items);
     }
@@ -22,6 +22,13 @@ function processLinks(
       item.link = "/" + item.link;
     }
     return item;
+  });
+
+  // 将归档文件夹移到末尾
+  return processedItems.sort((a, b) => {
+    if (a.text?.includes("归档")) return 1;
+    if (b.text?.includes("归档")) return -1;
+    return 0;
   });
 }
 
