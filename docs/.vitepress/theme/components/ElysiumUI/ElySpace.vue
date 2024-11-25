@@ -26,7 +26,7 @@ const spaceSize = computed(() => {
 
   if (!(props.size in sizeMap)) {
     console.warn(
-      `EdenSpace: Invalid size prop: "${props.size}". Falling back to default size.`
+      `ElySpace: Invalid size prop: "${props.size}". Falling back to default size.`
     );
     return DEFAULT_SIZE + "px";
   }
@@ -115,7 +115,6 @@ const SpaceElement = () => {
 </script>
 
 <template>
-  <!-- @vue-ignore -->
   <div
     class="elysium-ui elysium-ui__space flex"
     :class="spaceClass"

@@ -8,16 +8,24 @@ import {
   usePreferredReducedMotion,
   useIntersectionObserver,
   useDebounceFn,
+  usePreferredLanguages,
 } from "@vueuse/core";
 import { createWaveAnimation } from "./_utils/wave";
 
 const props = defineProps<ProfileProps>();
 
 const preferredMotion = usePreferredReducedMotion();
-
+const preferredLanguages = usePreferredLanguages();
 const backgroundCanvas = ref<HTMLCanvasElement>();
 const { height: windowHeight } = useWindowSize();
 const { height: canvasHeight } = useElementSize(backgroundCanvas);
+
+const name = computed(
+  () =>
+    props.name[preferredLanguages.value[0]] ||
+    props.name["en-US"] ||
+    props.name["zh-CN"]
+);
 
 const avatarMarginTop = computed(() => canvasHeight.value * 0.3 - 56);
 
@@ -118,12 +126,12 @@ function handleScrollIndicatorClick() {
         <img
           class="ely-profile__avatar-img w-[100px] h-[100px] rounded-full"
           :src="props.avatar"
-          :alt="props.name"
+          :alt="name"
         />
       </div>
       <div class="flex flex-col items-center gap-1">
         <h1 class="ely-profile__name text-2xl font-bold m-0 text-primary">
-          {{ props.name }}
+          {{ name }}
         </h1>
         <p class="ely-profile__bio text-primary">
           {{ props.bio }}

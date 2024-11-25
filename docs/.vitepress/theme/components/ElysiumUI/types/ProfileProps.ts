@@ -1,7 +1,10 @@
 export type ProfileProps = {
   accent?: string;
   background?: string;
-  name: string;
+  name: {
+    "zh-CN": string;
+    [key: string]: string;
+  };
   avatar: string;
   bio: string;
   email: string;

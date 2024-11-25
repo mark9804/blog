@@ -69,6 +69,7 @@ figure {
   width: 100%;
   align-items: center;
   gap: 8px;
+  margin-top: 20px;
 
   figcaption {
     font-size: 14px;
@@ -162,7 +163,8 @@ a.title span,
   .title,
   strong,
   .custom-block-title,
-  thead {
+  thead,
+  summary {
     font-weight: 700;
     font-family: "Wix Madefor", "HarmonyOS Sans SC Bold",
       var(--vp-font-family-base);
