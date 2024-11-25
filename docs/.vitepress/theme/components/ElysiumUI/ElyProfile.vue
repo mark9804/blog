@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref, computed, watch } from "vue";
+import { withBase } from "vitepress";
 import type { ProfileProps } from "./types/ProfileProps";
 import {
   useWindowSize,
@@ -145,7 +146,7 @@ function handleScrollIndicatorClick() {
           v-for="social in props.social"
           class="hover:text-[var(--color-accent)] transition-colors duration-300"
           :key="social.alias"
-          :href="social.link"
+          :href="withBase(social.link)"
           target="_blank"
           >{{ social.alias }}</a
         >

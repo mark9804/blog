@@ -3,7 +3,11 @@ import type { Post } from "../types/Post";
 import { unique, sift } from "radash";
 
 export function defaultFilter(post: Post) {
-  return !post.frontmatter?.publish && !post.url.endsWith("/");
+  return (
+    !post.frontmatter?.publish &&
+    !post.url.endsWith("/") &&
+    post.url.match(/posts\//)
+  );
 }
 
 export const postData = {
