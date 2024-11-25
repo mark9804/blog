@@ -6,7 +6,7 @@ export function defaultFilter(post: Post) {
   return (
     !post.frontmatter?.publish &&
     !post.url.endsWith("/") &&
-    post.url.match(/posts\//)
+    !!post.url.match(/posts\//)
   );
 }
 
