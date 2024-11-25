@@ -40,7 +40,7 @@ export const markdownConfig = {
     ) => {
       let parsedResult = self.renderToken(tokens, idx, options);
       if (tokens[idx].tag === "h1") {
-        parsedResult += `\n<ClientOnly>\n<ArticleInfo />\n</ClientOnly>\n`;
+        parsedResult += `\n<ArticleInfo />\n`;
       }
       return parsedResult;
     };

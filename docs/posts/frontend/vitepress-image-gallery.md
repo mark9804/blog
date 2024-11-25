@@ -289,13 +289,11 @@ withDefaults(
 </script>
 
 <template>
-  <ClientOnly>
-    <a-image-preview-group>
-      <a-space>
-        <slot />
-      </a-space>
-    </a-image-preview-group>
-  </ClientOnly>
+  <a-image-preview-group>
+    <a-space>
+      <slot />
+    </a-space>
+  </a-image-preview-group>
   <figcaption
     v-if="name.length > 0"
     class="text-sm text-gray-400 text-center mt-2"
