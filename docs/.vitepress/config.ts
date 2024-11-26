@@ -26,8 +26,8 @@ function processLinks(
 
   // 将归档文件夹移到末尾
   return processedItems.sort((a, b) => {
-    if (a.text?.includes("归档")) return 1;
-    if (b.text?.includes("归档")) return -1;
+    if (a.text?.includes("考古")) return 1;
+    if (b.text?.includes("考古")) return -1;
     return 0;
   });
 }

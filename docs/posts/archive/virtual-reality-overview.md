@@ -1,6 +1,7 @@
 ---
 title: 虚拟现实-亦真？亦幻？
 description: 虚拟现实，绝对是现在的一个热门话题，然而它并不是一个什么新概念。
+publish: false
 createdAt: 1454229325000
 tags:
   - 虚拟现实
