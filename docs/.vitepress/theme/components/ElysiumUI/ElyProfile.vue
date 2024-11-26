@@ -130,9 +130,11 @@ function handleScrollIndicatorClick() {
         />
       </div>
       <div class="flex flex-col items-center gap-1">
-        <h1 class="ely-profile__name text-2xl font-bold m-0 text-primary">
-          {{ name }}
-        </h1>
+        <ClientOnly>
+          <h1 class="ely-profile__name text-2xl font-bold m-0 text-primary">
+            {{ name }}
+          </h1>
+        </ClientOnly>
         <p class="ely-profile__bio text-primary">
           {{ props.bio }}
         </p>
