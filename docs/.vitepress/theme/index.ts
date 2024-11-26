@@ -6,9 +6,11 @@ import { createPinia } from "pinia";
 import piniaPluginPersistedstate from "pinia-plugin-persistedstate";
 import ArticleInfo from "./components/ArticleInfo.vue";
 import { Image } from "@arco-design/web-vue";
-import ImageGallery from "./components/ElysiumUI/ElyImageGallery.vue";
-import { autoAnimatePlugin } from "@formkit/auto-animate/vue";
+import ElyImageGallery from "./components/ElysiumUI/ElyImageGallery.vue";
 import ElySpace from "./components/ElysiumUI/ElySpace.vue";
+import giscusTalk from "vitepress-plugin-comment-with-giscus";
+import { useData, useRoute } from "vitepress";
+import type { App } from "vue";
 
 import "@arco-design/web-vue/es/image/style/css.js";
 import "@arco-design/web-vue/es/tooltip/style/css.js";
@@ -21,19 +23,43 @@ pinia.use(piniaPluginPersistedstate);
 export default {
   ...Theme,
   extends: Theme,
-  setup() {},
+  setup() {
+    const { frontmatter } = useData();
+    const route = useRoute();
+
+    // Giscus configuration
+    giscusTalk(
+      {
+        repo: "mark9804/blog",
+        repoId: "R_kgDOLo2yWA",
+        category: "Announcements",
+        categoryId: "DIC_kwDOLo2yWM4CknAK",
+        mapping: "title",
+        inputPosition: "top",
+        lang: "zh-CN",
+        loading: "lazy",
+        reactionsEnabled: "1",
+        emitMetadata: "0",
+        theme: "preferred_color_scheme",
+      },
+      {
+        frontmatter,
+        route,
+      },
+      true // 默认在所有页面启用评论
+    );
+  },
   Layout: MainLayout,
-  // @ts-ignore
-  enhanceApp({ app, router, siteData }) {
-    app.use(pinia).use(autoAnimatePlugin);
+
+  enhanceApp({ app }: { app: App }) {
+    app.use(pinia);
     Message._context = app._context;
 
     // register your custom global components
-    // Space 组件已经在 ElyImageGallery 中使用了，会自动导入
     app
       .component("ArticleInfo", ArticleInfo)
       .component("ArcoImage", Image)
-      .component("ElyImageGallery", ImageGallery)
+      .component("ElyImageGallery", ElyImageGallery)
       .component("ElySpace", ElySpace);
   },
 };

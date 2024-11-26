@@ -47,7 +47,6 @@
   "dependencies": {
     "@arco-design/web-vue": "^2.55.1",
     "@arco-plugins/vite-vue": "^1.4.5",
-    "@formkit/auto-animate": "^0.8.2",
     "@icon-park/vue-next": "^1.4.2",
     "@mdit/plugin-footnote": "^0.13.1",
     "@mdit/plugin-img-size": "^0.13.0",
@@ -75,6 +74,7 @@
     "sass": "^1.72.0",
     "unplugin-icons": "^0.20.0",
     "unplugin-vue-components": "^0.27.0",
+    "vitepress-plugin-comment-with-giscus": "^1.1.15",
     "vitepress-plugin-rss": "^0.3.0",
     "words-count": "^2.0.2"
   }

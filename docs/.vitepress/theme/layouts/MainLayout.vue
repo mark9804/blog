@@ -2,7 +2,6 @@
 import { useData, withBase, useRoute } from "vitepress";
 import { nextTick, onBeforeMount, provide, ComputedRef } from "vue";
 import DefaultTheme from "vitepress/theme";
-import DiscussionWidget from "../components/deprecated/DiscussionWidget.vue";
 import type { ArticleInfo } from "../types/ArticleInfo";
 import { useSearchTags } from "../utils/tagSearchUtils";
 import { useCustomStore } from "../../piniaStore";
@@ -78,9 +77,6 @@ function handleTagClick(tag: string) {
           {{ tag }}
         </ElyTag>
       </div>
-    </template>
-    <template #doc-after v-if="withBase('/') !== route.path">
-      <DiscussionWidget />
     </template>
   </Layout>
 </template>

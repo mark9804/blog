@@ -7,6 +7,7 @@ prev: false
 next: false
 title: 首页
 publish: false
+comment: false
 ---
 
 <script setup>

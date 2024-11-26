@@ -6,6 +6,7 @@ prev: false
 next: false
 title: 搜索标签
 publish: false
+comment: false
 ---
 
 <script setup>
