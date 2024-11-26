@@ -13,8 +13,8 @@ createdAt: 1732558487000
 ### [碧蓝档案剧情站](https://blue-archive.io/)
 
 :::gallery 页面截图
-![页面截图](https://cdn.sa.net/2024/11/26/zKriY9gWhRcTDo8.webp)
-![页面截图](https://cdn.sa.net/2024/11/26/O2urcifQE9vjgX3.webp)
+![](https://cdn.sa.net/2024/11/26/zKriY9gWhRcTDo8.webp)
+![](https://cdn.sa.net/2024/11/26/O2urcifQE9vjgX3.webp)
 :::
 
 - 项目发起人，负责项目/人员管理、美术、UI 设计、架构设计、前端开发、服务器运维、文本翻译、账号运营、组织间沟通、对外交流
@@ -46,7 +46,9 @@ createdAt: 1732558487000
 | 平面设计 | [伤信矢](https://space.bilibili.com/45899303) |
 :::
 
-### 碧蓝档案同人游戏[（合集）](https://blue-archive.io/library)
+### 碧蓝档案同人游戏
+
+[合集](https://blue-archive.io/library)
 
 #### [小春 2048](https://koharu.blue-archive.io/)
 
@@ -106,23 +108,25 @@ createdAt: 1732558487000
 | 美术 | [Nyaruko](https://space.bilibili.com/341657114)<br>[妮娅ko](https://space.bilibili.com/13347846)<br>[伤信矢](https://space.bilibili.com/45899303) |
 :::
 
-### 官方网页汉化存档[（合集）](https://blue-archive.io/library)
+### 官方网页汉化存档
+
+[合集](https://blue-archive.io/library)
 
 - 为玩家提供经过汉化的不同服务器的在线/线下活动/游戏页面存档
 - 项目发起人，全权负责项目运营
 
 :::gallery 页面截图
-![页面截图](https://cdn.sa.net/2024/11/26/xmfX79GJSIMDv8w.webp)
-![页面截图](https://cdn.sa.net/2024/11/26/ZODLeN5oculHGFI.webp)
+![](https://cdn.sa.net/2024/11/26/xmfX79GJSIMDv8w.webp)
+![](https://cdn.sa.net/2024/11/26/ZODLeN5oculHGFI.webp)
 :::
 
 ## 明日方舟
 
-#### [明日方舟敌方信息查询工具](https://github.com/mark9804/arknights-enemydata-search)
+### [明日方舟敌方信息查询工具](https://github.com/mark9804/arknights-enemydata-search)
 
 - 和 [PRTS](https://prts.wiki/) 同时期的敌方信息查询工具，可查询精确数值。现已不再维护
 
-#### [龙门祈愿墙期望计算工具](https://gist.github.com/Mark9804/1ec434c6fbba8c93c5870e97ec4e9c63)
+### [龙门祈愿墙期望计算工具](https://gist.github.com/Mark9804/1ec434c6fbba8c93c5870e97ec4e9c63)
 
 - 暴力求解有限 correct 模式下，明日方舟新年福利活动“龙门祈愿墙”的期望计算
 
@@ -130,53 +134,53 @@ createdAt: 1732558487000
 
 ## 原神
 
-#### [Adachi-bot](https://github.com/Arondight/Adachi-BOT)
+### [Adachi-bot](https://github.com/Arondight/Adachi-BOT)
 
 - 一个在 QQ 中运行的原神助手，基于 [oicq](https://github.com/takayama-lily/oicq) 开发。[功能示例](https://github.com/Arondight/Adachi-BOT/wiki/%E5%8A%9F%E8%83%BD%E7%A4%BA%E4%BE%8B)
 - 两位主程之一，负责前端功能设计和 UI 实现，以及部分后端功能开发和完善
 
-#### [卡池期望计算器](https://github.com/mark9804/genshin-gacha-calculator)
+### [卡池期望计算器](https://github.com/mark9804/genshin-gacha-calculator)
 
 - 基于[孤胆飞客](https://bbs.nga.cn/nuke.php?func=ucp&uid=43116386)对 1.x 版本原神抽卡模型分析基础上添加 2.0~ 版本武器定轨规则的暴力求解计算器，现已不再维护
 
-#### [原神抽卡概率分析工具包-GGanalysislib](https://github.com/OneBST/GGanalysislib)
+### [原神抽卡概率分析工具包-GGanalysislib](https://github.com/OneBST/GGanalysislib)
 
 - 使用马尔可夫链对原神抽卡概率进行分析的工具包，负责 MacOS 平台的开发
 
-## MDN Web Docs
+## [MDN Web Docs](https://developer.mozilla.org/en-US/)
 
 - 参与 MDN Web Docs CSS 模块相关的中文翻译与编写工作
 
 ## 个人项目
 
-#### 个人博客
+### [个人博客](https://mark9804.github.io/)
 
 - 你现在看到的这个博客，基于 [VitePress](https://vitepress.dev/) 开发
 
-#### [Eden Design](https://eden.blue-archive.io/)
+### [Eden Design](https://eden.blue-archive.io/)
 
 - 基于 [Vue 3](https://vuejs.org/) 的组件库，SSR 友好
 
-#### [Elysium UI](https://github.com/mark9804/blog/tree/master/docs/.vitepress/theme/components/ElysiumUI)
+### [Elysium UI](https://github.com/mark9804/blog/tree/master/docs/.vitepress/theme/components/ElysiumUI)
 
 - 本博客使用的 UI 组件，SSR 友好
 
 ## 其他
 
-#### [心理学研究室主页](https://development-psychology-hiroshima.github.io/)
+### [心理学研究室主页](https://development-psychology-hiroshima.github.io/)
 
 - 全权负责设计、开发、部署与维护
-- 将维护工作简化为仅需使用记事本编辑单个特定文本配置文件，不再需要手动修改 HTML 结构。另应维护者要求编写一套从用记事本编辑到下载 vscode 设置应用语言为日语到自动部署上线的全套维护手册
+- 将维护工作简化为仅需使用记事本编辑单个特定文本配置文件，不再需要手动修改 HTML 结构。另应日本人维护者要求编写一套从用记事本编辑到下载 vscode 设置应用语言为日语到自动部署上线的全套维护手册
 - ~~日本人说为了防止我毕业后不会维护，要我从 css 开始解释并教会他们整个开发（不是维护）过程中写的每一行代码并留存 word 文档，因此拒绝上线生产环境，现已停止更新，活该你们继续用 2004 年的网页。~~
 
-#### [Attentional Blink 实验程序](https://github.com/mark9804/attentional-blink)
+### [Attentional Blink 实验程序](https://github.com/mark9804/attentional-blink)
 
 - 基于 Web 的日语本地化视觉注意实验程序，用于心理学实验课课辅助教学
 
-#### [Cyberball 实验程序](https://github.com/mark9804/cyberball-electron)
+### [Cyberball 实验程序](https://github.com/mark9804/cyberball-electron)
 
 - 基于 Electron 的 Cyberball 实验程序，用于心理学实验课课辅助教学
 
-#### [GridWare Web](https://github.com/gridware-web/gridware-web)
+### [GridWare Web](https://github.com/gridware-web/gridware-web)
 
 - 基于 Web 的 GridWare 时间序列分析和可视化工具，用于硕士毕业论文
