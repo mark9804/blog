@@ -26,11 +26,13 @@ const { direction } = useSwipe(el, {
 </script>
 
 <template>
-  <a-image-preview-group v-model:current="current" ref="imagePreviewGroup">
-    <ElySpace size="small">
-      <slot />
-    </ElySpace>
-  </a-image-preview-group>
+  <ClientOnly>
+    <a-image-preview-group v-model:current="current" ref="imagePreviewGroup">
+      <ElySpace size="small">
+        <slot />
+      </ElySpace>
+    </a-image-preview-group>
+  </ClientOnly>
   <figcaption
     v-if="name.length > 0"
     class="text-sm text-[var(--color-text-3)] text-center mt-2"

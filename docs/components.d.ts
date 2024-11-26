@@ -7,15 +7,10 @@ export {};
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
-    ADoption: typeof import('@arco-design/web-vue')['Doption']
-    ADropdown: typeof import('@arco-design/web-vue')['Dropdown']
     AImagePreviewGroup: typeof import('@arco-design/web-vue')['ImagePreviewGroup']
-    AInputTag: typeof import('@arco-design/web-vue')['InputTag']
     ArticleInfo: typeof import('./.vitepress/theme/components/ArticleInfo.vue')['default']
     ArticleWaterfallList: typeof import('./.vitepress/theme/components/ArticleWaterfallList.vue')['default']
-    ASpace: typeof import('@arco-design/web-vue')['Space']
     ASwitch: typeof import('@arco-design/web-vue')['Switch']
-    ATag: typeof import('@arco-design/web-vue')['Tag']
     ATooltip: typeof import('@arco-design/web-vue')['Tooltip']
     DiscussionWidget: typeof import('./.vitepress/theme/components/deprecated/DiscussionWidget.vue')['default']
     DiscusWidget: typeof import('./.vitepress/theme/components/deprecated/DiscusWidget.vue')['default']
