@@ -1,5 +1,6 @@
 @use "../components/ElysiumUI/_config" as config;
 @use "../components/ElysiumUI/_config/theme_colors" as colors;
+@use "sass:color";
 
 $base-opacity: 0.8;
 $code-brightness-tune: 17%;
@@ -15,7 +16,7 @@ html {
   --color-accent-text-primary: #{config.$light-text-primary};
   --color-accent-text-secondary: #{config.$light-text-secondary};
   --color-accent-text-tertiary: #{config.$light-text-tertiary};
-  --color-accent-code: #{desaturate(darken(config.$light-accent, $code-brightness-tune), $code-saturation-tune)};
+  --color-accent-code: #{color.adjust(config.$light-accent, $saturation: -$code-saturation-tune, $lightness: -$code-brightness-tune)};
 
   @for $i from 1 through 9 {
     --color-accent-border-#{$i}00: #{rgba(config.$light-accent, $i * 0.1)};
@@ -38,7 +39,7 @@ html.dark {
   --color-accent-text-primary: #{config.$dark-text-primary};
   --color-accent-text-secondary: #{config.$dark-text-secondary};
   --color-accent-text-tertiary: #{config.$dark-text-tertiary};
-  --color-accent-code: #{saturate(lighten(config.$dark-accent, $code-brightness-tune), $code-saturation-tune)};
+  --color-accent-code: #{color.adjust(config.$dark-accent, $saturation: -$code-saturation-tune, $lightness: -$code-brightness-tune)};
 
   @for $i from 1 through 9 {
     --color-accent-border-#{$i}00: #{rgba(config.$dark-accent, $i * 0.1)};

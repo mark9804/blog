@@ -70,6 +70,7 @@ export const viteConfig = {
     preprocessorOptions: {
       scss: {
         additionalData: "",
+        api: "modern-compiler",
       },
     },
     postcss: {
