@@ -6,7 +6,6 @@ tags:
   - Arco Design
   - Vue
   - 自定义
-outline: [2, 3]
 ---
 
 # 在 VitePress 中加入图册功能

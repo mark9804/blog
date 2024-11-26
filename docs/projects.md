@@ -1,7 +1,6 @@
 ---
 publish: false
 comment: false
-outline: [2, 4]
 createdAt: 1732558487000
 ---
 

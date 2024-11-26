@@ -1,5 +1,4 @@
 ---
-outline: deep
 title: 儿童游戏疗法：改变的模式与方法-导论
 tags:
   - 翻译

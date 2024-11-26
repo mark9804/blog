@@ -14,6 +14,8 @@ export const themeConfig = {
     },
   },
 
+  outline: "deep",
+
   search: {
     provider: "local",
     options: {
