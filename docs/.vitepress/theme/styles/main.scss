@@ -1,5 +1,7 @@
 @use "color-variable" as *;
+@use "../components/ElysiumUI/_config/theme_colors" as colors;
 @use "fonts";
+@use "sass:color";
 
 body {
   font-size: 16px !important;
@@ -145,7 +147,8 @@ a.title span,
 
     &:hover {
       transform: scale(1.002);
-      box-shadow: 0 0 20px var(--color-accent-shadow-200);
+      box-shadow: 0 4px 24px
+        color.adjust(colors.$light-text-base, $alpha: -0.97);
     }
   }
 
