@@ -5,6 +5,7 @@ import { withBase } from "vitepress";
 import { formatRelativeTime } from "../../utils/timeUtils";
 import { useSearchTags } from "../../utils/tagSearchUtils";
 import { useCustomStore } from "../../../piniaStore";
+import { formalizeString } from "./_utils/stringUtils";
 
 const store = useCustomStore();
 
@@ -87,7 +88,7 @@ onUnmounted(() => {
     />
     <div class="elysium-ui__card--content flex flex-col pb-4">
       <h2 class="elysium-ui__card--title font-bold text-lg pt-4 pl-4 pr-4">
-        {{ props.content.frontmatter.title }}
+        {{ formalizeString(props.content.frontmatter.title) }}
       </h2>
       <ElySpace
         :size="2"
