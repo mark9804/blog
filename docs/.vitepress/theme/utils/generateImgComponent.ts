@@ -14,5 +14,5 @@ export function generateImgComponent(imgToken: Token) {
   const widthProps = width ? ` width="${width}"` : "";
   const heightProps = height ? ` height="${height}"` : "";
 
-  return `\n<ArcoImage src="${src}" alt="${alt}"${widthProps}${heightProps} show-loader />\n`;
+  return `<ClientOnly><ArcoImage src="${src}" alt="${alt}"${widthProps}${heightProps} show-loader /></ClientOnly>`;
 }

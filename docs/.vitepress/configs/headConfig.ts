@@ -14,14 +14,14 @@ export const headConfig = [
     "link",
     {
       rel: "icon",
-      href: BASE_URL + "/favicon.ico",
+      href: BASE_URL + "favicon.ico",
     },
   ],
   [
     "link",
     {
       rel: "manifest",
-      href: BASE_URL + "/manifest.json",
+      href: BASE_URL + "manifest.json",
     },
   ],
   [
