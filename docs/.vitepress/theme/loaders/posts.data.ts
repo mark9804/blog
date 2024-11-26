@@ -6,6 +6,15 @@ import { createContentLoader } from "vitepress";
 import wordsCount from "words-count";
 import type Config from "words-count";
 
+declare global {
+  var VITEPRESS_CONFIG: {
+    srcDir: string;
+    rewrites: {
+      inv: Record<string, string>;
+    };
+  };
+}
+
 interface WordsCount {
   default: (text: string, config?: typeof Config) => number;
   wordsCount: (text: string, config?: typeof Config) => number;

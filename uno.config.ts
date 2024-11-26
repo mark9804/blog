@@ -6,10 +6,13 @@ import {
   transformerVariantGroup,
 } from "unocss";
 
-const borderAccents = [1, 2, 3, 4, 5, 6, 7, 8, 9].map(i => [
-  `border-accent-${i}00`,
-  { "border-color": `var(--color-accent-border-${i}00)` },
-]);
+const borderAccents = [1, 2, 3, 4, 5, 6, 7, 8, 9].map(
+  i =>
+    [
+      `border-accent-${i}00`,
+      { "border-color": `var(--color-accent-border-${i}00)` },
+    ] as [string, Record<string, string>]
+);
 
 export default defineConfig({
   rules: [
@@ -24,7 +27,6 @@ export default defineConfig({
     ["text-primary", { color: "var(--color-accent-text-primary)" }],
     ["text-secondary", { color: "var(--color-accent-text-secondary)" }],
     ["text-tertiary", { color: "var(--color-accent-text-tertiary)" }],
-    // @ts-ignore
     ...borderAccents,
   ],
   shortcuts: {

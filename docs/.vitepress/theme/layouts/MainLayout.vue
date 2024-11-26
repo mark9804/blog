@@ -1,4 +1,12 @@
 <script setup lang="ts">
+declare global {
+  interface Document {
+    startViewTransition(callback: () => Promise<void> | void): {
+      ready: Promise<void>;
+    };
+  }
+}
+
 import { useData, withBase, useRoute } from "vitepress";
 import { nextTick, onBeforeMount, provide, ComputedRef } from "vue";
 import DefaultTheme from "vitepress/theme";
@@ -20,7 +28,6 @@ provide("toggle-appearance", async () => {
     return;
   }
 
-  // @ts-ignore
   await document.startViewTransition(async () => {
     isDark.value = !isDark.value;
     await nextTick();

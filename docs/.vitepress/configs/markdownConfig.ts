@@ -1,4 +1,3 @@
-// @ts-ignore
 import implicitFigures from "markdown-it-implicit-figures";
 import { mark } from "@mdit/plugin-mark";
 import { ruby } from "@mdit/plugin-ruby";

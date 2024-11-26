@@ -10,6 +10,7 @@ declare module 'vue' {
     AImagePreviewGroup: typeof import('@arco-design/web-vue')['ImagePreviewGroup']
     ArticleInfo: typeof import('./.vitepress/theme/components/ArticleInfo.vue')['default']
     ArticleWaterfallList: typeof import('./.vitepress/theme/components/ArticleWaterfallList.vue')['default']
+    ASwitch: typeof import('@arco-design/web-vue')['Switch']
     ATooltip: typeof import('@arco-design/web-vue')['Tooltip']
     ElyButton: typeof import('./.vitepress/theme/components/ElysiumUI/ElyButton.vue')['default']
     ElyCard: typeof import('./.vitepress/theme/components/ElysiumUI/ElyCard.vue')['default']

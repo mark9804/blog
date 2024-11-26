@@ -26,7 +26,8 @@
     "docs/.vitepress/**/*.d.ts",
     "docs/auto-imports.d.ts",
     "docs/components.d.ts",
-    "docs/**/*.vue"
+    "docs/**/*.vue",
+    "docs/.vitepress/vite-env.d.ts",
   ],
   "references": [
     {

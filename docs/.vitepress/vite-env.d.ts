@@ -4,6 +4,12 @@ interface ViewTransition {
   updateCallbackDone: Promise<void>;
 }
 
-declare interface Document {
-  startViewTransition?: (callback: () => void) => ViewTransition;
+declare global {
+  interface Document {
+    startViewTransition(callback: () => Promise<void> | void): {
+      ready: Promise<void>;
+    };
+  }
 }
+
+declare module "markdown-it-implicit-figures";

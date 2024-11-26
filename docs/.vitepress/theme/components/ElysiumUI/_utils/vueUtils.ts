@@ -22,9 +22,7 @@ export const isElement = (vn: string | Element | VNode | undefined): boolean =>
   Boolean(
     (typeof Element !== "undefined" && vn instanceof Element) ||
       (typeof vn === "object" &&
-        // @ts-ignore
-        vn?.shapeFlag &&
-        // @ts-ignore
+        "shapeFlag" in vn &&
         vn.shapeFlag & ShapeFlags.ELEMENT)
   );
 
