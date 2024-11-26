@@ -79,6 +79,7 @@ onUnmounted(() => {
       tabindex="0"
     />
     <img
+      class="elysium-ui__card--cover"
       v-if="props.content.frontmatter.cover"
       :src="props.content.frontmatter.cover"
       :alt="`文章「${props.content.frontmatter.title}」的封面图片`"
