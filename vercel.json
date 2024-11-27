@@ -1,5 +1,14 @@
 {
   "github": {
     "silent": true
-  }
+  },
+  "framework": "vitepress",
+  "installCommand": "pnpm install",
+  "buildCommand": "vitepress build docs --base /",
+  "redirects": [
+    {
+      "source": "/blog/",
+      "destination": "/"
+    }
+  ]
 }
