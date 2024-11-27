@@ -13,8 +13,11 @@ export function defaultFilter(post: Post) {
 export const postData = {
   async getAllPosts(filter?: (post: Post) => boolean) {
     const posts = (await usePosts) as Post[];
-    const sortedPosts = posts.sort((a, b) => b.createdAt - a.createdAt);
-    return filter ? sortedPosts.filter(filter) : sortedPosts;
+    const filteredPosts = filter ? posts.filter(filter) : posts;
+    return filteredPosts.sort(
+      (a, b) =>
+        new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+    );
   },
 
   async getCreatedAt(currentPathWithoutBase: string) {
