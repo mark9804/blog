@@ -25,6 +25,8 @@ declare module 'vue' {
     IconEmail: typeof import('@arco-design/web-vue/es/icon')['IconEmail']
     IconHistory: typeof import('@arco-design/web-vue/es/icon')['IconHistory']
     IconTag: typeof import('@arco-design/web-vue/es/icon')['IconTag']
+    RouterLink: typeof import('vue-router')['RouterLink']
+    RouterView: typeof import('vue-router')['RouterView']
     TagSearchPage: typeof import('./.vitepress/theme/components/TagSearchPage.vue')['default']
   }
 }

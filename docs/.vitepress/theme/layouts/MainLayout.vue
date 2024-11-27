@@ -7,12 +7,13 @@ declare global {
   }
 }
 
-import { useData, withBase, useRoute } from "vitepress";
+import { useData, useRoute } from "vitepress";
 import { nextTick, onBeforeMount, provide, ComputedRef } from "vue";
 import DefaultTheme from "vitepress/theme";
 import type { ArticleInfo } from "../types/ArticleInfo";
 import { useSearchTags } from "../utils/tagSearchUtils";
 import { useCustomStore } from "../../piniaStore";
+import { SpeedInsights } from "@vercel/speed-insights/vue";
 
 const store = useCustomStore();
 
@@ -69,6 +70,7 @@ function handleTagClick(tag: string) {
 
 <template>
   <Layout>
+    <SpeedInsights />
     <template #doc-footer-before>
       <div class="flex flex-wrap gap-2 pb-4" v-if="frontmatter?.tags?.length">
         <span class="text-sm text-gray-600 @dark:text-gray-400"

@@ -55,6 +55,7 @@
     "@mdit/plugin-spoiler": "^0.13.0",
     "@mdit/plugin-sub": "^0.13.0",
     "@mdit/plugin-sup": "^0.13.0",
+    "@vercel/speed-insights": "^1.1.0",
     "@vitejs/plugin-vue-jsx": "^4.0.1",
     "@vueuse/components": "^11.2.0",
     "@vueuse/core": "^11.2.0",
@@ -76,6 +77,7 @@
     "unplugin-vue-components": "^0.27.0",
     "vitepress-plugin-comment-with-giscus": "^1.1.15",
     "vitepress-plugin-rss": "^0.3.0",
+    "vue-router": "^4.5.0",
     "words-count": "^2.0.2"
   }
 }

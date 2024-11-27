@@ -38,6 +38,9 @@ importers:
       '@mdit/plugin-sup':
         specifier: ^0.13.0
         version: 0.13.1(markdown-it@14.1.0)
+      '@vercel/speed-insights':
+        specifier: ^1.1.0
+        version: 1.1.0(vue-router@4.5.0(vue@3.5.13(typescript@5.6.3)))(vue@3.5.13(typescript@5.6.3))
       '@vitejs/plugin-vue-jsx':
         specifier: ^4.0.1
         version: 4.1.0(vite@5.4.10(@types/node@22.9.1)(sass@1.81.0))(vue@3.5.13(typescript@5.6.3))
@@ -101,6 +104,9 @@ importers:
       vitepress-plugin-rss:
         specifier: ^0.3.0
         version: 0.3.0(vitepress@1.5.0(@algolia/client-search@4.23.3)(@types/node@22.9.1)(async-validator@4.2.5)(markdown-it-mathjax3@4.3.2)(postcss@8.4.49)(sass@1.81.0)(search-insights@2.13.0)(typescript@5.6.3))
+      vue-router:
+        specifier: ^4.5.0
+        version: 4.5.0(vue@3.5.13(typescript@5.6.3))
       words-count:
         specifier: ^2.0.2
         version: 2.0.2
@@ -1118,6 +1124,29 @@ packages:
     resolution: {integrity: sha512-DIvl7Mofc5Q6kKElMRALbH33xBYb5w3Yf7TQ860lmi3DOwjEcg+OWE1HD+iDf7IxZeqPsdF17NvJJaSdmr0m5Q==}
     peerDependencies:
       vite: ^2.9.0 || ^3.0.0-0 || ^4.0.0 || ^5.0.0-0
+
+  '@vercel/speed-insights@1.1.0':
+    resolution: {integrity: sha512-rAXxuhhO4mlRGC9noa5F7HLMtGg8YF1zAN6Pjd1Ny4pII4cerhtwSG4vympbCl+pWkH7nBS9kVXRD4FAn54dlg==}
+    peerDependencies:
+      '@sveltejs/kit': ^1 || ^2
+      next: '>= 13'
+      react: ^18 || ^19 || ^19.0.0-rc
+      svelte: '>= 4'
+      vue: ^3
+      vue-router: ^4
+    peerDependenciesMeta:
+      '@sveltejs/kit':
+        optional: true
+      next:
+        optional: true
+      react:
+        optional: true
+      svelte:
+        optional: true
+      vue:
+        optional: true
+      vue-router:
+        optional: true
 
   '@vitejs/plugin-vue-jsx@4.1.0':
     resolution: {integrity: sha512-KuRejz7KAFvhXDzOudlaS2IyygAwoAEEMtHAdcRSy/8cA5iKH043Qudcz48zsC0M0vvN5iKwIwNMuWbBYn6/Yg==}
@@ -3091,6 +3120,11 @@ packages:
     peerDependencies:
       vue: ^3.4.37
 
+  vue-router@4.5.0:
+    resolution: {integrity: sha512-HDuk+PuH5monfNuY+ct49mNmkCRK4xJAV9Ts4z9UFc4rzdDnxQLyCMGGc8pKhZhHTVzfanpNwB/lwqevcBwI4w==}
+    peerDependencies:
+      vue: ^3.2.0
+
   vue@3.5.13:
     resolution: {integrity: sha512-wmeiSMxkZCSc+PM2w2VRsOYAZC8GdipNFRTsLSfodVqI9mbejKeXEGr8SckuLnrQPGe3oJN5c3K0vpoU9q/wCQ==}
     peerDependencies:
@@ -4241,6 +4275,11 @@ snapshots:
       - rollup
       - supports-color
       - vue
+
+  '@vercel/speed-insights@1.1.0(vue-router@4.5.0(vue@3.5.13(typescript@5.6.3)))(vue@3.5.13(typescript@5.6.3))':
+    optionalDependencies:
+      vue: 3.5.13(typescript@5.6.3)
+      vue-router: 4.5.0(vue@3.5.13(typescript@5.6.3))
 
   '@vitejs/plugin-vue-jsx@4.1.0(vite@5.4.10(@types/node@22.9.1)(sass@1.81.0))(vue@3.5.13(typescript@5.6.3))':
     dependencies:
@@ -6373,6 +6412,11 @@ snapshots:
 
   vue-flow-layout@0.1.1(vue@3.5.13(typescript@5.6.3)):
     dependencies:
+      vue: 3.5.13(typescript@5.6.3)
+
+  vue-router@4.5.0(vue@3.5.13(typescript@5.6.3)):
+    dependencies:
+      '@vue/devtools-api': 6.6.4
       vue: 3.5.13(typescript@5.6.3)
 
   vue@3.5.13(typescript@5.6.3):
