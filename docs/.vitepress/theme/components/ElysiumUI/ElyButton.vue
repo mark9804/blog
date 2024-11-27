@@ -13,6 +13,7 @@ const props = withDefaults(defineProps<ButtonProps>(), {
   primary: true,
   secondary: false,
   text: false,
+  ariaLabel: "按钮",
 });
 
 const classes = computed(() => ({
@@ -54,7 +55,7 @@ const buttonTag = computed(() => (isLink.value ? "a" : "button"));
     @click="handleClick"
     tabindex="0"
     role="button"
-    aria-label="按钮"
+    :aria-label="props.ariaLabel"
   >
     <span v-if="loading" class="ely-button__loading">
       <span class="loading-spinner"></span>

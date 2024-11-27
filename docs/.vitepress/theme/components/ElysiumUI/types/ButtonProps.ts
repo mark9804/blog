@@ -11,4 +11,5 @@ export type ButtonProps = {
   secondary?: boolean;
   text?: boolean;
   href?: string;
+  ariaLabel: string;
 };
