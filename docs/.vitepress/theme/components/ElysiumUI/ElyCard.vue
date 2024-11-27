@@ -75,20 +75,22 @@ onUnmounted(() => {
     <a
       v-if="props.content.url"
       :href="withBase(props.content.url)"
-      :aria-label="`阅读文章：${props.content.frontmatter.title}`"
       class="absolute inset-0 w-full h-full z-0"
       tabindex="0"
+      aria-hidden="true"
     />
     <img
       class="elysium-ui__card--cover"
       v-if="props.content.frontmatter.cover"
       :src="props.content.frontmatter.cover"
-      :alt="`文章「${props.content.frontmatter.title}」的封面图片`"
+      :alt="props.content.frontmatter.title"
       :aria-label="`文章「${props.content.frontmatter.title}」的封面图片`"
     />
     <div class="elysium-ui__card--content flex flex-col pb-4">
       <h2 class="elysium-ui__card--title font-bold text-lg pt-4 pl-4 pr-4">
-        {{ formalizeString(props.content.frontmatter.title) }}
+        <a :href="withBase(props.content.url)">
+          {{ formalizeString(props.content.frontmatter.title) }}
+        </a>
       </h2>
       <ElySpace
         :size="2"

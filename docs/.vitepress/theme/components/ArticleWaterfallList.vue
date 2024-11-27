@@ -39,7 +39,7 @@ const waterfallItemsList = computed(() => {
   <div class="article-list__waterfall-container flex justify-between w-full">
     <div
       class="article-list__waterfall-item flex flex-col"
-      :style="{ gap: `${gapSize}px` }"
+      :style="{ gap: `${gapSize}px`, width: `${cardWidth}px` }"
       v-for="items in waterfallItemsList"
     >
       <ElyCard

@@ -45,7 +45,7 @@ postData.getAllTags().then(res => {
 <template>
   <div class="flex flex-col w-full items-center pt-10 mb-20">
     <div
-      class="flex flex-col gap-10 max-w-[1280px] pl-16 xs:pl-10 xs:pr-10 pr-16"
+      class="flex flex-col gap-10 max-w-[1272px] pl-16 xs:pl-10 xs:pr-10 pr-16"
       ref="containerRef"
     >
       <div class="tags-container flex flex-wrap gap-4">

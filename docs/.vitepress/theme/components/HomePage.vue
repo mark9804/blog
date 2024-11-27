@@ -46,15 +46,15 @@ watch(isDark, newVal => {
       :email="props?.email"
       :social="props?.social"
     />
-    <section
-      class="w-full max-w-[1280px] flex flex-col pl-16 xs:pl-10 xs:pr-10 pr-16 mt-10 mb-20"
+    <main
+      class="w-full max-w-[1272px] flex flex-col pl-16 xs:pl-10 xs:pr-10 pr-16 mt-10 mb-20"
     >
       <h1 class="mb-10 flex flex-nowrap items-end gap-5" ref="articleTitleRef">
         <span class="home-title">Articles</span>
         <VPLocalSearchBox />
       </h1>
       <ArticleWaterfallList :posts="posts" :width="articleTitleWidth" />
-    </section>
+    </main>
   </div>
 </template>
 

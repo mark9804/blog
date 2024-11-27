@@ -107,7 +107,7 @@ function handleScrollIndicatorClick() {
 </script>
 
 <template>
-  <div
+  <header
     aria-label="用户信息"
     class="ely-profile w-full relative flex flex-col items-center absolute top-0 left-0 select-none"
   >
@@ -184,7 +184,7 @@ function handleScrollIndicatorClick() {
       />
       <span class="ely-profile__scroll-indicator-text text-sm">SCROLL</span>
     </div>
-  </div>
+  </header>
 </template>
 
 <style scoped lang="scss">
