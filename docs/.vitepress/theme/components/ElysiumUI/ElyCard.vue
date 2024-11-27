@@ -57,6 +57,8 @@ onUnmounted(() => {
     clearInterval(timer);
   }
 });
+
+const shouldAriaLabelHide = ref(false);
 </script>
 
 <template>
@@ -76,8 +78,10 @@ onUnmounted(() => {
       v-if="props.content.url"
       :href="withBase(props.content.url)"
       class="absolute inset-0 w-full h-full z-0"
-      tabindex="0"
-      aria-hidden="true"
+      tabindex="-1"
+      :aria-hidden="shouldAriaLabelHide"
+      @mouseover="shouldAriaLabelHide = false"
+      @mouseleave="shouldAriaLabelHide = true"
     />
     <img
       class="elysium-ui__card--cover"
