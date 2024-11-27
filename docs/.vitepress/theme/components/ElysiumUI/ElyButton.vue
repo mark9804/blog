@@ -53,6 +53,8 @@ const buttonTag = computed(() => (isLink.value ? "a" : "button"));
     :href="isLink ? props.href : null"
     @click="handleClick"
     tabindex="0"
+    role="button"
+    aria-label="按钮"
   >
     <span v-if="loading" class="ely-button__loading">
       <span class="loading-spinner"></span>

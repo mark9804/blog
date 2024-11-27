@@ -98,6 +98,7 @@ const SpaceElement = () => {
               (!!props.divider ? (
                 <span
                   role="separator"
+                  aria-label="分隔符"
                   class="elysium-ui elysium-ui__space--built-in-divider select-none"
                 >
                   {props.divider}

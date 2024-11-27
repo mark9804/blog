@@ -59,6 +59,7 @@ const handleClose = (e: Event) => {
 <template>
   <span
     :class="classes"
+    :role="props.clickable ? 'button' : null"
     @click="handleClick"
     :tabindex="!props.disabled && props.clickable ? 0 : -1"
     @keydown.space.prevent="handleClick"
@@ -72,7 +73,13 @@ const handleClose = (e: Event) => {
     <span class="elysium-ui__tag--content font-bold">
       <slot></slot>
     </span>
-    <span v-if="closable" class="elysium-ui__tag--close" @click="handleClose">
+    <span
+      v-if="closable"
+      class="elysium-ui__tag--close"
+      @click="handleClose"
+      role="button"
+      aria-label="移除标签"
+    >
       <icon-close />
     </span>
   </span>

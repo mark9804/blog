@@ -108,7 +108,7 @@ function handleScrollIndicatorClick() {
 
 <template>
   <div
-    aria-label="User profile"
+    aria-label="用户信息"
     class="ely-profile w-full relative flex flex-col items-center absolute top-0 left-0 select-none"
   >
     <canvas
