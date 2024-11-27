@@ -1,6 +1,7 @@
 import { data as usePosts } from "../loaders/posts.data";
 import type { Post } from "../types/Post";
 import { unique, sift } from "radash";
+import { compareDates } from "./timeUtils";
 
 export function defaultFilter(post: Post) {
   return (
@@ -14,10 +15,7 @@ export const postData = {
   async getAllPosts(filter?: (post: Post) => boolean) {
     const posts = (await usePosts) as Post[];
     const filteredPosts = filter ? posts.filter(filter) : posts;
-    return filteredPosts.sort(
-      (a, b) =>
-        new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-    );
+    return filteredPosts.sort((a, b) => compareDates(a.createdAt, b.createdAt));
   },
 
   async getCreatedAt(currentPathWithoutBase: string) {
