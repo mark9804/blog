@@ -7,8 +7,19 @@
   "buildCommand": "vitepress build docs --base /",
   "redirects": [
     {
-      "source": "/blog/",
-      "destination": "/"
+      "source": "/blog/:path*",
+      "destination": "/:path*"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/feed.rss",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/rss+xml; charset=utf-8"
+        }
+      ]
     }
   ]
 }
