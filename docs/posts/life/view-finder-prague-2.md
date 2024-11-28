@@ -1,7 +1,7 @@
 ---
 title: View Finder：捷克布拉格（2）
 description:
-cover: https://cdn.sa.net/2024/11/07/o9R6ZSpXfJQwmk5.jpg
+cover: https://cdn.sa.net/2024/11/11/qwWrX5DnYz1Qo72.webp
 tags:
   - 生活
   - 旅游

@@ -1,6 +1,6 @@
 ---
 title: View Finder：法国鲁昂（2）
-cover: https://s2.loli.net/2024/09/13/SwDBj29XgdbMAsv.webp
+cover: https://s2.loli.net/2024/09/10/e7XZqO8mzhKYxvt.webp
 tags:
   - 生活
   - 旅游

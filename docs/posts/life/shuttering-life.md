@@ -51,7 +51,7 @@ tags:
 ![](https://cdn.sa.net/2024/11/25/Q4U6KfdaVlkChZA.webp)
 ![](https://cdn.sa.net/2024/11/25/p9m5MhosZI8ygbR.webp)
 ![](https://cdn.sa.net/2024/11/25/p3LVMBaoPFIvNyd.webp)
-![](https://cdn.sa.net/2024/11/25/wQ8j3eOcVpfbaPM.webp)
+![](https://cdn.sa.net/2024/11/29/QGlTzZt9KLoBgX1.webp)
 ![](https://cdn.sa.net/2024/11/25/GoR8sUfEiSKj2pk.webp)
 ![](https://cdn.sa.net/2024/11/25/bQfDOewVo9176SR.webp)
 ![](https://cdn.sa.net/2024/11/25/IfEbuKgtdv3j1Zm.webp)
