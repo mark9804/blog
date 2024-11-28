@@ -9,9 +9,12 @@ export function tokenize(text: string): Array<string> {
     return text.split(SPACE_OR_PUNCTUATION);
   }
 
+  // @ts-ignore
   const segmenter = new Intl.Segmenter("cn", { granularity: "word" });
 
-  const segs = Array.from(segmenter.segment(text)).map(item => item.segment);
+  const segs = Array.from(segmenter.segment(text)).map(
+    (item: any) => item.segment
+  );
   const uniqueSegs = Array.from(new Set(segs));
   return uniqueSegs.filter(w => !/^\s+$/.test(w));
 }

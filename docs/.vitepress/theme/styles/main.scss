@@ -204,10 +204,9 @@ a.title span,
 
       &:nth-child(2n) {
         background-color: $color-accent-quaternary;
-
-        &:hover {
-          background-color: $color-accent-tertiary;
-        }
+      }
+      &:hover {
+        background-color: $color-accent-tertiary;
       }
     }
   }

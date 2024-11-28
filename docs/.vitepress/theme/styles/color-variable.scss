@@ -16,7 +16,11 @@ html {
   --color-accent-text-primary: #{config.$light-text-primary};
   --color-accent-text-secondary: #{config.$light-text-secondary};
   --color-accent-text-tertiary: #{config.$light-text-tertiary};
-  --color-accent-code: #{color.adjust(config.$light-accent, $saturation: -$code-saturation-tune, $lightness: -$code-brightness-tune)};
+  --color-accent-code: #{color.adjust(
+      config.$light-accent,
+      $saturation: -$code-saturation-tune,
+      $lightness: -$code-brightness-tune
+    )};
 
   @for $i from 1 through 9 {
     --color-accent-border-#{$i}00: #{rgba(config.$light-accent, $i * 0.1)};
@@ -39,7 +43,11 @@ html.dark {
   --color-accent-text-primary: #{config.$dark-text-primary};
   --color-accent-text-secondary: #{config.$dark-text-secondary};
   --color-accent-text-tertiary: #{config.$dark-text-tertiary};
-  --color-accent-code: #{color.adjust(config.$dark-accent, $saturation: +$code-saturation-tune, $lightness: +$code-brightness-tune)};
+  --color-accent-code: #{color.adjust(
+      config.$dark-accent,
+      $saturation: + $code-saturation-tune,
+      $lightness: + $code-brightness-tune
+    )};
 
   @for $i from 1 through 9 {
     --color-accent-border-#{$i}00: #{rgba(config.$dark-accent, $i * 0.1)};
