@@ -153,7 +153,7 @@ createdAt: 1732558487000
 
 ## 个人项目
 
-### [个人博客](https://mark9804.github.io/)
+### [个人博客](https://mark9804.vercel.app/)
 
 - 你现在看到的这个博客，基于 [VitePress](https://vitepress.dev/) 开发
 

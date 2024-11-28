@@ -1,4 +1,5 @@
 import type { ProfileProps } from "../theme/components/ElysiumUI/types/ProfileProps";
+import { DOMAIN, BASE_URL } from "../constants";
 
 export const userProfile: ProfileProps = {
   name: {
@@ -15,7 +16,7 @@ export const userProfile: ProfileProps = {
     },
     {
       alias: "RSS",
-      link: "https://mark9804.github.io/blog/feed.rss",
+      link: `${DOMAIN}${BASE_URL}feed.rss`,
     },
     {
       alias: "Team",
