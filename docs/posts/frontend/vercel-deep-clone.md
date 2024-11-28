@@ -1,6 +1,6 @@
 ---
 title: 使 Vercel 在部署时克隆完整仓库
-description: Vercel 部署时默认浅克隆，导致一些依赖完整 Git 克隆的工具无法正常工作。我们来解决这个问题。
+description: Vercel 部署时默认浅克隆，但是可以通过 git pull <仓库地址> --unshallow <分支> 命令解决。
 tags:
   - Vercel
   - 前端
@@ -13,7 +13,7 @@ tags:
 
 > When you make a deployment..., Vercel performs a "shallow clone" on your Git repository using the command `git clone --depth=10 (...)` and fetches ten levels of git commit history. This means that **only the latest ten commits are pulled** and not the entire repository history.
 
-我的首页时间轴工具是基于 Git 的完整提交历史来实现的，浅克隆虽然不会报错，但是会让文章的展示顺序变得非常混乱。因此最后我使用 `git pull --unshallow <仓库地址> master` 深克隆了整个仓库，解决了这个问题。
+我的首页时间轴工具是基于 Git 的完整提交历史来实现的，浅克隆虽然不会报错，但是会让文章的展示顺序变得非常混乱。因此最后我使用 `git pull --unshallow <仓库地址> <分支>` 深克隆了整个仓库，解决了这个问题。
 
 （只想知道解决方案的可以退出了，这就是解决方案）
 

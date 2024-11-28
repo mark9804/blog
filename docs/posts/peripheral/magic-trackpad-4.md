@@ -1,5 +1,6 @@
 ---
 title: Magic Trackpad 4：一个让我换回旧款的触控板
+publish: false
 tags:
   - 外设
   - Apple
