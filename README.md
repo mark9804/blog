@@ -2,7 +2,7 @@
 
 基于 VitePress，定制 [Elysium](./docs/.vitepress/theme/components/ElysiumUI) 主题，使用少量 [Arco Design](https://arco.design/vue/) 组件库和图标。~~现在还很多，会慢慢变少的~~
 
-视障人群友好（尽量），晕动症患者友好（大概）。
+视障人群友好（已和朋友测试过，感谢他抽出自己休息时间给我提了许多建议！），晕动症患者友好（大概）。
 
 无制作主题包计划，但有一定程度的抽象，喜欢的请 fork 后自行修改样式文件。或者不修改直接把文章换成自己的也行。
 
