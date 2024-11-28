@@ -51,3 +51,9 @@ const waterfallItemsList = computed(() => {
     </div>
   </div>
 </template>
+
+<style scoped lang="scss">
+.article-list__waterfall-container {
+  filter: drop-shadow(0 1rem 2rem var(--color-accent-shadow-200));
+}
+</style>

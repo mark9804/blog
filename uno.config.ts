@@ -17,12 +17,8 @@ const borderAccents = [1, 2, 3, 4, 5, 6, 7, 8, 9].map(
 export default defineConfig({
   rules: [
     [
-      "shadow-card",
-      { "box-shadow": "0 1rem 3rem var(--color-accent-shadow-200)" },
-    ],
-    [
       "shadow-card-hover",
-      { "box-shadow": "0 1rem 3rem var(--color-accent-shadow-300)" },
+      { filter: "drop-shadow(0 1rem 3rem var(--color-accent-shadow-100))" },
     ],
     ["text-primary", { color: "var(--color-accent-text-primary)" }],
     ["text-secondary", { color: "var(--color-accent-text-secondary)" }],
