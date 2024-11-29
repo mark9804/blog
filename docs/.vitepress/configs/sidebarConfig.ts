@@ -1,7 +1,7 @@
 export const sidebarConfig = {
   documentRootPath: "/docs",
-  scanStartPath: "/posts/",
-  resolvePath: "/posts/",
+  scanStartPath: "/breves/",
+  resolvePath: "/breves/",
   useTitleFromFileHeading: true,
   useTitleFromFrontmatter: true,
   useFolderTitleFromIndexFile: true,

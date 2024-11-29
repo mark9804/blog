@@ -9,6 +9,10 @@
     {
       "source": "/blog/:path*",
       "destination": "/:path*"
+    },
+    {
+      "source": "/posts/:path*",
+      "destination": "/breves/:path*"
     }
   ],
   "headers": [
