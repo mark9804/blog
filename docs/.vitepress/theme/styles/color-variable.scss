@@ -80,9 +80,9 @@ $color-accent-code: var(--color-accent-code);
   --vp-c-brand-3: #{$color-accent-tertiary};
   --vp-c-brand-soft: #{$color-accent-quaternary};
 
-  --vp-c-tip-1: #{$color-accent-tertiary};
+  --vp-c-tip-1: #{$color-accent};
   --vp-c-tip-2: #{$color-accent-secondary};
-  --vp-c-tip-3: #{$color-accent};
+  --vp-c-tip-3: #{$color-accent-tertiary};
   --vp-c-tip-soft: #{$color-accent-quaternary};
 
   // --vp-c-warning-1: #{$warning-7};
