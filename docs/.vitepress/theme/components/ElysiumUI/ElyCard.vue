@@ -97,7 +97,7 @@ const shouldAriaLabelHide = ref(false);
         </a>
       </h2>
       <ElySpace
-        :size="2"
+        :size="0"
         divider="・"
         wrap
         class="pt-1 pl-4 pr-4 text-tertiary text-xs"
