@@ -5,7 +5,7 @@ comment: false
 
 # プロフィール
 
-[中文](./about.md) | [English](./about-en.md)
+[中文](./about.md) | [English](./about.en.md)
 
 ## 自己紹介
 
