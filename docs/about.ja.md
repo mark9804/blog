@@ -25,7 +25,7 @@ comment: false
 
 このサイトは[VitePress](https://vitepress.dev/)で構築され、[Vercel](https://vercel.com/)でホスティングされています。
 
-ウェブサイトのテーマ「Elysium」は自身でデザイン・開発しました。テーマ名、記事カテゴリー（長文：{breve}、短文：{quaver}）、カラースキームは==永久の楽園==と==黄金の庭園==のコンセプトからインスピレーションを得ています。このテーマは視覚障害者にも配慮されています（お忙しい中、テーマのテストにご協力いただいた[Armstrong](https://armstrong.viyf.org/)さんに感謝いたします）。
+ウェブサイトのテーマ「Elysium」は自身でデザイン・開発しました。テーマ名、記事カテゴリー（長文：{倍全音符: breve}、短文：{八分音符: quaver}）、カラースキームは==永久の楽園==と==黄金の庭園==のコンセプトからインスピレーションを得ています。このテーマは視覚障害者にも配慮されています（お忙しい中、テーマのテストにご協力いただいた [Armstrong](https://armstrong.viyf.org/) さんに感謝いたします）。
 
 ウェブサイトのコンテンツはすべてオープンソースです。記事のコンテンツは[CC-BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)ライセンスの下で公開されています。コードは[AGPL-3.0](https://www.gnu.org/licenses/agpl-3.0.html)ライセンスの下で公開されています。
 
