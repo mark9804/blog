@@ -11,7 +11,7 @@ export const sidebarConfig = {
   // capitalizeFirst: true,
   // capitalizeEachWords: true,
   collapsed: true,
-  collapseDepth: 2,
+  // collapseDepth: 2,
   // sortMenusByName: false,
   // sortMenusByFrontmatterOrder: false,
   // sortMenusByFrontmatterDate: false,
