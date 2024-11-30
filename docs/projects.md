@@ -171,15 +171,18 @@ createdAt: 1732558487000
 ### [Adachi-bot](https://github.com/Arondight/Adachi-BOT)
 
 - 一个在 QQ 中运行的原神助手，基于 [oicq](https://github.com/takayama-lily/oicq) 开发。[功能示例](https://github.com/Arondight/Adachi-BOT/wiki/%E5%8A%9F%E8%83%BD%E7%A4%BA%E4%BE%8B)
-- 两位主程之一，负责前端功能设计和 UI 实现，以及部分后端功能开发和完善
+- 两位主程之一，负责全部前端功能设计、UI 绘制和实现，以及部分后端功能开发和完善
+- 现已不再维护
 
 ### [卡池期望计算器](https://github.com/mark9804/genshin-gacha-calculator)
 
-- 基于[孤胆飞客](https://bbs.nga.cn/nuke.php?func=ucp&uid=43116386)对 1.x 版本原神抽卡模型分析基础上添加 2.0~ 版本武器定轨规则的暴力求解计算器，现已不再维护
+- 基于[孤胆飞客](https://bbs.nga.cn/nuke.php?func=ucp&uid=43116386)对 1.x 版本原神抽卡模型分析基础上添加 2.0~ 版本武器定轨规则的暴力求解计算器
+- 现已不再维护
 
 ### [原神抽卡概率分析工具包-GGanalysislib](https://github.com/OneBST/GGanalysislib)
 
 - 使用马尔可夫链对原神抽卡概率进行分析的工具包，负责 MacOS 平台的开发
+- 现已不再维护
 
 ### [FURINA](https://github.com/PalaisMermonia/FURINA)
 
@@ -197,7 +200,7 @@ createdAt: 1732558487000
 
 ### [Eden Design](https://eden.blue-archive.io/)
 
-- 基于 [Vue 3](https://vuejs.org/) 的组件库，SSR 友好
+- 基于 [Vue 3](https://vuejs.org/) + [TypeScript](https://www.typescriptlang.org/) + [Nuxt 3](https://nuxt.com/) 的组件库，SSR 友好
 
 ### [Elysium UI](https://github.com/mark9804/blog/tree/master/docs/.vitepress/theme/components/ElysiumUI)
 
@@ -213,16 +216,20 @@ createdAt: 1732558487000
 
 ### [Serial Position Effect 实验程序](https://github.com/mark9804/serial-position)
 
-- 基于 Web 的序列位置效应实验程序，用于心理学实验课课辅助教学。进入维护状态。
+- 基于 Web 的序列位置效应实验程序，用于心理学实验课课辅助教学。
+- 不再添加新功能，进入维护状态。
 
 ### [Attentional Blink 实验程序](https://github.com/mark9804/attentional-blink)
 
-- 基于 Web 的日语本地化视觉注意实验程序，用于心理学实验课课辅助教学。不再维护。
+- 基于 Web 的日语本地化视觉注意实验程序，用于心理学实验课课辅助教学。
+- 不再维护。
 
 ### [Cyberball 实验程序](https://github.com/mark9804/cyberball-electron)
 
-- 基于 Electron 的 Cyberball 实验程序，用于心理学实验课课辅助教学。不再维护。
+- 基于 Electron 的 Cyberball 实验程序，用于心理学实验课课辅助教学。
+- 不再维护。
 
 ### [GridWare Web](https://github.com/gridware-web/gridware-web)
 
-- 基于 Web 的 GridWare 时间序列分析和可视化工具，用于心理学硕士毕业论文。不再维护。
+- 基于 Web 的 GridWare 时间序列分析和可视化工具，用于心理学硕士毕业论文。
+- 不再维护。
