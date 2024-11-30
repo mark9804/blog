@@ -38,6 +38,7 @@ export const viteConfig = {
       include: [/\.vue$/, /\.md$/, /\.ts$/],
       dirs: [
         ".vitepress/theme/components/ElysiumUI",
+        ".vitepress/theme/components/ElysiumUI/ElyIcon",
         ".vitepress/theme/components",
       ],
       resolvers: [
