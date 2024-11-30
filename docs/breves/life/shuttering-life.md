@@ -51,7 +51,7 @@ tags:
 ![](https://cdn.sa.net/2024/11/25/Q4U6KfdaVlkChZA.webp)
 ![](https://cdn.sa.net/2024/11/25/p9m5MhosZI8ygbR.webp)
 ![](https://cdn.sa.net/2024/11/25/p3LVMBaoPFIvNyd.webp)
-![](https://cdn.sa.net/2024/11/29/QGlTzZt9KLoBgX1.webp)
+![](https://cdn.sa.net/2024/12/01/1WGL9sK4yOcnRQi.webp)
 ![](https://cdn.sa.net/2024/11/25/GoR8sUfEiSKj2pk.webp)
 ![](https://cdn.sa.net/2024/11/25/bQfDOewVo9176SR.webp)
 ![](https://cdn.sa.net/2024/11/25/IfEbuKgtdv3j1Zm.webp)
@@ -63,4 +63,4 @@ tags:
 
 是的，在买 X-T4 的时候我就知道它有诸多缺点：低光拉、高感差，宽容度（相对）低，是残画幅，镜头群落后；但是它的后期流程无比简单：只需要导入 lightroom，选择自动光线，选择 Classic Chrome profile，应用自动降噪，应用自动 upright，裁剪一下，导出。它可以让我很没有负担地定格下某一刻的生活瞬间，我回家只需要导入照片，然后批量应用一下色彩模式就可以放在那里不管，等到之后的某一刻（就像写这篇文章时）重新打开 lightroom，把时光倒带回某年某月的某一天。
 
-就仿佛大二时的我，为了定格生活，买下了人生中第一台单反。
+就仿佛大二时的我，买下了人生中第一台单反，只为定格那一刻的生活。
