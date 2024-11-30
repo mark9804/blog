@@ -209,6 +209,13 @@ a.title span,
       }
     }
   }
+
+  // 内嵌视频
+  iframe {
+    margin-top: 16px;
+    width: 100%;
+    height: 360px;
+  }
 }
 
 .DocSearch {

@@ -14,7 +14,9 @@ createdAt: 1732558487000
 
 ## 碧蓝档案
 
-### [碧蓝档案剧情站](https://blue-archive.io/)
+### 碧蓝档案剧情站
+
+[项目地址](https://blue-archive.io/) | [哔哩哔哩](https://space.bilibili.com/1413213021) | [GitHub](https://github.com/ba-archive/blue-archive)
 
 :::gallery 页面截图
 ![](https://cdn.sa.net/2024/11/26/zKriY9gWhRcTDo8.webp)
@@ -23,13 +25,15 @@ createdAt: 1732558487000
 
 - 项目发起人，负责项目/人员管理、美术、UI 设计、架构设计、前端开发、服务器运维、文本翻译、账号运营、组织间沟通、对外交流
 - 目标是通过交互式网页和同人作品带给所有的 BA 玩家更好的游戏体验，运营至今独立用户访问已超过 60 万
-- 基于 [pixi.js](https://pixijs.com/) 开发
+- 基于 [pixi.js](https://pixijs.com/) 开发，更多技术详情请参考 [GitHub 仓库](https://github.com/ba-archive/blue-archive)
 
 [贡献者名单](https://blue-archive.io/about)
 
 ### 碧蓝档案同人动画
 
 #### [千年游戏制作人](https://www.bilibili.com/video/BV19K421C722/)
+
+<iframe src="https://player.bilibili.com/player.html?isOutside=true&aid=1700418020&bvid=BV19K421C722&cid=1431404285&p=1&high_quality=1&autoplay=0&muted=true" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen></iframe>
 
 ![视频封面 | 设计：[伤信矢](https://space.bilibili.com/45899303) 绘：[UniqueMayuri](https://space.bilibili.com/22766124/)、[青空望冬](https://space.bilibili.com/39639709)](https://cdn.sa.net/2024/11/26/iVYZG8ae6MTD4Bx.webp)
 
@@ -94,11 +98,15 @@ createdAt: 1732558487000
 
 #### [　梦](https://games.blue-archive.io/koharu-dream/)
 
-![PV 封面](https://cdn.sa.net/2024/11/26/HkNnvfIMm9yThQS.webp)  
-![游戏截图](https://cdn.sa.net/2024/11/26/6BXdvIHmCODYJli.webp)
+<iframe src="https://player.bilibili.com/player.html?isOutside=true&aid=532836301&bvid=BV1ru411N7Eg&cid=1250005688&p=1&high_quality=1&autoplay=0&muted=true" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen></iframe>
 
-[宣传 PV](https://www.bilibili.com/video/BV1ru411N7Eg/) by [水哥不sd](https://space.bilibili.com/341657114)
+:::gallery
+![](https://cdn.sa.net/2024/11/26/HkNnvfIMm9yThQS.webp)
+![](https://cdn.sa.net/2024/11/26/6BXdvIHmCODYJli.webp)
+:::
 
+- 宣传 PV 由「[水哥不sd](https://space.bilibili.com/341657114)」制作
+- PV 封面由 [伤信矢](https://space.bilibili.com/45899303) 设计，[妮娅ko](https://space.bilibili.com/13347846) 绘制
 - 类吸血鬼幸存者 STG 游戏
 - Unity WebGL 实现
 - 像素风格化渲染
@@ -123,6 +131,28 @@ createdAt: 1732558487000
 ![](https://cdn.sa.net/2024/11/26/xmfX79GJSIMDv8w.webp)
 ![](https://cdn.sa.net/2024/11/26/ZODLeN5oculHGFI.webp)
 :::
+
+### [碧蓝档案资讯站](https://space.bilibili.com/37507923)
+
+- 负责账号运营、日常内容运营和本地化、人员流动管理、组织间沟通
+- 组织建立了一套完善的本地化工作流，创新提出并实践了基于在线文档的同步非阻塞视频本地化工作方式，交接效率较传统本地化方式提升三倍
+
+#### Blue Archive Official Artworks Vol.1
+
+- 负责文本翻译和内容校对
+
+#### Blue Archive Official Artworks Vol.2
+
+- 负责组织本地化工作、内容校对
+- 推动建立并实践基于在线文档的同步非阻塞静态资产本地化工作方式，推进众包校阅工作流，大大降低工作中的无效和低效沟通成本
+
+### 未花同人音乐专辑 Euridice
+
+<iframe src="https://player.bilibili.com/player.html?isOutside=true&aid=113570964570581&bvid=BV1qwzHYbEvC&cid=27106544442&p=1&high_quality=1&autoplay=0&muted=true" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen></iframe>
+
+[试听](https://www.bilibili.com/video/BV1qwzHYbEvC/) | [购买](https://item.taobao.com/item.htm?id=858788977487)
+
+- 负责念白文本的日语本地化
 
 ## 明日方舟
 
