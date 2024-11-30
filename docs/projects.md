@@ -181,6 +181,10 @@ createdAt: 1732558487000
 
 - 使用马尔可夫链对原神抽卡概率进行分析的工具包，负责 MacOS 平台的开发
 
+### [FURINA](https://github.com/PalaisMermonia/FURINA)
+
+- Yet Another 原神 bot。oicq 去世后基于元框架 [Koishi](https://koishi.js.org/) 开发的跨平台跨协议 bot，由于实在太忙，连文档都没写全就开始沉睡。~~水神摸鱼不是很符合人设吗~~
+
 ## [MDN Web Docs](https://developer.mozilla.org/en-US/)
 
 - 参与 MDN Web Docs CSS 模块相关的中文翻译与编写工作
@@ -207,14 +211,18 @@ createdAt: 1732558487000
 - 将维护工作简化为仅需使用记事本编辑单个特定文本配置文件，不再需要手动修改 HTML 结构。另应日本人维护者要求编写一套从用记事本编辑到下载 vscode 设置应用语言为日语到自动部署上线的全套维护手册
 - ~~日本人说为了防止我毕业后不会维护，要我从 css 开始解释并教会他们整个开发（不是维护）过程中写的每一行代码并留存 word 文档，因此拒绝上线生产环境，现已停止更新，活该你们继续用 2004 年的网页。~~
 
+### [Serial Position Effect 实验程序](https://github.com/mark9804/serial-position)
+
+- 基于 Web 的序列位置效应实验程序，用于心理学实验课课辅助教学。进入维护状态。
+
 ### [Attentional Blink 实验程序](https://github.com/mark9804/attentional-blink)
 
-- 基于 Web 的日语本地化视觉注意实验程序，用于心理学实验课课辅助教学
+- 基于 Web 的日语本地化视觉注意实验程序，用于心理学实验课课辅助教学。不再维护。
 
 ### [Cyberball 实验程序](https://github.com/mark9804/cyberball-electron)
 
-- 基于 Electron 的 Cyberball 实验程序，用于心理学实验课课辅助教学
+- 基于 Electron 的 Cyberball 实验程序，用于心理学实验课课辅助教学。不再维护。
 
 ### [GridWare Web](https://github.com/gridware-web/gridware-web)
 
-- 基于 Web 的 GridWare 时间序列分析和可视化工具，用于硕士毕业论文
+- 基于 Web 的 GridWare 时间序列分析和可视化工具，用于心理学硕士毕业论文。不再维护。
