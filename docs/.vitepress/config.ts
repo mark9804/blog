@@ -35,6 +35,7 @@ function processLinks(
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   base: BASE_URL,
+  cleanUrls: true,
   title: "今天没有早睡",
   head: headConfig as HeadConfig[],
   description: "",

@@ -5,6 +5,7 @@
   "framework": "vitepress",
   "installCommand": "git pull --unshallow https://github.com/mark9804/blog master && pnpm install",
   "buildCommand": "vitepress build docs --base /",
+  "cleanUrls": true,
   "redirects": [
     {
       "source": "/blog/:path*",
