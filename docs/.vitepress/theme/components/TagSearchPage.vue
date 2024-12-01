@@ -38,7 +38,7 @@ postData.getAllPosts(defaultFilter).then(res => {
 });
 
 postData.getAllTags().then(res => {
-  allTags.value = res;
+  allTags.value = res.sort((a, b) => a.localeCompare(b));
 });
 </script>
 
@@ -64,5 +64,3 @@ postData.getAllTags().then(res => {
     </div>
   </div>
 </template>
-
-<style lang="scss" scoped></style>
