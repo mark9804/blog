@@ -14,6 +14,7 @@ declare module 'vue' {
     ATooltip: typeof import('@arco-design/web-vue')['Tooltip']
     ElyButton: typeof import('./.vitepress/theme/components/ElysiumUI/ElyButton.vue')['default']
     ElyCard: typeof import('./.vitepress/theme/components/ElysiumUI/ElyCard.vue')['default']
+    ElyIconBreve: typeof import('./.vitepress/theme/components/ElysiumUI/ElyIcon/ElyIconBreve.vue')['default']
     ElyImageGallery: typeof import('./.vitepress/theme/components/ElysiumUI/ElyImageGallery.vue')['default']
     ElyProfile: typeof import('./.vitepress/theme/components/ElysiumUI/ElyProfile.vue')['default']
     ElySpace: typeof import('./.vitepress/theme/components/ElysiumUI/ElySpace.vue')['default']
