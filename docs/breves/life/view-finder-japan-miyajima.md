@@ -2,9 +2,11 @@
 title: View Finder：宫岛
 createdAt: 1700385156000
 tags:
-  - 旅行
+  - 生活
+  - 旅游
   - 日本
   - 宫岛
+  - View Finder
 cover: https://cdn.sa.net/2024/11/25/bQfDOewVo9176SR.webp
 ---
 

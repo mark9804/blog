@@ -2,9 +2,11 @@
 title: View Finder：京都
 createdAt: 1703821515000
 tags:
-  - 旅行
+  - 生活
+  - 旅游
   - 日本
   - 京都
+  - View Finder
 cover: https://cdn.sa.net/2024/11/25/uyAvXg59dWnSsOi.webp
 ---
 
