@@ -78,14 +78,13 @@ de Rouen}，再顺着{大时钟: Le Gros-Horloge}一路走到市政厅旁边的{
 
 实际上我们下车之后先 walk 了一圈，真实行程是从{圣旺教堂:Abbatiale Saint-Ouen} 开始的。很不幸圣旺教堂正在维修，所以等于没去过。
 
-<details>
-  <summary>圣旺教堂</summary>
+:::details 圣旺教堂
 
+:::gallery 维修中的圣旺教堂
 ![维修中的圣旺教堂](https://cdn.sa.net/2024/09/13/cl8rDfFMzeQVmSO.webp)
-
 ![圣旺教堂旁的拿破仑一世雕像](https://cdn.sa.net/2024/09/13/lDybjGtguvFTWSh.webp)
 
-</details>
+:::
 
 之后从圣旺教堂走小路（特地选了看起来比较有时代感的小路）回到了达米埃特街。
 

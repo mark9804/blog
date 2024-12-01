@@ -200,7 +200,7 @@ createdAt: 1732558487000
 
 ### [Eden Design](https://eden.blue-archive.io/)
 
-- 基于 [Vue 3](https://vuejs.org/) + [TypeScript](https://www.typescriptlang.org/) + [Nuxt 3](https://nuxt.com/) 的组件库，SSR 友好
+- 基于 [Vue 3](https://vuejs.org/) + [TypeScript](https://www.typescriptlang.org/) + [Nuxt 3](https://nuxt.com/) 的小型设计系统，SSR 友好
 
 ### [Elysium UI](https://github.com/mark9804/blog/tree/master/docs/.vitepress/theme/components/ElysiumUI)
 

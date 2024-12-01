@@ -28,7 +28,7 @@ VitePress 的设计用途是技术文档，博客功能没有 WordPress 等 CMS 
 ![](https://cdn.sa.net/2024/11/08/neQrdAT7BJ9DpkW.webp)
 :::
 
-[这篇文章](../life/view-finder-prague-1.md) 中也大量使用了图册功能。
+[这篇文章](../life/view-finder-europe-prague-1) 中也大量使用了图册功能。
 
 ## 实现
 
