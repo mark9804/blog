@@ -162,7 +162,7 @@ createdAt: 1732558487000
 
 ### [龙门祈愿墙期望计算工具](https://gist.github.com/Mark9804/1ec434c6fbba8c93c5870e97ec4e9c63)
 
-- 暴力求解有限 correct 模式下，明日方舟新年福利活动“龙门祈愿墙”的期望计算
+- 暴力求解有限 correct 假设下，明日方舟新年福利活动“龙门祈愿墙”的期望计算
 
 [NGA 讨论贴 1](https://nga.178.com/read.php?tid=25312180) | [NGA 讨论贴 2](https://nga.178.com/read.php?tid=25571950)
 
