@@ -117,22 +117,22 @@ const shouldAriaLabelHide = ref(false);
       @mouseover="shouldAriaLabelHide = false"
       @mouseleave="shouldAriaLabelHide = true"
     />
-    <div
-      class="elysium-ui__card--cover-container"
-      v-if="props.content.frontmatter.cover"
-    >
-      <img
-        class="elysium-ui__card--cover"
-        :class="{ loaded: imageLoaded }"
-        :src="props.content.frontmatter.cover"
-        :alt="props.content.frontmatter.title"
-        :aria-label="`文章「${props.content.frontmatter.title}」的封面图片`"
-        @load="handleImageLoad"
-        @error="emit('suspense')"
-        loading="eager"
-      />
-    </div>
-    <div class="elysium-ui__card--content flex flex-col pb-4 z-0">
+    <div class="elysium-ui__card--content flex flex-col pb-4">
+      <div
+        class="elysium-ui__card--cover-container z-0"
+        v-if="props.content.frontmatter.cover"
+      >
+        <img
+          class="elysium-ui__card--cover"
+          :class="{ loaded: imageLoaded }"
+          :src="props.content.frontmatter.cover"
+          :alt="props.content.frontmatter.title"
+          :aria-label="`文章「${props.content.frontmatter.title}」的封面图片`"
+          @load="handleImageLoad"
+          @error="emit('suspense')"
+          loading="eager"
+        />
+      </div>
       <h2 class="elysium-ui__card--title font-bold text-lg pt-4 pl-4 pr-4">
         <a :href="withBase(props.content.url)">
           {{ formalizeString(props.content.frontmatter.title) }}
@@ -161,7 +161,7 @@ const shouldAriaLabelHide = ref(false);
         <ElyTag
           v-for="tag in props.content.frontmatter.tags"
           :key="tag"
-          class="z-1"
+          class="z-2"
           :id="tag"
           :title="`搜索含有「${tag}」标签的文章`"
           size="small"
