@@ -1,8 +1,54 @@
+@use "sass:color";
+
+@function adjust-saturation-lightness($color, $level) {
+  @if $color == $light-accent {
+    @if $level == 'secondary' {
+      $color: color.adjust($color, $hue: 3);
+      @return color.scale($color,
+        $saturation: -12%,
+        $lightness: 5%
+      );
+    } @else if $level == 'tertiary' {
+      $color: color.adjust($color, $hue: 2);
+      @return color.scale($color,
+        $saturation: -20%,
+        $lightness: 28%
+      );
+    } @else if $level == 'quaternary' {
+      $color: color.adjust($color, $hue: 5);
+      @return color.scale($color,
+        $saturation: -23%,
+        $lightness: 92%
+      );
+    }
+  } @else if $color == $dark-accent {
+    @if $level == 'secondary' {
+      @return color.scale($color,
+        $saturation: -3%,
+        $lightness: -3%
+      );
+    } @else if $level == 'tertiary' {
+      $color: color.adjust($color, $hue: -1);
+      @return color.scale($color,
+        $saturation: -23%,
+        $lightness: -4%
+      );
+    } @else if $level == 'quaternary' {
+      $color: color.adjust($color, $hue: -4);
+      @return color.scale($color,
+        $saturation: -40%,
+        $lightness: -58%
+      );
+    }
+  }
+  @return $color;
+}
+
 // Light Theme Colors
 $light-accent: #d19062;
-$light-accent-secondary: #c9a785;
-$light-accent-tertiary: #e9e0d7;
-$light-accent-quaternary: #fbfaf8;
+$light-accent-secondary: adjust-saturation-lightness($light-accent, 'secondary');
+$light-accent-tertiary: adjust-saturation-lightness($light-accent, 'tertiary');
+$light-accent-quaternary: adjust-saturation-lightness($light-accent, 'quaternary');
 $light-accent-base: #fff;
 
 $light-text-base: rgb(47, 40, 38);
@@ -12,14 +58,14 @@ $light-text-tertiary: rgba($light-text-base, 0.45);
 
 // Dark Theme Colors
 $dark-accent: #ab8054;
-$dark-accent-secondary: #9e7c51;
-$dark-accent-tertiary: #837467;
-$dark-accent-quaternary: #3c3834;
+$dark-accent-secondary: adjust-saturation-lightness($dark-accent, 'secondary');
+$dark-accent-tertiary: adjust-saturation-lightness($dark-accent, 'tertiary');
+$dark-accent-quaternary: adjust-saturation-lightness($dark-accent, 'quaternary');
 $dark-accent-base: #2f2826;
 
 $dark-text-base: rgb(220, 220, 220);
 $dark-text-primary: rgba($dark-text-base, 1);
-$dark-text-secondary: rgba($dark-text-base, 0.88);
+$dark-text-secondary: rgba($dark-text-base, 0.75);
 $dark-text-tertiary: rgba($dark-text-base, 0.45);
 
 $button-colors: (
