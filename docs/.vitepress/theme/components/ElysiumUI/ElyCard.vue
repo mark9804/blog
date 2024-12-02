@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onMounted, onUnmounted, ref } from "vue";
+import { computed, onMounted, onUnmounted, ref, nextTick } from "vue";
 import type { CardProps } from "./types/CardProps";
 import { withBase } from "vitepress";
 import { formatRelativeTime } from "../../utils/timeUtils";
@@ -10,8 +10,8 @@ import { formalizeString } from "./_utils/stringUtils";
 const store = useCustomStore();
 
 const emit = defineEmits<{
-  (e: "loaded"): void;
-  (e: "suspense"): void;
+  (e: "loaded"): void; // 图片加载完成
+  (e: "suspense"): void; // 图片加载时间过长
 }>();
 
 const isLoaded = ref(false);
@@ -61,23 +61,24 @@ const relativeTime = ref(formatRelativeTime(props.content.createdAt));
 
 let timer: ReturnType<typeof setInterval> | null = null;
 
-onMounted(() => {
+onMounted(async () => {
   timer = setInterval(() => {
     relativeTime.value = formatRelativeTime(props.content.createdAt);
   }, 60000); // 每分钟更新一次 relativeTime
-  // If no cover image, emit loaded immediately
+  await nextTick(); // 先等待 DOM 更新
+  // 如果没有封面图片，则直接认为图片加载完成
   if (!props.content.frontmatter.cover) {
     isLoaded.value = true;
     emit("loaded");
   } else {
-    // For posts with cover, emit suspense after timeout
+    // 如果存在封面图片，延时判断，如果没加载完成发送 suspense 事件避免阻塞
     setTimeout(() => {
       if (!isLoaded.value) {
         emit("suspense");
       }
-    }, 800);
+    }, 1000);
   }
-  // Add a small delay before showing the card for a smooth fade-in
+  // 添加一个小延迟，平滑淡入效果
   requestAnimationFrame(() => {
     isVisible.value = true;
   });
@@ -127,6 +128,7 @@ const shouldAriaLabelHide = ref(false);
         :alt="props.content.frontmatter.title"
         :aria-label="`文章「${props.content.frontmatter.title}」的封面图片`"
         @load="handleImageLoad"
+        @error="emit('suspense')"
         loading="eager"
       />
     </div>
