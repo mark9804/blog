@@ -163,6 +163,11 @@ a.title span,
     margin: 0.67em 0;
   }
 
+  h2 {
+    border: none;
+    margin-top: 16px;
+  }
+
   @for $i from 1 through 6 {
     h#{$i},
     h#{$i} a {
