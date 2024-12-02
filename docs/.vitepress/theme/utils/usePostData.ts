@@ -3,13 +3,18 @@ import type { Post } from "../types/Post";
 import { unique, sift } from "radash";
 import { compareDates } from "./timeUtils";
 
-export function defaultFilter(post: Post) {
-  return (
-    post.frontmatter?.publish !== false &&
-    !post.url.endsWith("/") &&
-    !!post.url.match(/breves\//)
-  );
+function createFilter(pattern: string) {
+  return function (post: Post) {
+    return (
+      post.frontmatter?.publish !== false &&
+      !post.url.endsWith("/") &&
+      !!post.url.match(new RegExp(pattern + "/"))
+    );
+  };
 }
+
+export const defaultFilter = createFilter("breves");
+export const defaultQuaversFilter = createFilter("quavers");
 
 export const postData = {
   async getAllPosts(filter?: (post: Post) => boolean) {
