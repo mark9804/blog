@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from "vue";
+import { computed, ref, watch, nextTick, useTemplateRef } from "vue";
 import type { Post } from "../types/Post";
 
 const props = withDefaults(
@@ -26,27 +26,74 @@ const gapSize = computed(() =>
   )
 );
 
-const waterfallItemsList = computed(() => {
-  const tempList = Array.from({ length: waterfallCount.value }, () => []);
-  for (let i = 0; i < props.posts.length; i++) {
-    tempList[i % waterfallCount.value].push(props.posts[i]);
+const waterfallContainerRef = useTemplateRef<HTMLDivElement[]>(
+  "waterfallContainerRef"
+);
+const waterfallItemsList = ref<Post[][]>([]);
+
+/**
+ * 找到一个高度最短的列
+ * @param {number} assumeImageHeight 假设的图片高度
+ * @returns {number} 最短列的索引
+ */
+async function findShortestColumn(assumeImageHeight = 0) {
+  await nextTick();
+  const containers = waterfallContainerRef.value;
+  if (!containers) return 0;
+
+  let minHeight = Infinity;
+  let targetColumnIndex = 0;
+
+  for (let i = 0; i < containers.length; i++) {
+    const height = containers[i].offsetHeight + assumeImageHeight;
+    if (height < minHeight) {
+      minHeight = height;
+      targetColumnIndex = i;
+    }
   }
-  return tempList;
+
+  return targetColumnIndex;
+}
+
+function handleLoaded() {
+  findShortestColumn();
+}
+
+function handleSuspense() {
+  findShortestColumn(400);
+}
+
+watch([waterfallCount, cardWidth, props.posts], async () => {
+  waterfallItemsList.value = Array.from(
+    { length: waterfallCount.value },
+    () => []
+  );
+
+  // 找到一个高度最短的列，把文章卡片塞进去
+  for (const post of props.posts) {
+    const targetColumnIndex = await findShortestColumn();
+    waterfallItemsList.value[targetColumnIndex].push(post);
+  }
 });
 </script>
 
 <template>
-  <div class="article-list__waterfall-container flex justify-between w-full">
+  <div
+    class="article-list__waterfall-container flex justify-between w-full items-start"
+  >
     <div
       class="article-list__waterfall-item flex flex-col"
       :style="{ gap: `${gapSize}px`, width: `${cardWidth}px` }"
       v-for="items in waterfallItemsList"
+      ref="waterfallContainerRef"
     >
       <ElyCard
         v-for="post in items"
         :key="post.url"
         :content="post"
         :max-width="cardWidth"
+        @loaded="handleLoaded"
+        @suspense="handleSuspense"
       />
     </div>
   </div>

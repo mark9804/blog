@@ -9,6 +9,21 @@ import { formalizeString } from "./_utils/stringUtils";
 
 const store = useCustomStore();
 
+const emit = defineEmits<{
+  (e: "loaded"): void;
+  (e: "suspense"): void;
+}>();
+
+const isLoaded = ref(false);
+const isVisible = ref(false);
+const imageLoaded = ref(false);
+
+const handleImageLoad = () => {
+  imageLoaded.value = true;
+  isLoaded.value = true;
+  emit("loaded");
+};
+
 const props = withDefaults(defineProps<CardProps>(), {
   content: () => ({
     url: "",
@@ -50,6 +65,22 @@ onMounted(() => {
   timer = setInterval(() => {
     relativeTime.value = formatRelativeTime(props.content.createdAt);
   }, 60000); // 每分钟更新一次 relativeTime
+  // If no cover image, emit loaded immediately
+  if (!props.content.frontmatter.cover) {
+    isLoaded.value = true;
+    emit("loaded");
+  } else {
+    // For posts with cover, emit suspense after timeout
+    setTimeout(() => {
+      if (!isLoaded.value) {
+        emit("suspense");
+      }
+    }, 800);
+  }
+  // Add a small delay before showing the card for a smooth fade-in
+  requestAnimationFrame(() => {
+    isVisible.value = true;
+  });
 });
 
 onUnmounted(() => {
@@ -67,6 +98,8 @@ const shouldAriaLabelHide = ref(false);
     class="elysium-ui__card__container w-full rounded-[3px] overflow-hidden hover:shadow-card-hover hover:scale-102 transition-all duration-300 relative"
     :class="{
       'no-cover': !props.content.frontmatter.cover,
+      'opacity-0': !isVisible,
+      'opacity-100': isVisible,
     }"
     :style="{
       minWidth: `${minWidth}px`,
@@ -77,20 +110,26 @@ const shouldAriaLabelHide = ref(false);
     <a
       v-if="props.content.url"
       :href="withBase(props.content.url)"
-      class="absolute inset-0 w-full h-full z-0"
+      class="absolute inset-0 w-full h-full z-1"
       tabindex="-1"
       :aria-hidden="shouldAriaLabelHide"
       @mouseover="shouldAriaLabelHide = false"
       @mouseleave="shouldAriaLabelHide = true"
     />
-    <img
-      class="elysium-ui__card--cover"
+    <div
+      class="elysium-ui__card--cover-container"
       v-if="props.content.frontmatter.cover"
-      :src="props.content.frontmatter.cover"
-      :alt="props.content.frontmatter.title"
-      :aria-label="`文章「${props.content.frontmatter.title}」的封面图片`"
-    />
-    <div class="elysium-ui__card--content flex flex-col pb-4">
+    >
+      <img
+        class="elysium-ui__card--cover"
+        :class="{ loaded: imageLoaded }"
+        :src="props.content.frontmatter.cover"
+        :alt="props.content.frontmatter.title"
+        :aria-label="`文章「${props.content.frontmatter.title}」的封面图片`"
+        @load="handleImageLoad"
+      />
+    </div>
+    <div class="elysium-ui__card--content flex flex-col pb-4 z-0">
       <h2 class="elysium-ui__card--title font-bold text-lg pt-4 pl-4 pr-4">
         <a :href="withBase(props.content.url)">
           {{ formalizeString(props.content.frontmatter.title) }}
@@ -144,14 +183,31 @@ const shouldAriaLabelHide = ref(false);
       "cover"
       "content";
     background-color: colors.$color-accent-base;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 
     &.no-cover {
       grid-template-areas: "content";
     }
   }
 
-  &--cover {
+  &--cover-container {
     grid-area: cover;
+    position: relative;
+    width: 100%;
+    background-color: colors.$color-accent-base;
+    overflow: hidden;
+  }
+
+  &--cover {
+    width: 100%;
+    display: block;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+
+    &.loaded {
+      opacity: 1;
+    }
   }
 
   &--content {
