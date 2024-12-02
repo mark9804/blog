@@ -45,11 +45,11 @@ onMounted(() => {
 
 const createdAt = computed(() => formatDateTime(createdAtTimestamp.value));
 
-const hasPostNotUpdated = computed(
+const hasPostUpdate = computed(
   () =>
     lastUpdatedTimestamp.value &&
     createdAtTimestamp.value &&
-    lastUpdatedTimestamp.value === createdAtTimestamp.value
+    lastUpdatedTimestamp.value !== createdAtTimestamp.value
 );
 
 function handleTagClick(tag: string) {
@@ -63,15 +63,15 @@ function handleTagClick(tag: string) {
   <div class="article-info flex flex-wrap gap-4 items-center mb-5">
     <a-tooltip
       v-if="lastUpdated || createdAt"
-      :content="`文章${hasPostNotUpdated ? '' : '初稿'}创建于 ${createdAt} (GMT+8)`"
+      :content="`文章${hasPostUpdate ? '最后更新于' + lastUpdated : '创建于' + createdAt} (GMT+8)`"
       position="right"
     >
       <span
         class="text-sm flex items-center gap-1 text-gray-500 dark:text-gray-400"
       >
-        <icon-clock-circle v-if="hasPostNotUpdated" />
-        <icon-history v-else />
-        {{ lastUpdated || createdAt }} (GMT+8)
+        <icon-history v-if="hasPostUpdate" />
+        <icon-clock-circle v-else />
+        {{ createdAt }} (GMT+8)
       </span>
     </a-tooltip>
     <a-tooltip
