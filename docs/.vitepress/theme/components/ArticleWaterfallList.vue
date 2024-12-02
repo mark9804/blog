@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, ref, watch, nextTick, useTemplateRef } from "vue";
+import { clamp } from "./ElysiumUI/_utils/numberUtils";
 import type { Post } from "../types/Post";
 
 const props = withDefaults(
@@ -19,10 +20,11 @@ const waterfallCount = computed(() =>
 const cardWidth = computed(() => (props.width >= 375 ? 280 : props.width));
 
 const gapSize = computed(() =>
-  Math.max(
+  clamp(
     (props.width - waterfallCount.value * cardWidth.value) /
       (waterfallCount.value - 1 || 1),
-    24
+    24,
+    32
   )
 );
 
