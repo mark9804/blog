@@ -65,18 +65,21 @@ function handleSuspense() {
   findShortestColumn(400);
 }
 
-watch([waterfallCount, cardWidth, props.posts], async () => {
-  waterfallItemsList.value = Array.from(
-    { length: waterfallCount.value },
-    () => []
-  );
+watch(
+  () => [waterfallCount.value, cardWidth.value, props.posts],
+  async () => {
+    waterfallItemsList.value = Array.from(
+      { length: waterfallCount.value },
+      () => []
+    );
 
-  // 找到一个高度最短的列，把文章卡片塞进去
-  for (const post of props.posts) {
-    const targetColumnIndex = await findShortestColumn();
-    waterfallItemsList.value[targetColumnIndex].push(post);
+    // 找到一个高度最短的列，把文章卡片塞进去
+    for (const post of props.posts) {
+      const targetColumnIndex = await findShortestColumn();
+      waterfallItemsList.value[targetColumnIndex].push(post);
+    }
   }
-});
+);
 </script>
 
 <template>
