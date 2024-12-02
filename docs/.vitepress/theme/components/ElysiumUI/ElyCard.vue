@@ -127,6 +127,7 @@ const shouldAriaLabelHide = ref(false);
         :alt="props.content.frontmatter.title"
         :aria-label="`文章「${props.content.frontmatter.title}」的封面图片`"
         @load="handleImageLoad"
+        loading="eager"
       />
     </div>
     <div class="elysium-ui__card--content flex flex-col pb-4 z-0">
