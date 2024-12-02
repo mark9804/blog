@@ -4,6 +4,7 @@
     "skipLibCheck": true,
     "module": "ESNext",
     "moduleResolution": "bundler",
+    "jsx": "preserve",
     "allowSyntheticDefaultImports": true
   },
   "include": ["vite.config.ts", "docs/.vitepress/**/*"]
