@@ -1,5 +1,13 @@
 <script setup lang="ts">
-import { nextTick, computed, ref, watch, useTemplateRef } from "vue";
+import {
+  nextTick,
+  computed,
+  ref,
+  watch,
+  useTemplateRef,
+  onMounted,
+  onActivated,
+} from "vue";
 import { useDark, useCssVar, useElementSize } from "@vueuse/core";
 import { useData } from "vitepress";
 import { postData, defaultFilter } from "../utils/usePostData";
@@ -15,7 +23,7 @@ const props = computed(() => {
 
 const posts = ref([]);
 const articleTitleRef = useTemplateRef<HTMLHeadingElement>("articleTitleRef");
-const isDark = useDark();
+const isDark = computed(() => useDark().value || useData().isDark.value);
 const accentColor = ref(isDark.value ? "#aa7e53" : "#d19062");
 const backgroundColor = ref(isDark.value ? "#2f2826" : "#fbfaf8");
 
@@ -25,14 +33,32 @@ postData.getAllPosts(defaultFilter).then(res => {
   posts.value = res;
 });
 
-watch(isDark, newVal => {
+watch(
+  () => isDark.value,
+  newVal => {
+    nextTick(() => {
+      accentColor.value = useCssVar("--color-accent").value;
+      backgroundColor.value = newVal
+        ? useCssVar("--color-accent-base").value
+        : useCssVar("--color-accent-quaternary").value;
+      setThemeOnActivated();
+    });
+  }
+);
+
+function setThemeOnActivated() {
   nextTick(() => {
-    accentColor.value = useCssVar("--color-accent").value;
-    backgroundColor.value = newVal
-      ? useCssVar("--color-accent-base").value
-      : useCssVar("--color-accent-quaternary").value;
+    const htmlElement = document.documentElement;
+    if (isDark.value) {
+      htmlElement.classList.add("dark");
+    } else {
+      htmlElement.classList.remove("dark");
+    }
   });
-});
+}
+
+onActivated(() => setThemeOnActivated());
+onMounted(() => setThemeOnActivated());
 </script>
 
 <template>
