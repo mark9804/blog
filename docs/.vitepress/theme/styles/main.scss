@@ -136,6 +136,10 @@ a.title span,
     color: $color-accent-code;
   }
 
+  code {
+    font-family: fonts.$font-family-mono;
+  }
+
   a {
     color: inherit;
     text-decoration-color: $color-accent-secondary;
