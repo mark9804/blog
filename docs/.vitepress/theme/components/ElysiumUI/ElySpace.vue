@@ -126,7 +126,7 @@ const SpaceElement = () => {
 </template>
 
 <style lang="scss" scoped>
-@use "../../styles/color-variable" as colors;
+@use "../../styles/colors";
 .elysium-ui__space--built-in-divider {
   display: inline-block;
   color: colors.$color-accent-text-secondary;

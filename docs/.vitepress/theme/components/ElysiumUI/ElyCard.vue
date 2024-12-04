@@ -176,7 +176,7 @@ const shouldAriaLabelHide = ref(false);
 </template>
 
 <style scoped lang="scss">
-@use "../../styles/color-variable" as colors;
+@use "../../styles/colors";
 
 .elysium-ui__card {
   &__container {

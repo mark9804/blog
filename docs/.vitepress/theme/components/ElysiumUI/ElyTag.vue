@@ -87,8 +87,8 @@ const handleClose = (e: Event) => {
 
 <style scoped lang="scss">
 @use "sass:map";
-@use "./_mixins/tag" as tag;
-@use "../../styles/color-variable" as color;
+@use "./_mixins/tag";
+@use "../../styles/colors";
 
 .elysium-ui__tag {
   @include tag.tag-base;
@@ -121,8 +121,8 @@ const handleClose = (e: Event) => {
 
   // States
   &--active {
-    background-color: color.$color-accent;
-    color: color.$color-accent-base;
+    background-color: colors.$color-accent;
+    color: colors.$color-accent-base;
   }
 
   &--clickable {
