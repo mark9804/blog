@@ -151,6 +151,11 @@ a.title span,
     }
   }
 
+  s {
+    color: $color-accent-text-tertiary;
+    text-decoration-thickness: 2px;
+  }
+
   img,
   .arco-image,
   .elysium-ui__image {
