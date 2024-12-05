@@ -10,7 +10,11 @@ import {
 } from "vue";
 import { useDark, useCssVar, useElementSize } from "@vueuse/core";
 import { useData } from "vitepress";
-import { postData, defaultFilter } from "../utils/usePostData";
+import {
+  postData,
+  defaultFilter,
+  defaultQuaversFilter,
+} from "../utils/usePostData";
 import VPLocalSearchBox from "vitepress/dist/client/theme-default/components/VPNavBarSearch.vue";
 const { theme } = useData();
 const props = computed(() => {
@@ -22,6 +26,11 @@ const props = computed(() => {
 });
 
 const posts = ref([]);
+const quavers = ref([]);
+const postType = ref<"breves" | "quavers">("breves");
+const waterfallData = computed(() =>
+  postType.value === "breves" ? posts.value : quavers.value
+);
 const articleTitleRef = useTemplateRef<HTMLHeadingElement>("articleTitleRef");
 const { isDark: themeIsDark } = useData();
 const isDark = computed(() => useDark().value || themeIsDark.value);
@@ -30,9 +39,16 @@ const backgroundColor = ref(useCssVar("--color-accent-quaternary").value);
 
 const { width: articleTitleWidth } = useElementSize(articleTitleRef);
 
-postData.getAllPosts(defaultFilter).then(res => {
-  posts.value = res;
-});
+function initPosts() {
+  return Promise.all([
+    postData.getAllPosts(defaultFilter).then(res => {
+      posts.value = res;
+    }),
+    postData.getAllPosts(defaultQuaversFilter).then(res => {
+      quavers.value = res;
+    }),
+  ]);
+}
 
 watch(
   () => isDark.value,
@@ -58,8 +74,19 @@ function setThemeOnActivated() {
   });
 }
 
-onActivated(() => setThemeOnActivated());
-onMounted(() => setThemeOnActivated());
+function toggleWaterfall(type: "breves" | "quavers") {
+  postType.value = type;
+}
+
+function init() {
+  initPosts().then(() => {
+    toggleWaterfall("breves");
+    setThemeOnActivated();
+  });
+}
+
+onActivated(init);
+onMounted(init);
 </script>
 
 <template>
@@ -76,11 +103,29 @@ onMounted(() => setThemeOnActivated());
     <main
       class="w-full max-w-[1272px] flex flex-col pl-16 xs:pl-10 xs:pr-10 pr-16 mt-10 mb-20"
     >
-      <h1 class="mb-10 flex flex-nowrap items-end gap-5" ref="articleTitleRef">
-        <span class="home-title">Breves</span>
+      <h1
+        class="mb-10 flex flex-nowrap items-end justify-between overflow-x-hidden"
+        ref="articleTitleRef"
+      >
+        <div class="flex">
+          <ElyButton
+            text
+            class="home-title"
+            :class="{ active: postType === 'breves' }"
+            @click="toggleWaterfall('breves')"
+            >Breves</ElyButton
+          >
+          <ElyButton
+            text
+            class="home-title"
+            :class="{ active: postType === 'quavers' }"
+            @click="toggleWaterfall('quavers')"
+            >Quavers</ElyButton
+          >
+        </div>
         <VPLocalSearchBox />
       </h1>
-      <ArticleWaterfallList :posts="posts" :width="articleTitleWidth" />
+      <ArticleWaterfallList :posts="waterfallData" :width="articleTitleWidth" />
     </main>
   </div>
 </template>
@@ -94,9 +139,48 @@ onMounted(() => setThemeOnActivated());
 
 :deep(.VPNavBarSearch) {
   padding: 0;
+  justify-content: flex-end;
+}
+
+:deep(#local-search) {
+  flex-grow: 1;
+  display: flex;
+  justify-content: flex-end;
 }
 
 :deep(.DocSearch-Button) {
-  height: 36px;
+  padding: 0 12px;
+  justify-content: space-between;
+  flex-grow: 1;
+  max-width: 280px;
+}
+
+.home-title {
+  cursor: pointer !important;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 500;
+  color: var(--color-accent-text-tertiary);
+
+  &:after {
+    content: "";
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 0;
+    background-color: var(--color-accent);
+    transition: height 0.3s ease-in-out;
+  }
+
+  &.active {
+    color: var(--color-accent-text-primary);
+    border-radius: 0;
+
+    &:after {
+      height: 4px;
+    }
+  }
 }
 </style>

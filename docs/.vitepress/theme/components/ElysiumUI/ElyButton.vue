@@ -13,13 +13,13 @@ const props = withDefaults(defineProps<ButtonProps>(), {
   primary: true,
   secondary: false,
   text: false,
-  ariaLabel: "按钮",
+  ariaLabel: undefined,
 });
 
 const classes = computed(() => ({
   "ely-button": true,
-  "ely-button--primary": props.primary,
-  "ely-button--secondary": props.secondary,
+  "ely-button--primary": props.primary && !props.secondary && !props.text,
+  "ely-button--secondary": props.secondary && !props.text,
   "ely-button--text": props.text,
   "ely-button--mini": props.size === "mini",
   "ely-button--small": props.size === "small",

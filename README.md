@@ -41,7 +41,7 @@
 
 ## TODO
 
-- [ ] 轻量化文章 （a.k.a 朋友圈） <ruby><code>quavers</code><rt>八分音符</rt></ruby>
+- [x] 轻量化文章 （a.k.a 朋友圈） <ruby><code>quavers</code><rt>八分音符</rt></ruby>
 - [ ] 首页 NavBar
 - [ ] 逐渐替换掉 Arco Design 组件库
 - [x] 根据一级主题色自动生成二、三、四级主题色

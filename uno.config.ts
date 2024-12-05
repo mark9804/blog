@@ -25,10 +25,6 @@ export default defineConfig({
     ["text-tertiary", { color: "var(--color-accent-text-tertiary)" }],
     ...borderAccents,
   ],
-  shortcuts: {
-    "home-title":
-      "text-2xl font-bold border-b-4 border-b-solid border-b-[var(--color-accent)]",
-  },
   presets: [
     presetUno(),
     presetIcons({
