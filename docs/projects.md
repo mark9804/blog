@@ -233,3 +233,8 @@ createdAt: 1732558487000
 
 - 基于 Web 的 GridWare 时间序列分析和可视化工具，用于心理学硕士毕业论文。
 - 不再维护。
+
+### [DocumentImageExtractor](https://github.com/mark9804/DocumentImageExtractor)
+
+- 自动提取 Office 2007 及更新的 Office 程序创建的文档（docx, pptx, xlsx）以及 PDF 中的图片。
+- 不再维护。
