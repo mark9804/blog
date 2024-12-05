@@ -1,59 +1,149 @@
-@use "../components/ElysiumUI/_config/theme_colors" as config;
 @use "sass:color";
 
+$accent: #d19062;
 $base-opacity: 0.8;
 $code-brightness-tune: 17%;
 $code-saturation-tune: 10%;
+$disabled-opacity: 0.6;
+
+@function generate-dark-accent($light-accent) {
+  $color: color.adjust($light-accent, $hue: 3);
+  @return color.scale($color,
+    $saturation: -18%,
+    $lightness: -10%
+  );
+}
+
+@function adjust-saturation-lightness($color, $level) {
+  @if $color == $light-accent {
+    @if $level == 'secondary' {
+      $color: color.adjust($color, $hue: 3);
+      @return color.scale($color,
+        $saturation: -12%,
+        $lightness: 5%
+      );
+    } @else if $level == 'tertiary' {
+      $color: color.adjust($color, $hue: 2);
+      @return color.scale($color,
+        $saturation: -20%,
+        $lightness: 28%
+      );
+    } @else if $level == 'quaternary' {
+      $color: color.adjust($color, $hue: 5);
+      @return color.scale($color,
+        $saturation: -23%,
+        $lightness: 92%
+      );
+    }
+  } @else if $color == $dark-accent {
+    @if $level == 'secondary' {
+      @return color.scale($color,
+        $saturation: -3%,
+        $lightness: -3%
+      );
+    } @else if $level == 'tertiary' {
+      $color: color.adjust($color, $hue: -1);
+      @return color.scale($color,
+        $saturation: -23%,
+        $lightness: -4%
+      );
+    } @else if $level == 'quaternary' {
+      $color: color.adjust($color, $hue: -4);
+      @return color.scale($color,
+        $saturation: -40%,
+        $lightness: -58%
+      );
+    }
+  }
+  @return $color;
+}
+
+// Light Theme Colors
+$light-accent: $accent;
+$light-accent-secondary: adjust-saturation-lightness($light-accent, 'secondary');
+$light-accent-tertiary: adjust-saturation-lightness($light-accent, 'tertiary');
+$light-accent-quaternary: adjust-saturation-lightness($light-accent, 'quaternary');
+$light-accent-base: #fff;
+
+$light-text-base: rgb(47, 40, 38);
+$light-text-primary: rgba($light-text-base, 1);
+$light-text-secondary: rgba($light-text-base, 0.75);
+$light-text-tertiary: rgba($light-text-base, 0.45);
+
+// Dark Theme Colors
+$dark-accent: generate-dark-accent($light-accent);
+$dark-accent-secondary: adjust-saturation-lightness($dark-accent, 'secondary');
+$dark-accent-tertiary: adjust-saturation-lightness($dark-accent, 'tertiary');
+$dark-accent-quaternary: adjust-saturation-lightness($dark-accent, 'quaternary');
+$dark-accent-base: #2f2826;
+
+$dark-text-base: rgb(220, 220, 220);
+$dark-text-primary: rgba($dark-text-base, 1);
+$dark-text-secondary: rgba($dark-text-base, 0.75);
+$dark-text-tertiary: rgba($dark-text-base, 0.45);
+
+$button-colors: (
+  "primary": (
+    "background": $light-accent,
+    "text": var(--color-accent-base)
+  ),
+  "secondary": (
+    "background": $light-accent-quaternary,
+    "text": $dark-accent
+  )
+);
+
+/* ------------------------------------------------------------ */
 
 html {
-  --color-accent: #{config.$light-accent};
-  --color-accent-secondary: #{config.$light-accent-secondary};
-  --color-accent-tertiary: #{config.$light-accent-tertiary};
-  --color-accent-quaternary: #{config.$light-accent-quaternary};
-  --color-accent-base: #{config.$light-accent-base};
-  --color-accent-transparent: #{rgba(config.$light-accent-base, $base-opacity)};
-  --color-accent-text-primary: #{config.$light-text-primary};
-  --color-accent-text-secondary: #{config.$light-text-secondary};
-  --color-accent-text-tertiary: #{config.$light-text-tertiary};
+  --color-accent: #{$light-accent};
+  --color-accent-secondary: #{$light-accent-secondary};
+  --color-accent-tertiary: #{$light-accent-tertiary};
+  --color-accent-quaternary: #{$light-accent-quaternary};
+  --color-accent-base: #{$light-accent-base};
+  --color-accent-transparent: #{rgba($light-accent-base, $base-opacity)};
+  --color-accent-text-primary: #{$light-text-primary};
+  --color-accent-text-secondary: #{$light-text-secondary};
+  --color-accent-text-tertiary: #{$light-text-tertiary};
   --color-accent-code: #{color.adjust(
-      config.$light-accent,
+      $light-accent,
       $saturation: -$code-saturation-tune,
       $lightness: -$code-brightness-tune
     )};
 
   @for $i from 1 through 9 {
-    --color-accent-border-#{$i}00: #{rgba(config.$light-accent, $i * 0.1)};
+    --color-accent-border-#{$i}00: #{rgba($light-accent, $i * 0.1)};
   }
 
   @for $i from 1 through 9 {
-    --color-accent-shadow-#{$i}00: #{rgba(config.$light-accent, $i * 0.1)};
+    --color-accent-shadow-#{$i}00: #{rgba($light-accent, $i * 0.1)};
   }
 
   color: var(--color-accent-text-primary);
 }
 
 html.dark {
-  --color-accent: #{config.$dark-accent};
-  --color-accent-secondary: #{config.$dark-accent-secondary};
-  --color-accent-tertiary: #{config.$dark-accent-tertiary};
-  --color-accent-quaternary: #{config.$dark-accent-quaternary};
-  --color-accent-base: #{config.$dark-accent-base};
-  --color-accent-transparent: #{rgba(config.$dark-accent-base, $base-opacity)};
-  --color-accent-text-primary: #{config.$dark-text-primary};
-  --color-accent-text-secondary: #{config.$dark-text-secondary};
-  --color-accent-text-tertiary: #{config.$dark-text-tertiary};
+  --color-accent: #{$dark-accent};
+  --color-accent-secondary: #{$dark-accent-secondary};
+  --color-accent-tertiary: #{$dark-accent-tertiary};
+  --color-accent-quaternary: #{$dark-accent-quaternary};
+  --color-accent-base: #{$dark-accent-base};
+  --color-accent-transparent: #{rgba($dark-accent-base, $base-opacity)};
+  --color-accent-text-primary: #{$dark-text-primary};
+  --color-accent-text-secondary: #{$dark-text-secondary};
+  --color-accent-text-tertiary: #{$dark-text-tertiary};
   --color-accent-code: #{color.adjust(
-      config.$dark-accent,
+      $dark-accent,
       $saturation: + $code-saturation-tune,
       $lightness: + $code-brightness-tune
     )};
 
   @for $i from 1 through 9 {
-    --color-accent-border-#{$i}00: #{rgba(config.$dark-accent, $i * 0.1)};
+    --color-accent-border-#{$i}00: #{rgba($dark-accent, $i * 0.1)};
   }
 
   @for $i from 1 through 9 {
-    --color-accent-shadow-#{$i}00: #{rgba(config.$dark-accent, $i * 0.1)};
+    --color-accent-shadow-#{$i}00: #{rgba($dark-accent, $i * 0.1)};
   }
 }
 
