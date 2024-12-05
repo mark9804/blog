@@ -25,8 +25,18 @@ comment: false
 
 本站基于 [VitePress](https://vitepress.dev/) 搭建，托管于 [Vercel](https://vercel.com/)。
 
-网站主题为自行设计并开发的 Elysium。主题名称、文章分类（长文章：{二全音符:breve}；短文章：{四分音符:quaver}）和配色灵感来自概念==永世乐土==以及==黄金庭园==。主题对视觉障碍者友好（感谢 [Armstrong](https://armstrong.viyf.org/) 在百忙之中抽出时间来帮助我测试这个主题）。
+网站主题为自行设计并开发的 Elysium。主题名称、文章分类（长文章：{二全音符:breve}；短文章：{四分音符:quaver}）和默认配色灵感来自概念==永世乐土==以及==黄金庭园==。主题对视觉障碍者友好（感谢 [Armstrong](https://armstrong.viyf.org/) 在百忙之中抽出时间来帮助我测试这个主题）。
 
 网站全部内容均开源，文章内容使用 [CC-BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh) 协议发布。代码使用 [AGPL-3.0](https://www.gnu.org/licenses/agpl-3.0.html) 协议发布。
 
 如果你希望了解更多技术细节，可以访问该网站的 [GitHub 仓库](https://github.com/mark9804/blog)。
+
+### 部署和使用
+
+#### 使用主题
+
+本主题暂时没有发布主题包的计划，如果需要使用，请 fork 本仓库并自行修改。
+
+#### 修改主题色
+
+修改 `docs/.vitepress/theme/styles/colors.scss` 中的 `$accent` 变量值即可，色板中的其余颜色会自动生成（包括暗色色板）。
