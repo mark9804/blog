@@ -135,7 +135,7 @@ function handleScrollIndicatorClick() {
             {{ name }}
           </h1>
         </ClientOnly>
-        <p class="ely-profile__bio text-primary">
+        <p class="ely-profile__bio text-tertiary">
           {{ props.bio }}
         </p>
       </div>
@@ -144,6 +144,7 @@ function handleScrollIndicatorClick() {
         as="link"
         :href="`mailto:${props.email}`"
         aria-label="发送邮件"
+        :style="{ maxWidth: '240px' }"
         ><span class="flex items-center gap-2">
           <icon-email :stroke-width="6" />Contact
         </span></ElyButton

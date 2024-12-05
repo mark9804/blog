@@ -8,7 +8,7 @@ export const userProfile: ProfileProps = {
   },
   email: "mark_chen@blue-archive.io",
   avatar: "avatar.webp",
-  bio: "To trace the bright moonlight",
+  bio: "Per aspera ad astra",
   social: [
     {
       alias: "GitHub",
@@ -25,6 +25,10 @@ export const userProfile: ProfileProps = {
     {
       alias: "Projects",
       link: "/projects",
+    },
+    {
+      alias: "About",
+      link: "/about",
     },
   ],
 };
