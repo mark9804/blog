@@ -1,5 +1,7 @@
 # mark9804 的个人博客
 
+[访问](https://mark9804.github.io/)
+
 基于 VitePress，定制 [Elysium](./docs/.vitepress/theme/components/ElysiumUI) 主题，使用少量 [Arco Design](https://arco.design/vue/) 组件库和图标。~~现在还很多，会慢慢变少的~~
 
 视障人群友好（感谢 [Armstrong](https://armstrong.viyf.org/) 抽出自己休息时间给我提了许多建议！），晕动症患者友好（大概）。
@@ -9,11 +11,12 @@
 ## Feature
 
 - ~~正在~~定制 [Elysium](./docs/.vitepress/theme/components/ElysiumUI) 主题。
+  - 易于客制化：只需修改一处主题色，系统自动生成并应用全局色板。
+  - 支持标签搜索和关键词搜索。
 - 支持 [giscus](https://giscus.app/) 评论系统。
 - 首页美化：
   - 文章瀑布流布局；
-  - 文章卡片支持封面图片；
-  - 文章卡片支持加载动画。
+  - 文章卡片支持封面图片。
 - Markdown 语法增强：
   - 相册语法 `:::gallery 相册名称`；
   - 图片增强：
@@ -41,7 +44,7 @@
 - [ ] 轻量化文章 （a.k.a 朋友圈） <ruby><code>quavers</code><rt>八分音符</rt></ruby>
 - [ ] 首页 NavBar
 - [ ] 逐渐替换掉 Arco Design 组件库
-- [ ] 根据一级主题色自动生成二、三、四级主题色
+- [x] 根据一级主题色自动生成二、三、四级主题色
 - [x] 首页文章搜索框
 
 ## 技术栈
