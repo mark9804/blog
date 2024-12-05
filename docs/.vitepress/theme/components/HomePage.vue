@@ -23,9 +23,10 @@ const props = computed(() => {
 
 const posts = ref([]);
 const articleTitleRef = useTemplateRef<HTMLHeadingElement>("articleTitleRef");
-const isDark = computed(() => useDark().value || useData().isDark.value);
-const accentColor = ref(isDark.value ? "#aa7e53" : "#d19062");
-const backgroundColor = ref(isDark.value ? "#2f2826" : "#fbfaf8");
+const { isDark: themeIsDark } = useData();
+const isDark = computed(() => useDark().value || themeIsDark.value);
+const accentColor = ref(useCssVar("--color-accent").value);
+const backgroundColor = ref(useCssVar("--color-accent-quaternary").value);
 
 const { width: articleTitleWidth } = useElementSize(articleTitleRef);
 
