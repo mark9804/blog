@@ -122,7 +122,7 @@ tags:
 
 其实写到这已经和猫娘调教没什么关系了，不过相信聪明的你一定可以学以致用的，Ciallo～(∠・ω< )⌒☆
 
-## 参考
+## 延伸阅读
 
 - [让 Claude 思考（思维链提示）以提高性能](https://docs.anthropic.com/zh-CN/docs/build-with-claude/prompt-engineering/chain-of-thought)
 - [Prompt Engineering - OpenAI](https://platform.openai.com/docs/guides/prompt-engineering#tactic-specify-the-steps-required-to-complete-a-task)

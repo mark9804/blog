@@ -100,3 +100,8 @@ ChatGPT 并不是一个模型，它（根据大家猜测）是一个混合专家
 ChatGPT 并不是一次性对话，你可以在后续追加指示，也可以给出它对上一次回答的反馈。ChatGPT 的架构决定了每一次做出回答之前它都会重新回顾一遍之前的所有对话内容（尽管这个机制决定了对话内容越长 ChatGPT 回答得越慢，消耗的资源也越多），所以直接告诉它你喜欢或者不喜欢它的回答就可以了。不过记得告诉它为什么你喜欢或者不喜欢它回答里的哪个部分——让男朋友猜他哪里做错了可能有意外惊喜，让 ChatGPT 猜它哪里做错了只会浪费你的 token。
 
 做完这一步之后，恭喜你，你现在应该得到了一只头脑简单但是十分听话的赛博猫娘。不过很可惜，在一些脑筋急转弯的问题上，可能她还不是那么聪明。不过对于一只猫娘来说，天然呆也是属性，对吧？
+
+## 延伸阅读
+
+- [提示工程概述 | Anthropic](https://docs.anthropic.com/zh-CN/docs/build-with-claude/prompt-engineering/overview)
+- [设计提示的通用技巧 | Prompt Engineering Guide](https://www.promptingguide.ai/zh/introduction/tips)
