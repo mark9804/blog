@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { postData, defaultFilter } from "../utils/usePostData";
-import { computed, ref, useTemplateRef } from "vue";
+import { computed, ref, useTemplateRef, onMounted, onActivated } from "vue";
 import ArticleWaterfallList from "./ArticleWaterfallList.vue";
 import ElyTag from "./ElysiumUI/ElyTag.vue";
 import { useCustomStore } from "../../piniaStore";
@@ -15,6 +15,17 @@ const allTags = ref([]);
 const allPosts = ref([]);
 
 const selectedTags = computed(() => store.getSelectedTags);
+
+// 移除失效 tag
+// 失效 tag：在某次选中之后，由于文章更改，导致已经不存在这个 tag 了
+// 会导致永远无法匹配到任何文章，用户也不能手动移除这个 tag
+function removeInvalidTags() {
+  selectedTags.value.forEach(tag => {
+    if (!allTags.value.includes(tag)) {
+      store.removeSelectedTags(tag);
+    }
+  });
+}
 
 const toggleTag = (tag: string) => {
   if (selectedTags.value.includes(tag)) {
@@ -40,6 +51,9 @@ postData.getAllPosts(defaultFilter).then(res => {
 postData.getAllTags().then(res => {
   allTags.value = res.sort((a, b) => a.localeCompare(b));
 });
+
+onMounted(removeInvalidTags);
+onActivated(removeInvalidTags);
 </script>
 
 <template>
