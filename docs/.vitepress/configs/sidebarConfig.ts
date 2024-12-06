@@ -1,7 +1,5 @@
-export const sidebarConfig = {
+const commonConfig = {
   documentRootPath: "/docs",
-  scanStartPath: "/breves/",
-  resolvePath: "/breves/",
   useTitleFromFileHeading: true,
   useTitleFromFrontmatter: true,
   useFolderTitleFromIndexFile: true,
@@ -20,9 +18,9 @@ export const sidebarConfig = {
   // sortMenusOrderNumericallyFromLink: false,
   // frontmatterOrderDefaultValue: 0,
   // manualSortFileNameByPriority: ['first.md', 'second', 'third.md'],
-  // removePrefixAfterOrdering: false,
-  // prefixSeparator: '.',
-  excludePattern: ["tags.md", "quavers"],
+  removePrefixAfterOrdering: true,
+  prefixSeparator: ".",
+  // excludePattern: ["tags.md"],
   // excludeFilesByFrontmatter: false,
   // includeDotFiles: false,
   // includeRootIndexFile: false,
@@ -36,3 +34,16 @@ export const sidebarConfig = {
   // keepMarkdownSyntaxFromTitle: false,
   // debugPrint: true,
 };
+
+export const sidebarConfig = [
+  {
+    scanStartPath: "breves",
+    resolvePath: "/breves",
+    ...commonConfig,
+  },
+  {
+    scanStartPath: "quavers",
+    resolvePath: "/quavers",
+    ...commonConfig,
+  },
+];

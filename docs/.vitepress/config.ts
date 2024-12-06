@@ -8,15 +8,12 @@ import { viteConfig } from "./configs/viteConfig";
 import { sidebarConfig } from "./configs/sidebarConfig";
 import { withSidebar } from "vitepress-sidebar";
 
-// withSidebar 在设置了 `resolvePath` 后不会在 `link` 前添加 `/`，
-// 导致 VitePress 不能正确应用 `is-active` 类
-// 这里手动递归处理一下添加
-function processLinks(
-  items: DefaultTheme.SidebarItem[]
+function fixSidebarLinks(
+  sidebar: DefaultTheme.SidebarItem[]
 ): DefaultTheme.SidebarItem[] {
-  const processedItems = items.map(item => {
+  const processedItems = sidebar.map(item => {
     if (item.items) {
-      item.items = processLinks(item.items);
+      item.items = fixSidebarLinks(item.items);
     }
     if (item.link && !item.link.startsWith("/")) {
       item.link = "/" + item.link;
@@ -24,12 +21,25 @@ function processLinks(
     return item;
   });
 
-  // 将归档文件夹移到末尾
   return processedItems.sort((a, b) => {
     if (a.text?.includes("考古")) return 1;
     if (b.text?.includes("考古")) return -1;
     return 0;
   });
+}
+
+function processLinks(sidebar: DefaultTheme.Sidebar): DefaultTheme.Sidebar {
+  const processedSidebar: DefaultTheme.Sidebar = {};
+  for (const [path, config] of Object.entries(sidebar)) {
+    if ("items" in config && Array.isArray(config.items)) {
+      processedSidebar[path] = {
+        base: config.base,
+        items: fixSidebarLinks(config.items),
+      };
+    }
+  }
+
+  return processedSidebar;
 }
 
 // https://vitepress.dev/reference/site-config
@@ -47,9 +57,7 @@ export default defineConfig({
   markdown: markdownConfig,
   themeConfig: {
     ...(themeConfig as DefaultTheme.Config),
-    sidebar: processLinks(
-      withSidebar({}, sidebarConfig).themeConfig.sidebar || []
-    ),
+    sidebar: processLinks(withSidebar({}, sidebarConfig).themeConfig.sidebar),
   },
   vite: viteConfig,
 });
