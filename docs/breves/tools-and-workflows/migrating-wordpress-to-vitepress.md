@@ -28,7 +28,7 @@ WordPress 的笨重不仅体现在管理后台，还体现在前端页面上。W
 
 比起 Hexo 之类的框架，VuePress 和 VitePress 更像是一个防御型产品，React 没有的我们可以没有，React 有的我们也得在我们的生态里整一个定位类似或者相同的替代品出来。VuePress 好就好在它用了 Vue，VitePress 好就好在它用了 Vue 和 Vite。不过当然，我认为 VuePress 和 VitePress 的产品战略是完全正确的，他们确实获得了相当多 Vue 开发者的青睐，而这些青睐和自发宣传也会让更多人愿意了解和使用 VitePress。
 
-所以我迁移到 VitePress 的原因其实说白了也很简单，我现在没有时间和精力来维护自己的域名和服务器了，因此我需要一个主打静态页面生成的博客框架；正好我是 Vue 开发者，因此我选择了 VuePress 的继任者 VitePress。最后，因为我希望我的博客能从国内访问~~测试了一下好像不能~~，所以我基本上只能在 Vercel、Netlify 和 Cloudflare Pages 之间选择。Cloudflare 是众所周知的国内减速器，Netlify 的免费构建时间又比 Vercel 缩水了整整 100 倍，因此经历了两天思考之后我最终选择了 Vercel。不过没关系，我可以用 GitHub Pages 首页来做跳板，之后想跳到哪就跳到哪。
+所以我迁移到 VitePress 的原因其实说白了也很简单，我现在没有时间和精力来维护自己的域名和服务器了，因此我需要一个主打静态页面生成的博客框架；正好我是 Vue 开发者，因此我选择了 VuePress 的继任者 VitePress。最后，因为我希望我的博客能从国内访问~~测试了一下 Vercel 好像不能~~，所以我基本上只能在 Vercel、Netlify 和 Cloudflare Pages 之间选择。Cloudflare 是众所周知的国内减速器，Netlify 的免费构建时间又比 Vercel 缩水了整整 100 倍，因此经历了两天思考之后我最终选择了 ~~Vercel~~ Netlify。不过没关系，我可以用 GitHub Pages 首页来做跳板，之后想跳到哪就跳到哪。
 
 ## 从 WordPress 到 VitePress
 
