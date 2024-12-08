@@ -3,12 +3,12 @@ import type { Post } from "../types/Post";
 import { unique, sift } from "radash";
 import { compareDates } from "./timeUtils";
 
-function createFilter(pattern: string) {
+export function createFilter(pattern?: string) {
   return function (post: Post) {
     return (
       post.frontmatter?.publish !== false &&
       !post.url.endsWith("/") &&
-      !!post.url.match(new RegExp(pattern + "/"))
+      !!post.url.match(new RegExp(pattern ?? "" + "/"))
     );
   };
 }
