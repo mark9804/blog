@@ -35,7 +35,11 @@ const articleTitleRef = useTemplateRef<HTMLHeadingElement>("articleTitleRef");
 const { isDark: themeIsDark } = useData();
 const isDark = computed(() => useDark().value || themeIsDark.value);
 const accentColor = ref(useCssVar("--color-accent").value);
-const backgroundColor = ref(useCssVar("--color-accent-quaternary").value);
+const backgroundColor = ref(
+  isDark.value
+    ? useCssVar("--color-accent-base").value
+    : useCssVar("--color-accent-quaternary").value
+);
 
 const { width: articleTitleWidth } = useElementSize(articleTitleRef);
 
@@ -55,6 +59,7 @@ watch(
   newVal => {
     nextTick(() => {
       accentColor.value = useCssVar("--color-accent").value;
+      console.log(newVal);
       backgroundColor.value = newVal
         ? useCssVar("--color-accent-base").value
         : useCssVar("--color-accent-quaternary").value;
