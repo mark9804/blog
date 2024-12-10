@@ -8,51 +8,30 @@ $disabled-opacity: 0.6;
 
 @function generate-dark-accent($light-accent) {
   $color: color.adjust($light-accent, $hue: 3);
-  @return color.scale($color,
-    $saturation: -18%,
-    $lightness: -10%
-  );
+  @return color.scale($color, $saturation: -18%, $lightness: -10%);
 }
 
 @function adjust-saturation-lightness($color, $level) {
   @if $color == $light-accent {
-    @if $level == 'secondary' {
+    @if $level == "secondary" {
       $color: color.adjust($color, $hue: 3);
-      @return color.scale($color,
-        $saturation: -12%,
-        $lightness: 5%
-      );
-    } @else if $level == 'tertiary' {
+      @return color.scale($color, $saturation: -12%, $lightness: 5%);
+    } @else if $level == "tertiary" {
       $color: color.adjust($color, $hue: 2);
-      @return color.scale($color,
-        $saturation: -20%,
-        $lightness: 28%
-      );
-    } @else if $level == 'quaternary' {
+      @return color.scale($color, $saturation: -20%, $lightness: 28%);
+    } @else if $level == "quaternary" {
       $color: color.adjust($color, $hue: 5);
-      @return color.scale($color,
-        $saturation: -23%,
-        $lightness: 92%
-      );
+      @return color.scale($color, $saturation: -23%, $lightness: 92%);
     }
   } @else if $color == $dark-accent {
-    @if $level == 'secondary' {
-      @return color.scale($color,
-        $saturation: -3%,
-        $lightness: -3%
-      );
-    } @else if $level == 'tertiary' {
+    @if $level == "secondary" {
+      @return color.scale($color, $saturation: -3%, $lightness: -3%);
+    } @else if $level == "tertiary" {
       $color: color.adjust($color, $hue: -1);
-      @return color.scale($color,
-        $saturation: -23%,
-        $lightness: -4%
-      );
-    } @else if $level == 'quaternary' {
+      @return color.scale($color, $saturation: -23%, $lightness: -4%);
+    } @else if $level == "quaternary" {
       $color: color.adjust($color, $hue: -4);
-      @return color.scale($color,
-        $saturation: -40%,
-        $lightness: -58%
-      );
+      @return color.scale($color, $saturation: -40%, $lightness: -58%);
     }
   }
   @return $color;
@@ -60,9 +39,15 @@ $disabled-opacity: 0.6;
 
 // Light Theme Colors
 $light-accent: $accent;
-$light-accent-secondary: adjust-saturation-lightness($light-accent, 'secondary');
-$light-accent-tertiary: adjust-saturation-lightness($light-accent, 'tertiary');
-$light-accent-quaternary: adjust-saturation-lightness($light-accent, 'quaternary');
+$light-accent-secondary: adjust-saturation-lightness(
+  $light-accent,
+  "secondary"
+);
+$light-accent-tertiary: adjust-saturation-lightness($light-accent, "tertiary");
+$light-accent-quaternary: adjust-saturation-lightness(
+  $light-accent,
+  "quaternary"
+);
 $light-accent-base: #fff;
 
 $light-text-base: rgb(47, 40, 38);
@@ -72,10 +57,13 @@ $light-text-tertiary: rgba($light-text-base, 0.45);
 
 // Dark Theme Colors
 $dark-accent: generate-dark-accent($light-accent);
-$dark-accent-secondary: adjust-saturation-lightness($dark-accent, 'secondary');
-$dark-accent-tertiary: adjust-saturation-lightness($dark-accent, 'tertiary');
-$dark-accent-quaternary: adjust-saturation-lightness($dark-accent, 'quaternary');
-$dark-accent-base: #2f2826;
+$dark-accent-secondary: adjust-saturation-lightness($dark-accent, "secondary");
+$dark-accent-tertiary: adjust-saturation-lightness($dark-accent, "tertiary");
+$dark-accent-quaternary: adjust-saturation-lightness(
+  $dark-accent,
+  "quaternary"
+);
+$dark-accent-base: #1b1b1f;
 
 $dark-text-base: rgb(220, 220, 220);
 $dark-text-primary: rgba($dark-text-base, 1);
@@ -85,12 +73,12 @@ $dark-text-tertiary: rgba($dark-text-base, 0.45);
 $button-colors: (
   "primary": (
     "background": $light-accent,
-    "text": var(--color-accent-base)
+    "text": var(--color-accent-base),
   ),
   "secondary": (
     "background": $light-accent-quaternary,
-    "text": $dark-accent
-  )
+    "text": $dark-accent,
+  ),
 );
 
 /* ------------------------------------------------------------ */
