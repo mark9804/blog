@@ -16,7 +16,7 @@ export const userProfile: ProfileProps = {
     },
     {
       alias: "RSS",
-      link: `${BASE_URL}feed.rss`,
+      link: `feed.rss`,
     },
     {
       alias: "Team",
@@ -24,11 +24,11 @@ export const userProfile: ProfileProps = {
     },
     {
       alias: "Projects",
-      link: "/projects",
+      link: "projects",
     },
     {
       alias: "About",
-      link: "/about",
+      link: "about",
     },
   ],
 };
