@@ -49,7 +49,7 @@ const prefilled = {
 
 ![点我看蓝发晓美焰](https://cdn.sa.net/2024/12/10/GdfpTmwJ7BtnOib.webp =360x)
 
-最终章幻觉抑制，堂堂开篇——
+最终章[幻觉抑制](./005-hallucination-suppression)，堂堂开篇！
 
 ## 延伸阅读
 
