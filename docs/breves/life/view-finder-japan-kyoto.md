@@ -51,8 +51,8 @@ cover: https://cdn.sa.net/2024/11/25/uyAvXg59dWnSsOi.webp
 第二天我决定去伏见稻荷大社和八坂神社。伏见稻荷大社的千本鸟居是一个标志性景点（虽然大概率知道是什么样），八坂神社则是听说晚上的夜景不错。
 
 :::gallery 伏见稻荷大社
-![](https://cdn.sa.net/2024/12/01/ga8eko9djtbBmrP.webp)  
-![](https://cdn.sa.net/2024/12/01/iSyH8cgNPtT5GdR.webp)  
+![](https://cdn.sa.net/2024/12/01/ga8eko9djtbBmrP.webp)
+![](https://cdn.sa.net/2024/12/01/iSyH8cgNPtT5GdR.webp)
 :::
 
 ![大社本殿](https://cdn.sa.net/2024/12/01/tGZwIexcWFr8Y7n.webp)
@@ -64,8 +64,8 @@ cover: https://cdn.sa.net/2024/11/25/uyAvXg59dWnSsOi.webp
 买了个合格守，祈祷了一下来年考试能合格，然后看了一下地图发现和公交时间不太正好，决定走路去八坂神社。
 
 :::gallery 路上拍的
-![](https://cdn.sa.net/2024/12/01/aIw9xGnMZqHLoBV.webp)  
-![](https://cdn.sa.net/2024/12/01/UmFuTMs92qYQdRB.webp)  
+![](https://cdn.sa.net/2024/12/01/aIw9xGnMZqHLoBV.webp)
+![](https://cdn.sa.net/2024/12/01/UmFuTMs92qYQdRB.webp)
 :::
 
 到了八坂神社正好赶上太阳下山，能拍到不太明显的夕阳打在建筑物上的效果。不过因为人实在太多了，感觉布列松来都不好使。
