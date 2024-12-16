@@ -155,7 +155,7 @@ function handleScrollIndicatorClick() {
         "
         :size="0"
         divider="・"
-        class="text-sm text-primary"
+        class="text-sm text-primary font-normal"
       >
         <a
           v-for="social in props.social"
