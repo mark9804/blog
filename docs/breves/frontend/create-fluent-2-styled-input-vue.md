@@ -63,7 +63,7 @@ tags:
   <FluentInputExample class="w-full h-[32px]"/>
 </div>
 
-```vue{28-45}
+```vue{27-44}
 <template>
   <span
     class="eden-ui eden-ui__input eden-ui__input--wrapper rounded flex gap-1 overflow-clip"
@@ -77,7 +77,6 @@ tags:
 </template>
 
 <style scoped lang="scss">
-@use "@style/color-variable.scss" as *;
 .eden-ui__input {
   $border-width: 1px;
 
@@ -96,17 +95,17 @@ tags:
       content: "";
       position: absolute;
       left: 0;
-      bottom: 0px;
+      bottom: 0;
       width: 100%;
       height: $border-width;
-      background: var(--color-border-3);
+      background: #c0c0c0;
       transition: all 0.3s ease-in-out;
     }
 
     &::after {
       will-change: transform;
       height: 2 * $border-width;
-      background: var(--arona-blue-6);
+      background: #2773e1;
       transform: rotate3d(0, 1, 0, 90deg);
     }
 
@@ -114,12 +113,12 @@ tags:
     &:focus,
     &:focus-within {
       transition: box-shadow 0.3s ease-in-out;
-      box-shadow: inset 0 0 0 1px var(--color-border-3);
+      box-shadow: inset 0 0 0 1px #c0c0c0;
     }
 
     &:focus,
     &:focus-within {
-      background-color: var(--color-fill-base);
+      background-color: transparent;
 
       &::after {
         transform: rotate3d(0, 1, 0, 0deg);
