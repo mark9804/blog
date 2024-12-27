@@ -206,10 +206,9 @@ a.title span,
       border: inherit;
     }
 
-    th {
-      &.arco-table-th {
-        border: none;
-      }
+    th,
+    .arco-table-th {
+      border: none;
     }
 
     tr {
