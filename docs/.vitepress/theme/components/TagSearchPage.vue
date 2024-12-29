@@ -5,14 +5,14 @@ import ArticleWaterfallList from "./ArticleWaterfallList.vue";
 import ElyTag from "./ElysiumUI/ElyTag.vue";
 import { useCustomStore } from "../../piniaStore";
 import { useElementSize } from "@vueuse/core";
-
+import { Post } from "../types/Post";
 const store = useCustomStore();
 
 const containerRef = useTemplateRef<HTMLDivElement>("containerRef");
 const { width } = useElementSize(containerRef);
 
-const allTags = ref([]);
-const allPosts = ref([]);
+const allTags = ref<string[]>([]);
+const allPosts = ref<Post[]>([]);
 
 const selectedTags = computed(() => store.getSelectedTags);
 
@@ -20,6 +20,7 @@ const selectedTags = computed(() => store.getSelectedTags);
 // 失效 tag：在某次选中之后，由于文章更改，导致已经不存在这个 tag 了
 // 会导致永远无法匹配到任何文章，用户也不能手动移除这个 tag
 function removeInvalidTags() {
+  if (allTags.value.length === 0) return;
   selectedTags.value.forEach(tag => {
     if (!allTags.value.includes(tag)) {
       store.removeSelectedTags(tag);
