@@ -16,6 +16,7 @@ declare module 'vue' {
     ElyDropdown: typeof import('./.vitepress/theme/components/ElysiumUI/ElyDropdown.vue')['default']
     ElyDropdownItem: typeof import('./.vitepress/theme/components/ElysiumUI/ElyDropdownItem.vue')['default']
     ElyIconBreve: typeof import('./.vitepress/theme/components/ElysiumUI/ElyIcon/ElyIconBreve.vue')['default']
+    ElyImage: typeof import('./.vitepress/theme/components/ElysiumUI/ElyImage.vue')['default']
     ElyImageGallery: typeof import('./.vitepress/theme/components/ElysiumUI/ElyImageGallery.vue')['default']
     ElyProfile: typeof import('./.vitepress/theme/components/ElysiumUI/ElyProfile.vue')['default']
     ElySpace: typeof import('./.vitepress/theme/components/ElysiumUI/ElySpace.vue')['default']
