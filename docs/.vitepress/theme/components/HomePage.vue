@@ -158,6 +158,7 @@ onMounted(init);
   justify-content: space-between;
   flex-grow: 1;
   max-width: 280px;
+  border-radius: 3px;
 }
 
 .home-title {
