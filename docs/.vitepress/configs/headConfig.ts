@@ -27,6 +27,13 @@ export const headConfig = [
   [
     "link",
     {
+      rel: "manifest",
+      href: "manifest.json",
+    },
+  ],
+  [
+    "link",
+    {
       rel: "prefetch",
       href: "https://fonts.blue-archive.io/harmonyos-sans-webfont/harmonyos-sans-sc-400.css",
       as: "style",
