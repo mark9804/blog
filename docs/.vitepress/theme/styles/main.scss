@@ -71,7 +71,7 @@ kbd {
   padding: 0 4px;
 }
 
-.custom-block.info code {
+.custom-block.info p > code {
   background-color: transparent;
   border: solid 1px $color-accent-code;
   color: $color-accent-code;
