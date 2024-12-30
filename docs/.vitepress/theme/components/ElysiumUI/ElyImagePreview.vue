@@ -89,44 +89,46 @@ onUnmounted(() => {
 <template>
   <ClientOnly>
     <Teleport to="body">
-      <div
-        v-if="shouldShowPreview"
-        class="elysium-ui__image-preview__container fixed z-999 top-0 left-0 w-full h-full bg-black/40 flex flex-col items-center justify-center gap-4"
-        @wheel="handleScroll"
-        @touchstart="handleTouch"
-        @touchmove="handleTouch"
-      >
-        <OnClickOutside :options="clickOutsideOptions" @trigger="handleClose">
-          <img
-            class="elysium-ui__image-preview--image w-full max-w-screen-md object-contain flex-1"
-            :src="imgList[imgIndex]"
-            :style="{ transform: `scale(${scale})` }"
-            alt="Image preview"
-          />
-        </OnClickOutside>
-        <!-- Switch image -->
-        <button
-          v-if="shouldShowNav"
-          class="elysium-ui__image-preview__button elysium-ui__image-preview__button__nav elysium-ui__image-preview__button__nav--prev"
-          @click="handlePrev"
+      <Transition name="fade">
+        <div
+          v-if="shouldShowPreview"
+          class="elysium-ui__image-preview__container fixed z-999 top-0 left-0 w-full h-full bg-black/40 flex flex-col items-center justify-center gap-4"
+          @wheel="handleScroll"
+          @touchstart="handleTouch"
+          @touchmove="handleTouch"
         >
-          <IconLeft />
-        </button>
-        <button
-          v-if="shouldShowNav"
-          class="elysium-ui__image-preview__button elysium-ui__image-preview__button__nav elysium-ui__image-preview__button__nav--next"
-          @click="handleNext"
-        >
-          <IconRight />
-        </button>
-        <!-- Close -->
-        <button
-          class="elysium-ui__image-preview__button elysium-ui__image-preview__button--close"
-          @click="handleClose"
-        >
-          <icon-close />
-        </button>
-      </div>
+          <OnClickOutside :options="clickOutsideOptions" @trigger="handleClose">
+            <img
+              class="elysium-ui__image-preview--image w-full max-w-screen-md object-contain flex-1"
+              :src="imgList[imgIndex]"
+              :style="{ transform: `scale(${scale})` }"
+              alt="Image preview"
+            />
+          </OnClickOutside>
+          <!-- Switch image -->
+          <button
+            v-if="shouldShowNav"
+            class="elysium-ui__image-preview__button elysium-ui__image-preview__button__nav elysium-ui__image-preview__button__nav--prev"
+            @click="handlePrev"
+          >
+            <IconLeft />
+          </button>
+          <button
+            v-if="shouldShowNav"
+            class="elysium-ui__image-preview__button elysium-ui__image-preview__button__nav elysium-ui__image-preview__button__nav--next"
+            @click="handleNext"
+          >
+            <IconRight />
+          </button>
+          <!-- Close -->
+          <button
+            class="elysium-ui__image-preview__button elysium-ui__image-preview__button--close"
+            @click="handleClose"
+          >
+            <icon-close />
+          </button>
+        </div>
+      </Transition>
     </Teleport>
   </ClientOnly>
 </template>
@@ -151,5 +153,15 @@ onUnmounted(() => {
       @apply top-4 right-4 w-10 h-10 rounded-full flex items-center justify-center;
     }
   }
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  @apply transition-opacity duration-300;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  @apply opacity-0;
 }
 </style>
