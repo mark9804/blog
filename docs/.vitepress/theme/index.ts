@@ -5,7 +5,7 @@ import MainLayout from "./layouts/MainLayout.vue";
 import { createPinia } from "pinia";
 import piniaPluginPersistedstate from "pinia-plugin-persistedstate";
 import ArticleInfo from "./components/ArticleInfo.vue";
-import { Image } from "@arco-design/web-vue";
+import ElyImage from "./components/ElysiumUI/ElyImage.vue";
 import ElyImageGallery from "./components/ElysiumUI/ElyImageGallery.vue";
 import ElySpace from "./components/ElysiumUI/ElySpace.vue";
 import giscusTalk from "vitepress-plugin-comment-with-giscus";
@@ -58,7 +58,7 @@ export default {
     // register your custom global components
     app
       .component("ArticleInfo", ArticleInfo)
-      .component("ArcoImage", Image)
+      .component("ElyImage", ElyImage)
       .component("ElyImageGallery", ElyImageGallery)
       .component("ElySpace", ElySpace);
   },

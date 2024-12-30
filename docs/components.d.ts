@@ -28,6 +28,8 @@ declare module 'vue' {
     IconDoubleDown: typeof import('@arco-design/web-vue/es/icon')['IconDoubleDown']
     IconEmail: typeof import('@arco-design/web-vue/es/icon')['IconEmail']
     IconHistory: typeof import('@arco-design/web-vue/es/icon')['IconHistory']
+    IconLeft: typeof import('@arco-design/web-vue/es/icon')['IconLeft']
+    IconRight: typeof import('@arco-design/web-vue/es/icon')['IconRight']
     IconTag: typeof import('@arco-design/web-vue/es/icon')['IconTag']
     NavBar: typeof import('./.vitepress/theme/components/NavBar.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']

@@ -89,6 +89,9 @@ function handleTagClick(tag: string) {
         </ElyTag>
       </div>
     </template>
+    <template #layout-bottom>
+      <ElyImagePreview />
+    </template>
   </Layout>
 </template>
 
