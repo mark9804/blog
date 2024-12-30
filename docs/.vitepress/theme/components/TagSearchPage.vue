@@ -3,7 +3,7 @@ import { postData, createFilter } from "../utils/usePostData";
 import { computed, ref, useTemplateRef, onMounted, onActivated } from "vue";
 import ArticleWaterfallList from "./ArticleWaterfallList.vue";
 import ElyTag from "./ElysiumUI/ElyTag.vue";
-import { useCustomStore } from "../../piniaStore";
+import { useCustomStore } from "../../stores/piniaStore";
 import { useElementSize } from "@vueuse/core";
 import { Post } from "../types/Post";
 const store = useCustomStore();

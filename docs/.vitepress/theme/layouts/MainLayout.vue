@@ -12,7 +12,7 @@ import { nextTick, onBeforeMount, provide, ComputedRef } from "vue";
 import DefaultTheme from "vitepress/theme";
 import type { ArticleInfo } from "../types/ArticleInfo";
 import { useSearchTags } from "../utils/tagSearchUtils";
-import { useCustomStore } from "../../piniaStore";
+import { useCustomStore } from "../../stores/piniaStore";
 import { SpeedInsights } from "@vercel/speed-insights/nuxt";
 import { Analytics } from "@vercel/analytics/nuxt";
 

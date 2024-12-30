@@ -6,7 +6,7 @@ import { postData } from "../utils/usePostData";
 import { formatDateTime } from "../utils/timeUtils";
 import { AlarmClock } from "@icon-park/vue-next";
 import { useSearchTags } from "../utils/tagSearchUtils";
-import { useCustomStore } from "../../piniaStore";
+import { useCustomStore } from "../../stores/piniaStore";
 
 const store = useCustomStore();
 

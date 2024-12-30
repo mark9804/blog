@@ -4,7 +4,7 @@ import type { CardProps } from "./types/CardProps";
 import { withBase } from "vitepress";
 import { formatRelativeTime } from "../../utils/timeUtils";
 import { useSearchTags } from "../../utils/tagSearchUtils";
-import { useCustomStore } from "../../../piniaStore";
+import { useCustomStore } from "../../../stores/piniaStore";
 import { formalizeString } from "./_utils/stringUtils";
 
 const store = useCustomStore();
