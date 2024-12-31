@@ -1,9 +1,8 @@
 ---
 title: 在 VitePress 中集成图册
-description: 在 VitePress 中集成 Arco Design 的多图预览组件
+description: 使用 Markdown 自定义容器，在 VitePress 中实现图册功能
 tags:
   - VitePress
-  - Arco Design
   - Vue
   - 自定义
 ---
@@ -207,7 +206,8 @@ export default defineConfig({
 ```
 
 ```ts [./utils/generateImgGallery.ts]
-import { generateImgGroups } from "./generateImgGroups";
+import type { Token } from "../types/Token";
+import { getImgInfo } from "./generateImgComponent";
 
 export function generateImgGallery(galleryToken: Token) {
   if (!galleryToken.children || galleryToken.children.length === 0) return "";
@@ -215,56 +215,44 @@ export function generateImgGallery(galleryToken: Token) {
   const galleryName = galleryToken.children[0].content
     .replace(/:::gallery\s?/, "")
     .trim();
-  const imgTokens = tokens.filter(token => token.type === "image");
+  const imgList = tokens
+    .filter(token => token.type === "image")
+    .map(getImgInfo);
 
-  return `\n<ElyImageGallery name="${galleryName}">\n${generateImgGroups(imgTokens)}\n</ElyImageGallery>\n`;
-}
-```
-
-```ts [./utils/generateImgGroups.ts]
-import { generateImgComponent } from "./generateImgComponent";
-import { cluster } from "radash";
-import type { Token } from "../../../src/types/Token";
-
-/**
- * 生成拼接好的图片组字符串，解决直接用变量传入 non-string Object 时解析会出错的问题
- * @param {Token[]} imgListRaw 图片信息列表
- * @returns {string} 拼接好的图片组模板字符串
- */
-export function generateImgGroups(imgListRaw: Token[]) {
-  const imgGroups = cluster(imgListRaw, 3);
-  let result = "<a-space direction='vertical'>\n";
-  for (const group of imgGroups) {
-    result += `<a-space>\n`;
-    for (const img of group) {
-      result += `${generateImgComponent(img)}\n`;
-    }
-    result += `</a-space>\n`;
-  }
-  result += `</a-space>\n`;
-  return result;
+  return `\n<ElyImageGallery name="${galleryName}" :imgList="${JSON.stringify(
+    imgList
+  ).replaceAll('"', "'")}" />\n`;
 }
 ```
 
 ```ts [./utils/generateImgComponent.ts]
-import type { Token } from "../../../src/types/Token";
+import type { Token } from "../types/Token";
+import type { ImageBase } from "../components/ElysiumUI/types/ImageBase";
 
 export function getImgInfo(imgToken: Token) {
-  const src = imgToken.attrs.find(attr => attr[0] === "src")?.[1];
+  const src = imgToken?.attrs?.find(attr => attr[0] === "src")?.[1];
   const alt = imgToken.content;
-  const width = imgToken.attrs.find(attr => attr[0] === "width")?.[1];
-  const height = imgToken.attrs.find(attr => attr[0] === "height")?.[1];
+  const width = imgToken?.attrs?.find(attr => attr[0] === "width")?.[1];
+  const height = imgToken?.attrs?.find(attr => attr[0] === "height")?.[1];
   return { src, alt, width, height };
 }
 
 export function generateImgComponent(imgToken: Token) {
   const { src, alt, width, height } = getImgInfo(imgToken);
 
-  const widthProps = width ? ` width="${width}"` : "";
-  const heightProps = height ? ` height="${height}"` : "";
+  const image: ImageBase = { src, alt, width, height };
 
-  return `\n<ArcoImage src="${src}" alt="${alt}"${widthProps}${heightProps} show-loader />\n`;
+  return `<ElyImage :image="${JSON.stringify(image).replaceAll('"', "'")}" />`;
 }
+```
+
+```ts [ImageBase.ts]
+export type ImageBase = {
+  src: string;
+  alt: string;
+  width?: number | string;
+  height?: number | string;
+};
 ```
 
 :::
@@ -277,29 +265,51 @@ export function generateImgComponent(imgToken: Token) {
 
 ```vue [ImageGallery.vue]
 <script setup lang="ts">
-withDefaults(
-  defineProps<{
-    name: string;
-  }>(),
-  {
-    name: "",
+import type { ImageProps } from "./types/ImageProps";
+import { parseSize } from "./_utils/styleUtils";
+import { computed } from "vue";
+
+const props = defineProps<ImageProps>();
+
+const store = useImageStore();
+
+const imageSrc = computed(() => {
+  if (Array.isArray(props.image)) {
+    return props.image[(props.index ?? 0) % props.image.length];
   }
-);
+  return props.image;
+});
 </script>
 
 <template>
-  <a-image-preview-group>
-    <a-space>
-      <slot />
-    </a-space>
-  </a-image-preview-group>
-  <figcaption
-    v-if="name.length > 0"
-    class="text-sm text-gray-400 text-center mt-2"
-  >
-    {{ name }}
-  </figcaption>
+  <img
+    class="elysium-ui elysium-ui__image cursor-pointer w-full max-w-screen-md object-contain flex-1 block"
+    :src="imageSrc.src"
+    :alt="imageSrc.alt"
+    :style="{
+      width: parseSize(imageSrc.width) ?? '100%',
+      height: parseSize(imageSrc.height) ?? 'auto',
+    }"
+  />
 </template>
+
+<style scoped lang="scss">
+img.elysium-ui__image {
+  display: block;
+  min-width: 0;
+  max-width: 100%;
+  object-fit: cover;
+}
+</style>
+```
+
+```ts [ImageProps.ts]
+import type { ImageBase } from "./ImageBase";
+
+export type ImageProps = {
+  image: ImageBase[] | ImageBase;
+  index?: number;
+};
 ```
 
 :::
