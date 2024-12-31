@@ -1,5 +1,6 @@
+import type { ImageBase } from "../components/ElysiumUI/types/ImageBase";
 export interface ImagePreviewConfig {
   show: boolean;
-  image: string | string[];
+  image: ImageBase[] | ImageBase;
   index?: number;
 }

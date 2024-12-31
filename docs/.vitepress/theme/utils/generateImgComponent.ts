@@ -1,4 +1,5 @@
 import type { Token } from "../types/Token";
+import type { ImageBase } from "../components/ElysiumUI/types/ImageBase";
 
 export function getImgInfo(imgToken: Token) {
   const src = imgToken?.attrs?.find(attr => attr[0] === "src")?.[1];
@@ -14,5 +15,12 @@ export function generateImgComponent(imgToken: Token) {
   const widthProps = width ? ` width="${width}"` : "";
   const heightProps = height ? ` height="${height}"` : "";
 
-  return `<ElyImage src="${src}" alt="${alt}"${widthProps}${heightProps} />`;
+  const image: ImageBase = {
+    src,
+    alt,
+    width: widthProps,
+    height: heightProps,
+  };
+
+  return `<ElyImage :image="${JSON.stringify(image).replaceAll('"', "'")}" />`;
 }

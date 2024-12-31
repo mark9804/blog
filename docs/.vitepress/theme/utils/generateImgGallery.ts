@@ -1,5 +1,5 @@
 import type { Token } from "../types/Token";
-import { generateImgGroups } from "./generateImgGroups";
+import { getImgInfo } from "./generateImgComponent";
 
 export function generateImgGallery(galleryToken: Token) {
   if (!galleryToken.children || galleryToken.children.length === 0) return "";
@@ -7,7 +7,11 @@ export function generateImgGallery(galleryToken: Token) {
   const galleryName = galleryToken.children[0].content
     .replace(/:::gallery\s?/, "")
     .trim();
-  const imgTokens = tokens.filter(token => token.type === "image");
+  const imgList = tokens
+    .filter(token => token.type === "image")
+    .map(getImgInfo);
 
-  return `\n<ElyImageGallery name="${galleryName}" :length="${imgTokens.length}">\n${generateImgGroups(imgTokens)}\n</ElyImageGallery>\n`;
+  return `\n<ElyImageGallery name="${galleryName}" :imgList="${JSON.stringify(
+    imgList
+  ).replaceAll('"', "'")}" />\n`;
 }

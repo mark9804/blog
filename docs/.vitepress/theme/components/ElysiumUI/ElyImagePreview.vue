@@ -21,11 +21,11 @@ const clickOutsideOptions = {
 };
 
 function handlePrev() {
-  imageStore.setImagePreviewIndex(imgIndex.value ?? 1 - 1);
+  imageStore.prevImagePreview();
 }
 
 function handleNext() {
-  imageStore.setImagePreviewIndex(imgIndex.value ?? 0 + 1);
+  imageStore.nextImagePreview();
 }
 
 function handleClose() {
@@ -92,7 +92,7 @@ onUnmounted(() => {
       <Transition name="fade">
         <div
           v-if="shouldShowPreview"
-          class="elysium-ui__image-preview__container fixed z-999 top-0 left-0 w-full h-full bg-black/40 flex flex-col items-center justify-center gap-4"
+          class="elysium-ui elysium-ui__image-preview__container fixed z-999 top-0 left-0 w-full h-full bg-black/40 flex flex-col items-center justify-center gap-4"
           @wheel="handleScroll"
           @touchstart="handleTouch"
           @touchmove="handleTouch"
@@ -100,7 +100,7 @@ onUnmounted(() => {
           <OnClickOutside :options="clickOutsideOptions" @trigger="handleClose">
             <img
               class="elysium-ui__image-preview--image w-full max-w-screen-md object-contain flex-1"
-              :src="imgList[imgIndex]"
+              :src="imgList[imgIndex].src"
               :style="{ transform: `scale(${scale})` }"
               alt="Image preview"
             />

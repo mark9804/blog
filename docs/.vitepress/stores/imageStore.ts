@@ -5,7 +5,7 @@ import { ref, computed } from "vue";
 export const useImageStore = defineStore("vitepress-image-store", () => {
   const imagePreviewSettings = ref<ImagePreviewConfig>({
     show: false,
-    image: "",
+    image: [{ src: "", alt: "" }],
     index: 0,
   });
   const getImagePreviewSettings = computed(() => imagePreviewSettings.value);
@@ -24,16 +24,25 @@ export const useImageStore = defineStore("vitepress-image-store", () => {
   function closeImagePreview() {
     imagePreviewSettings.value.show = false;
   }
-  function openImagePreview(image: string | string[], index?: number) {
+  function openImagePreview(
+    image: ImagePreviewConfig["image"],
+    index?: number
+  ) {
     imagePreviewSettings.value.image = image;
     imagePreviewSettings.value.index = index ?? 0;
     imagePreviewSettings.value.show = true;
   }
-  function setImagePreviewIndex(index: number) {
-    imagePreviewSettings.value.index = index;
+  function prevImagePreview() {
+    imagePreviewSettings.value.index = Math.max(
+      imagePreviewSettings.value.index - 1,
+      0
+    );
   }
-  function setImagePreviewSettings(settings: ImagePreviewConfig) {
-    imagePreviewSettings.value = settings;
+  function nextImagePreview() {
+    imagePreviewSettings.value.index = Math.min(
+      imagePreviewSettings.value.index + 1,
+      getImageList.value.length - 1
+    );
   }
 
   return {
@@ -45,7 +54,7 @@ export const useImageStore = defineStore("vitepress-image-store", () => {
     toggleImagePreview,
     closeImagePreview,
     openImagePreview,
-    setImagePreviewIndex,
-    setImagePreviewSettings,
+    prevImagePreview,
+    nextImagePreview,
   };
 });
