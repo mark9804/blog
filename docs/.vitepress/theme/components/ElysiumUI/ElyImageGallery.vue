@@ -1,42 +1,64 @@
 <script setup lang="ts">
-import { useTemplateRef } from "vue";
-import { useSwipe } from "@vueuse/core";
-withDefaults(
+import type { ImageBase } from "./types/ImageBase";
+import { computed } from "vue";
+const props = withDefaults(
   defineProps<{
     name: string;
-    length: number;
+    imgList: ImageBase[];
   }>(),
   {
     name: "",
-    length: 0,
+    imgList: () => [] as ImageBase[],
   }
 );
 
-const current = defineModel<number>();
-const el = useTemplateRef<HTMLDivElement>("imagePreviewGroup");
-const { direction } = useSwipe(el, {
-  onSwipeEnd: () => {
-    if (direction.value === "left") {
-      current.value = (current.value ?? 0 + 1) % length;
-    } else if (direction.value === "right") {
-      current.value = (current.value ?? 0 - 1 + length) % length;
-    }
-  },
+const images = computed(() => {
+  const result = Array.from(
+    { length: 3 },
+    () => [] as Array<ImageBase & { index: number }>
+  );
+  props.imgList.forEach((img, index) => {
+    result[index % 3].push({ ...img, index });
+  });
+  return result;
 });
 </script>
 
 <template>
   <ClientOnly>
-    <a-image-preview-group v-model:current="current" ref="imagePreviewGroup">
-      <ElySpace size="small">
-        <slot />
-      </ElySpace>
-    </a-image-preview-group>
-    <figcaption
-      v-if="name.length > 0"
-      class="text-sm text-[var(--color-text-3)] text-center mt-2"
-    >
-      {{ name }}
-    </figcaption>
+    <div class="elysium-ui elysium-ui__gallery flex flex-col gap-2 container">
+      <div class="elysium-ui elysium-ui__gallery__img-container flex gap-2">
+        <ElySpace
+          v-for="imageGroup in images"
+          size="small"
+          direction="vertical"
+        >
+          <ElyImage
+            v-for="img in imageGroup"
+            :key="img.index"
+            :image="props.imgList"
+            :index="img.index"
+          />
+        </ElySpace>
+      </div>
+      <figcaption
+        v-if="name.length > 0"
+        class="text-sm text-[var(--color-text-3)] text-center mt-2"
+      >
+        {{ name }}
+      </figcaption>
+    </div>
   </ClientOnly>
 </template>
+
+<style scoped lang="scss">
+.elysium-ui__gallery {
+  container-type: inline-size;
+
+  @container (max-width: 375px) {
+    &__img-container {
+      flex-direction: column;
+    }
+  }
+}
+</style>
