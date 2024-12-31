@@ -12,15 +12,7 @@ export function getImgInfo(imgToken: Token) {
 export function generateImgComponent(imgToken: Token) {
   const { src, alt, width, height } = getImgInfo(imgToken);
 
-  const widthProps = width ? ` width="${width}"` : "";
-  const heightProps = height ? ` height="${height}"` : "";
-
-  const image: ImageBase = {
-    src,
-    alt,
-    width: widthProps,
-    height: heightProps,
-  };
+  const image: ImageBase = { src, alt, width, height };
 
   return `<ElyImage :image="${JSON.stringify(image).replaceAll('"', "'")}" />`;
 }
