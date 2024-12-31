@@ -14,5 +14,5 @@ export function generateImgComponent(imgToken: Token) {
 
   const image: ImageBase = { src, alt, width, height };
 
-  return `<ElyImage :image="${JSON.stringify(image).replaceAll('"', "'")}" />`;
+  return `<ElyImage :image="${JSON.stringify(image).replaceAll('"', "'")}" lazy />`;
 }

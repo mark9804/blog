@@ -30,6 +30,7 @@ function handleClick() {
       width: parseSize(imageSrc.width) ?? '100%',
       height: parseSize(imageSrc.height) ?? 'auto',
     }"
+    :loading="lazy ? 'lazy' : undefined"
   />
 </template>
 

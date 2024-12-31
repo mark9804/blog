@@ -38,6 +38,7 @@ const images = computed(() => {
             :key="img.index"
             :image="props.imgList"
             :index="img.index"
+            lazy
           />
         </ElySpace>
       </div>
