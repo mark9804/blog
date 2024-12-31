@@ -79,6 +79,33 @@ function handleTouch(event: TouchEvent) {
   lastTouchDistance.value = distance;
 }
 
+function handleKeydown(event: KeyboardEvent) {
+  switch (event.key) {
+    case "ArrowLeft":
+    case "ArrowUp":
+      event.preventDefault();
+      imageStore.prevImagePreview();
+      break;
+    case "ArrowRight":
+    case "ArrowDown":
+      event.preventDefault();
+      imageStore.nextImagePreview();
+      break;
+    case "Escape":
+      event.preventDefault();
+      imageStore.closeImagePreview();
+      break;
+  }
+}
+
+watch(shouldShowPreview, newVal => {
+  if (newVal && imgList.value.length > 1) {
+    document.addEventListener("keydown", handleKeydown);
+  } else {
+    document.removeEventListener("keydown", handleKeydown);
+  }
+});
+
 onUnmounted(() => {
   if (rafId) {
     cancelAnimationFrame(rafId);
