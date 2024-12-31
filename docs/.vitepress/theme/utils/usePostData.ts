@@ -25,22 +25,24 @@ export const postData = {
 
   async getCreatedAt(currentPathWithoutBase: string) {
     const posts = (await usePosts) as Post[];
-    return posts.find(el => el.url === currentPathWithoutBase)?.createdAt;
+    return posts.find(el => el.url === currentPathWithoutBase)?.createdAt ?? 0;
   },
 
   async getReadingTime(currentPathWithoutBase: string) {
     const posts = (await usePosts) as Post[];
-    return posts.find(el => el.url === currentPathWithoutBase)?.readingTime;
+    return (
+      posts.find(el => el.url === currentPathWithoutBase)?.readingTime ?? 0
+    );
   },
 
   async getWordsCount(currentPathWithoutBase: string) {
     const posts = (await usePosts) as Post[];
-    return posts.find(el => el.url === currentPathWithoutBase)?.wordsCount;
+    return posts.find(el => el.url === currentPathWithoutBase)?.wordsCount ?? 0;
   },
 
   async getImgCount(currentPathWithoutBase: string) {
     const posts = (await usePosts) as Post[];
-    return posts.find(el => el.url === currentPathWithoutBase)?.imgCount;
+    return posts.find(el => el.url === currentPathWithoutBase)?.imgCount ?? 0;
   },
 
   async getAllTags() {

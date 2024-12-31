@@ -7,7 +7,6 @@ export {};
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
-    AImagePreviewGroup: typeof import('@arco-design/web-vue')['ImagePreviewGroup']
     ArticleInfo: typeof import('./.vitepress/theme/components/ArticleInfo.vue')['default']
     ArticleWaterfallList: typeof import('./.vitepress/theme/components/ArticleWaterfallList.vue')['default']
     ATooltip: typeof import('@arco-design/web-vue')['Tooltip']

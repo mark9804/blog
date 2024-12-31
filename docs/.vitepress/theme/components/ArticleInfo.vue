@@ -12,7 +12,7 @@ const store = useCustomStore();
 
 const { frontmatter, page, isDark } = useData();
 
-const lastUpdatedTimestamp = computed(() => page.value.lastUpdated);
+const lastUpdatedTimestamp = computed(() => page.value.lastUpdated ?? 0);
 const lastUpdated = computed(() => formatDateTime(lastUpdatedTimestamp.value));
 
 const route = useRoute();
