@@ -172,7 +172,7 @@ export default defineConfig({
 
 ### 生成 HTML 模板
 
-接下来就是就是设置规则触发函数。由于刚刚已经加入了 `gallery` 类型，因此只需要在渲染阶段根据类型调用处理函数即可。
+接下来就是就是设置规则触发函数。由于刚刚已经加入了 `gallery` 类型，因此只需要在渲染阶段根据类型调用处理函数即可。在 `generateImgGallery` 以及 `generateImgComponent` 中，为了让模板字符串能够被正确解析，我使用了 `JSON.stringify` 将对象转换为字符串，并使用 `replaceAll` 将双引号替换为单引号。具体原因可以参考 [这篇文章](./vitepress-markdown-use-object-param)。
 
 :::code-group
 
@@ -316,14 +316,13 @@ export type ImageProps = {
 
 ### 注册全局组件
 
-因为我是基于 [Arco Design](https://arco.design/vue/docs/start) 进行的主题自定义，所以我会顺带全局导入 `Tooltip` 组件需要的 css。如果完全是自己写组件则不需要这一步。我使用了 [unplugin-auto-import](https://github.com/unplugin/unplugin-auto-import) 插件来自动导入组件，因此只需要在 `enhanceApp` 函数中注册即可。如果没有使用该插件的则需要手动导入 `Space` `Image` 还有 `ImagePreviewGroup`。
+完成图库组件后，由于图库组件在编译前的依赖分析阶段没有明确的调用，因此需要手动将其注册为全局组件以便运行时能够正确解析组件。
 
 :::code-group
 
 ```ts [index.ts]
 // ...
 import ElyImageGallery from "./components/ElysiumUI/ElyImageGallery.vue";
-import "@arco-design/web-vue/es/tooltip/style/css.js";
 // ...
 
 export default {
