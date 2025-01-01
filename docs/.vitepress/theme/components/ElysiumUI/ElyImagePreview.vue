@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { OnClickOutside } from "@vueuse/components";
-import { ref, computed, onUnmounted } from "vue";
+import { ref, computed, onUnmounted, watch } from "vue";
 import { useImageStore } from "../../../stores/imageStore";
 
 const imageStore = useImageStore();
@@ -51,32 +51,53 @@ function updateScale(delta: number) {
 }
 
 function handleScroll(event: WheelEvent) {
-  event.preventDefault(); // 阻止 scroll chaining
-  scrollDelta.value = event.deltaY;
-  updateScale(-event.deltaY);
+  // 阻止默认滚动行为，避免 scroll chaining
+  event.preventDefault();
+
+  // 只处理 pinch zoom 手势
+  //（触摸板上的捏合手势会转换为 ctrl + wheel 事件）
+  if (event.ctrlKey) {
+    scrollDelta.value = event.deltaY;
+    updateScale(-event.deltaY);
+  } else {
+    // TODO: 平移滚动时平移图片
+  }
 }
 
 function handleTouch(event: TouchEvent) {
-  if (event.touches.length !== 2) return; // 只处理双指触摸，不阻止单指事件（点击等）
+  // 处理单指事件（点击等）
+  if (event.touches.length === 1) {
+    // TODO: 平移滚动时平移图片
+    return;
+  }
 
-  event.preventDefault();
+  // 过滤双指以外的触摸事件
+  if (event.touches.length !== 2) return;
+
+  // 获取触摸点
   const touch1 = event.touches[0];
   const touch2 = event.touches[1];
+
+  // 计算两点间距离
   const distance = Math.hypot(
     touch2.clientX - touch1.clientX,
     touch2.clientY - touch1.clientY
   );
 
-  // touchstart: 记录初始距离
   if (event.type === "touchstart") {
+    event.preventDefault(); // 仅在开始缩放时阻止默认行为
     lastTouchDistance.value = distance;
     return;
   }
 
-  // touchmove: 计算距离变化，更新缩放比例
+  // 计算距离变化，只有在变化超过阈值时才认为是缩放
   const delta = distance - lastTouchDistance.value;
-  updateScale(delta * 0.1);
-  lastTouchDistance.value = distance;
+  if (Math.abs(delta) > 1) {
+    // 添加一个小阈值，避免误触
+    event.preventDefault();
+    updateScale(delta * 0.1);
+    lastTouchDistance.value = distance;
+  }
 }
 
 function handleKeydown(event: KeyboardEvent) {
@@ -151,6 +172,7 @@ onUnmounted(() => {
           <button
             class="elysium-ui__image-preview__button elysium-ui__image-preview__button--close"
             @click="handleClose"
+            aria-label="关闭图像预览"
           >
             <icon-close />
           </button>
