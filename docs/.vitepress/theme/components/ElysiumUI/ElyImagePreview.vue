@@ -32,7 +32,6 @@ function handleClose() {
   imageStore.closeImagePreview();
 }
 
-const scrollDelta = ref(0);
 const scale = ref(1);
 const MIN_SCALE = 0.5;
 const MAX_SCALE = 3;
@@ -57,7 +56,6 @@ function handleScroll(event: WheelEvent) {
   // 只处理 pinch zoom 手势
   //（触摸板上的捏合手势会转换为 ctrl + wheel 事件）
   if (event.ctrlKey) {
-    scrollDelta.value = event.deltaY;
     updateScale(-event.deltaY);
   } else {
     // TODO: 平移滚动时平移图片
