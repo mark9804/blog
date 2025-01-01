@@ -120,7 +120,7 @@ function handleKeydown(event: KeyboardEvent) {
 }
 
 watch(shouldShowPreview, newVal => {
-  if (newVal && imgList.value.length > 1) {
+  if (newVal) {
     document.addEventListener("keydown", handleKeydown);
   } else {
     document.removeEventListener("keydown", handleKeydown);
