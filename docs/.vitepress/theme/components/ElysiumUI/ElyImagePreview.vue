@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { OnClickOutside } from "@vueuse/components";
-import { useElementBounding, useWindowSize } from "@vueuse/core";
+import { useElementBounding, useWindowSize, useThrottleFn } from "@vueuse/core";
 import { ref, computed, onUnmounted, watch, useTemplateRef } from "vue";
 import { useImageStore } from "../../../stores/imageStore";
 import { clamp } from "./_utils/numberUtils";
@@ -22,18 +22,6 @@ const clickOutsideOptions = {
   ignore: [".elysium-ui__image-preview__button"],
 };
 
-function handlePrev() {
-  imageStore.prevImagePreview();
-}
-
-function handleNext() {
-  imageStore.nextImagePreview();
-}
-
-function handleClose() {
-  imageStore.closeImagePreview();
-}
-
 const scale = ref(1);
 const offset = ref({ translateX: 0, translateY: 0 }); // 最终单位 px
 const MIN_SCALE = 0.5;
@@ -52,14 +40,18 @@ enum ScrollIntent {
 
 const scrollIntent = ref(ScrollIntent.Resize);
 
+const setIntentThrottled = useThrottleFn((intent: ScrollIntent) => {
+  scrollIntent.value = intent;
+}, 500);
+
 watch(
   () => [imageWidth.value, imageHeight.value],
   ([newWidth, newHeight]) => {
     // 如果图像某一边尺寸超过窗口，默认操作为平移
     if (newWidth > windowWidth.value || newHeight > windowHeight.value) {
-      scrollIntent.value = ScrollIntent.Pan;
+      setIntentThrottled(ScrollIntent.Pan);
     } else {
-      scrollIntent.value = ScrollIntent.Resize;
+      setIntentThrottled(ScrollIntent.Resize);
     }
   }
 );
@@ -174,10 +166,29 @@ watch(shouldShowPreview, newVal => {
   }
 });
 
-onUnmounted(() => {
+function handlePrev() {
+  imageStore.prevImagePreview();
+}
+
+function handleNext() {
+  imageStore.nextImagePreview();
+}
+
+function handleClose() {
+  imageStore.closeImagePreview();
+
   if (rafId) {
     cancelAnimationFrame(rafId);
+    rafId = null;
   }
+
+  // 重置状态
+  scale.value = 1;
+  offset.value = { translateX: 0, translateY: 0 };
+}
+
+onUnmounted(() => {
+  handleClose();
 });
 </script>
 
