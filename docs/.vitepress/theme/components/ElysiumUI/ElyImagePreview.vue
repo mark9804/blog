@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import { OnClickOutside } from "@vueuse/components";
-import { ref, computed, onUnmounted, watch } from "vue";
+import { useElementBounding, useWindowSize } from "@vueuse/core";
+import { ref, computed, onUnmounted, watch, useTemplateRef } from "vue";
 import { useImageStore } from "../../../stores/imageStore";
+import { clamp } from "./_utils/numberUtils";
 
 const imageStore = useImageStore();
 
@@ -33,9 +35,34 @@ function handleClose() {
 }
 
 const scale = ref(1);
+const offset = ref({ translateX: 0, translateY: 0 }); // 最终单位 px
 const MIN_SCALE = 0.5;
 const MAX_SCALE = 3;
+const PAN_THRESHOLD = 2;
 const lastTouchDistance = ref(0);
+const imageRef = useTemplateRef("imageRef");
+
+const { width: imageWidth, height: imageHeight } = useElementBounding(imageRef);
+const { width: windowWidth, height: windowHeight } = useWindowSize();
+
+enum ScrollIntent {
+  Resize = 0,
+  Pan = 1,
+}
+
+const scrollIntent = ref(ScrollIntent.Resize);
+
+watch(
+  () => [imageWidth.value, imageHeight.value],
+  ([newWidth, newHeight]) => {
+    // 如果图像某一边尺寸超过窗口，默认操作为平移
+    if (newWidth > windowWidth.value || newHeight > windowHeight.value) {
+      scrollIntent.value = ScrollIntent.Pan;
+    } else {
+      scrollIntent.value = ScrollIntent.Resize;
+    }
+  }
+);
 
 let rafId: number | null = null; // 节流用
 
@@ -44,9 +71,27 @@ function updateScale(delta: number) {
 
   rafId = requestAnimationFrame(() => {
     const newScale = scale.value + delta * 0.01;
-    scale.value = Math.min(Math.max(newScale, MIN_SCALE), MAX_SCALE);
+    scale.value = clamp(newScale, MIN_SCALE, MAX_SCALE);
     rafId = null;
   });
+}
+
+function updateOffset(deltaTranslateX = 0, deltaTranslateY = 0) {
+  // 最大 offset 不能超过 100% 图像尺寸
+  if (Math.abs(deltaTranslateX) > PAN_THRESHOLD) {
+    offset.value.translateX = clamp(
+      offset.value.translateX + deltaTranslateX,
+      imageWidth.value * -1,
+      imageWidth.value
+    );
+  }
+  if (Math.abs(deltaTranslateY) > PAN_THRESHOLD) {
+    offset.value.translateY = clamp(
+      offset.value.translateY + deltaTranslateY,
+      imageHeight.value * -1,
+      imageHeight.value
+    );
+  }
 }
 
 function handleScroll(event: WheelEvent) {
@@ -56,17 +101,21 @@ function handleScroll(event: WheelEvent) {
   // 只处理 pinch zoom 手势
   //（触摸板上的捏合手势会转换为 ctrl + wheel 事件）
   if (event.ctrlKey) {
+    // 有 Ctrl，一定是缩放
     updateScale(-event.deltaY);
   } else {
-    // TODO: 平移滚动时平移图片
+    // 没有 Ctrl，分流意图
+    if (scrollIntent.value === ScrollIntent.Resize) {
+      updateScale(-event.deltaY);
+    } else {
+      updateOffset(-event.deltaX, -event.deltaY);
+    }
   }
 }
 
 function handleTouch(event: TouchEvent) {
   // 处理单指事件（点击等）
   if (event.touches.length === 1) {
-    // TODO: 平移滚动时平移图片
-    return;
   }
 
   // 过滤双指以外的触摸事件
@@ -147,8 +196,11 @@ onUnmounted(() => {
             <img
               class="elysium-ui__image-preview--image w-full max-w-screen-md object-contain flex-1"
               :src="imgList[imgIndex].src"
-              :style="{ transform: `scale(${scale})` }"
+              :style="{
+                transform: `scale(${scale}) translate3d(${offset.translateX}px, ${offset.translateY}px, 0)`,
+              }"
               alt="Image preview"
+              ref="imageRef"
             />
           </OnClickOutside>
           <!-- Switch image -->
