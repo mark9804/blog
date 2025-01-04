@@ -21,7 +21,7 @@
   },
   "devDependencies": {
     "@types/cross-spawn": "6.0.6",
-    "@types/node": "22.10.2",
+    "@types/node": "22.10.3",
     "@unocss/preset-icons": "0.65.3",
     "autoprefixer": "10.4.20",
     "eslint-config-prettier": "9.1.0",
@@ -65,7 +65,7 @@
     "eslint": "9.17.0",
     "eslint-plugin-vue": "9.32.0",
     "husky": "9.1.7",
-    "lint-staged": "15.2.11",
+    "lint-staged": "15.3.0",
     "markdown-it-implicit-figures": "0.12.0",
     "medium-zoom": "1.1.0",
     "p-map": "7.0.3",
