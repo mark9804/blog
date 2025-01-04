@@ -81,3 +81,7 @@ dist
 *.njsproj
 *.sln
 *.sw?
+
+# Autoimport generated files
+auto-import.d.ts
+components.d.ts
