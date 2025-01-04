@@ -4,7 +4,7 @@ import { useElementBounding, useWindowSize, useThrottleFn } from "@vueuse/core";
 import { ref, computed, onUnmounted, watch, useTemplateRef } from "vue";
 import { useImageStore } from "../../../stores/imageStore";
 import { clamp } from "./_utils/numberUtils";
-
+import { useRaf } from "./_utils/useAnimationUtils";
 const imageStore = useImageStore();
 
 const shouldShowPreview = computed(() => imageStore.getImagePreviewVisibility);
@@ -28,6 +28,8 @@ const MIN_SCALE = 0.5;
 const MAX_SCALE = 3;
 const PAN_THRESHOLD = 2;
 const lastTouchDistance = ref(0);
+const lastClickPosition = ref({ x: 0, y: 0 }); // 拖动检测通用
+const isDragging = ref(false);
 const imageRef = useTemplateRef("imageRef");
 
 const { width: imageWidth, height: imageHeight } = useElementBounding(imageRef);
@@ -56,34 +58,31 @@ watch(
   }
 );
 
-let rafId: number | null = null; // 节流用
-
 function updateScale(delta: number) {
-  if (!!rafId) return;
-
-  rafId = requestAnimationFrame(() => {
+  useRaf(() => {
     const newScale = scale.value + delta * 0.01;
     scale.value = clamp(newScale, MIN_SCALE, MAX_SCALE);
-    rafId = null;
   });
 }
 
 function updateOffset(deltaTranslateX = 0, deltaTranslateY = 0) {
   // 最大 offset 不能超过 100% 图像尺寸
-  if (Math.abs(deltaTranslateX) > PAN_THRESHOLD) {
-    offset.value.translateX = clamp(
-      offset.value.translateX + deltaTranslateX,
-      imageWidth.value * -1,
-      imageWidth.value
-    );
-  }
-  if (Math.abs(deltaTranslateY) > PAN_THRESHOLD) {
-    offset.value.translateY = clamp(
-      offset.value.translateY + deltaTranslateY,
-      imageHeight.value * -1,
-      imageHeight.value
-    );
-  }
+  useRaf(() => {
+    if (Math.abs(deltaTranslateX) > PAN_THRESHOLD) {
+      offset.value.translateX = clamp(
+        offset.value.translateX + deltaTranslateX,
+        imageWidth.value * -1,
+        imageWidth.value
+      );
+    }
+    if (Math.abs(deltaTranslateY) > PAN_THRESHOLD) {
+      offset.value.translateY = clamp(
+        offset.value.translateY + deltaTranslateY,
+        imageHeight.value * -1,
+        imageHeight.value
+      );
+    }
+  });
 }
 
 function handleScroll(event: WheelEvent) {
@@ -108,6 +107,22 @@ function handleScroll(event: WheelEvent) {
 function handleTouch(event: TouchEvent) {
   // 处理单指事件（点击等）
   if (event.touches.length === 1) {
+    switch (event.type) {
+      case "touchstart":
+        lastClickPosition.value = {
+          x: event.touches[0].clientX,
+          y: event.touches[0].clientY,
+        };
+        break;
+      case "touchmove":
+        event.preventDefault();
+        const deltaX = event.touches[0].clientX - lastClickPosition.value.x;
+        const deltaY = event.touches[0].clientY - lastClickPosition.value.y;
+        // FIXME: 移动端的平移不知为何偏移量特别大，暂时先加一个系数
+        // 后续需要调整一下
+        updateOffset(deltaX * 0.1, deltaY * 0.1);
+        break;
+    }
   }
 
   // 过滤双指以外的触摸事件
@@ -137,6 +152,12 @@ function handleTouch(event: TouchEvent) {
     updateScale(delta * 0.1);
     lastTouchDistance.value = distance;
   }
+}
+
+function handleMouseMove(event: MouseEvent) {
+  if (!isDragging.value) return;
+
+  updateOffset(event.movementX, event.movementY);
 }
 
 function handleKeydown(event: KeyboardEvent) {
@@ -175,12 +196,9 @@ function handleNext() {
 }
 
 function handleClose() {
-  imageStore.closeImagePreview();
+  if (isDragging.value) return;
 
-  if (rafId) {
-    cancelAnimationFrame(rafId);
-    rafId = null;
-  }
+  imageStore.closeImagePreview();
 
   // 重置状态
   scale.value = 1;
@@ -202,9 +220,13 @@ onUnmounted(() => {
           @wheel="handleScroll"
           @touchstart="handleTouch"
           @touchmove="handleTouch"
+          @mousemove="handleMouseMove"
+          @mousedown="isDragging = true"
+          @mouseup="isDragging = false"
         >
           <OnClickOutside :options="clickOutsideOptions" @trigger="handleClose">
             <img
+              draggable="false"
               class="elysium-ui__image-preview--image w-full max-w-screen-md object-contain flex-1"
               :src="imgList[imgIndex].src"
               :style="{
