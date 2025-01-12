@@ -74,7 +74,7 @@
     "postcss-plugin-px2rem": "0.8.1",
     "radash": "12.1.0",
     "sass": "1.83.1",
-    "unplugin-icons": "0.22.0",
+    "unplugin-icons": "22.0.0",
     "unplugin-vue-components": "0.28.0",
     "vitepress-plugin-comment-with-giscus": "1.1.15",
     "vitepress-plugin-rss": "0.3.0",
