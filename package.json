@@ -75,7 +75,7 @@
     "radash": "12.1.0",
     "sass": "1.83.1",
     "unplugin-icons": "22.0.0",
-    "unplugin-vue-components": "0.28.0",
+    "unplugin-vue-components": "28.0.0",
     "vitepress-plugin-comment-with-giscus": "1.1.15",
     "vitepress-plugin-rss": "0.3.0",
     "vue-router": "4.5.0",
