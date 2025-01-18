@@ -8,6 +8,7 @@ next: false
 title: 首页
 publish: false
 comment: false
+gitChangelog: false
 ---
 
 <script setup>

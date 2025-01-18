@@ -7,6 +7,7 @@ next: false
 title: 搜索标签
 publish: false
 comment: false
+gitChangelog: false
 ---
 
 <script setup>

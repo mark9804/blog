@@ -2,6 +2,7 @@
 publish: false
 comment: false
 createdAt: 1732558487000
+gitChangelog: false
 ---
 
 # 我的项目
@@ -12,7 +13,7 @@ createdAt: 1732558487000
 如果你想了解**我**，请移步 [关于](./about)。
 :::
 
-## 碧蓝档案
+## 碧蓝档案（蔚蓝档案）
 
 ### 碧蓝档案剧情站
 
@@ -208,33 +209,50 @@ createdAt: 1732558487000
 
 ## 其他
 
-### [心理学研究室主页](https://development-psychology-hiroshima.github.io/)
+在开发和写作过程中，我也创作过一些个人项目，或是向其他项目或产品提交过建议或直接贡献过代码。
+
+### [sugar-blog/vitepress-plugin-rss](https://github.com/ATQQ/sugar-blog/blob/master/packages/vitepress-plugin-rss/README-zh.md)
+
+- 用于生成 RSS 订阅源的 VitePress 插件
+- 提出支持自定义 `transform` 函数的 FR，并提交 PR 实现
+
+### [知犀](https://www.zhixi.com/invite?from=O7AXKs4Mrw)
+
+- 体验过程中发现知犀客户端在触控板操作时缩放不跟手的问题，向开发团队提交了问题原因分析，并提交解决方案；提出根据平面向量模长计算缩放差值的算法原型，完善解决方案在知犀 PC 客户端 3.3.2 版本中实现
+
+### 其他不再维护的项目
+
+:::details 其他不再维护的项目
+
+<h3><a href="https://development-psychology-hiroshima.github.io/" style="color:var(--vp-c-text-1)">心理学研究室主页</a></h3>
 
 - 全权负责设计、开发、部署与维护
 - 将维护工作简化为仅需使用记事本编辑单个特定文本配置文件，不再需要手动修改 HTML 结构。另应日本人维护者要求编写一套从用记事本编辑到下载 vscode 设置应用语言为日语到自动部署上线的全套维护手册
 - ~~日本人说为了防止我毕业后不会维护，要我从 css 开始解释并教会他们整个开发（不是维护）过程中写的每一行代码并留存 word 文档，因此拒绝上线生产环境，现已停止更新，活该你们继续用 2004 年的网页。~~
 
-### [Serial Position Effect 实验程序](https://github.com/mark9804/serial-position)
+<h3><a href="https://github.com/mark9804/serial-position" style="color:var(--vp-c-text-1)">Serial Position Effect 实验程序</a></h3>
 
 - 基于 Web 的序列位置效应实验程序，用于心理学实验课课辅助教学。
 - 不再添加新功能，进入维护状态。
 
-### [Attentional Blink 实验程序](https://github.com/mark9804/attentional-blink)
+<h3><a href="https://github.com/mark9804/attentional-blink" style="color:var(--vp-c-text-1)">Attentional Blink 实验程序</a></h3>
 
 - 基于 Web 的日语本地化视觉注意实验程序，用于心理学实验课课辅助教学。
 - 不再维护。
 
-### [Cyberball 实验程序](https://github.com/mark9804/cyberball-electron)
+<h3><a href="https://github.com/mark9804/cyberball-electron" style="color:var(--vp-c-text-1)">Cyberball 实验程序</a></h3>
 
 - 基于 Electron 的 Cyberball 实验程序，用于心理学实验课课辅助教学。
 - 不再维护。
 
-### [GridWare Web](https://github.com/gridware-web/gridware-web)
+<h3><a href="https://github.com/gridware-web/gridware-web" style="color:var(--vp-c-text-1)">GridWare Web</a></h3>
 
 - 基于 Web 的 GridWare 时间序列分析和可视化工具，用于心理学硕士毕业论文。
 - 不再维护。
 
-### [DocumentImageExtractor](https://github.com/mark9804/DocumentImageExtractor)
+<h3><a href="https://github.com/mark9804/DocumentImageExtractor" style="color:var(--vp-c-text-1)">DocumentImageExtractor</a></h3>
 
 - 自动提取 Office 2007 及更新的 Office 程序创建的文档（docx, pptx, xlsx）以及 PDF 中的图片。
 - 不再维护。
+
+:::
