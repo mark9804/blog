@@ -13,7 +13,6 @@ import { useData, useRoute } from "vitepress";
 import type { App } from "vue";
 import { NolebaseGitChangelogPlugin } from "@nolebase/vitepress-plugin-git-changelog/client";
 
-import "@arco-design/web-vue/es/image/style/css.js";
 import "@arco-design/web-vue/es/tooltip/style/css.js";
 import "./styles/main.scss";
 import "uno.css";
