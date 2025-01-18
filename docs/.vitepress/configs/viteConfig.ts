@@ -73,7 +73,11 @@ export const viteConfig = {
     GitChangelog({
       repoURL: () => "https://github.com/mark9804/blog",
     }),
-    GitChangelogMarkdownSection(),
+    GitChangelogMarkdownSection({
+      sections: {
+        disableContributors: true,
+      },
+    }),
     RssPlugin(rssConfig),
   ],
   css: {
