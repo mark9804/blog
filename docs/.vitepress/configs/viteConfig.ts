@@ -15,6 +15,11 @@ import Icons from "unplugin-icons/vite";
 import IconsResolver from "unplugin-icons/resolver";
 import vueDevTools from "vite-plugin-vue-devtools";
 import { RssPlugin } from "vitepress-plugin-rss";
+import {
+  GitChangelog,
+  GitChangelogMarkdownSection,
+} from "@nolebase/vitepress-plugin-git-changelog/vite";
+
 import { rssConfig } from "./rssConfig";
 
 export const viteConfig = {
@@ -65,6 +70,10 @@ export const viteConfig = {
       ],
       transformers: [transformerDirectives()],
     }),
+    GitChangelog({
+      repoURL: () => "https://github.com/mark9804/blog",
+    }),
+    GitChangelogMarkdownSection(),
     RssPlugin(rssConfig),
   ],
   css: {

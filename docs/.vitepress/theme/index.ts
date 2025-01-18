@@ -11,11 +11,15 @@ import ElySpace from "./components/ElysiumUI/ElySpace.vue";
 import giscusTalk from "vitepress-plugin-comment-with-giscus";
 import { useData, useRoute } from "vitepress";
 import type { App } from "vue";
+import { NolebaseGitChangelogPlugin } from "@nolebase/vitepress-plugin-git-changelog/client";
 
 import "@arco-design/web-vue/es/image/style/css.js";
 import "@arco-design/web-vue/es/tooltip/style/css.js";
 import "./styles/main.scss";
 import "uno.css";
+
+// 已经装了 unocss，不需要引入
+// import "@nolebase/vitepress-plugin-git-changelog/client/style.css";
 
 const pinia = createPinia();
 pinia.use(piniaPluginPersistedstate);
@@ -60,6 +64,9 @@ export default {
       .component("ArticleInfo", ArticleInfo)
       .component("ElyImage", ElyImage)
       .component("ElyImageGallery", ElyImageGallery)
-      .component("ElySpace", ElySpace);
+      .component("ElySpace", ElySpace)
+      .use(NolebaseGitChangelogPlugin, {
+        displayAuthorsInsideCommitLine: true,
+      });
   },
 };
