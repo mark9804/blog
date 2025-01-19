@@ -28,6 +28,8 @@
     "docs/components.d.ts",
     "docs/**/*.vue",
     "docs/.vitepress/vite-env.d.ts",
+    "plugins/**/*.ts",
+    "plugins/**/*.d.ts",
   ],
   "references": [
     {

@@ -14,7 +14,7 @@ import {
 import Icons from "unplugin-icons/vite";
 import IconsResolver from "unplugin-icons/resolver";
 import vueDevTools from "vite-plugin-vue-devtools";
-import { RssPlugin } from "vitepress-plugin-rss";
+import { RssPlugin } from "../../../plugins/vitepress-plugin-rss/index";
 import {
   GitChangelog,
   GitChangelogMarkdownSection,

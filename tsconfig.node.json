@@ -7,5 +7,5 @@
     "jsx": "preserve",
     "allowSyntheticDefaultImports": true
   },
-  "include": ["vite.config.ts", "docs/.vitepress/**/*"]
+  "include": ["vite.config.ts", "docs/.vitepress/**/*", "plugins/**/*"]
 }
