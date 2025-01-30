@@ -83,5 +83,5 @@ dist
 *.sw?
 
 # Autoimport generated files
-docs/auto-import.d.ts
+docs/auto-imports.d.ts
 docs/components.d.ts
