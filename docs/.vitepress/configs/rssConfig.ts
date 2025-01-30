@@ -1,4 +1,4 @@
-import { RSSOptions } from "../../../plugins/vitepress-plugin-rss/type";
+import { RSSOptions } from "vitepress-plugin-rss";
 import { elyImageTransformer } from "../../../plugins/vitepress-plugin-rss/transformers/ely-image-transformer";
 import { DOMAIN } from "../constants";
 

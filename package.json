@@ -57,7 +57,6 @@
     "@mdit/plugin-spoiler": "0.16.0",
     "@mdit/plugin-sub": "0.16.0",
     "@mdit/plugin-sup": "0.16.0",
-    "@sugarat/theme-shared": "^0.0.4",
     "@vercel/analytics": "1.4.1",
     "@vercel/speed-insights": "1.1.0",
     "@vitejs/plugin-vue-jsx": "4.1.1",

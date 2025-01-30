@@ -85,3 +85,7 @@ dist
 # Autoimport generated files
 docs/auto-imports.d.ts
 docs/components.d.ts
+
+# RSS
+docs/.vitepress/dist/
+docs/.vitepress/cache/
