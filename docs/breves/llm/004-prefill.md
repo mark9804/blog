@@ -19,6 +19,11 @@ tags:
 
 要使用这个功能，需要使用 Anthropic 的 API 接口，并且预先给 `Assistant` 角色填充一些内容。
 
+:::tip
+
+DeepSeek 也支持预填充，详情可以参考他们的官方文档：https://api-docs.deepseek.com/zh-cn/guides/chat_prefix_completion
+:::
+
 一个不完整的预填充示例类似于这样。
 
 ```ts
@@ -48,6 +53,8 @@ const prefilled = {
 现在唯一的问题就剩下——要是她不坚持晓美焰有一头蓝色长发就好了。
 
 ![点我看蓝发晓美焰](https://cdn.sa.net/2024/12/10/GdfpTmwJ7BtnOib.webp =360x)
+
+## 下集预告
 
 最终章[幻觉抑制](./005-hallucination-suppression)，堂堂开篇！
 
