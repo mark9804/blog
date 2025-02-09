@@ -75,14 +75,23 @@ const spaceClass = computed(() => {
 });
 
 const spaceStyles = computed(() => {
-  return {
+  const styles: Record<string, string | undefined> = {
     gap: spaceSize.value,
-    margin: marginSize.value,
-    padding: paddingSize.value,
   };
+
+  const margin = marginSize.value;
+  const padding = paddingSize.value;
+
+  if (margin) styles.margin = margin;
+  if (padding) styles.padding = padding;
+
+  return styles;
 });
 
-const slots = useSlots();
+const slots = useSlots() as {
+  default?: () => any[];
+  divider?: () => any;
+};
 
 const SpaceElement = () => {
   const children = getAllElements(slots.default?.(), true);
