@@ -2,7 +2,7 @@
 
 [访问](https://mark9804.github.io/)
 
-基于 VitePress，定制 [Elysium](./docs/.vitepress/theme/components/ElysiumUI) 主题，使用少量 [Arco Design](https://arco.design/vue/) 组件库和图标。~~现在还很多，会慢慢变少的~~
+基于 VitePress，定制 [Elysium](./docs/.vitepress/theme/components/ElysiumUI) 主题，图标来自 [Arco Design](https://arco.design/vue/)、 [Icon Park](https://iconpark.oceanengine.com/) 以及 [Octicons](https://icon-sets.iconify.design/octicon/)。
 
 视障人群友好（感谢 [Armstrong](https://armstrong.viyf.org/) 抽出自己休息时间给我提了许多建议！），晕动症患者友好（大概）。
 
@@ -21,7 +21,7 @@
   - 相册语法 `:::gallery 相册名称`；
   - 图片增强：
     - 图片可点击放大；
-    - 图片支持 lazyload，加入 loading 效果；
+    - 可通过鼠标滚轮和触摸板手势缩放和平移图片；
     - 可控制图像尺寸。
   - 重点标记 `mark`；
   - 注音 `ruby`；
@@ -43,7 +43,7 @@
 
 - [x] 轻量化文章 （a.k.a 朋友圈） <ruby><code>quavers</code><rt>八分音符</rt></ruby>
 - [ ] 首页 NavBar
-- [ ] 逐渐替换掉 Arco Design 组件库
+- [x] 逐渐替换掉 Arco Design 组件库
 - [x] 根据一级主题色自动生成二、三、四级主题色
 - [x] 首页文章搜索框
 
