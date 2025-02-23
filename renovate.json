@@ -11,6 +11,10 @@
       "minimumReleaseAge": "3 days",
       "automerge": true,
       "matchPackageNames": ["*"]
+    },
+    {
+      "matchPackageNames": ["@vueuse/core", "@vueuse/components"],
+      "enabled": false
     }
   ]
 }
