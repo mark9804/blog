@@ -155,6 +155,15 @@ gitChangelog: false
 
 - 负责念白文本的日语本地化
 
+## 天元突破红莲螺岩
+
+### 2025天元突破拜年纪
+
+<iframe src="https://player.bilibili.com/player.html?isOutside=true&aid=113901274401689&bvid=BV1kcfSYaEcb&cid=28113700636&p=1&high_quality=1&autoplay=0&muted=true" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen></iframe>
+
+- 负责有声漫画部分的完整校对
+  - 使用[飞书](https://www.feishu.cn/)进行翻译与校对，[阅流](https://yueliu.cn/)进行版本控制以及审阅。全程避免了传统翻译与审片流程中因为版本混乱以及沟通不畅导致的低效与无效沟通，做到了成品的快速交付
+
 ## 明日方舟
 
 ### [明日方舟敌方信息查询工具](https://github.com/mark9804/arknights-enemydata-search)
