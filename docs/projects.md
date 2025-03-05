@@ -17,7 +17,7 @@ gitChangelog: false
 
 ### 碧蓝档案剧情站
 
-[项目地址](https://blue-archive.io/) | [哔哩哔哩](https://space.bilibili.com/1413213021) | [GitHub](https://github.com/ba-archive/blue-archive)
+[项目地址](https://blue-archive.io/) | [Bilibili](https://space.bilibili.com/1413213021) | [GitHub](https://github.com/ba-archive/blue-archive)
 
 :::gallery 页面截图
 ![](https://cdn.sa.net/2024/11/26/zKriY9gWhRcTDo8.webp)
@@ -25,8 +25,8 @@ gitChangelog: false
 :::
 
 - 项目发起人，负责项目/人员管理、美术、UI 设计、架构设计、前端开发、服务器运维、文本翻译、账号运营、组织间沟通、对外交流
-- 目标是通过交互式网页和同人作品带给所有的 BA 玩家更好的游戏体验，运营至今独立用户访问已超过 60 万
-- 基于 [pixi.js](https://pixijs.com/) 开发，更多技术详情请参考 [GitHub 仓库](https://github.com/ba-archive/blue-archive)
+- 目标是通过交互式网页和同人作品带给所有的 BA 玩家更好的游戏体验，2021 年 1 月正式上线至今独立用户访问已超百万人次，哔哩哔哩粉丝超过 4 万人
+- 基于 [pixi.js](https://pixijs.com/) + [Vue 3](https://vuejs.org/) + [TypeScript](https://www.typescriptlang.org/) 开发，更多技术详情请参考 [GitHub 仓库](https://github.com/ba-archive/blue-archive)
 
 [贡献者名单](https://blue-archive.io/about)
 
@@ -135,12 +135,13 @@ gitChangelog: false
 
 ### [碧蓝档案资讯站](https://space.bilibili.com/37507923)
 
-- 负责账号运营、日常内容运营和本地化、人员流动管理、组织间沟通
+- 碧蓝档案社区流量最大的非官方号，粉丝数量超过 60 万人，播放数破亿
+- 负责账号运营、日常内容运营和本地化、人员流动管理、与其他民间或非民间组织间的事务沟通和处理
 - 组织建立了一套完善的本地化工作流，创新提出并实践了基于在线文档的同步非阻塞视频本地化工作方式，交接效率较传统本地化方式提升三倍
 
 #### Blue Archive Official Artworks Vol.1
 
-- 负责文本翻译和内容校对
+- 负责部分文本翻译和内容校对
 
 #### Blue Archive Official Artworks Vol.2
 
@@ -162,7 +163,7 @@ gitChangelog: false
 <iframe src="https://player.bilibili.com/player.html?isOutside=true&aid=113901274401689&bvid=BV1kcfSYaEcb&cid=28113700636&p=1&high_quality=1&autoplay=0&muted=true" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen></iframe>
 
 - 负责有声漫画部分的完整校对
-  - 使用[飞书](https://www.feishu.cn/)进行翻译与校对，[阅流](https://yueliu.cn/)进行版本控制以及审阅。全程避免了传统翻译与审片流程中因为版本混乱以及沟通不畅导致的低效与无效沟通，做到了成品的快速交付
+- 使用[飞书](https://www.feishu.cn/)进行翻译与校对，[阅流](https://yueliu.cn/)进行版本控制以及审阅。全程避免了传统翻译与审片流程中因为版本混乱以及沟通不畅导致的低效与无效沟通，做到了成品的快速交付
 
 ## 明日方舟
 
@@ -210,11 +211,11 @@ gitChangelog: false
 
 ### [Eden Design](https://eden.blue-archive.io/)
 
-- 基于 [Vue 3](https://vuejs.org/) + [TypeScript](https://www.typescriptlang.org/) + [Nuxt 3](https://nuxt.com/) 的小型设计系统，SSR 友好
+- 基于 [Vue 3](https://vuejs.org/) + [TypeScript](https://www.typescriptlang.org/) + [Nuxt 3](https://nuxt.com/) + [UnoCSS](https://unocss.dev/) 的小型设计系统。SSR 友好
 
-### [Elysium UI](https://github.com/mark9804/blog/tree/master/docs/.vitepress/theme/components/ElysiumUI)
+### [Elysium UI](https://github.com/mark9804/blog/tree/master/docs/.vitepress/theme)
 
-- 本博客使用的 UI 组件，SSR 友好
+- 本博客使用的 VitePress 主题，基于 [Vue 3](https://vuejs.org/) + [TypeScript](https://www.typescriptlang.org/) + [UnoCSS](https://unocss.dev/) 开发，SSR 友好
 
 ## 其他
 
@@ -223,7 +224,7 @@ gitChangelog: false
 ### [sugar-blog/vitepress-plugin-rss](https://github.com/ATQQ/sugar-blog/blob/master/packages/vitepress-plugin-rss/README-zh.md)
 
 - 用于生成 RSS 订阅源的 VitePress 插件
-- 提出支持自定义 `transform` 函数的 FR，并提交 PR 实现
+- 提出支持自定义 `transform` 函数的 Feature Request，并提交 PR 实现
 
 ### [知犀](https://www.zhixi.com/invite?from=O7AXKs4Mrw)
 
