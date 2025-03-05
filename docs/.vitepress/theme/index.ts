@@ -17,6 +17,8 @@ import "@arco-design/web-vue/es/tooltip/style/css.js";
 import "./styles/main.scss";
 import "uno.css";
 
+import { giscusConfig } from "../configs/giscusConfig";
+
 // 已经装了 unocss，不需要引入
 // import "@nolebase/vitepress-plugin-git-changelog/client/style.css";
 
@@ -31,26 +33,7 @@ export default {
     const route = useRoute();
 
     // Giscus configuration
-    giscusTalk(
-      {
-        repo: "mark9804/blog",
-        repoId: "R_kgDOLo2yWA",
-        category: "Announcements",
-        categoryId: "DIC_kwDOLo2yWM4CknAK",
-        mapping: "title",
-        inputPosition: "top",
-        lang: "zh-CN",
-        loading: "lazy",
-        reactionsEnabled: "1",
-        emitMetadata: "0",
-        theme: "preferred_color_scheme",
-      },
-      {
-        frontmatter,
-        route,
-      },
-      true // 默认在所有页面启用评论
-    );
+    giscusTalk(giscusConfig, { frontmatter, route }, true);
   },
   Layout: MainLayout,
 

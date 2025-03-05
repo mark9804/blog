@@ -1,5 +1,3 @@
-import { BASE_URL } from "../constants";
-
 export const headConfig = [
   ["meta", { name: "theme-color", content: "#fbfaf8" }],
   [
