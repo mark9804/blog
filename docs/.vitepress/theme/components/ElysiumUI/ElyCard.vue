@@ -114,6 +114,7 @@ const shouldAriaLabelHide = ref(false);
       class="absolute inset-0 w-full h-full z-1"
       tabindex="-1"
       :aria-hidden="shouldAriaLabelHide"
+      :aria-label="`Read more about ${props.content.frontmatter.title}`"
       @mouseover="shouldAriaLabelHide = false"
       @mouseleave="shouldAriaLabelHide = true"
     />
