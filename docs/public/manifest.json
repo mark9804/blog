@@ -3,14 +3,9 @@
   "short_name": "早睡的博客",
   "icons": [
     {
-      "src": "/android-chrome-192x192.png",
-      "sizes": "192x192",
-      "type": "image/png"
-    },
-    {
-      "src": "/android-chrome-512x512.png",
+      "src": "https://cdn.sa.net/2025/03/05/mzcXIYvrSTV2Af3.webp",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/webp"
     }
   ],
   "start_url": "/",

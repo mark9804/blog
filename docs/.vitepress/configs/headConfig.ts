@@ -14,21 +14,14 @@ export const headConfig = [
     "link",
     {
       rel: "icon",
-      href: BASE_URL + "favicon.ico",
+      href: "https://avatars.githubusercontent.com/u/9006264?v=4",
     },
   ],
   [
     "link",
     {
       rel: "manifest",
-      href: BASE_URL + "manifest.json",
-    },
-  ],
-  [
-    "link",
-    {
-      rel: "manifest",
-      href: "manifest.json",
+      href: "/manifest.json",
     },
   ],
   [

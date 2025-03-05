@@ -4,7 +4,7 @@ import { tokenize } from "../utils/tokenizer";
 
 export const themeConfig = {
   userProfile: userProfile,
-  logo: "/" + userProfile.avatar,
+  logo: userProfile.avatar,
   lastUpdated: {
     text: "最后更新于",
     formatOptions: {
