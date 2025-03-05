@@ -1,10 +1,11 @@
 @use "sass:color";
+@use "../../configs/theme" as theme;
 
-$accent: #d19062;
-$base-opacity: 0.8;
-$code-brightness-tune: 17%;
-$code-saturation-tune: 10%;
-$disabled-opacity: 0.6;
+$accent: theme.$accent;
+$base-opacity: theme.$base-opacity;
+$code-brightness-tune: theme.$code-brightness-tune;
+$code-saturation-tune: theme.$code-saturation-tune;
+$disabled-opacity: theme.$disabled-opacity;
 
 @function generate-dark-accent($light-accent) {
   $color: color.adjust($light-accent, $hue: 3);
@@ -97,6 +98,10 @@ html {
       $light-accent,
       $saturation: -$code-saturation-tune,
       $lightness: -$code-brightness-tune
+    )};
+  --color-accent-mark-background: #{color.adjust(
+      $light-accent-tertiary,
+      $alpha: -0.35
     )};
 
   @for $i from 1 through 9 {
