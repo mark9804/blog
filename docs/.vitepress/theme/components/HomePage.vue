@@ -15,7 +15,7 @@ import {
   defaultFilter,
   defaultQuaversFilter,
 } from "../utils/usePostData";
-import VPLocalSearchBox from "vitepress/dist/client/theme-default/components/VPNavBarSearch.vue";
+import VPNavBarSearch from "vitepress/dist/client/theme-default/components/VPNavBarSearch.vue";
 import type { Post } from "../types/Post";
 
 const { theme } = useData();
@@ -90,6 +90,11 @@ function init() {
     toggleWaterfall("breves");
     setThemeOnActivated();
   });
+
+  () =>
+    import(
+      "vitepress/dist/client/theme-default/components/VPLocalSearchBox.vue"
+    );
 }
 
 onActivated(init);
@@ -130,7 +135,7 @@ onMounted(init);
             >Quavers</ElyButton
           >
         </div>
-        <VPLocalSearchBox />
+        <VPNavBarSearch />
       </h1>
       <ArticleWaterfallList :posts="waterfallData" :width="articleTitleWidth" />
     </main>
