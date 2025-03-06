@@ -1,6 +1,6 @@
 import { data as usePosts } from "../loaders/posts.data";
 import type { Post } from "../types/Post";
-import { unique, sift } from "radash";
+import { unique, sift } from "radashi";
 import { compareDates } from "./timeUtils";
 
 export function createFilter(pattern?: string) {

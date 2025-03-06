@@ -61,4 +61,4 @@
 - Markdown 扩展：[mdit-plugins](https://mdit-plugins.github.io/zh/)
 - 评论系统：[giscus](https://giscus.app/)
 - Icon：[IconPark](https://iconpark.bytedance.com/) / [Arco](https://arco.design/vue/component/icon)
-- 工具库：[VueUse](https://vueuse.org/), [Radash](https://radash-docs.vercel.app/docs/getting-started)
+- 工具库：[VueUse](https://vueuse.org/), [Radashi](https://radashi.js.org/)

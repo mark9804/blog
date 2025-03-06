@@ -41,7 +41,7 @@ Cursor 本质上是一个深度集成了 AI 功能的 VSCode，相比于作为�
 
 Cursor 的另一个亮点是基于代码库 RAG 的代码补全，并且以我的使用体验来看，Cursor 的参考资料库权重还针对用户场景做了优化。如果当前编辑器的 Layout 是左右布局的，左右两边各自打开了一个文件，那么 Cursor 会优先从当前激活的两个文件中搜索可用的代码。如果没有找到的话，则会次优先搜索当前打开的其他文件，最后才会在整个代码库中搜索。（题外话，他们向量检索用的是 [TurboBuffer](https://turbopuffer.com/)，看起来价格好像还行，之后打算试试看）
 
-最后讲一讲 Cursor 自己对于 AI 辅助编程交出的模块性答卷，Cursor Composer 还有 Cursor Chat。Chat 这个功能基本上对标的是 Copilot Chat，不过添加了 Web Search 功能，可以自主搜索网络文档。像比较新的 [Radash](https://radash-docs.vercel.app/docs/getting-started) 这种工具库，你可以直接给出文档链接让 Cursor 自己看，或者让 Cursor 自己搜索相关的用法，这样生成代码的时候就不会被 lodash 的文档污染。代码生成后 Cursor 会自动生成一份和当前代码对比的 diff，用户可以逐个 diff 块选择 Accept 或者 Reject。
+最后讲一讲 Cursor 自己对于 AI 辅助编程交出的模块性答卷，Cursor Composer 还有 Cursor Chat。Chat 这个功能基本上对标的是 Copilot Chat，不过添加了 Web Search 功能，可以自主搜索网络文档。像比较新的 [Radashi](https://radashi.js.org/) 这种工具库，你可以直接给出文档链接让 Cursor 自己看，或者让 Cursor 自己搜索相关的用法，这样生成代码的时候就不会被 lodash 的文档污染。代码生成后 Cursor 会自动生成一份和当前代码对比的 diff，用户可以逐个 diff 块选择 Accept 或者 Reject。
 
 Composer 是 Cursor 重点宣传的一个功能，Edit with Copilot 基本上对标的就是 Composer。Composer 与 Chat 相比，开放了自由创建文件和写入代码的能力（Chat 必须手动 Apply），比起 Edit with Copilot 来说更加灵活，编辑和查询的范围不会局限于给定的文件（也会自行搜索整个 codebase），有时候也会自行选择生成指示外的文件来降低耦合度。我使用 Composer 大部分时候不是不会写，而是我先写好一版能跑但是抽象程度或者耦合度比较低的版本，然后让它进行整理和抽象。Composer 通常表现得很好，能把代码的功能和结构描述得比较清楚，偶尔拆分的颗粒度还会比我预想的更加精细一些。而对于赋予了生成模型更高的自由度这一点，可能有人会觉得给生成模型下方太多的编辑权限会污染代码库本来不需要更改的部分，这种情况我确实遇到过一次。当时我选择了 reject 相关代码并让它重新生成，不要碰我不想让它碰的文件名解决了这个问题，本质上也就加了几个字的事情，比跟产品经理对线好说话多了。
 

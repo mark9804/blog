@@ -79,7 +79,7 @@
     "pinia": "3.0.1",
     "pinia-plugin-persistedstate": "4.2.0",
     "postcss-plugin-px2rem": "0.8.1",
-    "radash": "12.1.0",
+    "radashi": "^12.3.4",
     "sass": "1.85.1",
     "unplugin-icons": "22.1.0",
     "unplugin-vue-components": "28.4.1",

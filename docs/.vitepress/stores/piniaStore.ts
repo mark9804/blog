@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { ref, computed } from "vue";
-import { unique, sift } from "radash";
+import { unique, sift } from "radashi";
 
 export const useCustomStore = defineStore(
   "vitepress-custom-store",
