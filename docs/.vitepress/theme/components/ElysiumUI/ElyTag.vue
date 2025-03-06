@@ -3,7 +3,7 @@ import type { TagProps } from "./types/TagProps";
 import { computed, ref, watch } from "vue";
 
 const props = withDefaults(defineProps<TagProps>(), {
-  id: undefined,
+  id: "",
   size: "medium",
   primary: true,
   secondary: false,
@@ -59,7 +59,7 @@ const handleClose = (e: Event) => {
 <template>
   <span
     :class="classes"
-    :role="props.clickable ? 'button' : null"
+    :role="props.clickable ? 'button' : undefined"
     @click="handleClick"
     :tabindex="!props.disabled && props.clickable ? 0 : -1"
     @keydown.space.prevent="handleClick"

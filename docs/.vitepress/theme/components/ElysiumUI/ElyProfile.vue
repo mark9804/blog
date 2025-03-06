@@ -32,8 +32,8 @@ const avatarMarginTop = computed(() => canvasHeight.value * 0.3 - 56);
 let waveController: ReturnType<typeof createWaveAnimation> | null = null;
 
 const createWaveConfig = () => ({
-  strokeStyle: props.accent,
-  backgroundColor: props.background,
+  strokeStyle: props.accent ?? "var(--color-accent)",
+  backgroundColor: props.background ?? "transparent",
   verticalPosition: 0.3,
   amplitudeRatio: 0.02,
   periodMultiplier: 0.008,

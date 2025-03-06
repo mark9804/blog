@@ -13,6 +13,6 @@ export function generateImgComponent(imgToken: Token) {
   const { src, alt, width, height } = getImgInfo(imgToken);
 
   const image: ImageBase = { src, alt, width, height };
-
+  // @ts-ignore
   return `<ElyImage :image="${JSON.stringify(image).replaceAll('"', "'")}" lazy />`;
 }

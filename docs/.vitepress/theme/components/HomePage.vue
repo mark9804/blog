@@ -16,6 +16,8 @@ import {
   defaultQuaversFilter,
 } from "../utils/usePostData";
 import VPLocalSearchBox from "vitepress/dist/client/theme-default/components/VPNavBarSearch.vue";
+import type { Post } from "../types/Post";
+
 const { theme } = useData();
 const props = computed(() => {
   if (theme.value.userProfile) {
@@ -25,8 +27,8 @@ const props = computed(() => {
   return null;
 });
 
-const posts = ref([]);
-const quavers = ref([]);
+const posts = ref<Post[]>([]);
+const quavers = ref<Post[]>([]);
 const postType = ref<"breves" | "quavers">("breves");
 const waterfallData = computed(() =>
   postType.value === "breves" ? posts.value : quavers.value
@@ -46,10 +48,10 @@ const { width: articleTitleWidth } = useElementSize(articleTitleRef);
 function initPosts() {
   return Promise.all([
     postData.getAllPosts(defaultFilter).then(res => {
-      posts.value = res;
+      posts.value = res as Post[];
     }),
     postData.getAllPosts(defaultQuaversFilter).then(res => {
-      quavers.value = res;
+      quavers.value = res as Post[];
     }),
   ]);
 }

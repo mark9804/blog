@@ -13,5 +13,7 @@ export function generateImgGallery(galleryToken: Token) {
 
   return `\n<ElyImageGallery name="${galleryName}" :imgList="${JSON.stringify(
     imgList
-  ).replaceAll('"', "'")}" />\n`;
+  )
+    // @ts-ignore
+    .replaceAll('"', "'")}" />\n`;
 }
