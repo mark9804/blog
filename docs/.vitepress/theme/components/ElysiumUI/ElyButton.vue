@@ -67,7 +67,7 @@ const buttonTag = computed(() => (isLink.value ? "a" : "button"));
 
   &:focus,
   &:focus-visible {
-    outline: 2px solid blueviolet;
+    outline: 2px solid var(--color-accent);
   }
 
   // Size variants

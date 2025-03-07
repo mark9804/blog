@@ -96,7 +96,7 @@ const shouldAriaLabelHide = ref(false);
 <template>
   <component
     :is="isLink ? 'a' : 'div'"
-    class="elysium-ui__card__container w-full rounded-[3px] overflow-hidden hover:shadow-card-hover hover:scale-102 transition-all duration-300 relative"
+    class="elysium-ui__card__container w-full grid rounded-[3px] overflow-hidden hover:shadow-card-hover hover:scale-102 transition-all duration-500 relative"
     :class="{
       'no-cover': !props.content.frontmatter.cover,
       'opacity-0': !isVisible,
@@ -120,11 +120,11 @@ const shouldAriaLabelHide = ref(false);
     />
     <div class="elysium-ui__card--content flex flex-col pb-4">
       <div
-        class="elysium-ui__card--cover-container z-0"
+        class="elysium-ui__card--cover-container z-0 relative w-full h-full overflow-hidden"
         v-if="props.content.frontmatter.cover"
       >
         <img
-          class="elysium-ui__card--cover"
+          class="elysium-ui__card--cover w-full block object-cover transition-opacity duration-500"
           :class="{ loaded: imageLoaded }"
           :src="props.content.frontmatter.cover"
           :alt="props.content.frontmatter.title"
@@ -181,13 +181,10 @@ const shouldAriaLabelHide = ref(false);
 
 .elysium-ui__card {
   &__container {
-    width: 100%;
-    display: grid;
     grid-template-areas:
       "cover"
       "content";
     background-color: colors.$color-accent-base;
-    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 
     &.no-cover {
       grid-template-areas: "content";
@@ -196,18 +193,11 @@ const shouldAriaLabelHide = ref(false);
 
   &--cover-container {
     grid-area: cover;
-    position: relative;
-    width: 100%;
     background-color: colors.$color-accent-base;
-    overflow: hidden;
   }
 
   &--cover {
-    width: 100%;
-    display: block;
-    object-fit: cover;
     opacity: 0;
-    transition: opacity 0.3s ease;
 
     &.loaded {
       opacity: 1;
