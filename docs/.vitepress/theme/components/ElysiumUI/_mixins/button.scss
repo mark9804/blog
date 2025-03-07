@@ -11,7 +11,6 @@
   border: none;
   border-radius: layouts.$border-radius-sm;
   cursor: pointer;
-  font-weight: 500;
   transition: layouts.$transition-normal;
   outline: none;
   position: relative;
@@ -22,11 +21,10 @@
   $variant-colors: map.get(colors.$button-colors, $variant);
   $background: map.get($variant-colors, "background");
   $text: map.get($variant-colors, "text");
-  
+
   background-color: $background;
   color: $text;
-  
-  &:hover {
+  &:not(.ely-button--disabled):hover {
     background-color: color.adjust($background, $lightness: -10%);
   }
 }

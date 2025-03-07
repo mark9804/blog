@@ -5,15 +5,7 @@ import type { ButtonProps } from "./types/ButtonProps";
 const props = withDefaults(defineProps<ButtonProps>(), {
   as: "button",
   size: "medium",
-  active: false,
-  disabled: false,
-  bordered: false,
-  wide: false,
-  loading: false,
   primary: true,
-  secondary: false,
-  text: false,
-  ariaLabel: undefined,
 });
 
 const classes = computed(() => ({
@@ -30,6 +22,7 @@ const classes = computed(() => ({
   "ely-button--active": props.active,
   "ely-button--disabled": props.disabled,
   "ely-button--loading": props.loading,
+  "font-bold": props.bold,
 }));
 
 const emit = defineEmits<{
@@ -59,7 +52,7 @@ const buttonTag = computed(() => (isLink.value ? "a" : "button"));
     <span v-if="loading" class="ely-button__loading">
       <span class="loading-spinner"></span>
     </span>
-    <span class="ely-button__content font-bold">
+    <span class="ely-button__content">
       <slot></slot>
     </span>
   </component>
@@ -124,7 +117,6 @@ const buttonTag = computed(() => (isLink.value ? "a" : "button"));
   &--disabled {
     opacity: colors.$disabled-opacity;
     cursor: not-allowed;
-    pointer-events: none;
   }
 
   // Loading state

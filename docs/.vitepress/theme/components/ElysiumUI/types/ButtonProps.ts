@@ -2,6 +2,7 @@ export type ButtonProps = {
   as?: "link" | "button";
   active?: boolean;
   disabled?: boolean;
+  bold?: boolean;
   size?: "mini" | "small" | "medium" | "large";
   bordered?: boolean;
   wide?: boolean;

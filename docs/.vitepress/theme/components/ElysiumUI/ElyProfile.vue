@@ -145,6 +145,7 @@ function handleScrollIndicatorClick() {
         :href="`mailto:${props.email}`"
         aria-label="发送邮件"
         :style="{ maxWidth: '240px' }"
+        bold
         ><span class="flex items-center gap-2">
           <icon-email :stroke-width="6" />Contact
         </span></ElyButton

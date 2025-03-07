@@ -122,6 +122,7 @@ onMounted(init);
         <div class="flex">
           <ElyButton
             text
+            bold
             class="home-title"
             :class="{ active: postType === 'breves' }"
             @click="toggleWaterfall('breves')"
@@ -129,6 +130,7 @@ onMounted(init);
           >
           <ElyButton
             text
+            bold
             class="home-title"
             :class="{ active: postType === 'quavers' }"
             @click="toggleWaterfall('quavers')"
@@ -172,7 +174,6 @@ onMounted(init);
   cursor: pointer !important;
   font-size: 1.5rem;
   line-height: 2rem;
-  font-weight: 500;
   color: var(--color-accent-text-tertiary);
 
   &:after {

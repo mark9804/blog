@@ -10,13 +10,14 @@
 
 ## Feature
 
-- ~~正在~~定制 [Elysium](./docs/.vitepress/theme/components/ElysiumUI) 主题。
+- 定制 [Elysium](./docs/.vitepress/theme/components/ElysiumUI) 主题。
   - 易于客制化：只需修改一处主题色，系统自动生成并应用全局色板。
   - 支持标签搜索和关键词搜索。
 - 支持 [giscus](https://giscus.app/) 评论系统。
 - 首页美化：
   - 文章瀑布流布局；
   - 文章卡片支持封面图片。
+  - 支持文章分页。
 - Markdown 语法增强：
   - 相册语法 `:::gallery 相册名称`；
   - 图片增强：
