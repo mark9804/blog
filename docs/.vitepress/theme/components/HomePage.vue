@@ -1,13 +1,5 @@
 <script setup lang="ts">
-import {
-  nextTick,
-  computed,
-  ref,
-  watch,
-  useTemplateRef,
-  onMounted,
-  onActivated,
-} from "vue";
+import { nextTick, computed, ref, watch, useTemplateRef, onMounted } from "vue";
 import { useDark, useCssVar, useElementSize } from "@vueuse/core";
 import { useData } from "vitepress";
 import {
@@ -56,15 +48,18 @@ function initPosts() {
   ]);
 }
 
+function updateCssVar(isDark: boolean) {
+  accentColor.value = useCssVar("--color-accent").value;
+  backgroundColor.value = isDark
+    ? useCssVar("--color-accent-base").value
+    : useCssVar("--color-accent-quaternary").value;
+}
+
 watch(
   () => isDark.value,
   newVal => {
     nextTick(() => {
-      accentColor.value = useCssVar("--color-accent").value;
-      console.log(newVal);
-      backgroundColor.value = newVal
-        ? useCssVar("--color-accent-base").value
-        : useCssVar("--color-accent-quaternary").value;
+      updateCssVar(newVal);
       setThemeOnActivated();
     });
   }
@@ -75,8 +70,10 @@ function setThemeOnActivated() {
     const htmlElement = document.documentElement;
     if (isDark.value) {
       htmlElement.classList.add("dark");
+      updateCssVar(true);
     } else {
       htmlElement.classList.remove("dark");
+      updateCssVar(false);
     }
   });
 }
@@ -97,7 +94,6 @@ function init() {
     );
 }
 
-onActivated(init);
 onMounted(init);
 </script>
 
