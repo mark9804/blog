@@ -100,7 +100,7 @@ function handlePageChange(page: number) {
 </script>
 
 <template>
-  <div class="article-list__waterfall flex flex-col w-full gap-5">
+  <div class="article-list__waterfall flex flex-col w-full gap-8">
     <div
       class="article-list__waterfall__articles-container flex justify-between w-full items-start"
     >
