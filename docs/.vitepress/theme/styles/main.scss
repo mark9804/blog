@@ -218,11 +218,11 @@ a.title span,
       background-color: transparent;
 
       &:nth-child(2n) {
-        background-color: $color-accent-quaternary;
+        background-color: $color-accent-quinary;
       }
 
       &:hover {
-        background-color: $color-accent-tertiary;
+        background-color: $color-accent-quaternary;
       }
     }
   }

@@ -23,6 +23,9 @@ $disabled-opacity: theme.$disabled-opacity;
     } @else if $level == "quaternary" {
       $color: color.adjust($color, $hue: 5);
       @return color.scale($color, $saturation: -23%, $lightness: 92%);
+    } @else if $level == "quinary" {
+      $color: color.adjust($color, $hue: 5);
+      @return color.scale($color, $saturation: -27%, $lightness: 98%);
     }
   } @else if $color == $dark-accent {
     @if $level == "secondary" {
@@ -33,6 +36,9 @@ $disabled-opacity: theme.$disabled-opacity;
     } @else if $level == "quaternary" {
       $color: color.adjust($color, $hue: -4);
       @return color.scale($color, $saturation: -40%, $lightness: -58%);
+    } @else if $level == "quinary" {
+      $color: color.adjust($color, $hue: -4);
+      @return color.scale($color, $saturation: -46%, $lightness: -65%);
     }
   }
   @return $color;
@@ -49,6 +55,7 @@ $light-accent-quaternary: adjust-saturation-lightness(
   $light-accent,
   "quaternary"
 );
+$light-accent-quinary: adjust-saturation-lightness($light-accent, "quinary");
 $light-accent-base: #fff;
 
 $light-text-base: rgb(47, 40, 38);
@@ -64,6 +71,7 @@ $dark-accent-quaternary: adjust-saturation-lightness(
   $dark-accent,
   "quaternary"
 );
+$dark-accent-quinary: adjust-saturation-lightness($dark-accent, "quinary");
 $dark-accent-base: #1b1b1f;
 
 $dark-text-base: rgb(220, 220, 220);
@@ -89,6 +97,7 @@ html {
   --color-accent-secondary: #{$light-accent-secondary};
   --color-accent-tertiary: #{$light-accent-tertiary};
   --color-accent-quaternary: #{$light-accent-quaternary};
+  --color-accent-quinary: #{$light-accent-quinary};
   --color-accent-base: #{$light-accent-base};
   --color-accent-transparent: #{rgba($light-accent-base, $base-opacity)};
   --color-accent-text-primary: #{$light-text-primary};
@@ -120,6 +129,7 @@ html.dark {
   --color-accent-secondary: #{$dark-accent-secondary};
   --color-accent-tertiary: #{$dark-accent-tertiary};
   --color-accent-quaternary: #{$dark-accent-quaternary};
+  --color-accent-quinary: #{$dark-accent-quinary};
   --color-accent-base: #{$dark-accent-base};
   --color-accent-transparent: #{rgba($dark-accent-base, $base-opacity)};
   --color-accent-text-primary: #{$dark-text-primary};
@@ -144,6 +154,7 @@ $color-accent: var(--color-accent);
 $color-accent-secondary: var(--color-accent-secondary);
 $color-accent-tertiary: var(--color-accent-tertiary);
 $color-accent-quaternary: var(--color-accent-quaternary);
+$color-accent-quinary: var(--color-accent-quinary);
 $color-accent-base: var(--color-accent-base);
 $color-accent-transparent: var(--color-accent-transparent);
 $color-accent-text-primary: var(--color-accent-text-primary);
