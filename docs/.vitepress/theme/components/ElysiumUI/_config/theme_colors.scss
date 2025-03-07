@@ -4,11 +4,11 @@
 
 $button-colors: (
   "primary": (
-    "background": $light-accent,
+    "background": $color-accent,
     "text": $color-accent-base
   ),
   "secondary": (
-    "background": $light-accent-quaternary,
-    "text": $dark-accent
+    "background": $color-accent-quaternary,
+    "text": $color-accent
   )
 );

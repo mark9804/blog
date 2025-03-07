@@ -101,8 +101,14 @@ const buttonTag = computed(() => (isLink.value ? "a" : "button"));
     background-color: transparent;
     color: var(--color-accent);
 
+    &::before {
+      background-color: var(--color-accent);
+    }
+
     &:hover {
-      background-color: var(--color-accent-quaternary);
+      &::before {
+        opacity: 0.1;
+      }
     }
   }
 
