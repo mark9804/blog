@@ -10,6 +10,7 @@ const props = withDefaults(defineProps<ButtonProps>(), {
 
 const classes = computed(() => ({
   "ely-button": true,
+  "cursor-pointer": !props.disabled,
   "ely-button--primary": props.primary && !props.secondary && !props.text,
   "ely-button--secondary": props.secondary && !props.text,
   "ely-button--text": props.text,
