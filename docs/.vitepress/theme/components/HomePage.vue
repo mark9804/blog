@@ -29,11 +29,7 @@ const articleTitleRef = useTemplateRef<HTMLHeadingElement>("articleTitleRef");
 const { isDark: themeIsDark } = useData();
 const isDark = computed(() => useDark().value || themeIsDark.value);
 const accentColor = ref(useCssVar("--color-accent").value);
-const backgroundColor = ref(
-  isDark.value
-    ? useCssVar("--color-accent-base").value
-    : useCssVar("--color-accent-quaternary").value
-);
+const backgroundColor = ref(useCssVar("--color-accent-quaternary").value);
 
 const { width: articleTitleWidth } = useElementSize(articleTitleRef);
 
@@ -48,18 +44,16 @@ function initPosts() {
   ]);
 }
 
-function updateCssVar(isDark: boolean) {
+function updateCssVar() {
   accentColor.value = useCssVar("--color-accent").value;
-  backgroundColor.value = isDark
-    ? useCssVar("--color-accent-base").value
-    : useCssVar("--color-accent-quaternary").value;
+  backgroundColor.value = useCssVar("--color-accent-quaternary").value;
 }
 
 watch(
   () => isDark.value,
   newVal => {
     nextTick(() => {
-      updateCssVar(newVal);
+      updateCssVar();
       setThemeOnActivated();
     });
   }
@@ -70,11 +64,10 @@ function setThemeOnActivated() {
     const htmlElement = document.documentElement;
     if (isDark.value) {
       htmlElement.classList.add("dark");
-      updateCssVar(true);
     } else {
       htmlElement.classList.remove("dark");
-      updateCssVar(false);
     }
+    updateCssVar();
   });
 }
 
@@ -94,7 +87,9 @@ function init() {
     );
 }
 
-onMounted(init);
+onMounted(() => {
+  init();
+});
 </script>
 
 <template>
