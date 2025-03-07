@@ -23,7 +23,6 @@ import { giscusConfig } from "../configs/giscusConfig";
 // import "@nolebase/vitepress-plugin-git-changelog/client/style.css";
 
 const pinia = createPinia();
-pinia.use(piniaPluginPersistedstate);
 
 export default {
   ...Theme,
@@ -38,6 +37,10 @@ export default {
   Layout: MainLayout,
 
   enhanceApp({ app }: { app: App }) {
+    if (!import.meta.env.SSR) {
+      pinia.use(piniaPluginPersistedstate);
+    }
+
     app.use(pinia);
     Message._context = app._context;
 
