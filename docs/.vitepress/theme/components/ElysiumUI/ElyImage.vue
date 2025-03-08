@@ -22,7 +22,7 @@ function handleClick() {
 
 <template>
   <img
-    class="elysium-ui elysium-ui__image cursor-pointer w-full max-w-screen-md object-contain flex-1 block object-cover"
+    class="elysium-ui elysium-ui__image cursor-pointer w-full max-w-screen-md object-fit flex-1 block object-cover"
     :src="imageSrc.src"
     :alt="imageSrc.alt"
     @click="handleClick"
