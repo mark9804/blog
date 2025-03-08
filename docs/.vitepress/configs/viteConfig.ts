@@ -8,7 +8,7 @@ import UnoCSS from "unocss/vite";
 import {
   presetAttributify,
   presetIcons,
-  presetUno,
+  presetWind3,
   transformerDirectives,
 } from "unocss";
 import Icons from "unplugin-icons/vite";
@@ -59,7 +59,7 @@ export const viteConfig = {
     vueDevTools(),
     UnoCSS({
       presets: [
-        presetUno(),
+        presetWind3(),
         presetIcons({
           extraProperties: {
             display: "inline-block",
@@ -96,5 +96,8 @@ export const viteConfig = {
         }),
       ],
     },
+  },
+  build: {
+    chunkSizeWarningLimit: 1000,
   },
 };
