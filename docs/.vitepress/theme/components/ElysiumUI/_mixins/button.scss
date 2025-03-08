@@ -48,8 +48,14 @@
   background-color: $background;
   color: $text;
 
-  &::before {
-    background-color: $color-accent-text-primary;
+  @if $variant == "primary" {
+    &::before {
+      background-color: $color-accent-base;
+    }
+  } @else {
+    &::before {
+      background-color: $color-accent-text-primary;
+    }
   }
 
   &:not(.ely-button--disabled):hover {
