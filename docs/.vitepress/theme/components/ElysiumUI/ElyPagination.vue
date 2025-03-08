@@ -105,6 +105,7 @@ watch(userCurrent, () => {
       :style="{ width: '32px', height: '32px', padding: '0' }"
       @click="handleSwitchPage('prev')"
       :disabled="userCurrent === 1"
+      aria-label="Previous Page"
     >
       <IconLeft />
     </ElyButton>
@@ -115,6 +116,7 @@ watch(userCurrent, () => {
         :style="{ width: '32px', height: '32px', padding: '0' }"
         :class="{ 'bg-primary text-white': item.value === userCurrent }"
         @click="handleGoToPage(item.value)"
+        :aria-label="`Page ${item.value}`"
       >
         <template v-if="item.type === 'number'">{{ item.value }}</template>
         <IconMore v-else />
@@ -126,6 +128,7 @@ watch(userCurrent, () => {
       :style="{ width: '32px', height: '32px', padding: '0' }"
       @click="handleSwitchPage('next')"
       :disabled="userCurrent === totalPages"
+      aria-label="Next Page"
     >
       <IconRight />
     </ElyButton>
