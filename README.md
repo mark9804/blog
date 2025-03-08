@@ -1,4 +1,6 @@
-# mark9804 的个人博客
+# <img src="https://avatars.githubusercontent.com/u/9006264?v=4" width="32"/> mark9804 的个人博客
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/f8397867-95ae-47a0-bd69-f6cd65908153/deploy-status)](https://app.netlify.com/sites/mark9804/deploys) ![Vercel](https://vercelbadge.vercel.app/api/mark9804/blog)
 
 [访问](https://mark9804.github.io/)
 
