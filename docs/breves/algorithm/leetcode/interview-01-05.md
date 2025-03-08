@@ -3,7 +3,7 @@ title: LeetCode 面试题 01.05. 一次编辑
 tags:
   - LeetCode
   - LeetCode-Medium
-  - TypeScript
+  - TS/JS
 ---
 
 # LeetCode 面试题 01.05. 一次编辑
