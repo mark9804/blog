@@ -78,7 +78,7 @@ const loader = createContentLoader("**/*.md", {
         if (item.url.endsWith("/")) return { ...item, createdAt: 0 };
         const file = transformUrlToPath(item.url);
         const frontmatter = item.frontmatter;
-        const wpms = 200 * (frontmatter?.timeAmp ?? 1);
+        const wpms = 200 * (frontmatter?.meta?.timeAmp ?? 1);
         const content = readFileSync(file, "utf-8");
 
         const createdAt =

@@ -60,14 +60,18 @@ function handleTagClick(tag: string) {
 </script>
 
 <template>
-  <div class="article-info flex flex-wrap gap-4 items-center mb-5">
+  <div
+    class="article-info flex flex-wrap gap-4 items-center mb-5"
+    v-if="!frontmatter?.meta?.hideArticleInfo"
+  >
     <a-tooltip
-      v-if="lastUpdated || createdAt"
+      v-if="lastUpdated || createdAt || !frontmatter?.meta?.hideEditTime"
       :content="`文章${hasPostUpdate ? '最后更新于' + lastUpdated : '创建于' + createdAt} (GMT+8)`"
       position="right"
     >
       <span
         class="text-sm flex items-center gap-1 text-gray-500 dark:text-gray-400"
+        v-if="!frontmatter?.meta?.hideEditTime"
       >
         <icon-history v-if="hasPostUpdate" />
         <icon-clock-circle v-else />
@@ -80,6 +84,7 @@ function handleTagClick(tag: string) {
     >
       <span
         class="text-sm flex items-center gap-1 text-gray-500 dark:text-gray-400"
+        v-if="!frontmatter?.meta?.hideReadingTime"
       >
         <alarm-clock
           theme="outline"
