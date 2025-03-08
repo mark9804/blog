@@ -35,10 +35,10 @@ $disabled-opacity: theme.$disabled-opacity;
       @return color.scale($color, $saturation: -23%, $lightness: -4%);
     } @else if $level == "quaternary" {
       $color: color.adjust($color, $hue: -4);
-      @return color.scale($color, $saturation: -40%, $lightness: -58%);
+      @return color.scale($color, $saturation: -40%, $lightness: -63%);
     } @else if $level == "quinary" {
       $color: color.adjust($color, $hue: -4);
-      @return color.scale($color, $saturation: -46%, $lightness: -65%);
+      @return color.scale($color, $saturation: -46%, $lightness: -72%);
     }
   }
   @return $color;
