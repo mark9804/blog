@@ -7,14 +7,12 @@ declare global {
   }
 }
 
-import { useData, useRoute } from "vitepress";
+import { useData } from "vitepress";
 import { nextTick, onBeforeMount, provide, ComputedRef } from "vue";
 import DefaultTheme from "vitepress/theme";
 import type { ArticleInfo } from "../types/ArticleInfo";
 import { useSearchTags } from "../utils/tagSearchUtils";
 import { useCustomStore } from "../../stores/piniaStore";
-import { SpeedInsights } from "@vercel/speed-insights/nuxt";
-import { Analytics } from "@vercel/analytics/nuxt";
 
 const store = useCustomStore();
 
@@ -56,7 +54,6 @@ onBeforeMount(() => {
 });
 
 const data = useData();
-const route = useRoute();
 const { Layout } = DefaultTheme;
 const frontmatter = data.frontmatter as unknown as ComputedRef<
   ArticleInfo["frontmatter"]
@@ -71,8 +68,6 @@ function handleTagClick(tag: string) {
 
 <template>
   <Layout>
-    <SpeedInsights />
-    <Analytics />
     <template #doc-footer-before>
       <div class="flex flex-wrap gap-2 pb-4" v-if="frontmatter?.tags?.length">
         <span class="text-sm text-gray-600 @dark:text-gray-400"

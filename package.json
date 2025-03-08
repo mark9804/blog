@@ -62,8 +62,6 @@
     "@mdit/plugin-spoiler": "0.16.0",
     "@mdit/plugin-sub": "0.16.0",
     "@mdit/plugin-sup": "0.16.0",
-    "@vercel/analytics": "1.5.0",
-    "@vercel/speed-insights": "1.2.0",
     "@vitejs/plugin-vue-jsx": "4.1.1",
     "@vueuse/components": "12.5.0",
     "@vueuse/core": "12.5.0",
