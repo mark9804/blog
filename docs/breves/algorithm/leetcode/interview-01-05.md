@@ -1,6 +1,7 @@
 ---
 title: LeetCode 面试题 01.05. 一次编辑
 tags:
+  - 面试算法
   - LeetCode
   - LeetCode-Medium
   - TS/JS
@@ -137,3 +138,7 @@ function oneEditAway(first: string, second: string): boolean {
 ```
 
 :::
+
+## 总结
+
+这道题最优题解巧妙的地方在于利用了“一次编辑”的特殊性，使用双指针分别从前向后和从后向前比较，最后判断没有被比较到的字符串长度是否小于等于 1。不过需要考虑空字符串的 corner case。
