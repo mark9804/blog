@@ -1,8 +1,10 @@
 # <img src="https://avatars.githubusercontent.com/u/9006264?v=4" width="32"/> mark9804 的个人博客
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/f8397867-95ae-47a0-bd69-f6cd65908153/deploy-status)](https://app.netlify.com/sites/mark9804/deploys) ![Vercel](https://vercelbadge.vercel.app/api/mark9804/blog)
+## 访问
+|  [自动选择](https://mark9804.github.io/)   |  [![Netlify Status](https://api.netlify.com/api/v1/badges/f8397867-95ae-47a0-bd69-f6cd65908153/deploy-status)](https://mark9804.netlify.app/)   | [![Vercel](https://vercelbadge.vercel.app/api/mark9804/blog)](https://mark9804.vercel.app/) |
+| --- | --- | --- |
 
-[访问](https://mark9804.github.io/)
+---
 
 基于 VitePress，定制 [Elysium](./docs/.vitepress/theme/components/ElysiumUI) 主题，图标来自 [Arco Design](https://arco.design/vue/)、 [Icon Park](https://iconpark.oceanengine.com/) 以及 [Octicons](https://icon-sets.iconify.design/octicon/)。
 
