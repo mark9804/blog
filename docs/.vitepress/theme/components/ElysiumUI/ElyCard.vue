@@ -2,7 +2,7 @@
 import { computed, onMounted, onUnmounted, ref, nextTick } from "vue";
 import type { CardProps } from "./types/CardProps";
 import { withBase } from "vitepress";
-import { formatRelativeTime } from "../../utils/timeUtils";
+import { formatRelativeTime, getUpdateInterval } from "../../utils/timeUtils";
 import { useSearchTags } from "../../utils/tagSearchUtils";
 import { useCustomStore } from "../../../stores/piniaStore";
 import { formalizeString } from "./_utils/stringUtils";
@@ -61,10 +61,28 @@ const relativeTime = ref(formatRelativeTime(props.content.createdAt));
 
 let timer: ReturnType<typeof setInterval> | null = null;
 
-onMounted(async () => {
+// 根据时间单位设置不同的更新频率
+function setupTimeUpdateInterval() {
+  // 清除现有的定时器
+  if (timer !== null) {
+    clearInterval(timer);
+  }
+
+  // 获取合适的更新间隔
+  const updateInterval = getUpdateInterval(props.content.createdAt);
+
+  // 设置新的定时器
   timer = setInterval(() => {
     relativeTime.value = formatRelativeTime(props.content.createdAt);
-  }, 60000); // 每分钟更新一次 relativeTime
+    // 更新后重新检查是否需要调整更新频率
+    setupTimeUpdateInterval();
+  }, updateInterval);
+}
+
+onMounted(async () => {
+  // 初始设置更新频率
+  setupTimeUpdateInterval();
+
   await nextTick(); // 先等待 DOM 更新
   // 如果没有封面图片，则直接认为图片加载完成
   if (!props.content.frontmatter.cover) {

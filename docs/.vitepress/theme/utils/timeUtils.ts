@@ -35,6 +35,32 @@ export function formatRelativeTime(timestamp: number): string {
   return dayjs(timestamp).fromNow();
 }
 
+/**
+ * 根据创建时间计算合适的更新间隔
+ * @param createdAt 创建时间的时间戳
+ * @returns 更新间隔（毫秒）
+ */
+export function getUpdateInterval(createdAt: number): number {
+  const now = dayjs();
+  const createdTime = dayjs(createdAt);
+
+  // 计算不同单位的时间差
+  const diffInHours = now.diff(createdTime, "hour");
+  const diffInDays = now.diff(createdTime, "day");
+
+  // 根据时间差设置不同的更新频率
+  if (diffInHours < 1) {
+    // 小于1小时
+    return 60000; // 每分钟更新
+  } else if (diffInDays < 1) {
+    // 小于1天
+    return 3600000; // 每小时更新
+  } else {
+    // 大于等于1天
+    return 86400000; // 每天更新
+  }
+}
+
 export function compareDates(
   dateA: string | number | Date,
   dateB: string | number | Date
