@@ -30,7 +30,7 @@ export function elyImageGalleryTransformer(content: string): string {
 
       // 添加一个包装div，包含图集名称和所有图片
       return `<div class="image-gallery">
-  <h4>${name}</h4>
+  ${!!name ? "<h4>" + name + "</h4>" : ""}
   ${imgTags}
 </div>`;
     } catch (error) {
