@@ -15,8 +15,8 @@ export const userProfile: ProfileProps = {
       link: "https://github.com/mark9804",
     },
     {
-      alias: "RSS",
-      link: `feed.rss`,
+      alias: "LinkedIn",
+      link: "https://www.linkedin.com/in/zhaolu-chen/",
     },
     {
       alias: "Team",
