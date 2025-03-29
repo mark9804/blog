@@ -40,9 +40,8 @@ Safari 的版本号是跟系统版本号一致的，在 iOS / iPad OS 上更新 
   width: 10px;
   height: 10px;
 }
-
-@keyframes next-btn {
-  // [!code focus:13]
+// prettier-ignore
+@keyframes next-btn { // [!code focus:13]
   0% {
     transform: translateY(0);
   }
