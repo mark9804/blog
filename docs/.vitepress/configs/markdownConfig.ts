@@ -17,6 +17,7 @@ export const markdownConfig = {
   image: {
     lazyLoading: true,
   },
+  lineNumbers: true,
   config: (md: any) => {
     md.use(implicitFigures, {
       figcaption: true,
