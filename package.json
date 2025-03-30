@@ -23,7 +23,7 @@
     "@iconify-json/octicon": "1.2.5",
     "@nolebase/vitepress-plugin-git-changelog": "2.15.1",
     "@types/cross-spawn": "6.0.6",
-    "@types/node": "22.13.13",
+    "@types/node": "22.13.14",
     "@unocss/preset-icons": "66.0.0",
     "autoprefixer": "10.4.21",
     "eslint-config-prettier": "10.1.1",
