@@ -8,6 +8,20 @@ import { sup } from "@mdit/plugin-sup";
 import { footnote } from "@mdit/plugin-footnote";
 import { generateImgComponent } from "../theme/utils/generateImgComponent";
 import { generateImgGallery } from "../theme/utils/generateImgGallery";
+import type MarkdownIt from "markdown-it";
+import type { Token } from "../theme/types/Token";
+
+interface MarkdownItRenderer {
+  renderToken: (
+    tokens: Token[],
+    idx: number,
+    options: MarkdownIt.Options
+  ) => string;
+}
+
+interface MarkdownItState {
+  tokens: Token[];
+}
 
 export const markdownConfig = {
   math: true,
@@ -18,7 +32,7 @@ export const markdownConfig = {
     lazyLoading: true,
   },
   lineNumbers: true,
-  config: (md: any) => {
+  config: (md: MarkdownIt) => {
     md.use(implicitFigures, {
       figcaption: true,
       copyAttrs: "^class$",
@@ -32,11 +46,11 @@ export const markdownConfig = {
       .use(footnote);
 
     md.renderer.rules.heading_close = (
-      tokens: any,
-      idx: any,
-      options: any,
-      env: any,
-      self: any
+      tokens: Token[],
+      idx: number,
+      options: MarkdownIt.Options,
+      env: Record<string, unknown>,
+      self: MarkdownItRenderer
     ) => {
       let parsedResult = self.renderToken(tokens, idx, options);
       if (tokens[idx].tag === "h1") {
@@ -45,12 +59,12 @@ export const markdownConfig = {
       return parsedResult;
     };
 
-    md.renderer.rules.image = (tokens: any, idx: any) => {
+    md.renderer.rules.image = (tokens: Token[], idx: number) => {
       return generateImgComponent(tokens[idx]);
     };
 
-    md.core.ruler.push("gallery", (state: any) => {
-      state.tokens.forEach((token: any, idx: any) => {
+    md.core.ruler.push("gallery", (state: MarkdownItState) => {
+      state.tokens.forEach((token: Token, idx: number) => {
         if (token?.content?.includes(":::gallery")) {
           if (state.tokens[idx].type === "fence") return true;
           state.tokens[idx].type = "gallery";
@@ -59,7 +73,7 @@ export const markdownConfig = {
       return true;
     });
 
-    md.renderer.rules.gallery = (tokens: any, idx: any) => {
+    md.renderer.rules.gallery = (tokens: Token[], idx: number) => {
       return generateImgGallery(tokens[idx]);
     };
   },

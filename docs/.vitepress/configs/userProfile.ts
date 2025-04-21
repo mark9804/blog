@@ -1,5 +1,4 @@
 import type { ProfileProps } from "../theme/components/ElysiumUI/types/ProfileProps";
-import { BASE_URL } from "../constants";
 
 export const userProfile: ProfileProps = {
   name: {
