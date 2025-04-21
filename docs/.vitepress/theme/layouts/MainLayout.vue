@@ -90,7 +90,7 @@ function handleTagClick(tag: string) {
   </Layout>
 </template>
 
-<style>
+<style lang="scss">
 ::view-transition-old(root),
 ::view-transition-new(root) {
   mix-blend-mode: normal;
