@@ -54,15 +54,10 @@ export default [
         extraFileExtensions: [".vue"],
       },
     },
+    processor: vuePlugin.processors[".vue"],
     rules: {
       "vue/no-multiple-template-root": "off",
       "vue/multi-word-component-names": "off",
-      "vue/block-order": [
-        "error",
-        {
-          order: ["script", "template", "style"],
-        },
-      ],
       "vue/block-lang": [
         "error",
         {
