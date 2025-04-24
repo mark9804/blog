@@ -8,6 +8,12 @@ tags:
 
 # 使用 Cursor 进行远程开发
 
+:::info 2025-04-24: 原版 Remote - SSH 插件已修复
+
+Cursor 的 Remote - SSH 插件已经修复了这个问题，反而是 Open Remote 插件现在装不上了，所以现在可以直接使用原版插件远程开发
+
+:::
+
 :::details 太长了，不想看
 
 卸载 Remote - SSH，下载 [Open Remote - SSH](https://github.com/jeanp413/open-remote-ssh)，装上 `.vsix` 扩展之后即可正常使用
