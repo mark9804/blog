@@ -8,6 +8,12 @@ tags:
 
 # 用命令行调教 macOS 系统行为
 
+:::info
+
+现在大部分功能都已经被 [Supercharge](https://sindresorhus.com/supercharge) 做出来了，还包括一个快捷键监控器（ShortcutDetective 已经似了）
+
+:::
+
 在 macOS 上，大部分应用程序的属性都可以通过一个叫属性列表（property list, plist） 的文件控制。Plist 内部的属性使用 XML 键值对存放，通过 plist 当中记录的属性可以控制应用程序和 macOS 系统的部分行为。网上一些付费的调教工具，例如 MacPilot，主要就是通过命令行修改对应的 plist 文件达到自定义系统行为的方式的。
 
 我曾经是 MacPilot 的用户（毕竟懒是第一生产力），但是它在 v12 更新到 v14 的过程中做了两件我不是很能接受的事：
