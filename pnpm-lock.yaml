@@ -127,8 +127,8 @@ importers:
         specifier: 1.2.6
         version: 1.2.6
       '@nolebase/vitepress-plugin-git-changelog':
-        specifier: 2.17.1
-        version: 2.17.1(typescript@5.8.3)(vitepress@1.6.3(@algolia/client-search@5.15.0)(@types/node@22.15.29)(async-validator@4.2.5)(less@4.3.0)(markdown-it-mathjax3@4.3.2)(postcss@8.5.4)(sass@1.89.1)(search-insights@2.13.0)(typescript@5.8.3))
+        specifier: 2.17.2
+        version: 2.17.2(typescript@5.8.3)(vitepress@1.6.3(@algolia/client-search@5.15.0)(@types/node@22.15.29)(async-validator@4.2.5)(less@4.3.0)(markdown-it-mathjax3@4.3.2)(postcss@8.5.4)(sass@1.89.1)(search-insights@2.13.0)(typescript@5.8.3))
       '@types/cross-spawn':
         specifier: 6.0.6
         version: 6.0.6
@@ -1198,13 +1198,13 @@ packages:
     resolution: {integrity: sha512-oGB+UxlgWcgQkgwo8GcEGwemoTFt3FIO9ababBmaGwXIoBKZ+GTy0pP185beGg7Llih/NSHSV2XAs1lnznocSg==}
     engines: {node: '>= 8'}
 
-  '@nolebase/ui@2.17.1':
-    resolution: {integrity: sha512-me3yI+UpLJEn1gx3PgknA1KmSOhO1umfwEd8Faj6Y6Sp2OdzKrL5MoOudLJqq4RcdErotS0BReYtskpLIOmaaQ==}
+  '@nolebase/ui@2.17.2':
+    resolution: {integrity: sha512-Skr0S1DkU3ud3WOR5j9fTk+s1WMzYxY4nCegbTY6oFA3o1xo4FFwJYinV6U0lkX0AhFeWHRlk0KjQirC19ZlXg==}
     peerDependencies:
       vitepress: ^1.5.0 || ^2.0.0-alpha.1
 
-  '@nolebase/vitepress-plugin-git-changelog@2.17.1':
-    resolution: {integrity: sha512-LivoOYxiW3T8qRxS8t8264FHDie1kEtBIctgqADMOgaaM6WdZLQEOF3sGGnhKPRc2zWbbzA2hRFGk49aOHRxug==}
+  '@nolebase/vitepress-plugin-git-changelog@2.17.2':
+    resolution: {integrity: sha512-79oTcTzCtCFTxq6OWGIvRGPfGm4itHFOzhDhaqRkpvHWOYQyidx+NsStEYJQO9mJ/9O/xC9Ctc4osk2otGgsSA==}
     peerDependencies:
       vitepress: ^1.5.0 || ^2.0.0-alpha.1
 
@@ -2643,10 +2643,6 @@ packages:
 
   ignore@5.3.2:
     resolution: {integrity: sha512-hsBTNUqQTDwkWtcdYI2i06Y/nUBEsNEDJKjWdigLvegy8kDuJAS8uRlpkkcQpyEXL0Z/pjDy5HBmMjRCJ2gq+g==}
-    engines: {node: '>= 4'}
-
-  ignore@7.0.4:
-    resolution: {integrity: sha512-gJzzk+PQNznz8ysRrC0aOkBNVRBDtE1n53IqyqEf3PXrYwomFs5q4pGMizBMJF+ykh03insJ27hB8gSrD2Hn8A==}
     engines: {node: '>= 4'}
 
   ignore@7.0.5:
@@ -4856,7 +4852,7 @@ snapshots:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.19.0
 
-  '@nolebase/ui@2.17.1(typescript@5.8.3)(vitepress@1.6.3(@algolia/client-search@5.15.0)(@types/node@22.15.29)(async-validator@4.2.5)(less@4.3.0)(markdown-it-mathjax3@4.3.2)(postcss@8.5.4)(sass@1.89.1)(search-insights@2.13.0)(typescript@5.8.3))':
+  '@nolebase/ui@2.17.2(typescript@5.8.3)(vitepress@1.6.3(@algolia/client-search@5.15.0)(@types/node@22.15.29)(async-validator@4.2.5)(less@4.3.0)(markdown-it-mathjax3@4.3.2)(postcss@8.5.4)(sass@1.89.1)(search-insights@2.13.0)(typescript@5.8.3))':
     dependencies:
       '@iconify-json/octicon': 1.2.6
       less: 4.3.0
@@ -4865,10 +4861,10 @@ snapshots:
     transitivePeerDependencies:
       - typescript
 
-  '@nolebase/vitepress-plugin-git-changelog@2.17.1(typescript@5.8.3)(vitepress@1.6.3(@algolia/client-search@5.15.0)(@types/node@22.15.29)(async-validator@4.2.5)(less@4.3.0)(markdown-it-mathjax3@4.3.2)(postcss@8.5.4)(sass@1.89.1)(search-insights@2.13.0)(typescript@5.8.3))':
+  '@nolebase/vitepress-plugin-git-changelog@2.17.2(typescript@5.8.3)(vitepress@1.6.3(@algolia/client-search@5.15.0)(@types/node@22.15.29)(async-validator@4.2.5)(less@4.3.0)(markdown-it-mathjax3@4.3.2)(postcss@8.5.4)(sass@1.89.1)(search-insights@2.13.0)(typescript@5.8.3))':
     dependencies:
       '@iconify-json/octicon': 1.2.6
-      '@nolebase/ui': 2.17.1(typescript@5.8.3)(vitepress@1.6.3(@algolia/client-search@5.15.0)(@types/node@22.15.29)(async-validator@4.2.5)(less@4.3.0)(markdown-it-mathjax3@4.3.2)(postcss@8.5.4)(sass@1.89.1)(search-insights@2.13.0)(typescript@5.8.3))
+      '@nolebase/ui': 2.17.2(typescript@5.8.3)(vitepress@1.6.3(@algolia/client-search@5.15.0)(@types/node@22.15.29)(async-validator@4.2.5)(less@4.3.0)(markdown-it-mathjax3@4.3.2)(postcss@8.5.4)(sass@1.89.1)(search-insights@2.13.0)(typescript@5.8.3))
       colorette: 2.0.20
       date-fns: 4.1.0
       defu: 6.1.4
@@ -6437,7 +6433,7 @@ snapshots:
     dependencies:
       '@sindresorhus/merge-streams': 2.3.0
       fast-glob: 3.3.3
-      ignore: 7.0.4
+      ignore: 7.0.5
       path-type: 6.0.0
       slash: 5.1.0
       unicorn-magic: 0.3.0
@@ -6515,8 +6511,6 @@ snapshots:
     optional: true
 
   ignore@5.3.2: {}
-
-  ignore@7.0.4: {}
 
   ignore@7.0.5: {}
 
