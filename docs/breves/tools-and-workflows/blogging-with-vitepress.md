@@ -57,6 +57,6 @@ cwebp 是一个 CLI 工具，不支持批量处理。会熟练使用 bash `for l
 
 我不知道是这个版本 VitePress 的问题亦或是我添加过自定义组件的问题，在我写文章使用 `vitepress dev` 预览的时候，写着写着浏览器会变得异常的卡，甚至整个预览页面都可能会崩溃。一看性能监视器，发现 VitePress 热更新文章的时候会留下一百多甚至两百多万个 DOM 节点，单页面占用内存最高能干到 4GB 以上。
 
-![在写这篇文章时截的，截完图没多久页面就崩了](https://cdn.sa.net/2024/12/05/5WoXZLyvugqBtec.webp =360x)
+![在写这篇文章时截的，截完图没多久页面就崩了 =360x](https://cdn.sa.net/2024/12/05/5WoXZLyvugqBtec.webp)
 
 如果你是用的是原生没有怎么修改过的 VitePress，并且只关注自己的语法有没有闭合、有没有明显的格式错误，那么 VSCode 预览插件的体验会比 `vitepress dev` 好得多。除非有什么特殊需求，否则我建议在写文章的时候只使用 VSCode 的 Markdown 预览插件，尽量少用 `vitepress dev` 预览，直到这个问题以某种方式解决为止。

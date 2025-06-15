@@ -13,7 +13,7 @@ cover: https://cdn.sa.net/2024/11/26/VpvA6ne3E9L7cS2.webp
 
 最近做了一个设计，需要在前端画圆角三角形。
 
-![效果图](https://cdn.sa.net/2024/11/26/BGQdpKOWlVNnr65.webp =360x)
+![效果图 =360x](https://cdn.sa.net/2024/11/26/BGQdpKOWlVNnr65.webp)
 
 非圆角三角形其实反向利用 CSS border 的原理是很好实现的，网上也有很多文章，这里不再赘述。
 
@@ -46,7 +46,7 @@ cover: https://cdn.sa.net/2024/11/26/VpvA6ne3E9L7cS2.webp
 
 但是假如想要实现圆角的需求，那么使用 border 骚操作是无能为力的。因此这里使用的思路是通过三个正方形进行二维变形并旋转后拼合。
 
-![示意图](https://cdn.sa.net/2024/11/26/VpvA6ne3E9L7cS2.webp =360x)
+![示意图 =360x](https://cdn.sa.net/2024/11/26/VpvA6ne3E9L7cS2.webp)
 
 ## 实现步骤
 
@@ -65,7 +65,7 @@ cover: https://cdn.sa.net/2024/11/26/VpvA6ne3E9L7cS2.webp
 </style>
 ```
 
-![绘制基础正方形](https://cdn.sa.net/2024/11/26/wDe4jhTzOHqEYS7.webp =360x)
+![绘制基础正方形 =360x](https://cdn.sa.net/2024/11/26/wDe4jhTzOHqEYS7.webp)
 
 ### 设置旋转角度
 
@@ -86,7 +86,7 @@ cover: https://cdn.sa.net/2024/11/26/VpvA6ne3E9L7cS2.webp
 </style>
 ```
 
-![设置旋转角度](https://cdn.sa.net/2024/11/26/LegcSmuxPdBj27A.webp =360x)
+![设置旋转角度 =360x](https://cdn.sa.net/2024/11/26/LegcSmuxPdBj27A.webp)
 
 ### 通过 `skew` 变形得到单个尖角
 
@@ -104,13 +104,13 @@ cover: https://cdn.sa.net/2024/11/26/VpvA6ne3E9L7cS2.webp
 </style>
 ```
 
-![剪切变形](https://cdn.sa.net/2024/11/26/2VGSDAhsgRvB6nw.webp =360x)
+![剪切变形 =360x](https://cdn.sa.net/2024/11/26/2VGSDAhsgRvB6nw.webp)
 
 需要注意的是在这一步当中各点的坐标没有发生改变，不过坐标系不再是平面直角坐标系了。换言之，**`skew` 旋转的是坐标轴，而不是图形本身。**
 
 这里用一张示意图来解释：
 
-![坐标系旋转](https://cdn.sa.net/2024/11/26/cL5flvVuNwYmhsi.webp =360x)
+![坐标系旋转 =360x](https://cdn.sa.net/2024/11/26/cL5flvVuNwYmhsi.webp)
 
 虽然各点的坐标没有发生改变，但是由于坐标轴发生了旋转，各边的长度不再相等。上图中可以看到左边的斜边明显是长于右边的。这会在在下一步中进行修正。
 
@@ -118,7 +118,7 @@ cover: https://cdn.sa.net/2024/11/26/VpvA6ne3E9L7cS2.webp
 
 通过辅助图形可以更加清晰的看到这个过程：
 
-![变形过程](https://cdn.sa.net/2024/11/26/bxW7BkyDNAPJvId.webp =360x)
+![变形过程 =360x](https://cdn.sa.net/2024/11/26/bxW7BkyDNAPJvId.webp)
 
 又因为旋转的角是 $30\degree$，因此作出两个角度分别为 $30\degree$，$60\degree$，$90\degree$ 的直角三角形。设变形后的斜边长度为 $1$，可知：
 
@@ -138,7 +138,7 @@ $$
 </style>
 ```
 
-![修正变形](https://cdn.sa.net/2024/11/26/9vEJzGDtukgsxyC.webp =360x)
+![修正变形 =360x](https://cdn.sa.net/2024/11/26/9vEJzGDtukgsxyC.webp)
 
 这样三角形的一个部件就做出来了。
 
@@ -194,7 +194,7 @@ $$
 </style>
 ```
 
-![最终效果](https://cdn.sa.net/2024/11/26/IYvWngSuFH1AdjN.webp =360x)
+![最终效果 =360x](https://cdn.sa.net/2024/11/26/IYvWngSuFH1AdjN.webp)
 
 至此，一个完整的绘制过程就完成了。
 

@@ -35,7 +35,7 @@ cover: https://cdn.sa.net/2024/11/24/RTW4v3V5esj1ozX.webp
 
 第二天把一整天行程给了台场。
 
-![电视台门口的海贼王雕像](https://cdn.sa.net/2024/12/13/BGHgomy65zY29WU.webp =360x)
+![电视台门口的海贼王雕像 =360x](https://cdn.sa.net/2024/12/13/BGHgomy65zY29WU.webp)
 
 :::gallery 富士电视台
 ![](https://cdn.sa.net/2024/12/13/qQ8Fw1MVypG2IxX.webp)

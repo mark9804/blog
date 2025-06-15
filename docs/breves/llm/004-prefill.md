@@ -52,7 +52,7 @@ const prefilled = {
 
 现在唯一的问题就剩下——要是她不坚持晓美焰有一头蓝色长发就好了。
 
-![点我看蓝发晓美焰](https://cdn.sa.net/2024/12/10/GdfpTmwJ7BtnOib.webp =360x)
+![点我看蓝发晓美焰 =360x](https://cdn.sa.net/2024/12/10/GdfpTmwJ7BtnOib.webp)
 
 ## 下集预告
 

@@ -59,7 +59,7 @@ cover: https://cdn.sa.net/2024/11/25/uyAvXg59dWnSsOi.webp
 
 到了鸟居，哈哈，我就知道。
 
-![千 人 鸟 居](https://cdn.sa.net/2024/12/01/hdPrcksMFmzoteJ.webp =360x)
+![千 人 鸟 居 =360x](https://cdn.sa.net/2024/12/01/hdPrcksMFmzoteJ.webp)
 
 买了个合格守，祈祷了一下来年考试能合格，然后看了一下地图发现和公交时间不太正好，决定走路去八坂神社。
 

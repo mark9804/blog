@@ -30,7 +30,7 @@ PS：捷克的KFC如果选堂食然后点了饮料的话好像可以无限续杯
 
 捷克的车票是用一个叫 [pid](https://apps.apple.com/us/app/pid-l%C3%ADta%C4%8Dka/id983071129) 的 app 购买和管理的，有效期间内可以无限次坐车，不需要刷卡，一般也只有随机查票，上车前一分钟点一下激活就可以。但是如果抱着侥幸心理逃票被查到的话会被罚多少就不知道了，我们遇到过一次便衣查票，冷不丁亮证件让一节车厢里的人出示车票。**如果想临时买的话是来不及的，因为激活需要等待一分钟时间**，有这一分钟时间便衣已经罚完了。
 
-![便衣在查逃票](https://cdn.sa.net/2024/11/11/8A3BzIPfJtLCQ51.webp =240x)
+![便衣在查逃票 =240x](https://cdn.sa.net/2024/11/11/8A3BzIPfJtLCQ51.webp)
 
 :::gallery 布拉格1区
 ![](https://cdn.sa.net/2024/11/07/A6HFktZUdmRrfis.webp)
@@ -51,7 +51,7 @@ PS：捷克的KFC如果选堂食然后点了饮料的话好像可以无限续杯
 
 ![布拉格歌剧院](https://cdn.sa.net/2024/11/07/MXOS5RtEKfd3Z7i.webp)
 
-![火药塔……旁边的一座不知道什么塔](https://cdn.sa.net/2024/11/07/xoqVd9jpeEQwSTl.webp =480x)
+![火药塔……旁边的一座不知道什么塔 =480x](https://cdn.sa.net/2024/11/07/xoqVd9jpeEQwSTl.webp)
 
 火药塔收费进入，做一回韭菜。塔内部的楼梯大部分是螺旋形石梯，爬到中央平台处会变成木台阶。角度比较陡，而且落脚点很小，要是前一天没休息好的话爬起来会头晕。
 
@@ -94,7 +94,7 @@ PS：捷克的KFC如果选堂食然后点了饮料的话好像可以无限续杯
 越过广场往前就是最出名的天文钟了，市政厅就在天文钟边上，不过现在人还很多，晚上再来看看。
 
 :::gallery 天文钟
-![](https://cdn.sa.net/2024/11/07/cKdFtifEDQuXrok.webp =340x)
+![](https://cdn.sa.net/2024/11/07/cKdFtifEDQuXrok.webp)
 ![](https://cdn.sa.net/2024/11/08/Lco1wxGydtP27NX.webp)
 :::
 

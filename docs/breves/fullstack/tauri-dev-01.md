@@ -27,7 +27,7 @@ AI 已经足够强大，特别是最近几天的 DeepSeek R1 更是让我看到�
 
 其实我从[试水 Tauri](https://github.com/ba-archive/translator-cheatsheet) 开始就一直都是一个坚定的 Tauri 小黑子，它从 Electron 的历史错误中学到了教训，然后转头就创造了更多的历史错误。其中最让人绷不住的还是它按着所有开发者的头让大家用 rust 写后端，rust 可能跨平台，但 rust 跨平台不太可能。
 
-![](https://cdn.sa.net/2025/01/30/ZlMELGFt2vN9zxu.webp =248x)
+![激情开喷 =248x](https://cdn.sa.net/2025/01/30/ZlMELGFt2vN9zxu.webp)
 
 但是回顾一下需求：我需要一个跨平台的应用，并且这个应用需要一定与系统交互的能力（发送通知、打开 QQ 或微信、写入和同步数据库，以及与系统层级的大模型 API 交互——我认为未来所有的系统更新一定会包含端侧模型交互能力）。因此 Electron 很遗憾地被我排除在外，不是因为它太大了，而是因为它在移动端上基本跑不动。
 

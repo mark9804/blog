@@ -34,7 +34,7 @@ cover: https://cdn.sa.net/2024/11/25/bQfDOewVo9176SR.webp
 
 再往前走几步，就能看到著名的朱红色海中鸟居——的合影队伍了。
 
-![](https://cdn.sa.net/2024/12/01/qLOnKjTsuc1JoxQ.webp =360x)
+![ =360x](https://cdn.sa.net/2024/12/01/qLOnKjTsuc1JoxQ.webp)
 
 队伍排了少说有七八十米长，估计没个两小时都排不到。那怎么办？那自然是直接跳过啦，反正有的是地方拍。
 
