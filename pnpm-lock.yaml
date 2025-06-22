@@ -18,11 +18,11 @@ importers:
         specifier: 1.4.2
         version: 1.4.2(vue@3.5.17(typescript@5.8.3))
       '@mdit/plugin-footnote':
-        specifier: 0.22.1
-        version: 0.22.1(markdown-it@14.1.0)
+        specifier: 0.22.2
+        version: 0.22.2(markdown-it@14.1.0)
       '@mdit/plugin-img-size':
-        specifier: 0.22.1
-        version: 0.22.1(markdown-it@14.1.0)
+        specifier: 0.22.2
+        version: 0.22.2(markdown-it@14.1.0)
       '@mdit/plugin-mark':
         specifier: 0.22.1
         version: 0.22.1(markdown-it@14.1.0)
@@ -1050,14 +1050,14 @@ packages:
       markdown-it:
         optional: true
 
-  '@mdit/plugin-footnote@0.22.1':
-    resolution: {integrity: sha512-XeNdgTsSjsg575On9orfsBJjy6Fe4OsmU4xZP3RkSgNpviYfZtqAruLQ/8fUhyy4tBHpwbaj/S1oWwLEwbaaNw==}
+  '@mdit/plugin-footnote@0.22.2':
+    resolution: {integrity: sha512-lHB6AV61QruvrWXIu/oWncltH2ED8cBUuvX4IO+5TvtWSyyc6wOm3ErPqqTFJqy1SJ1p21oLNcqRGdPF+S3N4w==}
     engines: {node: '>= 18'}
     peerDependencies:
       markdown-it: ^14.1.0
 
-  '@mdit/plugin-img-size@0.22.1':
-    resolution: {integrity: sha512-Rv8ZDUyeYsBfhjJQtz0kj8GWnyjX8SWovRwuGuhxD6RXRMsqiaDPekGOEN77ZBN2tCcZEc5tGmHHonlg1RAUtQ==}
+  '@mdit/plugin-img-size@0.22.2':
+    resolution: {integrity: sha512-+2+HpV5wZ3ZvFAs2alOiftDO635UbbOTr9uRQ0LZi/1lIZzKa0GE8sxYmtAZXRkdbGCj1uN6puoT7Bc7fdBs7Q==}
     engines: {node: '>= 18'}
     peerDependencies:
       markdown-it: ^14.1.0
@@ -4583,12 +4583,12 @@ snapshots:
     optionalDependencies:
       markdown-it: 14.1.0
 
-  '@mdit/plugin-footnote@0.22.1(markdown-it@14.1.0)':
+  '@mdit/plugin-footnote@0.22.2(markdown-it@14.1.0)':
     dependencies:
       '@types/markdown-it': 14.1.2
       markdown-it: 14.1.0
 
-  '@mdit/plugin-img-size@0.22.1(markdown-it@14.1.0)':
+  '@mdit/plugin-img-size@0.22.2(markdown-it@14.1.0)':
     dependencies:
       '@types/markdown-it': 14.1.2
     optionalDependencies:
