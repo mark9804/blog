@@ -65,7 +65,7 @@
     "@mdit/plugin-sup": "0.22.1",
     "@typescript-eslint/eslint-plugin": "^8.30.1",
     "@typescript-eslint/parser": "^8.30.1",
-    "@vitejs/plugin-vue-jsx": "4.2.0",
+    "@vitejs/plugin-vue-jsx": "5.0.0",
     "@vueuse/components": "12.5.0",
     "@vueuse/core": "12.5.0",
     "cross-spawn": "7.0.6",
