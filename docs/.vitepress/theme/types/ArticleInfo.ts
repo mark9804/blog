@@ -4,6 +4,7 @@ export type ArticleInfo = {
     description?: string;
     tags?: string[];
     cover?: string;
+    comment?: boolean;
     meta?: {
       hidden?: boolean;
       timeAmp?: number; // 阅读时间倍率
