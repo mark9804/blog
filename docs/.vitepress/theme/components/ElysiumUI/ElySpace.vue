@@ -1,6 +1,6 @@
-<script setup lang="tsx">
+<script setup lang="ts">
 import type { SpaceProps } from "./types/SpaceProps";
-import { computed, Fragment, useSlots } from "vue";
+import { computed, useSlots } from "vue";
 import { getAllElements } from "./_utils/vueUtils";
 import { parseSize } from "./_utils/styleUtils";
 const props = withDefaults(defineProps<SpaceProps>(), {
@@ -93,35 +93,7 @@ const slots = useSlots() as {
   divider?: () => any;
 };
 
-const SpaceElement = () => {
-  const children = getAllElements(slots.default?.(), true);
-
-  return (
-    <Fragment>
-      {children.map((child, index) => {
-        const shouldRenderDivider =
-          !!(slots.divider || props.divider) && index > 0;
-        return (
-          <Fragment key={child.key ?? `item-${index}`}>
-            {shouldRenderDivider &&
-              (!!props.divider ? (
-                <span
-                  role="separator"
-                  aria-label="分隔符"
-                  class="elysium-ui elysium-ui__space--built-in-divider select-none"
-                >
-                  {props.divider}
-                </span>
-              ) : (
-                slots.divider?.()
-              ))}
-            {child}
-          </Fragment>
-        );
-      })}
-    </Fragment>
-  );
-};
+const children = computed(() => getAllElements(slots.default?.(), true));
 </script>
 
 <template>
@@ -130,7 +102,23 @@ const SpaceElement = () => {
     :class="spaceClass"
     :style="spaceStyles"
   >
-    <SpaceElement />
+    <template
+      v-for="(child, index) in children"
+      :key="child.key ?? `item-${index}`"
+    >
+      <template v-if="!!(slots.divider || props.divider) && index > 0">
+        <span
+          v-if="!!props.divider"
+          role="separator"
+          aria-label="分隔符"
+          class="elysium-ui elysium-ui__space--built-in-divider select-none"
+        >
+          {{ props.divider }}
+        </span>
+        <slot v-else name="divider" />
+      </template>
+      <component :is="child" />
+    </template>
   </div>
 </template>
 
