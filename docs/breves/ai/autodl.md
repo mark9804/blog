@@ -28,7 +28,7 @@ echo 注意：仅限于学术用途，不承诺稳定性保证
 可以看到脚本实际上是把流量代理到了 12798 端口上，通过 `no_proxy` 变量来设置不走代理的白名单。这样我们可以使用 nano 或者 vim 编辑文件，把清华源（我比较喜欢）和 hf-mirror.com 也添加到白名单中，这样启用代理的时候就不会代理这两个额外网站了。
 
 ```shell
-export no_proxy=localhost,127.0.0.1,modelscope.com,aliyuncs.com,tencentyun.com,wisemodel.cn,hf-mirror.com,pypi.tuna.tsinghua.edu.cn
+export no_proxy=localhost,127.0.0.1,modelscope.com,aliyuncs.com,tencentyun.com,wisemodel.cn,hf-mirror.com,pypi.tuna.tsinghua.edu.cn,mirrors.tuna.tsinghua.edu.cn
 export http_proxy=http://172.31.1.128:12798 && export https_proxy=http://172.31.1.128:12798
 export REQUESTS_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt
 export SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
