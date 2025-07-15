@@ -11,6 +11,7 @@ import { useData } from "vitepress";
 import {
   nextTick,
   onBeforeMount,
+  onMounted,
   provide,
   ComputedRef,
   ref,
@@ -79,36 +80,38 @@ function handleTagClick(tag: string) {
 const route = useRoute();
 
 // resolve comment may not visible due to initial giscus error
-const shouldHaveComment = computed(() => frontmatter.value.comment !== false);
+const shouldHaveComment = computed(() => frontmatter.value.comment !== false); // 应用允许显式禁止评论，不能缩写成 !frontmatter.value.comment
 const hasComment = ref(false);
 const timer = ref<number | null>(null);
 
-watchEffect(onInvalidate => {
-  // Make sure effect re-runs on route change
-  route.path;
+onMounted(() => {
+  watchEffect(onInvalidate => {
+    // Make sure effect re-runs on route change
+    route.path;
 
-  hasComment.value = false;
+    hasComment.value = false;
 
-  onInvalidate(() => {
-    if (timer.value) {
-      window.clearInterval(timer.value);
-      timer.value = null;
+    onInvalidate(() => {
+      if (timer.value) {
+        window.clearInterval(timer.value);
+        timer.value = null;
+      }
+    });
+
+    if (shouldHaveComment.value) {
+      timer.value = window.setInterval(() => {
+        // check if #giscus is visible && width, height > 0
+        const giscus = document.getElementById("giscus");
+        if (giscus && giscus.offsetWidth > 0 && giscus.offsetHeight > 0) {
+          hasComment.value = true;
+          if (timer.value) {
+            window.clearInterval(timer.value);
+            timer.value = null;
+          }
+        }
+      }, 500);
     }
   });
-
-  if (shouldHaveComment.value) {
-    timer.value = window.setInterval(() => {
-      // check if #giscus is visible && width, height > 0
-      const giscus = document.getElementById("giscus");
-      if (giscus && giscus.offsetWidth > 0 && giscus.offsetHeight > 0) {
-        hasComment.value = true;
-        if (timer.value) {
-          window.clearInterval(timer.value);
-          timer.value = null;
-        }
-      }
-    }, 500);
-  }
 });
 
 function handleReloadComment() {
