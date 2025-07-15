@@ -4,6 +4,7 @@ import { cluster } from "radashi";
 import { clamp } from "./ElysiumUI/_utils/numberUtils";
 import type { Post } from "../types/Post";
 import ElyPagination from "./ElysiumUI/ElyPagination.vue";
+import ElyEmptyState from "./ElysiumUI/ElyEmptyState.vue";
 
 const props = withDefaults(
   defineProps<{
@@ -86,6 +87,10 @@ watch(
       () => []
     );
 
+    if (paginatedPosts.value.length === 0) {
+      return;
+    }
+
     // 找到一个高度最短的列，把文章卡片塞进去
     for (const post of paginatedPosts.value) {
       const targetColumnIndex = await findShortestColumn();
@@ -100,7 +105,10 @@ function handlePageChange(page: number) {
 </script>
 
 <template>
-  <div class="article-list__waterfall flex flex-col w-full gap-8">
+  <div
+    v-if="posts.length > 0"
+    class="article-list__waterfall flex flex-col w-full gap-8"
+  >
     <div
       class="article-list__waterfall__articles-container flex justify-between w-full items-start"
     >
@@ -127,6 +135,7 @@ function handlePageChange(page: number) {
       @change="handlePageChange"
     />
   </div>
+  <ElyEmptyState v-else />
 </template>
 
 <style scoped lang="scss">
