@@ -44,7 +44,7 @@ const images = computed(() => {
       </div>
       <figcaption
         v-if="name.length > 0"
-        class="text-sm text-[var(--color-text-3)] text-center mt-2"
+        class="text-sm text-[var(--color-accent-text-tertiary)] text-center"
       >
         {{ name }}
       </figcaption>
