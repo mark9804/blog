@@ -46,15 +46,15 @@ createdAt: 1733231786000
 ![道 灌 壕](https://cdn.sa.net/2025/03/17/gvJYHtVQ34217DB.webp)
 
 :::gallery 沿路的景观
-![7b2b2c3b882deacdd5070bf16b69855b711c24997284f9228a32db5ed051e4c3](https://cdn.sa.net/2025/03/17/rh7iBPq1exRAdm8.webp)  
-![433fcf4fdc75f5123e7873c4b61fdaf833ac3589e603bf2d2d975880a9b16e80](https://cdn.sa.net/2025/03/17/ph35HydmOeNWbr2.webp)  
+![7b2b2c3b882deacdd5070bf16b69855b711c24997284f9228a32db5ed051e4c3](https://cdn.sa.net/2025/03/17/rh7iBPq1exRAdm8.webp)
+![433fcf4fdc75f5123e7873c4b61fdaf833ac3589e603bf2d2d975880a9b16e80](https://cdn.sa.net/2025/03/17/ph35HydmOeNWbr2.webp)
 ![73550f93fb149adce0063d8c7c2f0f0170c9074e6d1efbc87981db7cc4cc7b3e](https://cdn.sa.net/2025/03/17/TS25Yg7jOz8iIlG.webp)
 :::
 
 继续往前，就快能看到乾门出口了。
 
 :::gallery 经典出门看人
-![](https://cdn.sa.net/2025/03/17/fZEYBChxwTtNHvG.webp)  
+![](https://cdn.sa.net/2025/03/17/fZEYBChxwTtNHvG.webp)
 ![1e605da68fb42021d756e1a54c05375aa6aaa3826f27ca432d92052701f514f9](https://cdn.sa.net/2025/03/17/xrHEDXUlwtOYziN.webp)
 :::
 

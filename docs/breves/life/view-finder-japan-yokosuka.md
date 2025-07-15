@@ -74,14 +74,14 @@ DDG-1001 就停在离我们的码头边不远处的船坞，刚开船没两分�
 城岛公园有东西两座灯塔，东边的灯塔其实是后来新建的，西边的灯塔是明治时期建造的，现在还在使用。不过体验一圈下来东边的灯塔没什么好看的，西边则是在建酒店，酒店把灯塔给挡住了。（不是，灯塔晚上那个亮度住酒店的人真能睡得着吗）
 
 :::gallery 城岛公园
-![](https://cdn.sa.net/2025/07/15/a4pZ1WQAzs2PyO9.webp)  
-![](https://cdn.sa.net/2025/07/15/ZyY8IdcDBMNz3Oj.webp)  
-![](https://cdn.sa.net/2025/07/15/2exdcH4pzka96nC.webp)  
-![](https://cdn.sa.net/2025/07/15/MJbVuDBzNfUYish.webp)  
-![](https://cdn.sa.net/2025/07/15/c5MZ1KGJ2veywpl.webp)  
-![](https://cdn.sa.net/2025/07/15/Rl1jIAawGD6uT4K.webp)  
-![](https://cdn.sa.net/2025/07/15/Pd6MrZnkDiaGc95.webp)  
-![](https://cdn.sa.net/2025/07/15/2hYONxaZuzQBl1K.webp)  
+![](https://cdn.sa.net/2025/07/15/a4pZ1WQAzs2PyO9.webp)
+![](https://cdn.sa.net/2025/07/15/ZyY8IdcDBMNz3Oj.webp)
+![](https://cdn.sa.net/2025/07/15/2exdcH4pzka96nC.webp)
+![](https://cdn.sa.net/2025/07/15/MJbVuDBzNfUYish.webp)
+![](https://cdn.sa.net/2025/07/15/c5MZ1KGJ2veywpl.webp)
+![](https://cdn.sa.net/2025/07/15/Rl1jIAawGD6uT4K.webp)
+![](https://cdn.sa.net/2025/07/15/Pd6MrZnkDiaGc95.webp)
+![](https://cdn.sa.net/2025/07/15/2hYONxaZuzQBl1K.webp)
 :::
 
 晚上开车去了三崎港，在港口边上一家叫さくら的店里吃了金枪鱼。金枪鱼富含铁元素，也就是其血腥味的来源，因此金枪鱼一旦加热之后就会变得很腥，日本主要是生吃。但是这家店不仅提供生吃，还提供了金枪鱼天妇罗和红烧金枪鱼，吃起来还没什么腥味，可以说是高手在民间了。店主老奶奶也很友善健谈，刺身盖饭提供的是金枪鱼和墨鱼，朋友不喜欢吃墨鱼，问能不能换成章鱼，店主奶奶先是说没有这道菜，后来去后厨确认了有章鱼之后就嗯给换成章鱼了，价格还是那个价格。
