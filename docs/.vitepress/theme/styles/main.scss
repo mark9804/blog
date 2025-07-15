@@ -55,6 +55,9 @@ html.dark {
       }
     }
   }
+  .VPNavBar:not(.has-sidebar) {
+    background-color: transparent !important;
+  }
 }
 
 .VPFooter {
