@@ -43,6 +43,10 @@
 - 开发者友好：
   - 提交时自动格式化；
   - 配置自动导入 Arco Design 组件/图标库和 Elysium UI 组件。
+ 
+## Issue Tracker
+
+https://github.com/mark9804/blog/issues?q=is%3Aissue%20state%3Aopen%20label%3Aenhancement%2Cbug
 
 ## TODO
 
