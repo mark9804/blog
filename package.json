@@ -35,7 +35,7 @@
     "typescript": "5.9.2",
     "unocss": "66.4.2",
     "unplugin-auto-import": "20.0.0",
-    "vite-plugin-vue-devtools": "8.0.0",
+    "vite-plugin-vue-devtools": "7.7.7",
     "vitepress": "1.6.4",
     "vitepress-sidebar": "1.33.0",
     "vue": "3.5.18"
