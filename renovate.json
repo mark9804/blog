@@ -1,19 +1,33 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["config:recommended", ":semanticCommitTypeAll(chore)"],
-  "schedule": ["after 8pm every weekend"],
+  "extends": [
+    "config:recommended",
+    ":semanticCommitTypeAll(chore)"
+  ],
+  "schedule": [
+    "after 8pm every weekend"
+  ],
   "timezone": "Asia/Tokyo",
   "packageRules": [
     {
-      "matchUpdateTypes": ["minor", "patch"],
+      "matchUpdateTypes": [
+        "minor",
+        "patch"
+      ],
       "groupName": "all non-major dependencies",
       "groupSlug": "all-minor-patch",
       "minimumReleaseAge": "3 days",
       "automerge": true,
-      "matchPackageNames": ["*"]
+      "matchPackageNames": [
+        "*"
+      ]
     },
     {
-      "matchPackageNames": ["@vueuse/core", "@vueuse/components"],
+      "matchPackageNames": [
+        "@vueuse/core",
+        "@vueuse/components",
+        "vite-plugin-vue-devtools" // >8.0.0 will cause dev server to crash
+      ],
       "enabled": false
     }
   ]
