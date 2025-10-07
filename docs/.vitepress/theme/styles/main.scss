@@ -152,6 +152,11 @@ a.title span,
     color: $color-accent-code;
   }
 
+  blockquote {
+    border-left: 3px solid $color-accent-quaternary;
+    color: $color-accent-text-tertiary;
+  }
+
   code {
     font-family: fonts.$font-family-mono;
   }
