@@ -5,7 +5,7 @@ export const userProfile: ProfileProps = {
     "zh-CN": "今天早睡了吗",
     "en-US": "Mark Chen",
   },
-  email: "mark_chen@blue-archive.io",
+  email: "mark.zhaolu.chen@rikkyo.ac.jp",
   avatar: "https://avatars.githubusercontent.com/u/9006264?v=4",
   bio: "Per aspera ad astra",
   social: [

@@ -10,7 +10,7 @@ export const rssConfig: RSSOptions = {
   language: "zh-cn",
   author: {
     name: "Mark Chen",
-    email: "mark_chen@blue-archive.io",
+    email: "mark.zhaolu.chen@rikkyo.ac.jp",
     link: "https://github.com/mark9804",
   },
   icon: true,
