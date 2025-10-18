@@ -43,21 +43,24 @@ function processLinks(sidebar: DefaultTheme.Sidebar): DefaultTheme.Sidebar {
 }
 
 // https://vitepress.dev/reference/site-config
-export default defineConfig({
-  base: BASE_URL,
-  cleanUrls: true,
-  title: "今天没有早睡",
-  head: headConfig as HeadConfig[],
-  description: "",
-  lang: "zh-CN",
-  sitemap: {
-    hostname: DOMAIN + BASE_URL,
-  },
-  lastUpdated: true,
-  markdown: markdownConfig,
-  themeConfig: {
-    ...(themeConfig as DefaultTheme.Config),
-    sidebar: processLinks(withSidebar({}, sidebarConfig).themeConfig.sidebar),
-  },
-  vite: viteConfig,
+export default defineConfig(({ mode }) => {
+  console.log("mode", mode);
+  return {
+    base: BASE_URL,
+    cleanUrls: true,
+    title: "今天没有早睡",
+    head: headConfig as HeadConfig[],
+    description: "",
+    lang: "zh-CN",
+    sitemap: {
+      hostname: DOMAIN + BASE_URL,
+    },
+    lastUpdated: true,
+    markdown: markdownConfig,
+    themeConfig: {
+      ...(themeConfig as DefaultTheme.Config),
+      sidebar: processLinks(withSidebar({}, sidebarConfig).themeConfig.sidebar),
+    },
+    vite: viteConfig(mode),
+  };
 });

@@ -30,7 +30,7 @@ jobs:
           fetch-depth: 0
       - uses: actions/setup-node@main
         with:
-          node-version: "latest"
+          node-version: 24.x
       - uses: pnpm/action-setup@master
         with:
           version: latest
