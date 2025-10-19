@@ -26,6 +26,7 @@
       "matchPackageNames": [
         "@vueuse/core",
         "@vueuse/components",
+        "markdown-it-mathjax3", // >5.0.0 will render duplicate formula
         "vite-plugin-vue-devtools" // >8.0.0 will cause dev server to crash
       ],
       "enabled": false
