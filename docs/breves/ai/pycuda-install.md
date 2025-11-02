@@ -2,6 +2,7 @@
 title: pycuda 安装时报错解决
 tags:
   - python
+  - 深度学习
 ---
 
 # pycuda 安装时报错解决

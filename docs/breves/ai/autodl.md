@@ -1,7 +1,7 @@
 ---
 title: AutoDL 的网络调教
 tags:
-  - 人工智能
+  - 深度学习
 ---
 
 # AutoDL 的网络调教
