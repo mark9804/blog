@@ -57,7 +57,9 @@ function handleTagClick(tag: string) {
   useSearchTags.go();
 }
 
-const relativeTime = ref(formatRelativeTime(props.content.createdAt));
+const relativeTime = ref(
+  formatRelativeTime(props.content.createdAt ?? new Date().getTime())
+);
 
 let timer: ReturnType<typeof setInterval> | null = null;
 

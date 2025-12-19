@@ -62,9 +62,16 @@ export function getUpdateInterval(createdAt: number): number {
 }
 
 export function compareDates(
-  dateA: string | number | Date,
-  dateB: string | number | Date
+  dateA: string | number | Date | null | undefined,
+  dateB: string | number | Date | null | undefined
 ): number {
+  // ensure dateA and dateB are valid dates
+  if (!dateA) {
+    dateA = new Date().getTime() as unknown as Date;
+  }
+  if (!dateB) {
+    dateB = new Date().getTime() as unknown as Date;
+  }
   return dayjs(dateA)
     .tz(DEFAULT_TIMEZONE)
     .isBefore(dayjs(dateB).tz(DEFAULT_TIMEZONE))
