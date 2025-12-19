@@ -8,7 +8,7 @@ tags:
   - 子数组问题
   - Kadane
   - Python
-  - TS/JS
+  - TypeScript
 ---
 
 # 淘天面试题：翻转子串

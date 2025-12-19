@@ -3,7 +3,7 @@ title: Amazon Intern 面试题：能被 4 整除的数（位运算）
 tags:
   - 面试算法
   - 位运算
-  - TS/JS
+  - TypeScript
   - Python
 ---
 

@@ -4,7 +4,7 @@ tags:
   - 面试算法
   - LeetCode
   - LeetCode-Medium
-  - TS/JS
+  - TypeScript
   - 字符串操作
 ---
 
