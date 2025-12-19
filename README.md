@@ -1,8 +1,11 @@
+<!-- markdownlint-disable-next-line no-inline-html -->
+
 # <img src="https://avatars.githubusercontent.com/u/9006264?v=4" width="32"/> mark9804 的个人博客
 
 ## 访问
-|  [自动选择](https://mark9804.github.io/)   |  [![Netlify Status](https://api.netlify.com/api/v1/badges/f8397867-95ae-47a0-bd69-f6cd65908153/deploy-status)](https://mark9804.netlify.app/)   | [![Vercel](https://vercelbadge.vercel.app/api/mark9804/blog)](https://mark9804.vercel.app/) |
-| --- | --- | --- |
+
+| [自动选择](https://mark9804.github.io/) | [![Netlify Status](https://api.netlify.com/api/v1/badges/f8397867-95ae-47a0-bd69-f6cd65908153/deploy-status)](https://mark9804.netlify.app/) | [![Vercel](https://vercelbadge.vercel.app/api/mark9804/blog)](https://mark9804.vercel.app/) |
+| --------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
 
 ---
 
@@ -43,10 +46,10 @@
 - 开发者友好：
   - 提交时自动格式化；
   - 配置自动导入 Arco Design 组件/图标库和 Elysium UI 组件。
- 
+
 ## Issue Tracker
 
-https://github.com/mark9804/blog/issues?q=is%3Aissue%20state%3Aopen%20label%3Aenhancement%2Cbug
+[Github Issues](https://github.com/mark9804/blog/issues?q=is%3Aissue%20state%3Aopen%20label%3Aenhancement%2Cbug)
 
 ## TODO
 

@@ -1,18 +1,18 @@
 <script setup lang="ts">
 import { postData, createFilter } from "../utils/usePostData";
-import { computed, ref, useTemplateRef, onMounted, onActivated } from "vue";
+import { computed, useTemplateRef, onMounted, onActivated } from "vue";
 import ArticleWaterfallList from "./ArticleWaterfallList.vue";
 import ElyTag from "./ElysiumUI/ElyTag.vue";
 import { useCustomStore } from "../../stores/piniaStore";
 import { useElementSize } from "@vueuse/core";
-import { Post } from "../types/Post";
+
 const store = useCustomStore();
 
 const containerRef = useTemplateRef<HTMLDivElement>("containerRef");
 const { width } = useElementSize(containerRef);
 
-const allTags = ref<string[]>([]);
-const allPosts = ref<Post[]>([]);
+const allPosts = postData.getAllPosts(createFilter());
+const allTags = postData.getAllTags().sort((a, b) => a.localeCompare(b));
 
 const selectedTags = computed(() => store.getSelectedTags);
 
@@ -20,9 +20,9 @@ const selectedTags = computed(() => store.getSelectedTags);
 // 失效 tag：在某次选中之后，由于文章更改，导致已经不存在这个 tag 了
 // 会导致永远无法匹配到任何文章，用户也不能手动移除这个 tag
 function removeInvalidTags() {
-  if (allTags.value.length === 0) return;
+  if (allTags.length === 0) return;
   selectedTags.value.forEach(tag => {
-    if (!allTags.value.includes(tag)) {
+    if (!allTags.includes(tag)) {
       store.removeSelectedTags(tag);
     }
   });
@@ -39,18 +39,10 @@ const toggleTag = (tag: string) => {
 const isTagActive = (tag: string) => selectedTags.value.includes(tag);
 
 const filteredPosts = computed(() => {
-  if (selectedTags.value.length === 0) return allPosts.value;
-  return allPosts.value.filter(post =>
+  if (selectedTags.value.length === 0) return allPosts;
+  return allPosts.filter(post =>
     selectedTags.value.some(tag => post.frontmatter?.tags?.includes(tag))
   );
-});
-
-postData.getAllPosts(createFilter()).then(res => {
-  allPosts.value = res;
-});
-
-postData.getAllTags().then(res => {
-  allTags.value = res.sort((a, b) => a.localeCompare(b));
 });
 
 onMounted(removeInvalidTags);

@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import { useData } from "vitepress";
-import { useRoute, withBase } from "vitepress";
-import { computed, ref, onMounted } from "vue";
+import { useData, useRoute, withBase } from "vitepress";
+import { computed } from "vue";
 import { postData } from "../utils/usePostData";
 import { formatDateTime } from "../utils/timeUtils";
 import { AlarmClock } from "@icon-park/vue-next";
@@ -9,45 +8,31 @@ import { useSearchTags } from "../utils/tagSearchUtils";
 import { useCustomStore } from "../../stores/piniaStore";
 
 const store = useCustomStore();
-
 const { frontmatter, page, isDark } = useData();
-
-const lastUpdatedTimestamp = computed(() => page.value.lastUpdated ?? 0);
-const lastUpdated = computed(() => formatDateTime(lastUpdatedTimestamp.value));
-
 const route = useRoute();
+
 const currentPathWithoutBase = computed(
   () => "/" + route.path.replace(withBase("/"), "")
 );
 
-const createdAtTimestamp = ref(0);
-const readingTime = ref(0);
-const wordsCount = ref(0);
-const imgCount = ref(0);
+const currentPost = computed(() =>
+  postData.getPost(currentPathWithoutBase.value)
+);
 
-async function fetchPostData() {
-  const [createdAt, reading, words, images] = await Promise.all([
-    postData.getCreatedAt(currentPathWithoutBase.value),
-    postData.getReadingTime(currentPathWithoutBase.value),
-    postData.getWordsCount(currentPathWithoutBase.value),
-    postData.getImgCount(currentPathWithoutBase.value),
-  ]);
+const createdAtTimestamp = computed(() => currentPost.value?.createdAt ?? 0);
+const readingTime = computed(() => currentPost.value?.readingTime ?? 0);
+const wordsCount = computed(() => currentPost.value?.wordsCount ?? 0);
+const imgCount = computed(() => currentPost.value?.imgCount ?? 0);
 
-  createdAtTimestamp.value = createdAt;
-  readingTime.value = reading;
-  wordsCount.value = words;
-  imgCount.value = images;
-}
-
-onMounted(() => {
-  fetchPostData();
-});
-
-const createdAt = computed(() => formatDateTime(createdAtTimestamp.value));
+const lastUpdatedTimestamp = computed(() => page.value.lastUpdated ?? 0);
+const lastUpdated = computed(() => formatDateTime(lastUpdatedTimestamp.value));
+const createdAt = computed(() =>
+  formatDateTime(createdAtTimestamp.value || new Date().getTime())
+);
 
 const hasPostUpdate = computed(
   () =>
-    lastUpdatedTimestamp.value &&
+    0 !== (lastUpdatedTimestamp.value ?? 0) &&
     createdAtTimestamp.value &&
     lastUpdatedTimestamp.value !== createdAtTimestamp.value
 );

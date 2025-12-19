@@ -8,7 +8,6 @@ import {
   defaultQuaversFilter,
 } from "../utils/usePostData";
 import VPNavBarSearch from "vitepress/dist/client/theme-default/components/VPNavBarSearch.vue";
-import type { Post } from "../types/Post";
 
 const { theme } = useData();
 const props = computed(() => {
@@ -19,12 +18,14 @@ const props = computed(() => {
   return null;
 });
 
-const posts = ref<Post[]>([]);
-const quavers = ref<Post[]>([]);
+const posts = postData.getAllPosts(defaultFilter);
+const quavers = postData.getAllPosts(defaultQuaversFilter);
+
 const postType = ref<"breves" | "quavers">("breves");
 const waterfallData = computed(() =>
-  postType.value === "breves" ? posts.value : quavers.value
+  postType.value === "breves" ? posts : quavers
 );
+
 const articleTitleRef = useTemplateRef<HTMLHeadingElement>("articleTitleRef");
 const { isDark: themeIsDark } = useData();
 const isDark = computed(() => useDark().value || themeIsDark.value);
@@ -32,17 +33,6 @@ const accentColor = ref(useCssVar("--color-accent").value);
 const backgroundColor = ref(useCssVar("--color-accent-quaternary").value);
 
 const { width: articleTitleWidth } = useElementSize(articleTitleRef);
-
-function initPosts() {
-  return Promise.all([
-    postData.getAllPosts(defaultFilter).then(res => {
-      posts.value = res as Post[];
-    }),
-    postData.getAllPosts(defaultQuaversFilter).then(res => {
-      quavers.value = res as Post[];
-    }),
-  ]);
-}
 
 function updateCssVar() {
   accentColor.value = useCssVar("--color-accent").value;
@@ -75,20 +65,9 @@ function toggleWaterfall(type: "breves" | "quavers") {
   postType.value = type;
 }
 
-function init() {
-  initPosts().then(() => {
-    toggleWaterfall("breves");
-    setThemeOnActivated();
-  });
-
-  () =>
-    import(
-      "vitepress/dist/client/theme-default/components/VPLocalSearchBox.vue"
-    );
-}
-
 onMounted(() => {
-  init();
+  toggleWaterfall("breves");
+  setThemeOnActivated();
 });
 </script>
 
