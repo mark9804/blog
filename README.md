@@ -1,5 +1,3 @@
-<!-- markdownlint-disable-next-line no-inline-html -->
-
 # <img src="https://avatars.githubusercontent.com/u/9006264?v=4" width="32"/> mark9804 的个人博客
 
 ## 访问
