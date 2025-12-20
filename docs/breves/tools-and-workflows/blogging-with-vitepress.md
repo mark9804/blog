@@ -19,7 +19,7 @@ tags:
 
 技术文档类型的静态网站通常有一个内容固定的侧边栏，基本只有在大版本更新的时候才需要进行调整。然而博客的侧边栏作为文章导航，需要经常进行更新来反映文章增删。要是每写一篇新文章都需要手动更新一次侧边栏，那真的还不如用回 Hexo 或者 WordPress 这种专门为内容型网站设计的 CMS 框架。
 
-好在这个问题可以通过 [VitePress Sidebar](https://vitepress-sidebar.jooy2.com) 插件解决。不过因为我使用了“长文章+短动态”的文章存储结构，直接使用插件提供的 `withSidebar` 函数会导致侧边栏的链接无法正常高亮。因此我的做法是先使用插件生成侧边栏数据，接着手动递归处理子元素。你可以[在这里看到我的修改](https://github.com/mark9804/blog/blob/4edd1cec2fc6eae41c73a918927502221a54f502/docs/.vitepress/config.ts#L14-L25)，以及[我的详细侧边栏配置](https://github.com/mark9804/blog/blob/4edd1cec2fc6eae41c73a918927502221a54f502/docs/.vitepress/configs/sidebarConfig.ts)。
+好在这个问题可以通过 [VitePress Sidebar](https://vitepress-sidebar.jooy2.com) 插件解决。不过因为我使用了“长文章+短动态”的文章存储结构，直接使用插件提供的 `withSidebar` 函数会导致侧边栏的链接无法正常高亮。因此我的做法是先使用插件生成侧边栏数据，接着手动递归处理子元素。你可以[在这里看到我的修改](https://github.com/mark9804/blog/blob/4edd1cec2fc6eae41c73a918927502221a54f502/docs/.vitepress/config.ts#L14-L25)，以及[我的详细侧边栏配置](https://github.com/mark9804/blog/blob/master/docs/.vitepress/configs/sidebarConfig.ts)。
 
 ## 使用 VSCode 写作
 
