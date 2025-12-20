@@ -49,7 +49,8 @@
     "onlyBuiltDependencies": [
       "@parcel/watcher",
       "@vercel/speed-insights",
-      "esbuild"
+      "esbuild",
+      "sharp"
     ]
   },
   "dependencies": {
