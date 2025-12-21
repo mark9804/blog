@@ -1,0 +1,24 @@
+[build]
+  command = "vitepress build docs --base /"
+  publish = "docs/.vitepress/dist"
+
+[build.environment]
+  NODE_VERSION = "22.x"
+  NETLIFY_GIT_FETCH_DEPTH = "0"
+
+[[redirects]]
+  from = "/blog/*"
+  to = "/:splat"
+  status = 301
+
+[[redirects]]
+  from = "/posts/*"
+  to = "/breves/:splat"
+  status = 301
+
+# Headers from vercel.json (and existing _headers)
+[[headers]]
+  for = "/feed.rss"
+  [headers.values]
+    Content-Type = "application/rss+xml; charset=utf-8"
+
