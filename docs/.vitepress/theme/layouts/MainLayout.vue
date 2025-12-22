@@ -7,7 +7,8 @@ declare global {
   }
 }
 
-import { useData } from "vitepress";
+import { useData, useRouter } from "vitepress";
+import GlobalLoader from "../components/GlobalLoader.vue";
 import {
   nextTick,
   onBeforeMount,
@@ -78,6 +79,27 @@ function handleTagClick(tag: string) {
 }
 
 const route = useRoute();
+const router = useRouter();
+
+const isLoading = ref(false);
+let loadingTimer: number | null = null;
+
+// 给过长的路由切换（用户网不好时）添加 loading 效果
+// 防止用户认为页面无响应
+router.onBeforeRouteChange = () => {
+  if (loadingTimer) clearTimeout(loadingTimer);
+  loadingTimer = window.setTimeout(() => {
+    isLoading.value = true;
+  }, 200); // 200ms 后再显示 loading，避免网络正常时闪烁打断心流
+};
+
+router.onAfterRouteChange = () => {
+  if (loadingTimer) {
+    clearTimeout(loadingTimer);
+    loadingTimer = null;
+  }
+  isLoading.value = false;
+};
 
 // resolve comment may not visible due to initial giscus error
 const shouldHaveComment = computed(() => frontmatter.value.comment !== false); // 应用允许显式禁止评论，不能缩写成 !frontmatter.value.comment
@@ -121,10 +143,16 @@ function handleReloadComment() {
 </script>
 
 <template>
+  <transition name="fade-in-out">
+    <GlobalLoader v-if="isLoading" />
+  </transition>
   <Layout>
     <template #doc-footer-before>
-      <div class="flex flex-wrap gap-2 pb-4" v-if="frontmatter?.tags?.length">
-        <span class="text-sm text-gray-600 @dark:text-gray-400"
+      <div
+        class="flex flex-wrap items-center gap-2 pb-4"
+        v-if="frontmatter?.tags?.length"
+      >
+        <span class="text-sm text-secondary"
           >Tag{{ frontmatter?.tags?.length > 1 ? "s" : "" }}:
         </span>
         <ElyTag
@@ -187,5 +215,15 @@ function handleReloadComment() {
 ::view-transition-new(root),
 .dark::view-transition-old(root) {
   z-index: 9999;
+}
+
+.fade-in-out-enter-active,
+.fade-in-out-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.fade-in-out-enter-from,
+.fade-in-out-leave-to {
+  opacity: 0;
 }
 </style>
