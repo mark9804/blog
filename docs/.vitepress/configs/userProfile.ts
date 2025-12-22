@@ -12,22 +12,25 @@ export const userProfile: ProfileProps = {
     {
       alias: "GitHub",
       link: "https://github.com/mark9804",
+      openInNewTab: true,
     },
     {
       alias: "LinkedIn",
       link: "https://www.linkedin.com/in/zhaolu-chen/",
+      openInNewTab: true,
     },
     {
       alias: "Team",
       link: "https://github.com/ba-archive",
+      openInNewTab: true,
     },
     {
       alias: "Projects",
-      link: "projects",
+      link: "/projects",
     },
     {
       alias: "About",
-      link: "about",
+      link: "/about",
     },
   ],
 };

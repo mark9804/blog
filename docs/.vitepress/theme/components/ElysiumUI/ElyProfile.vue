@@ -11,6 +11,8 @@ import {
   usePreferredLanguages,
 } from "@vueuse/core";
 import { createWaveAnimation } from "./_utils/wave";
+import { useRouter } from "vitepress";
+import { isExternalUrl } from "../../../utils/urlUtils";
 
 const props = defineProps<ProfileProps>();
 
@@ -104,6 +106,27 @@ function handleScrollIndicatorClick() {
     behavior: "smooth",
   });
 }
+
+const router = useRouter();
+
+function handleSocialLinkClick(social: {
+  link: string;
+  openInNewTab?: boolean;
+}) {
+  if (social.openInNewTab) {
+    window.open(withBase(social.link), "_blank");
+  } else {
+    // 检查是不是外部链接
+    if (isExternalUrl(social.link)) {
+      window.open(social.link, "_self");
+    } else {
+      // 直接调用 withBase 有点问题，需要自己拼接一下 currentPath + link
+      const currentPath = router.route.path;
+      const newPath = currentPath + social.link.replace(/^\//, "");
+      router.go(newPath); // vitepress 没有 router.push，router.go 接受 string
+    }
+  }
+}
 </script>
 
 <template>
@@ -163,7 +186,8 @@ function handleScrollIndicatorClick() {
           class="hover:text-[var(--color-accent)] transition-colors duration-300"
           :key="social.alias"
           :href="withBase(social.link)"
-          target="_blank"
+          @click.prevent="handleSocialLinkClick(social)"
+          @keydown.enter="handleSocialLinkClick(social)"
           >{{ social.alias }}</a
         >
       </ElySpace>

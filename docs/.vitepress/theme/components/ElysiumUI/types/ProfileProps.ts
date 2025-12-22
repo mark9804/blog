@@ -11,5 +11,6 @@ export type ProfileProps = {
   social?: {
     alias: string;
     link: string;
+    openInNewTab?: boolean;
   }[];
 };
