@@ -3,7 +3,7 @@
   publish = "docs/.vitepress/dist"
 
 [build.environment]
-  NODE_VERSION = "22.x"
+  NODE_VERSION = "24"
   NETLIFY_GIT_FETCH_DEPTH = "0"
 
 [[redirects]]
