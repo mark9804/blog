@@ -38,7 +38,7 @@
     "vite-plugin-vue-devtools": "7.7.7",
     "vitepress": "1.6.4",
     "vitepress-sidebar": "1.33.1",
-    "vue": "3.5.25"
+    "vue": "3.5.26"
   },
   "pnpm": {
     "peerDependencyRules": {
@@ -83,7 +83,7 @@
     "pinia-plugin-persistedstate": "4.7.1",
     "postcss-plugin-px2rem": "0.8.1",
     "radashi": "^12.3.4",
-    "sass": "1.97.0",
+    "sass": "1.97.1",
     "unplugin-icons": "22.5.0",
     "unplugin-vue-components": "30.0.0",
     "vite": "7.3.0",
