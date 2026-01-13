@@ -3,4 +3,4 @@ publish: false
 comment: false
 ---
 
-# LLM / vLLM
+# LLM / MLLM
