@@ -226,4 +226,10 @@ function handleReloadComment() {
 .fade-in-out-leave-to {
   opacity: 0;
 }
+
+h2#页面历史 {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
 </style>
