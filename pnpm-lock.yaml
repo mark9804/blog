@@ -166,8 +166,8 @@ importers:
         specifier: 66.5.12
         version: 66.5.12(postcss@8.5.6)(vite@7.3.1(@types/node@24.10.4)(jiti@2.6.1)(less@4.4.0)(sass@1.97.2)(tsx@4.19.2)(yaml@2.8.1))
       unplugin-auto-import:
-        specifier: 20.3.0
-        version: 20.3.0(@vueuse/core@12.5.0(typescript@5.9.3))
+        specifier: 21.0.0
+        version: 21.0.0(@vueuse/core@12.5.0(typescript@5.9.3))
       vite-plugin-vue-devtools:
         specifier: 7.7.7
         version: 7.7.7(rollup@4.46.2)(vite@7.3.1(@types/node@24.10.4)(jiti@2.6.1)(less@4.4.0)(sass@1.97.2)(tsx@4.19.2)(yaml@2.8.1))(vue@3.5.26(typescript@5.9.3))
@@ -3463,8 +3463,8 @@ packages:
     resolution: {integrity: sha512-+QBBXBCvifc56fsbuxZQ6Sic3wqqc3WWaqxs58gvJrcOuN83HGTCwz3oS5phzU9LthRNE9VrJCFCLUgHeeFnfA==}
     engines: {node: '>=18'}
 
-  unimport@5.5.0:
-    resolution: {integrity: sha512-/JpWMG9s1nBSlXJAQ8EREFTFy3oy6USFd8T6AoBaw1q2GGcF4R9yp3ofg32UODZlYEO5VD0EWE1RpI9XDWyPYg==}
+  unimport@5.6.0:
+    resolution: {integrity: sha512-8rqAmtJV8o60x46kBAJKtHpJDJWkA2xcBqWKPI14MgUb05o1pnpnCnXSxedUXyeq7p8fR5g3pTo2BaswZ9lD9A==}
     engines: {node: '>=18.12.0'}
 
   unist-util-is@6.0.0:
@@ -3498,9 +3498,9 @@ packages:
       vite:
         optional: true
 
-  unplugin-auto-import@20.3.0:
-    resolution: {integrity: sha512-RcSEQiVv7g0mLMMXibYVKk8mpteKxvyffGuDKqZZiFr7Oq3PB1HwgHdK5O7H4AzbhzHoVKG0NnMnsk/1HIVYzQ==}
-    engines: {node: '>=14'}
+  unplugin-auto-import@21.0.0:
+    resolution: {integrity: sha512-vWuC8SwqJmxZFYwPojhOhOXDb5xFhNNcEVb9K/RFkyk/3VnfaOjzitWN7v+8DEKpMjSsY2AEGXNgt6I0yQrhRQ==}
+    engines: {node: '>=20.19.0'}
     peerDependencies:
       '@nuxt/kit': ^4.0.0
       '@vueuse/core': '*'
@@ -7156,7 +7156,7 @@ snapshots:
 
   unicorn-magic@0.3.0: {}
 
-  unimport@5.5.0:
+  unimport@5.6.0:
     dependencies:
       acorn: 8.15.0
       escape-string-regexp: 5.0.0
@@ -7225,12 +7225,12 @@ snapshots:
       - postcss
       - supports-color
 
-  unplugin-auto-import@20.3.0(@vueuse/core@12.5.0(typescript@5.9.3)):
+  unplugin-auto-import@21.0.0(@vueuse/core@12.5.0(typescript@5.9.3)):
     dependencies:
       local-pkg: 1.1.2
       magic-string: 0.30.21
       picomatch: 4.0.3
-      unimport: 5.5.0
+      unimport: 5.6.0
       unplugin: 2.3.11
       unplugin-utils: 0.3.1
     optionalDependencies:
