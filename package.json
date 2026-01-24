@@ -38,7 +38,7 @@
     "vite-plugin-vue-devtools": "7.7.7",
     "vitepress": "1.6.4",
     "vitepress-sidebar": "1.33.1",
-    "vue": "3.5.26"
+    "vue": "3.5.27"
   },
   "pnpm": {
     "peerDependencyRules": {
@@ -72,7 +72,7 @@
     "cross-spawn": "7.0.6",
     "dayjs": "1.11.19",
     "eslint": "9.39.2",
-    "eslint-plugin-vue": "10.6.2",
+    "eslint-plugin-vue": "10.7.0",
     "globals": "^17.0.0",
     "husky": "9.1.7",
     "lint-staged": "16.2.7",
