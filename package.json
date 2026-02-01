@@ -85,7 +85,7 @@
     "radashi": "^12.3.4",
     "sass": "1.97.3",
     "unplugin-icons": "23.0.1",
-    "unplugin-vue-components": "30.0.0",
+    "unplugin-vue-components": "31.0.0",
     "vite": "7.3.1",
     "vitepress-plugin-comment-with-giscus": "1.1.15",
     "vitepress-plugin-rss": "0.4.2",
