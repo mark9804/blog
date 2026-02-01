@@ -90,7 +90,7 @@
     "vitepress-plugin-comment-with-giscus": "1.1.15",
     "vitepress-plugin-rss": "0.4.2",
     "vue-eslint-parser": "^10.1.3",
-    "vue-router": "4.6.4",
+    "vue-router": "5.0.1",
     "words-count": "2.0.2"
   }
 }
