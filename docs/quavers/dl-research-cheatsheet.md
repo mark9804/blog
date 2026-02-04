@@ -33,3 +33,7 @@ python -c "import torch;print(torch._C._GLIBCXX_USE_CXX11_ABI)"
 ## 模型微调
 
 - [Huggingface PEFT](https://huggingface.co/docs/peft/index) 库中的 [LoRA](https://huggingface.co/docs/peft/package_reference/lora) 微调时，传入参数有 `target_modules` 和 `modules_to_save` 两个参数。其中 `target_modules` 是冻结原有的层，然后在旁路插入两个低秩矩阵（即 $W_A$ 和 $W_B$），通过计算 $W_A \times W_B$ 来实现对原有层参数的低秩近似；保存内容是 $W_A$ 和 $W_B$。而 `modules_to_save` 会解冻目标层并进行标准的 SGD 更新，并且在保存时，会保存该层的完整权重张量而不是 LoRA 的适配器权重。
+
+## 辅助工具
+
+- Antigravity 服务端启用脚本：[antissh](https://github.com/ccpopy/antissh)
