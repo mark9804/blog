@@ -71,7 +71,7 @@
     "@vueuse/core": "12.5.0",
     "cross-spawn": "7.0.6",
     "dayjs": "1.11.19",
-    "eslint": "9.39.2",
+    "eslint": "10.0.0",
     "eslint-plugin-vue": "10.7.0",
     "globals": "^17.0.0",
     "husky": "9.1.7",
