@@ -24,7 +24,7 @@
     "@nolebase/vitepress-plugin-git-changelog": "2.18.2",
     "@types/cross-spawn": "6.0.6",
     "@types/markdown-it": "^14.1.2",
-    "@types/node": "24.10.10",
+    "@types/node": "24.10.13",
     "@unocss/preset-icons": "66.6.0",
     "autoprefixer": "10.4.24",
     "eslint-config-prettier": "10.1.8",
@@ -38,7 +38,7 @@
     "vite-plugin-vue-devtools": "7.7.7",
     "vitepress": "1.6.4",
     "vitepress-sidebar": "1.33.1",
-    "vue": "3.5.27"
+    "vue": "3.5.28"
   },
   "pnpm": {
     "peerDependencyRules": {
