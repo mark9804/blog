@@ -36,4 +36,5 @@ python -c "import torch;print(torch._C._GLIBCXX_USE_CXX11_ABI)"
 
 ## 辅助工具
 
-- Antigravity 服务端启用脚本：[antissh](https://github.com/ccpopy/antissh)
+- Antigravity 服务端启用脚本：~~[antissh](https://github.com/ccpopy/antissh)~~ 试了效果好像不如[自己写的](https://gist.github.com/mark9804/ccb37af14816747fc61ad404fc094694)好
+- Cline 使用 Gemini OpenAI Compatible 调用模型，端点只需要填到 `/v1beta/openai/` 即可，例如：`https://generativelanguage.googleapis.com/v1beta/openai/`
