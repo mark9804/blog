@@ -17,7 +17,7 @@ tags:
 
 :::details 太长不看
 
-[使用 uv workspaces 构建 monorepo](#使用-uv-workspaces-构建-monorepo)
+[模板仓库](https://github.com/RikkyoMLP/python-monorepo-example)
 
 :::
 
