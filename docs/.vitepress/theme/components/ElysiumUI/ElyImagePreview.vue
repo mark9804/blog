@@ -66,18 +66,21 @@ function updateScale(delta: number) {
 }
 
 function updateOffset(deltaTranslateX = 0, deltaTranslateY = 0) {
-  // 最大 offset 不能超过 100% 图像尺寸
+  // CSS transform order is scale() then translate3d() (right-to-left),
+  // so translations are visually amplified by scale.
+  // Divide by scale to keep panning 1:1 with pointer movement.
   useRaf(() => {
+    const s = scale.value;
     if (Math.abs(deltaTranslateX) > PAN_THRESHOLD) {
       offset.value.translateX = clamp(
-        offset.value.translateX + deltaTranslateX,
+        offset.value.translateX + deltaTranslateX / s,
         imageWidth.value * -1,
         imageWidth.value
       );
     }
     if (Math.abs(deltaTranslateY) > PAN_THRESHOLD) {
       offset.value.translateY = clamp(
-        offset.value.translateY + deltaTranslateY,
+        offset.value.translateY + deltaTranslateY / s,
         imageHeight.value * -1,
         imageHeight.value
       );
@@ -118,9 +121,12 @@ function handleTouch(event: TouchEvent) {
         event.preventDefault();
         const deltaX = event.touches[0].clientX - lastClickPosition.value.x;
         const deltaY = event.touches[0].clientY - lastClickPosition.value.y;
-        // FIXME: 移动端的平移不知为何偏移量特别大，暂时先加一个系数
-        // 后续需要调整一下
-        updateOffset(deltaX * 0.1, deltaY * 0.1);
+        // Update position so next delta is frame-to-frame, not cumulative
+        lastClickPosition.value = {
+          x: event.touches[0].clientX,
+          y: event.touches[0].clientY,
+        };
+        updateOffset(deltaX, deltaY);
         break;
     }
   }
@@ -149,7 +155,7 @@ function handleTouch(event: TouchEvent) {
   if (Math.abs(delta) > 1) {
     // 添加一个小阈值，避免误触
     event.preventDefault();
-    updateScale(delta * 0.1);
+    updateScale(delta);
     lastTouchDistance.value = distance;
   }
 }
