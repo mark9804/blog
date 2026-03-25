@@ -8,6 +8,8 @@ import { viteConfig } from "./configs/viteConfig";
 import { sidebarConfig } from "./configs/sidebarConfig";
 import { withSidebar } from "vitepress-sidebar";
 
+const SIDEBAR_BOTTOM_PATTERNS = ["考古"];
+
 function fixSidebarLinks(
   sidebar: DefaultTheme.SidebarItem[]
 ): DefaultTheme.SidebarItem[] {
@@ -22,8 +24,10 @@ function fixSidebarLinks(
   });
 
   return processedItems.sort((a, b) => {
-    if (a.text?.includes("考古")) return 1;
-    if (b.text?.includes("考古")) return -1;
+    const aBottom = SIDEBAR_BOTTOM_PATTERNS.some(p => a.text?.includes(p));
+    const bBottom = SIDEBAR_BOTTOM_PATTERNS.some(p => b.text?.includes(p));
+    if (aBottom && !bBottom) return 1;
+    if (!aBottom && bBottom) return -1;
     return 0;
   });
 }

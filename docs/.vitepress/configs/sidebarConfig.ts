@@ -9,6 +9,7 @@ const commonConfig = {
   // capitalizeFirst: true,
   // capitalizeEachWords: true,
   collapsed: true,
+  sortFolderTo: "top",
   // collapseDepth: 2,
   // sortMenusByName: false,
   // sortMenusByFrontmatterOrder: false,
