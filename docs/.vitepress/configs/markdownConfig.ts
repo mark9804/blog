@@ -5,16 +5,18 @@ import { spoiler } from "@mdit/plugin-spoiler";
 import { imgSize } from "@mdit/plugin-img-size";
 import { sub } from "@mdit/plugin-sub";
 import { sup } from "@mdit/plugin-sup";
-import { footnote } from "@mdit/plugin-footnote";
+// import { footnote } from "@mdit/plugin-footnote";
 import { generateImgComponent } from "../theme/utils/generateImgComponent";
 import { generateImgGallery } from "../theme/utils/generateImgGallery";
 import type MarkdownIt from "markdown-it";
 import type { Token } from "../theme/types/Token";
+import { footnote } from "../../../plugins/mdit-plugins-footnote";
 
 interface MarkdownItRenderer {
   renderToken: (
     tokens: Token[],
     idx: number,
+    // @ts-ignore
     options: MarkdownIt.Options
   ) => string;
 }
@@ -48,6 +50,7 @@ export const markdownConfig = {
     md.renderer.rules.heading_close = (
       tokens: Token[],
       idx: number,
+      // @ts-ignore
       options: MarkdownIt.Options,
       env: Record<string, unknown>,
       self: MarkdownItRenderer
