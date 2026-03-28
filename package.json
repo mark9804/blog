@@ -38,7 +38,7 @@
     "vite-plugin-vue-devtools": "7.7.7",
     "vitepress": "1.6.4",
     "vitepress-sidebar": "1.33.1",
-    "vue": "3.5.30"
+    "vue": "3.5.31"
   },
   "pnpm": {
     "peerDependencyRules": {
@@ -71,7 +71,7 @@
     "@vueuse/core": "12.5.0",
     "cross-spawn": "7.0.6",
     "dayjs": "1.11.20",
-    "eslint": "10.0.3",
+    "eslint": "10.1.0",
     "eslint-plugin-vue": "10.8.0",
     "globals": "^17.0.0",
     "husky": "9.1.7",
@@ -85,7 +85,7 @@
     "radashi": "^12.3.4",
     "sass": "1.98.0",
     "unplugin-icons": "23.0.1",
-    "unplugin-vue-components": "31.0.0",
+    "unplugin-vue-components": "31.1.0",
     "vite": "8.0.3",
     "vitepress-plugin-comment-with-giscus": "1.1.15",
     "vitepress-plugin-rss": "0.4.3",
