@@ -36,21 +36,34 @@ const enableTransitions = () =>
   window.matchMedia("(prefers-reduced-motion: no-preference)").matches;
 
 provide("toggle-appearance", async () => {
+  const syncArcoTheme = () => {
+    document
+      .querySelector("body")
+      ?.setAttribute("arco-theme", isDark.value ? "dark" : "");
+  };
+
   if (!enableTransitions()) {
     isDark.value = !isDark.value;
+    syncArcoTheme();
     return;
   }
 
-  await document.startViewTransition(async () => {
+  // Disable CSS transitions to prevent them from firing
+  // when view transition pseudo-elements are removed and the live DOM is revealed.
+  // Chrome/Firefox re-trigger `transition: all` from the last painted state,
+  // causing a white flash. Safari does not.
+  document.documentElement.classList.add("vt-transitioning");
+
+  const transition = document.startViewTransition(async () => {
     isDark.value = !isDark.value;
+    // Must be inside the callback so the new snapshot captures arco-theme styles.
+    syncArcoTheme();
     await nextTick();
-  }).ready;
+  });
 
-  document
-    .querySelector("body")
-    ?.setAttribute("arco-theme", isDark.value ? "dark" : "");
+  await transition.ready;
 
-  document.documentElement.animate(
+  const animation = document.documentElement.animate(
     { opacity: isDark.value ? [1, 0] : [0, 1] },
     {
       duration: 300,
@@ -58,6 +71,9 @@ provide("toggle-appearance", async () => {
       pseudoElement: `::view-transition-${isDark.value ? "old" : "new"}(root)`,
     }
   );
+
+  await animation.finished;
+  document.documentElement.classList.remove("vt-transitioning");
 });
 
 onBeforeMount(() => {
@@ -215,6 +231,11 @@ function handleReloadComment() {
 ::view-transition-new(root),
 .dark::view-transition-old(root) {
   z-index: 9999;
+}
+
+.vt-transitioning,
+.vt-transitioning * {
+  transition: none !important;
 }
 
 .fade-in-out-enter-active,
