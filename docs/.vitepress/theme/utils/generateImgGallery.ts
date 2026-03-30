@@ -1,11 +1,14 @@
 import type { Token } from "../types/Token";
 import { getImgInfo } from "./generateImgComponent";
 
-export function generateImgGallery(galleryToken: Token) {
-  const imageTokens: Token[] = galleryToken.meta?.imageTokens ?? [];
+interface GalleryInput {
+  imageTokens: Token[];
+  galleryName: string;
+}
+
+export function generateImgGallery({ imageTokens, galleryName }: GalleryInput) {
   if (imageTokens.length === 0) return "";
 
-  const galleryName = galleryToken.content || "";
   const imgList = imageTokens.map(getImgInfo);
 
   return `\n<ElyImageGallery name="${galleryName}" :imgList="${JSON.stringify(
