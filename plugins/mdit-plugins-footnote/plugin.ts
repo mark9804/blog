@@ -13,7 +13,7 @@ import type StateCore from "markdown-it/lib/rules_core/state_core.mjs";
 import type StateInline from "markdown-it/lib/rules_inline/state_inline.mjs";
 import type Token from "markdown-it/lib/token.mjs";
 
-import type { FootNoteEnv, FootNoteToken } from "./types.js";
+import type { FootNoteEnv, FootNoteToken } from "./types";
 
 interface FootNoteStateBlock extends StateBlock {
   tokens: FootNoteToken[];
@@ -123,10 +123,10 @@ const renderFootnoteAnchor: RenderRule = (
   self
 ): string =>
   // oxlint-disable-next-line typescript/no-non-null-assertion
-  ` <a href="#footnote-ref${self.rules.footnote_anchorName!(tokens, index, options, env, self)}${
-    getIDSuffix(tokens, index)
-    /* ↩ with escape code to prevent display as Apple Emoji on iOS */
-  }" class="footnote-backref"><sup>BACK</sup></a>`;
+  ` <a href="#footnote-ref${self.rules.footnote_anchorName!(tokens, index, options, env, self)}${getIDSuffix(
+    tokens,
+    index
+  )}" class="footnote-backref"><sup>BACK</sup></a>`;
 
 // Process footnote block definition
 const footnoteDef: RuleBlock = (

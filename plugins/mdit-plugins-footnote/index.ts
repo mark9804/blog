@@ -1,2 +1,2 @@
-export * from "./plugin.js";
-export type * from "./types.js";
+export * from "./plugin";
+export type * from "./types";
