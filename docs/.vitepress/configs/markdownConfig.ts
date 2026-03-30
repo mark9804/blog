@@ -90,6 +90,15 @@ export const markdownConfig = {
             for (const child of tokens[j].children!) {
               if (child.type === "image") imageTokens.push(child);
             }
+            // Suppress default rendering of inner content
+            tokens[j].children = [];
+          }
+          // Hide paragraph wrappers so no empty <p> tags are emitted
+          if (
+            tokens[j].type === "paragraph_open" ||
+            tokens[j].type === "paragraph_close"
+          ) {
+            tokens[j].hidden = true;
           }
         }
 
