@@ -1,12 +1,24 @@
 <script setup lang="ts">
 import type { ImageProps } from "./types/ImageProps";
+import { GALLERY_INJECTION_KEY } from "./types/GalleryContext";
 import { useImageStore } from "../../../stores/imageStore";
 import { parseSize } from "./_utils/styleUtils";
-import { computed } from "vue";
+import { computed, inject, onMounted, ref } from "vue";
 
 const props = defineProps<ImageProps>();
 
 const store = useImageStore();
+const gallery = inject(GALLERY_INJECTION_KEY, null);
+
+// Index of this image within a gallery (if inside one)
+const galleryIndex = ref(0);
+
+onMounted(() => {
+  if (gallery) {
+    const img = Array.isArray(props.image) ? props.image[0] : props.image;
+    galleryIndex.value = gallery.registerImage(img);
+  }
+});
 
 const imageSrc = computed(() => {
   if (Array.isArray(props.image)) {
@@ -16,7 +28,12 @@ const imageSrc = computed(() => {
 });
 
 function handleClick() {
-  store.openImagePreview(props.image, props.index);
+  if (gallery) {
+    // Open preview scoped to this gallery's image list
+    store.openImagePreview(gallery.images, galleryIndex.value);
+  } else {
+    store.openImagePreview(props.image, props.index);
+  }
 }
 </script>
 

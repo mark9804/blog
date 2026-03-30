@@ -7,7 +7,6 @@ import { sub } from "@mdit/plugin-sub";
 import { sup } from "@mdit/plugin-sup";
 // import { footnote } from "@mdit/plugin-footnote";
 import { generateImgComponent } from "../theme/utils/generateImgComponent";
-import { generateImgGallery } from "../theme/utils/generateImgGallery";
 // @ts-ignore no type definitions
 import container from "markdown-it-container";
 import type MarkdownIt from "markdown-it";
@@ -64,45 +63,16 @@ export const markdownConfig = {
       return generateImgComponent(tokens[idx]);
     };
 
-    // Register gallery as a proper container block.
-    // markdown-it-container handles :::gallery ... ::: pairing at the
-    // block level, so nesting inside :::details etc. works correctly.
+    // Gallery container: just output open/close Vue component tags.
+    // Inner images render normally as <ElyImage> via the image rule above.
+    // Vue's slot mechanism handles the composition.
     md.use(container, "gallery", {
       render(tokens: Token[], idx: number) {
-        const token = tokens[idx];
-        if (token.nesting !== 1) return "";
-
-        // Extract gallery name from info string
-        const galleryName = token.info.trim().slice("gallery".length).trim();
-
-        // Collect all image tokens between open and close
-        const imageTokens: Token[] = [];
-        for (
-          let j = idx + 1;
-          j < tokens.length &&
-          !(
-            tokens[j].nesting === -1 &&
-            tokens[j].type === "container_gallery_close"
-          );
-          j++
-        ) {
-          if (tokens[j].type === "inline" && tokens[j].children) {
-            for (const child of tokens[j].children!) {
-              if (child.type === "image") imageTokens.push(child);
-            }
-            // Suppress default rendering of inner content
-            tokens[j].children = [];
-          }
-          // Hide paragraph wrappers so no empty <p> tags are emitted
-          if (
-            tokens[j].type === "paragraph_open" ||
-            tokens[j].type === "paragraph_close"
-          ) {
-            tokens[j].hidden = true;
-          }
+        if (tokens[idx].nesting === 1) {
+          const name = tokens[idx].info.trim().slice("gallery".length).trim();
+          return `<ElyImageGallery name="${name}">\n`;
         }
-
-        return generateImgGallery({ imageTokens, galleryName });
+        return `</ElyImageGallery>\n`;
       },
     });
   },
