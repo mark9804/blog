@@ -117,9 +117,19 @@ export const markdownConfig = {
               : i;
         } else {
           // Scan forward for the closing :::
+          // Stop at container boundaries to avoid eating tokens from
+          // an enclosing :::details or similar container.
           let j = i + 1;
           blockEnd = -1;
           while (j < tokens.length) {
+            // Don't cross container close boundaries
+            if (
+              tokens[j].type.startsWith("container_") &&
+              tokens[j].nesting === -1
+            ) {
+              break;
+            }
+
             if (tokens[j].type === "inline") {
               const lines = tokens[j].content?.split("\n") ?? [];
               const last = lines[lines.length - 1]?.trim();
@@ -145,9 +155,16 @@ export const markdownConfig = {
           }
 
           if (blockEnd === -1) {
-            // No closing :::, skip
-            i++;
-            continue;
+            // No closing ::: found (e.g. nested inside a container).
+            // Treat as self-contained: just use images from the opening token.
+            if (imageTokens.length === 0) {
+              i++;
+              continue;
+            }
+            blockEnd =
+              i + 1 < tokens.length && tokens[i + 1].type === "paragraph_close"
+                ? i + 1
+                : i;
           }
         }
 
