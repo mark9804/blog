@@ -126,6 +126,5 @@ const children = computed(() => getAllElements(slots.default?.(), true));
 @use "../../styles/colors";
 .elysium-ui__space--built-in-divider {
   display: inline-block;
-  color: colors.$color-accent-text-secondary;
 }
 </style>
