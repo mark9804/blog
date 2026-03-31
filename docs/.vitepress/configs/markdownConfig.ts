@@ -9,7 +9,8 @@ import { sup } from "@mdit/plugin-sup";
 import { generateImgComponent } from "../theme/utils/generateImgComponent";
 // @ts-ignore no type definitions
 import container from "markdown-it-container";
-import type MarkdownIt from "markdown-it";
+import * as MarkdownIt from "markdown-it";
+import type { MarkdownOptions } from "vitepress";
 import type { Token } from "../theme/types/Token";
 import { footnote } from "../../../plugins/mdit-plugins-footnote";
 
@@ -17,12 +18,11 @@ interface MarkdownItRenderer {
   renderToken: (
     tokens: Token[],
     idx: number,
-    // @ts-ignore
     options: MarkdownIt.Options
   ) => string;
 }
 
-export const markdownConfig = {
+export const markdownConfig: MarkdownOptions = {
   math: true,
   headers: {
     level: [2, 6],
@@ -31,7 +31,7 @@ export const markdownConfig = {
     lazyLoading: true,
   },
   lineNumbers: true,
-  config: (md: MarkdownIt) => {
+  config: md => {
     md.use(implicitFigures, {
       figcaption: true,
       copyAttrs: "^class$",
