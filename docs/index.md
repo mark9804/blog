@@ -12,7 +12,7 @@ gitChangelog: false
 ---
 
 <script setup>
-  import HomePage from ".vitepress/theme/components/HomePage.vue";
+  import HomePage from "@theme/components/HomePage.vue";
 </script>
 
 <HomePage />

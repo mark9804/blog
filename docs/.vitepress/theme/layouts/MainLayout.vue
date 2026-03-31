@@ -117,7 +117,8 @@ router.onAfterRouteChange = () => {
   isLoading.value = false;
 };
 
-// resolve comment may not visible due to initial giscus error
+// giscus may encounter initialization error, making comment invisible
+// A button controlled by shouldHaveComment will reveal to prompt a reload
 const shouldHaveComment = computed(() => frontmatter.value.comment !== false); // 应用允许显式禁止评论，不能缩写成 !frontmatter.value.comment
 const hasComment = ref(false);
 const timer = ref<number | null>(null);
@@ -125,6 +126,7 @@ const timer = ref<number | null>(null);
 onMounted(() => {
   watchEffect(onInvalidate => {
     // Make sure effect re-runs on route change
+    // oxlint-disable-next-line no-unused-expressions
     route.path;
 
     hasComment.value = false;
@@ -147,7 +149,7 @@ onMounted(() => {
             timer.value = null;
           }
         }
-      }, 500);
+      }, 2000);
     }
   });
 });
