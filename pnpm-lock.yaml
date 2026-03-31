@@ -14,6 +14,9 @@ importers:
       '@arco-plugins/vite-vue':
         specifier: 1.4.6
         version: 1.4.6
+      '@date-fns/tz':
+        specifier: ^1.4.1
+        version: 1.4.1
       '@icon-park/vue-next':
         specifier: 1.4.2
         version: 1.4.2(vue@3.5.31(typescript@6.0.2))
@@ -50,9 +53,9 @@ importers:
       cross-spawn:
         specifier: 7.0.6
         version: 7.0.6
-      dayjs:
-        specifier: 1.11.20
-        version: 1.11.20
+      date-fns:
+        specifier: ^4.1.0
+        version: 4.1.0
       eslint:
         specifier: 10.1.0
         version: 10.1.0(jiti@2.6.1)
@@ -371,6 +374,9 @@ packages:
   '@babel/types@7.29.0':
     resolution: {integrity: sha512-LwdZHpScM4Qz8Xw2iKSzS+cfglZzJGvofQICy7W7v4caru4EaAmyUuO6BGrbyQ2mYV11W0U8j5mBhd14dd3B0A==}
     engines: {node: '>=6.9.0'}
+
+  '@date-fns/tz@1.4.1':
+    resolution: {integrity: sha512-P5LUNhtbj6YfI3iJjw5EL9eUAG6OitD0W3fWQcpQjDRc/QIsL0tRNuO1PcDvPccWL1fSTXXdE1ds+l95DV/OFA==}
 
   '@docsearch/css@4.6.2':
     resolution: {integrity: sha512-fH/cn8BjEEdM2nJdjNMHIvOVYupG6AIDtFVDgIZrNzdCSj4KXr9kd+hsehqsNGYjpUjObeKYKvgy/IwCb1jZYQ==}
@@ -4149,6 +4155,8 @@ snapshots:
     dependencies:
       '@babel/helper-string-parser': 7.27.1
       '@babel/helper-validator-identifier': 7.28.5
+
+  '@date-fns/tz@1.4.1': {}
 
   '@docsearch/css@4.6.2': {}
 

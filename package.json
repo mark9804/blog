@@ -59,6 +59,7 @@
   "dependencies": {
     "@arco-design/web-vue": "2.57.0",
     "@arco-plugins/vite-vue": "1.4.6",
+    "@date-fns/tz": "^1.4.1",
     "@icon-park/vue-next": "1.4.2",
     "@mdit/plugin-footnote": "0.23.1",
     "@mdit/plugin-img-size": "0.23.1",
@@ -71,7 +72,7 @@
     "@vueuse/components": "12.5.0",
     "@vueuse/core": "12.5.0",
     "cross-spawn": "7.0.6",
-    "dayjs": "1.11.20",
+    "date-fns": "^4.1.0",
     "eslint": "10.1.0",
     "globals": "^17.0.0",
     "husky": "9.1.7",

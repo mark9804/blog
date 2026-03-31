@@ -25,6 +25,7 @@ import { rssConfig } from "./rssConfig";
 export const viteConfig = (mode: string) => {
   return {
     resolve: {
+      tsconfigPaths: true,
       alias: {
         "@": "/src",
       },
