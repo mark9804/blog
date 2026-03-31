@@ -132,9 +132,11 @@ onMounted(() => {
   justify-content: flex-end;
 }
 
-:deep(.DocSearch-Button) {
-  padding: 0 12px;
-  justify-content: space-between;
+:deep(.VPNavBarSearchButton) {
+  display: grid;
+  grid-template-columns: min-content 1fr min-content;
+  gap: 10px;
+  justify-items: start;
   flex-grow: 1;
   max-width: 280px;
   border-radius: 3px;
