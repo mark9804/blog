@@ -11,7 +11,6 @@ import ElySpace from "./components/ElysiumUI/ElySpace.vue";
 import giscusTalk from "vitepress-plugin-comment-with-giscus";
 import { useData, useRoute } from "vitepress";
 import type { App } from "vue";
-import { NolebaseGitChangelogPlugin } from "@nolebase/vitepress-plugin-git-changelog/client";
 
 import "@arco-design/web-vue/es/tooltip/style/css.js";
 import "./styles/main.scss";
@@ -49,9 +48,6 @@ export default {
       .component("ArticleInfo", ArticleInfo)
       .component("ElyImage", ElyImage)
       .component("ElyImageGallery", ElyImageGallery)
-      .component("ElySpace", ElySpace)
-      .use(NolebaseGitChangelogPlugin, {
-        displayAuthorsInsideCommitLine: true,
-      });
+      .component("ElySpace", ElySpace);
   },
 };

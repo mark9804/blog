@@ -26,6 +26,7 @@ import { useCustomStore } from "../../stores/piniaStore";
 import { useRoute } from "vitepress";
 import ElyButton from "../components/ElysiumUI/ElyButton.vue";
 import ElySpace from "../components/ElysiumUI/ElySpace.vue";
+import { NolebaseGitChangelog } from "@nolebase/vitepress-plugin-git-changelog/client";
 
 const store = useCustomStore();
 
@@ -183,6 +184,7 @@ function handleReloadComment() {
           {{ tag }}
         </ElyTag>
       </div>
+      <div class="mb-5"><NolebaseGitChangelog /></div>
     </template>
     <template #layout-bottom>
       <ElyImagePreview />
