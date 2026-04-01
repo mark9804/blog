@@ -33,7 +33,7 @@ jobs:
           node-version: 24.x
       - uses: pnpm/action-setup@master
         with:
-          version: latest
+          # version: latest
           run_install: |
             - recursive: true
 
