@@ -4,7 +4,7 @@
   },
   "framework": "vitepress",
   "installCommand": "git pull --unshallow https://github.com/mark9804/blog master && pnpm install",
-  "buildCommand": "vitepress build docs --base /",
+  "buildCommand": "PLATFORM=vercel pnpm build --base /",
   "cleanUrls": true,
   "redirects": [
     {
