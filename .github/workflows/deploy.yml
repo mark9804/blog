@@ -7,7 +7,7 @@ on:
     paths:
       - "docs/**"
       - ".github/workflows/deploy.yml"
-      - "plugins/**"
+      - "../../docs/.vitepress/plugins/**"
       - "pnpm-lock.yaml"
 
 concurrency:

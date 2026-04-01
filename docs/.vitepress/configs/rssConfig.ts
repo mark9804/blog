@@ -1,5 +1,5 @@
 import { RSSOptions } from "vitepress-plugin-rss";
-import { applyAllImageTransformers } from "../../../plugins/vitepress-plugin-rss/transformers/ely-image-transformer";
+import { applyAllImageTransformers } from "../plugins/vitepress-plugin-rss/transformers/ely-image-transformer";
 import { DOMAIN } from "../constants";
 
 export const rssConfig: RSSOptions = {

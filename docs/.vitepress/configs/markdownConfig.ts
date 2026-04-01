@@ -12,7 +12,7 @@ import container from "markdown-it-container";
 import * as MarkdownIt from "markdown-it";
 import type { MarkdownOptions } from "vitepress";
 import type { Token } from "../theme/types/Token";
-import { footnote } from "../../../plugins/mdit-plugins-footnote";
+import { footnote } from "../plugins/mdit-plugins-footnote";
 
 interface MarkdownItRenderer {
   renderToken: (
