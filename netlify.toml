@@ -1,5 +1,5 @@
 [build]
-  command = "vitepress build docs --base /"
+  command = "pnpm build --base /"
   publish = "docs/.vitepress/dist"
 
 [build.environment]
