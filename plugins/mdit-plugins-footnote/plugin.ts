@@ -74,7 +74,7 @@ const renderFootnoteRef: RenderRule = (
     env,
     self
   );
-
+  // oxlint-disable-next-line max-len
   return `<sup class="footnote-ref"><a href="#footnote${id}">${caption}</a><a class="footnote-anchor" id="footnote-ref${id}${getIDSuffix(
     tokens,
     index

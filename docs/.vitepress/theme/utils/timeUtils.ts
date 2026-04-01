@@ -58,7 +58,7 @@ export function compareDates(
   dateA: string | number | Date | null | undefined,
   dateB: string | number | Date | null | undefined
 ): number {
-  const a = new TZDate(dateA ?? Date.now(), DEFAULT_TIMEZONE);
-  const b = new TZDate(dateB ?? Date.now(), DEFAULT_TIMEZONE);
+  const a = new TZDate(new Date(dateA ?? Date.now()), DEFAULT_TIMEZONE);
+  const b = new TZDate(new Date(dateB ?? Date.now()), DEFAULT_TIMEZONE);
   return isBefore(a, b) ? 1 : -1;
 }
