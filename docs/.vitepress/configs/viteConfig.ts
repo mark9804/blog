@@ -22,8 +22,21 @@ import {
 
 import { rssConfig } from "./rssConfig";
 
-export const viteConfig = (mode: string) => {
+const platform = process.env.PLATFORM || "default";
+
+export function createViteConfig(mode: string) {
+  console.log(`platform: ${platform}\nmode: ${mode}`);
+
+  // Vercel speed-insights analytics component should only be injected on vercel
+  const shouldInjectVercelSpeedInsightsComponent =
+    mode === "production" && platform === "vercel";
+
   return {
+    define: {
+      __INJECT_SPEED_INSIGHTS__: JSON.stringify(
+        shouldInjectVercelSpeedInsightsComponent
+      ),
+    },
     resolve: {
       tsconfigPaths: true,
       alias: {
@@ -103,4 +116,4 @@ export const viteConfig = (mode: string) => {
       chunkSizeWarningLimit: 1000,
     },
   };
-};
+}

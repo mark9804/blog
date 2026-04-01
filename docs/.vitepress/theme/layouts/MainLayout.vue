@@ -18,6 +18,7 @@ import {
   ref,
   watchEffect,
   computed,
+  defineAsyncComponent,
 } from "vue";
 import DefaultTheme from "vitepress/theme";
 import type { ArticleInfo } from "../types/ArticleInfo";
@@ -27,6 +28,15 @@ import { useRoute } from "vitepress";
 import ElyButton from "../components/ElysiumUI/ElyButton.vue";
 import ElySpace from "../components/ElysiumUI/ElySpace.vue";
 import { NolebaseGitChangelog } from "@nolebase/vitepress-plugin-git-changelog/client";
+declare const __INJECT_SPEED_INSIGHTS__: boolean;
+
+const SpeedInsights = __INJECT_SPEED_INSIGHTS__
+  ? defineAsyncComponent(() =>
+      import("@vercel/speed-insights/vue").then(m => ({
+        default: m.SpeedInsights,
+      }))
+    )
+  : null;
 
 const store = useCustomStore();
 
@@ -162,6 +172,7 @@ function handleReloadComment() {
 </script>
 
 <template>
+  <SpeedInsights v-if="SpeedInsights" />
   <transition name="fade-in-out">
     <GlobalLoader v-if="isLoading" />
   </transition>
@@ -184,7 +195,9 @@ function handleReloadComment() {
           {{ tag }}
         </ElyTag>
       </div>
-      <div class="mb-5"><NolebaseGitChangelog /></div>
+      <div class="mb-5">
+        <NolebaseGitChangelog />
+      </div>
     </template>
     <template #layout-bottom>
       <ElyImagePreview />

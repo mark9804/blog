@@ -1,10 +1,10 @@
-import { defineConfig } from "vitepress";
+import { type UserConfigFn } from "vitepress";
 import { HeadConfig, DefaultTheme } from "vitepress";
 import { BASE_URL, DOMAIN } from "./constants";
 import { headConfig } from "./configs/headConfig";
 import { markdownConfig } from "./configs/markdownConfig";
 import { themeConfig } from "./configs/themeConfig";
-import { viteConfig } from "./configs/viteConfig";
+import { createViteConfig } from "./configs/viteConfig";
 import { sidebarConfig } from "./configs/sidebarConfig";
 import { withSidebar } from "vitepress-sidebar";
 
@@ -47,24 +47,23 @@ function processLinks(sidebar: DefaultTheme.Sidebar): DefaultTheme.Sidebar {
 }
 
 // https://vitepress.dev/reference/site-config
-export default defineConfig(({ mode }) => {
-  console.log("mode", mode);
-  return {
-    base: BASE_URL,
-    cleanUrls: true,
-    title: "今天没有早睡",
-    head: headConfig as HeadConfig[],
-    description: "",
-    lang: "zh-CN",
-    sitemap: {
-      hostname: DOMAIN + BASE_URL,
-    },
-    lastUpdated: true,
-    markdown: markdownConfig,
-    themeConfig: {
-      ...(themeConfig as DefaultTheme.Config),
-      sidebar: processLinks(withSidebar({}, sidebarConfig).themeConfig.sidebar),
-    },
-    vite: viteConfig(mode),
-  };
+const config: UserConfigFn<DefaultTheme.Config> = ({ mode }) => ({
+  base: BASE_URL,
+  cleanUrls: true,
+  title: "今天没有早睡",
+  head: headConfig as HeadConfig[],
+  description: "",
+  lang: "zh-CN",
+  sitemap: {
+    hostname: DOMAIN + BASE_URL,
+  },
+  lastUpdated: true,
+  markdown: markdownConfig,
+  themeConfig: {
+    ...(themeConfig as DefaultTheme.Config),
+    sidebar: processLinks(withSidebar({}, sidebarConfig).themeConfig.sidebar),
+  },
+  vite: createViteConfig(mode),
 });
+
+export default config;
