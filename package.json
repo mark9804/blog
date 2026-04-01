@@ -19,6 +19,7 @@
       "git add"
     ]
   },
+  "packageManager": "pnpm@10.12.1",
   "devDependencies": {
     "@iconify-json/octicon": "1.2.22",
     "@nolebase/vitepress-plugin-git-changelog": "2.18.2",
