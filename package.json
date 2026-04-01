@@ -61,6 +61,7 @@
     "@arco-design/web-vue": "2.57.0",
     "@arco-plugins/vite-vue": "1.4.6",
     "@date-fns/tz": "^1.4.1",
+    "@giscus/vue": "^3.1.1",
     "@icon-park/vue-next": "1.4.2",
     "@mdit/plugin-footnote": "0.23.1",
     "@mdit/plugin-img-size": "0.23.1",
@@ -69,6 +70,7 @@
     "@mdit/plugin-spoiler": "0.23.1",
     "@mdit/plugin-sub": "0.24.1",
     "@mdit/plugin-sup": "0.24.1",
+    "@vercel/speed-insights": "^2.0.0",
     "@vitejs/plugin-vue-jsx": "5.1.5",
     "@vueuse/components": "12.5.0",
     "@vueuse/core": "12.5.0",
@@ -89,7 +91,6 @@
     "unplugin-icons": "23.0.1",
     "unplugin-vue-components": "32.0.0",
     "vite": "8.0.3",
-    "vitepress-plugin-comment-with-giscus": "1.1.15",
     "vitepress-plugin-rss": "0.4.3",
     "vue-router": "5.0.4",
     "words-count": "2.0.2"

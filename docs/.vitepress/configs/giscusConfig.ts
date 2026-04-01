@@ -1,4 +1,5 @@
-export const giscusConfig = {
+import { GiscusPropsType } from "../plugins/vitepress-plugin-comment-with-giscus";
+export const giscusConfig: GiscusPropsType = {
   repo: "mark9804/blog",
   repoId: "R_kgDOLo2yWA",
   category: "Announcements",

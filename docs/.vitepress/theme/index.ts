@@ -8,7 +8,7 @@ import ArticleInfo from "./components/ArticleInfo.vue";
 import ElyImage from "./components/ElysiumUI/ElyImage.vue";
 import ElyImageGallery from "./components/ElysiumUI/ElyImageGallery.vue";
 import ElySpace from "./components/ElysiumUI/ElySpace.vue";
-import giscusTalk from "vitepress-plugin-comment-with-giscus";
+import { giscusTalk } from "../plugins/vitepress-plugin-comment-with-giscus";
 import { useData, useRoute } from "vitepress";
 import type { App } from "vue";
 

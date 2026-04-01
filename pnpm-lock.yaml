@@ -17,6 +17,9 @@ importers:
       '@date-fns/tz':
         specifier: ^1.4.1
         version: 1.4.1
+      '@giscus/vue':
+        specifier: ^3.1.1
+        version: 3.1.1(vue@3.5.31(typescript@6.0.2))
       '@icon-park/vue-next':
         specifier: 1.4.2
         version: 1.4.2(vue@3.5.31(typescript@6.0.2))
@@ -41,6 +44,9 @@ importers:
       '@mdit/plugin-sup':
         specifier: 0.24.1
         version: 0.24.1(markdown-it@14.1.0)
+      '@vercel/speed-insights':
+        specifier: ^2.0.0
+        version: 2.0.0(vue-router@5.0.4(@vue/compiler-sfc@3.5.31)(pinia@3.0.4(typescript@6.0.2)(vue@3.5.31(typescript@6.0.2)))(vue@3.5.31(typescript@6.0.2)))(vue@3.5.31(typescript@6.0.2))
       '@vitejs/plugin-vue-jsx':
         specifier: 5.1.5
         version: 5.1.5(vite@8.0.3(@types/node@24.12.0)(esbuild@0.27.2)(jiti@2.6.1)(less@4.4.0)(sass@1.98.0)(tsx@4.19.2)(yaml@2.8.2))(vue@3.5.31(typescript@6.0.2))
@@ -101,9 +107,6 @@ importers:
       vite:
         specifier: 8.0.3
         version: 8.0.3(@types/node@24.12.0)(esbuild@0.27.2)(jiti@2.6.1)(less@4.4.0)(sass@1.98.0)(tsx@4.19.2)(yaml@2.8.2)
-      vitepress-plugin-comment-with-giscus:
-        specifier: 1.1.15
-        version: 1.1.15(vue@3.5.31(typescript@6.0.2))
       vitepress-plugin-rss:
         specifier: 0.4.3
         version: 0.4.3(vitepress@2.0.0-alpha.17(@types/node@24.12.0)(async-validator@4.2.5)(jiti@2.6.1)(less@4.4.0)(lightningcss@1.32.0)(markdown-it-mathjax3@4.3.2)(postcss@8.5.8)(sass@1.98.0)(tsx@4.19.2)(typescript@6.0.2)(yaml@2.8.2))
@@ -729,8 +732,8 @@ packages:
     resolution: {integrity: sha512-iH1B076HoAshH1mLpHMgwdGeTs0CYwL0SPMkGuSebZrwBp16v415e9NZXg2jtrqPVQjf6IANe2Vtlr5KswtcZQ==}
     engines: {node: ^20.19.0 || ^22.13.0 || >=24}
 
-  '@giscus/vue@2.4.0':
-    resolution: {integrity: sha512-QOxKHgsMT91myyQagP2v20YYAei1ByZuc3qcaYxbHx4AwOeyVrybDIuRFwG9YDv6OraC86jYnU4Ixd37ddC/0A==}
+  '@giscus/vue@3.1.1':
+    resolution: {integrity: sha512-xgsc93MibRQ0d1glBxN1BrEREHTIf3BPYs/3R+UZHNqawFFoWBV6iJ7uVCXMqoEKZdE2c78B3aKt5gfGqo8I5A==}
     peerDependencies:
       vue: '>=3.2.0'
 
@@ -1906,6 +1909,32 @@ packages:
     peerDependencies:
       vite: ^2.9.0 || ^3.0.0-0 || ^4.0.0 || ^5.0.0-0 || ^6.0.0-0 || ^7.0.0-0 || ^8.0.0-0
 
+  '@vercel/speed-insights@2.0.0':
+    resolution: {integrity: sha512-jwkNcrTeafWxjmWq4AHBaptSqZiJkYU5adLC9QBSqeim0GcqDMgN5Ievh8OG1rJ6W3A4l1oiP7qr9CWxGuzu3w==}
+    peerDependencies:
+      '@sveltejs/kit': ^1 || ^2
+      next: '>= 13'
+      nuxt: '>= 3'
+      react: ^18 || ^19 || ^19.0.0-rc
+      svelte: '>= 4'
+      vue: ^3
+      vue-router: ^4
+    peerDependenciesMeta:
+      '@sveltejs/kit':
+        optional: true
+      next:
+        optional: true
+      nuxt:
+        optional: true
+      react:
+        optional: true
+      svelte:
+        optional: true
+      vue:
+        optional: true
+      vue-router:
+        optional: true
+
   '@vitejs/plugin-vue-jsx@5.1.5':
     resolution: {integrity: sha512-jIAsvHOEtWpslLOI2MeElGFxH7M8pM83BU/Tor4RLyiwH0FM4nUW3xdvbw20EeU9wc5IspQwMq225K3CMnJEpA==}
     engines: {node: ^20.19.0 || >=22.12.0}
@@ -2658,8 +2687,8 @@ packages:
   get-tsconfig@4.13.7:
     resolution: {integrity: sha512-7tN6rFgBlMgpBML5j8typ92BKFi2sFQvIdpAqLA2beia5avZDrMs0FLZiM5etShWq5irVyGcGMEA1jcDaK7A/Q==}
 
-  giscus@1.5.0:
-    resolution: {integrity: sha512-t3LL0qbSO3JXq3uyQeKpF5CegstGfKX/0gI6eDe1cmnI7D56R7j52yLdzw4pdKrg3VnufwCgCM3FDz7G1Qr6lg==}
+  giscus@1.6.0:
+    resolution: {integrity: sha512-Zrsi8r4t1LVW950keaWcsURuZUQwUaMKjvJgTCY125vkW6OiEBkatE7ScJDbpqKHdZwb///7FVC21SE3iFK3PQ==}
 
   glob-parent@5.1.2:
     resolution: {integrity: sha512-AOIgSQCepiJYwP3ARnGx+5VnTu2HBYdzbGP45eLw1vr3zB3vZLeyed1sC9hnbcOc9/SrMyM5RPQrkGz4aS9Zow==}
@@ -3890,9 +3919,6 @@ packages:
       yaml:
         optional: true
 
-  vitepress-plugin-comment-with-giscus@1.1.15:
-    resolution: {integrity: sha512-1DJjgN+7SYvn5ZkjuSXPmz7nlqfcrh4qCGGviiZghA2ELXnaO2m9WY7m+RisPSaqCn90xqe0JbO2T4NMq8iUBg==}
-
   vitepress-plugin-rss@0.4.3:
     resolution: {integrity: sha512-/8DWX7HIhlzMZ0jdM6j5b7ghAbYf6BMuwXwzeR++UxGxe6NOdMV0NJT6u/H2XY2ZzrCpRbAyY99/t6yTf6Bzcg==}
     peerDependencies:
@@ -4494,9 +4520,9 @@ snapshots:
       '@eslint/core': 1.1.1
       levn: 0.4.1
 
-  '@giscus/vue@2.4.0(vue@3.5.31(typescript@6.0.2))':
+  '@giscus/vue@3.1.1(vue@3.5.31(typescript@6.0.2))':
     dependencies:
-      giscus: 1.5.0
+      giscus: 1.6.0
       vue: 3.5.31(typescript@6.0.2)
 
   '@humanfs/core@0.19.1': {}
@@ -5355,6 +5381,11 @@ snapshots:
       unplugin-utils: 0.3.1
       vite: 8.0.3(@types/node@24.12.0)(esbuild@0.27.2)(jiti@2.6.1)(less@4.4.0)(sass@1.98.0)(tsx@4.19.2)(yaml@2.8.2)
 
+  '@vercel/speed-insights@2.0.0(vue-router@5.0.4(@vue/compiler-sfc@3.5.31)(pinia@3.0.4(typescript@6.0.2)(vue@3.5.31(typescript@6.0.2)))(vue@3.5.31(typescript@6.0.2)))(vue@3.5.31(typescript@6.0.2))':
+    optionalDependencies:
+      vue: 3.5.31(typescript@6.0.2)
+      vue-router: 5.0.4(@vue/compiler-sfc@3.5.31)(pinia@3.0.4(typescript@6.0.2)(vue@3.5.31(typescript@6.0.2)))(vue@3.5.31(typescript@6.0.2))
+
   '@vitejs/plugin-vue-jsx@5.1.5(vite@8.0.3(@types/node@24.12.0)(esbuild@0.27.2)(jiti@2.6.1)(less@4.4.0)(sass@1.98.0)(tsx@4.19.2)(yaml@2.8.2))(vue@3.5.31(typescript@6.0.2))':
     dependencies:
       '@babel/core': 7.29.0
@@ -6194,7 +6225,7 @@ snapshots:
       resolve-pkg-maps: 1.0.0
     optional: true
 
-  giscus@1.5.0:
+  giscus@1.6.0:
     dependencies:
       lit: 3.2.1
 
@@ -7486,12 +7517,6 @@ snapshots:
       sass: 1.98.0
       tsx: 4.19.2
       yaml: 2.8.2
-
-  vitepress-plugin-comment-with-giscus@1.1.15(vue@3.5.31(typescript@6.0.2)):
-    dependencies:
-      '@giscus/vue': 2.4.0(vue@3.5.31(typescript@6.0.2))
-    transitivePeerDependencies:
-      - vue
 
   vitepress-plugin-rss@0.4.3(vitepress@2.0.0-alpha.17(@types/node@24.12.0)(async-validator@4.2.5)(jiti@2.6.1)(less@4.4.0)(lightningcss@1.32.0)(markdown-it-mathjax3@4.3.2)(postcss@8.5.8)(sass@1.98.0)(tsx@4.19.2)(typescript@6.0.2)(yaml@2.8.2)):
     dependencies:
