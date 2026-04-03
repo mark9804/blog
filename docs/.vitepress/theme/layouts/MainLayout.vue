@@ -22,6 +22,7 @@ import DefaultTheme from "vitepress/theme";
 import type { ArticleInfo } from "../types/ArticleInfo";
 import { useSearchTags } from "../utils/tagSearchUtils";
 import { useCustomStore } from "../../stores/piniaStore";
+import { useFormulaCopy } from "../composables/useFormulaCopy";
 import { NolebaseGitChangelog } from "@nolebase/vitepress-plugin-git-changelog/client";
 declare const __INJECT_SPEED_INSIGHTS__: boolean;
 
@@ -34,6 +35,7 @@ const SpeedInsights = __INJECT_SPEED_INSIGHTS__
   : null;
 
 const store = useCustomStore();
+useFormulaCopy();
 
 const { isDark } = useData();
 

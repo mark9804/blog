@@ -29,6 +29,7 @@
   - 图片增强：
     - 图片可点击放大；
     - 可通过鼠标滚轮和触摸板手势缩放和平移图片；
+    - 图片 caption；
     - 可控制图像尺寸。
   - 脚注（Footnote）增强：
     - 在引用处悬停可显示具体内容；
@@ -37,8 +38,7 @@
   - 注音 `ruby`；
   - 剧透 `spoiler`；
   - 上标和下标；
-  - 图片 caption；
-  - 支持 [LaTeX 语法](https://www.latex-project.org/)。
+  - 支持 [LaTeX 语法](https://www.latex-project.org/)，渲染后的公式支持点击复制。
 - 在构建时，基于 `contentLoader` 统计字数和图片张数。
 - 在构建时，基于字数和图片数量计算阅读时间。
 - 在构建时，基于 `contentLoader` 和 `git` 获取最后编辑时间。
@@ -47,7 +47,7 @@
 - 自动生成侧边栏目录。
 - 开发者友好：
   - 提交时自动格式化；
-  - 配置自动导入 Arco Design 组件/图标库和 Elysium UI 组件。
+  - 配置自动导入 ~~Arco Design 组件~~（项目似了，正在替换）/图标库和 Elysium UI 组件。
 
 ## Issue Tracker
 

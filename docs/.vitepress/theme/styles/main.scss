@@ -290,3 +290,14 @@ a.title span,
 .DocSearch {
   --docsearch-primary-color: $color-accent !important;
 }
+
+// Click-to-copy hint for math formulas
+mjx-container[data-formula] {
+  @apply cursor-pointer border-1 rounded-md border-solid border-transparent;
+  padding: 3px 2px;
+  transition: all 0.175s ease-in-out;
+
+  &:hover {
+    @apply border-[var(--color-accent-tertiary)] bg-[var(--color-accent-quaternary)];
+  }
+}

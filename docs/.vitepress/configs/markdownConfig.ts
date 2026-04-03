@@ -5,9 +5,7 @@ import { spoiler } from "@mdit/plugin-spoiler";
 import { imgSize } from "@mdit/plugin-img-size";
 import { sub } from "@mdit/plugin-sub";
 import { sup } from "@mdit/plugin-sup";
-// import { footnote } from "@mdit/plugin-footnote";
 import { generateImgComponent } from "../theme/utils/generateImgComponent";
-// @ts-ignore no type definitions
 import container from "markdown-it-container";
 import * as MarkdownIt from "markdown-it";
 import type { MarkdownOptions } from "vitepress";
@@ -63,9 +61,7 @@ export const markdownConfig: MarkdownOptions = {
       return generateImgComponent(tokens[idx]);
     };
 
-    // Gallery container: just output open/close Vue component tags.
-    // Inner images render normally as <ElyImage> via the image rule above.
-    // Vue's slot mechanism handles the composition.
+    // Gallery container
     md.use(container, "gallery", {
       render(tokens: Token[], idx: number) {
         if (tokens[idx].nesting === 1) {
@@ -75,5 +71,29 @@ export const markdownConfig: MarkdownOptions = {
         return `</ElyImageGallery>\n`;
       },
     });
+
+    // Inject data-formula attribute into mathjax output for click-to-copy
+    const escapeAttr = (s: string) =>
+      s.replace(/&/g, "&amp;").replace(/"/g, "&quot;");
+
+    const origInline = md.renderer.rules.math_inline!;
+    md.renderer.rules.math_inline = function (...args) {
+      const html = origInline.apply(this, args);
+      const formula = escapeAttr(args[0][args[1]].content);
+      return html.replace(
+        /^<mjx-container /,
+        `<mjx-container data-formula="${formula}" `
+      );
+    };
+
+    const origBlock = md.renderer.rules.math_block!;
+    md.renderer.rules.math_block = function (...args) {
+      const html = origBlock.apply(this, args);
+      const formula = escapeAttr(args[0][args[1]].content);
+      return html.replace(
+        /^<mjx-container /,
+        `<mjx-container data-formula="${formula}" `
+      );
+    };
   },
 };
