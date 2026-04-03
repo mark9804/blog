@@ -250,6 +250,10 @@ $$
 
 ## 重建任务常用数据集
 
+### The Columbia Imaging and Vision Laboratory (CAVE) dataset [^ParkCAVEdataset]
+
+### Korea Advanced Institute of Science & Technology (KAIST) dataset[^choiHighqualityHyperspectralReconstruction2017]
+
 ## 参考文献
 
 [^yuanSnapshotCompressiveImaging2021a]: Yuan, X., Brady, D. J., & Katsaggelos, A. K.: Snapshot compressive imaging: Theory, algorithms, and applications. IEEE Signal Processing Magazine, 38(2), 65–88 (2021).
@@ -283,3 +287,5 @@ $$
 [^caiMaskguidedSpectralwiseTransformer2022]: Cai, Y., Lin, J., Hu, X., Wang, H., Yuan, X., Zhang, Y., Timofte, R., & Gool, L. V.: Mask-guided Spectral-wise Transformer for Efficient Hyperspectral Image Reconstruction. (2022).
 
 [^heSelfsupervisedLearningSpectral2025]: He, Z., Wang, L., Meng, Z., & Yuan, X.: Self-supervised learning with spectral low-rank prior for hyperspectral image reconstruction. 2025 IEEE/CVF Winter Conference on Applications of Computer Vision (WACV), 9136-9145 (2025).
+
+[^choiHighqualityHyperspectralReconstruction2017]: Choi, I., Kim, M. H., Gutierrez, D., Jeon, D. S., & Nam, G.: High-quality hyperspectral reconstruction using a spectral prior. ACM trans. graph. (2017).
