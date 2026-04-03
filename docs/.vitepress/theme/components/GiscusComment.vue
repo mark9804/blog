@@ -4,7 +4,7 @@ import { useData, useRoute } from "vitepress";
 import { computed, ref, watch, onMounted, onUnmounted } from "vue";
 import { giscusConfig } from "../../configs/giscusConfig";
 
-const { frontmatter, isDark } = useData();
+const { isDark } = useData();
 const route = useRoute();
 
 // Force re-render on route change by keying on the path

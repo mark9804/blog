@@ -1,4 +1,6 @@
-const commonConfig = {
+import type { VitePressSidebarOptions } from "vitepress-sidebar";
+
+const commonConfig: VitePressSidebarOptions = {
   documentRootPath: "/docs",
   useTitleFromFileHeading: true,
   useTitleFromFrontmatter: true,
@@ -47,4 +49,4 @@ export const sidebarConfig = [
     resolvePath: "/quavers",
     ...commonConfig,
   },
-];
+] as VitePressSidebarOptions[];

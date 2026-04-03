@@ -1,0 +1,7 @@
+diff --git a/dist/index.d.ts b/dist/index.d.ts
+index a1a59ea7bc015621172fedc2d4eb213823e05e9a..e78d53dfabbc83f2c39907d4ee09faf598734cee 100644
+--- a/dist/index.d.ts
++++ b/dist/index.d.ts
+@@ -1 +1,2 @@
+ export { withSidebar, generateSidebar } from './sidebar.js';
++export { VitePressSidebarOptions } from './types.js';
