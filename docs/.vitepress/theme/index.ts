@@ -8,6 +8,7 @@ import ArticleInfo from "./components/ArticleInfo.vue";
 import ElyImage from "./components/ElysiumUI/ElyImage.vue";
 import ElyImageGallery from "./components/ElysiumUI/ElyImageGallery.vue";
 import ElySpace from "./components/ElysiumUI/ElySpace.vue";
+import FootnoteRef from "./components/FootnoteRef.vue";
 
 import type { App } from "vue";
 
@@ -39,6 +40,7 @@ export default {
       .component("ArticleInfo", ArticleInfo)
       .component("ElyImage", ElyImage)
       .component("ElyImageGallery", ElyImageGallery)
-      .component("ElySpace", ElySpace);
+      .component("ElySpace", ElySpace)
+      .component("FootnoteRef", FootnoteRef);
   },
 };
