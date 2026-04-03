@@ -90,6 +90,7 @@ export function createViteConfig(mode: string) {
       }),
       GitChangelogMarkdownSection({
         sections: {
+          disableChangelog: true,
           disableContributors: true,
         },
       }),

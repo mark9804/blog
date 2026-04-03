@@ -9,24 +9,19 @@ declare global {
 
 import { useData, useRouter } from "vitepress";
 import GlobalLoader from "../components/GlobalLoader.vue";
+import GiscusComment from "../components/GiscusComment.vue";
 import {
   nextTick,
   onBeforeMount,
-  onMounted,
   provide,
   ComputedRef,
   ref,
-  watchEffect,
-  computed,
   defineAsyncComponent,
 } from "vue";
 import DefaultTheme from "vitepress/theme";
 import type { ArticleInfo } from "../types/ArticleInfo";
 import { useSearchTags } from "../utils/tagSearchUtils";
 import { useCustomStore } from "../../stores/piniaStore";
-import { useRoute } from "vitepress";
-import ElyButton from "../components/ElysiumUI/ElyButton.vue";
-import ElySpace from "../components/ElysiumUI/ElySpace.vue";
 import { NolebaseGitChangelog } from "@nolebase/vitepress-plugin-git-changelog/client";
 declare const __INJECT_SPEED_INSIGHTS__: boolean;
 
@@ -105,7 +100,6 @@ function handleTagClick(tag: string) {
   useSearchTags.go();
 }
 
-const route = useRoute();
 const router = useRouter();
 
 const isLoading = ref(false);
@@ -127,48 +121,6 @@ router.onAfterRouteChange = () => {
   }
   isLoading.value = false;
 };
-
-// giscus may encounter initialization error, making comment invisible
-// A button controlled by shouldHaveComment will reveal to prompt a reload
-const shouldHaveComment = computed(() => frontmatter.value.comment !== false); // 应用允许显式禁止评论，不能缩写成 !frontmatter.value.comment
-const hasComment = ref(false);
-const timer = ref<number | null>(null);
-
-onMounted(() => {
-  watchEffect(onInvalidate => {
-    // Make sure effect re-runs on route change
-    // oxlint-disable-next-line no-unused-expressions
-    route.path;
-
-    hasComment.value = false;
-
-    onInvalidate(() => {
-      if (timer.value) {
-        window.clearInterval(timer.value);
-        timer.value = null;
-      }
-    });
-
-    if (shouldHaveComment.value) {
-      timer.value = window.setInterval(() => {
-        // check if #giscus is visible && width, height > 0
-        const giscus = document.getElementById("giscus");
-        if (giscus && giscus.offsetWidth > 0 && giscus.offsetHeight > 0) {
-          hasComment.value = true;
-          if (timer.value) {
-            window.clearInterval(timer.value);
-            timer.value = null;
-          }
-        }
-      }, 2000);
-    }
-  });
-});
-
-function handleReloadComment() {
-  window.localStorage.removeItem("giscus-session");
-  window.location.reload();
-}
 </script>
 
 <template>
@@ -204,30 +156,18 @@ function handleReloadComment() {
     </template>
 
     <template #doc-after>
+      <GiscusComment v-if="frontmatter.comment !== false" />
       <ElySpace
         class="justify-center mt-10 text-sm"
         wide
         :size="0"
-        align="center"
         padding="0"
-        v-if="shouldHaveComment"
-      >
-        <div contents v-if="!hasComment">
-          <span class="text-[var(--color-text-3)]">加载不出评论？</span>
-          <ElyButton text size="mini" @click="handleReloadComment">
-            <span class="text-sm">点我试试</span>
-          </ElyButton>
-        </div>
-      </ElySpace>
-      <ElySpace
-        class="justify-center mt-10 text-sm"
-        wide
-        :size="0"
         align="center"
-        padding="0"
         v-else
       >
-        <span class="text-[var(--color-text-3)]">本页面禁止评论</span>
+        <span class="text-[var(--color-text-3)] !select-none cursor-not-allowed"
+          >本页面禁止评论</span
+        >
       </ElySpace>
     </template>
   </Layout>
