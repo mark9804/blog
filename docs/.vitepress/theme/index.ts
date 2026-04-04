@@ -1,5 +1,4 @@
 // https://vitepress.dev/guide/custom-theme
-import { Message } from "@arco-design/web-vue";
 import Theme from "vitepress/theme";
 import MainLayout from "./layouts/MainLayout.vue";
 import { createPinia } from "pinia";
@@ -12,7 +11,6 @@ import FootnoteRef from "./components/FootnoteRef.vue";
 
 import type { App } from "vue";
 
-import "@arco-design/web-vue/es/tooltip/style/css.js";
 import "./styles/main.scss";
 import "uno.css";
 
@@ -33,7 +31,6 @@ export default {
     }
 
     app.use(pinia);
-    Message._context = app._context;
 
     // register your custom global components
     app

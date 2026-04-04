@@ -5,6 +5,8 @@ import { ref, computed, onUnmounted, watch, useTemplateRef } from "vue";
 import { useImageStore } from "../../../stores/imageStore";
 import { clamp } from "./_utils/numberUtils";
 import { useRaf } from "./_utils/useAnimationUtils";
+import { Close } from "@icon-park/vue-next";
+
 const imageStore = useImageStore();
 
 const shouldShowPreview = computed(() => imageStore.getImagePreviewVisibility);
@@ -263,7 +265,7 @@ onUnmounted(() => {
             @click="handleClose"
             aria-label="关闭图像预览"
           >
-            <icon-close />
+            <close />
           </button>
         </div>
       </Transition>

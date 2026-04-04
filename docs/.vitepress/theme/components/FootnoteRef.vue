@@ -22,12 +22,12 @@ onMounted(() => {
 
 <template>
   <sup class="footnote-ref">
-    <a-tooltip v-if="footnoteContent" position="bl">
+    <ElyTooltip v-if="footnoteContent" position="bl" :close-delay="400">
       <a :href="`#footnote${id}`">{{ caption }}</a>
       <template #content>
         <span v-html="footnoteContent"></span>
       </template>
-    </a-tooltip>
+    </ElyTooltip>
     <a v-else :href="`#footnote${id}`">{{ caption }}</a>
     <a class="footnote-anchor" :id="`footnote-ref${id}${suffix}`"></a>
   </sup>

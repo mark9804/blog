@@ -7,7 +7,7 @@
 
 ---
 
-基于 VitePress，定制 [Elysium](./docs/.vitepress/theme/components/ElysiumUI) 主题，图标来自 [Arco Design](https://arco.design/vue/)、 [Icon Park](https://iconpark.oceanengine.com/) 以及 [Octicons](https://icon-sets.iconify.design/octicon/)。
+基于 VitePress，定制 [Elysium](./docs/.vitepress/theme/components/ElysiumUI) 主题，图标来自 [Icon Park](https://iconpark.oceanengine.com/) 以及 [Octicons](https://icon-sets.iconify.design/octicon/)。
 
 视障人群友好（感谢 [Armstrong](https://armstrong.viyf.org/) 抽出自己休息时间给我提了许多建议！），晕动症患者友好（大概）。
 
@@ -47,7 +47,7 @@
 - 自动生成侧边栏目录。
 - 开发者友好：
   - 提交时自动格式化；
-  - 配置自动导入 ~~Arco Design 组件~~（项目似了，正在替换）/图标库和 Elysium UI 组件。
+  - 配置自动导入 Elysium UI 组件。
 
 ## Issue Tracker
 
@@ -57,22 +57,21 @@
 
 - [x] 轻量化文章 （a.k.a 朋友圈） <ruby><code>quavers</code><rt>八分音符</rt></ruby>
 - [ ] 首页 NavBar
-- [x] 逐渐替换掉 Arco Design 组件库
 - [x] 根据一级主题色自动生成二、三、四级主题色
 - [x] 首页文章搜索框
 
 ## 技术栈
 
-- 基础框架：[VitePress](https://vitepress.vuejs.org/)（自动跟随上游版本号） + `husky@v9` + `lint-staged` + `prettier` + `eslint@v9`
+- 基础框架：[VitePress](https://vitepress.vuejs.org/)（自动跟随上游版本号） + `husky@v9` + `lint-staged` + `prettier` + `oxlint@v1`
 - CSS 框架：[UnoCss](https://unocss.dev/)
 - DX/CI/CD：
   - 自动导入：[unplugin-auto-import](https://github.com/unplugin/unplugin-auto-import#readme)
-  - 自动构建和部署：GitHub Actions + GitHub Pages
+  - 自动构建和部署：GitHub Actions + GitHub Pages，[Netlify](https://www.netlify.com/)，[Vercel](https://vercel.com/)
   - 自动更新依赖：[Mend Renovate](https://www.mend.io/renovate-free/)
   - 自动侧边栏：[VitePress Sidebar](https://vitepress-sidebar.jooy2.com)
-- 组件库：[Elysium UI](./docs/.vitepress/theme/components/ElysiumUI)，[Arco Design Vue](https://arco.design/vue/)
+- 组件库：[Elysium UI](./docs/.vitepress/theme/components/ElysiumUI)，[Reka UI](https://reka-ui.com/)
 - 状态管理：[Pinia](https://pinia.vuejs.org/)
 - Markdown 扩展：[mdit-plugins](https://mdit-plugins.github.io/zh/)
 - 评论系统：[giscus](https://giscus.app/)
-- Icon：[IconPark](https://iconpark.bytedance.com/) / [Arco](https://arco.design/vue/component/icon)
+- Icon：[IconPark](https://iconpark.bytedance.com/)
 - 工具库：[VueUse](https://vueuse.org/), [Radashi](https://radashi.js.org/)

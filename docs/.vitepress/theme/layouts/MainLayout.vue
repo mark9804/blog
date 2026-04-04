@@ -44,15 +44,8 @@ const enableTransitions = () =>
   window.matchMedia("(prefers-reduced-motion: no-preference)").matches;
 
 provide("toggle-appearance", async () => {
-  const syncArcoTheme = () => {
-    document
-      .querySelector("body")
-      ?.setAttribute("arco-theme", isDark.value ? "dark" : "");
-  };
-
   if (!enableTransitions()) {
     isDark.value = !isDark.value;
-    syncArcoTheme();
     return;
   }
 
@@ -64,8 +57,6 @@ provide("toggle-appearance", async () => {
 
   const transition = document.startViewTransition(async () => {
     isDark.value = !isDark.value;
-    // Must be inside the callback so the new snapshot captures arco-theme styles.
-    syncArcoTheme();
     await nextTick();
   });
 
@@ -82,12 +73,6 @@ provide("toggle-appearance", async () => {
 
   await animation.finished;
   document.documentElement.classList.remove("vt-transitioning");
-});
-
-onBeforeMount(() => {
-  document
-    .querySelector("body")
-    ?.setAttribute("arco-theme", isDark.value ? "dark" : "");
 });
 
 const data = useData();

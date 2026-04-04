@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { TagProps } from "./types/TagProps";
 import { computed, ref, watch } from "vue";
+import { TagOne, Close } from "@icon-park/vue-next";
 
 const props = withDefaults(defineProps<TagProps>(), {
   id: "",
@@ -67,7 +68,7 @@ const handleClose = (e: Event) => {
   >
     <span class="elysium-ui__tag--icon">
       <slot name="icon">
-        <icon-tag />
+        <tag-one size="12" theme="outline" />
       </slot>
     </span>
     <span class="elysium-ui__tag--content font-bold">
@@ -80,7 +81,7 @@ const handleClose = (e: Event) => {
       role="button"
       aria-label="移除标签"
     >
-      <icon-close />
+      <close size="12" />
     </span>
   </span>
 </template>

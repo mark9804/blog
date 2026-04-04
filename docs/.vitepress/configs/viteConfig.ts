@@ -2,7 +2,7 @@ import vueJsx from "@vitejs/plugin-vue-jsx";
 // @ts-ignore
 import px2rem from "postcss-plugin-px2rem";
 import AutoImport from "unplugin-auto-import/vite";
-import { ArcoResolver } from "unplugin-vue-components/resolvers";
+import RekaResolver from "reka-ui/resolver";
 import Components from "unplugin-vue-components/vite";
 import UnoCSS from "unocss/vite";
 import {
@@ -51,7 +51,7 @@ export function createViteConfig(mode: string) {
     plugins: [
       vueJsx(),
       AutoImport({
-        resolvers: [ArcoResolver({ sideEffect: true, resolveIcons: true })],
+        resolvers: [RekaResolver()],
         imports: ["vue"],
       }),
       Components({
@@ -62,7 +62,7 @@ export function createViteConfig(mode: string) {
           ".vitepress/theme/components",
         ],
         resolvers: [
-          ArcoResolver({ sideEffect: true, resolveIcons: true }),
+          RekaResolver(),
           IconsResolver({
             alias: {
               park: "icon-park",

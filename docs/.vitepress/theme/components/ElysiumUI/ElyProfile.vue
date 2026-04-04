@@ -13,6 +13,7 @@ import {
 import { createWaveAnimation } from "./_utils/wave";
 import { useRouter } from "vitepress";
 import { isExternalUrl } from "../../../utils/urlUtils";
+import { Mail, DoubleDown } from "@icon-park/vue-next";
 
 const props = defineProps<ProfileProps>();
 
@@ -169,8 +170,8 @@ function handleSocialLinkClick(social: {
         aria-label="发送邮件"
         :style="{ maxWidth: '240px' }"
         bold
-        ><span class="flex items-center gap-2">
-          <icon-email :stroke-width="6" />Contact
+        ><span class="flex items-center gap-2 text-lg">
+          <mail :stroke-width="5" size="18" />Contact
         </span></ElyButton
       >
       <ElySpace
@@ -198,7 +199,7 @@ function handleSocialLinkClick(social: {
       role="button"
       @click="handleScrollIndicatorClick"
     >
-      <icon-double-down
+      <double-down
         class="ely-profile__scroll-indicator-icon"
         :stroke-width="2"
         stroke-linecap="round"

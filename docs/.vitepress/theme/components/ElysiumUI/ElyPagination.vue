@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, ref, watch } from "vue";
 import ElyButton from "./ElyButton.vue";
-import { IconLeft, IconRight, IconMore } from "@arco-design/web-vue/es/icon";
+import { Left, Right, More } from "@icon-park/vue-next";
 import { clamp } from "./_utils/numberUtils";
 const props = withDefaults(
   defineProps<{
@@ -107,7 +107,7 @@ watch(userCurrent, () => {
       :disabled="userCurrent === 1"
       aria-label="Previous Page"
     >
-      <IconLeft />
+      <left />
     </ElyButton>
 
     <template v-for="(item, index) in computedPaginationItems" :key="index">
@@ -119,7 +119,7 @@ watch(userCurrent, () => {
         :aria-label="`Page ${item.value}`"
       >
         <template v-if="item.type === 'number'">{{ item.value }}</template>
-        <IconMore v-else />
+        <more v-else />
       </ElyButton>
     </template>
 
@@ -130,7 +130,7 @@ watch(userCurrent, () => {
       :disabled="userCurrent === totalPages"
       aria-label="Next Page"
     >
-      <IconRight />
+      <right />
     </ElyButton>
   </div>
 </template>

@@ -11,7 +11,7 @@ gitChangelog: false
 ---
 
 <script setup>
-  import TagSearchPage from ".vitepress/theme/components/TagSearchPage.vue";
+  import TagSearchPage from "@theme/components/TagSearchPage.vue";
 </script>
 
 <TagSearchPage />
