@@ -22,3 +22,9 @@
   [headers.values]
     Content-Type = "application/rss+xml; charset=utf-8"
 
+[[plugins]]
+  package = "@netlify/plugin-lighthouse"
+
+  [plugins.inputs.settings]
+    preset = "desktop"
+
