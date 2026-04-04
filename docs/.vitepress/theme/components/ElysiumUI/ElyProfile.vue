@@ -13,7 +13,7 @@ import {
 import { createWaveAnimation } from "./_utils/wave";
 import { useRouter } from "vitepress";
 import { isExternalUrl } from "../../../utils/urlUtils";
-import { Mail, DoubleDown } from "@icon-park/vue-next";
+import { Mail, ChevronsDown } from "lucide-vue-next";
 
 const props = defineProps<ProfileProps>();
 
@@ -171,7 +171,7 @@ function handleSocialLinkClick(social: {
         :style="{ maxWidth: '240px' }"
         bold
         ><span class="flex items-center gap-2 text-lg">
-          <mail :stroke-width="5" size="18" />Contact
+          <mail :stroke-width="3" :size="18" />Contact
         </span></ElyButton
       >
       <ElySpace
@@ -199,9 +199,9 @@ function handleSocialLinkClick(social: {
       role="button"
       @click="handleScrollIndicatorClick"
     >
-      <double-down
+      <chevrons-down
         class="ely-profile__scroll-indicator-icon"
-        :stroke-width="2"
+        :stroke-width="1"
         stroke-linecap="round"
         stroke-linejoin="bevel"
         :size="36"

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, ref, watch } from "vue";
 import ElyButton from "./ElyButton.vue";
-import { Left, Right, More } from "@icon-park/vue-next";
+import { ChevronLeft, ChevronRight, Ellipsis } from "lucide-vue-next";
 import { clamp } from "./_utils/numberUtils";
 const props = withDefaults(
   defineProps<{
@@ -14,6 +14,8 @@ const props = withDefaults(
     pageSize: 50,
   }
 );
+
+const ICON_SIZE = 18;
 
 const userCurrent = ref(props.current);
 const computedPaginationItems = computed<
@@ -107,7 +109,7 @@ watch(userCurrent, () => {
       :disabled="userCurrent === 1"
       aria-label="Previous Page"
     >
-      <left />
+      <ChevronLeft :size="ICON_SIZE" />
     </ElyButton>
 
     <template v-for="(item, index) in computedPaginationItems" :key="index">
@@ -119,7 +121,7 @@ watch(userCurrent, () => {
         :aria-label="`Page ${item.value}`"
       >
         <template v-if="item.type === 'number'">{{ item.value }}</template>
-        <more v-else />
+        <ellipsis v-else :size="ICON_SIZE" />
       </ElyButton>
     </template>
 
@@ -130,7 +132,7 @@ watch(userCurrent, () => {
       :disabled="userCurrent === totalPages"
       aria-label="Next Page"
     >
-      <right />
+      <ChevronRight :size="ICON_SIZE" />
     </ElyButton>
   </div>
 </template>

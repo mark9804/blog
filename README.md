@@ -7,7 +7,7 @@
 
 ---
 
-基于 VitePress，定制 [Elysium](./docs/.vitepress/theme/components/ElysiumUI) 主题，图标来自 [Icon Park](https://iconpark.oceanengine.com/) 以及 [Octicons](https://icon-sets.iconify.design/octicon/)。
+基于 VitePress，定制 [Elysium](./docs/.vitepress/theme/components/ElysiumUI) 主题，图标来自 [Lucide](https://lucide.dev/) 以及 [Octicons](https://icon-sets.iconify.design/octicon/)。
 
 视障人群友好（感谢 [Armstrong](https://armstrong.viyf.org/) 抽出自己休息时间给我提了许多建议！），晕动症患者友好（大概）。
 
@@ -73,5 +73,5 @@
 - 状态管理：[Pinia](https://pinia.vuejs.org/)
 - Markdown 扩展：[mdit-plugins](https://mdit-plugins.github.io/zh/)
 - 评论系统：[giscus](https://giscus.app/)
-- Icon：[IconPark](https://iconpark.bytedance.com/)
+- Icon：[Lucide](https://lucide.dev/)，[Octicons](https://icon-sets.iconify.design/octicon/)
 - 工具库：[VueUse](https://vueuse.org/), [Radashi](https://radashi.js.org/)

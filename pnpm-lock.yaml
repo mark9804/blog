@@ -19,9 +19,6 @@ importers:
       '@giscus/vue':
         specifier: ^3.1.1
         version: 3.1.1(vue@3.5.31(typescript@6.0.2))
-      '@icon-park/vue-next':
-        specifier: 1.4.2
-        version: 1.4.2(vue@3.5.31(typescript@6.0.2))
       '@mdit/plugin-img-size':
         specifier: 0.23.1
         version: 0.23.1(markdown-it@14.1.0)
@@ -67,6 +64,9 @@ importers:
       lint-staged:
         specifier: 16.4.0
         version: 16.4.0
+      lucide-vue-next:
+        specifier: ^1.0.0
+        version: 1.0.0(vue@3.5.31(typescript@6.0.2))
       markdown-it-implicit-figures:
         specifier: 0.12.0
         version: 0.12.0
@@ -106,6 +106,9 @@ importers:
       vue-router:
         specifier: 5.0.4
         version: 5.0.4(@vue/compiler-sfc@3.5.31)(pinia@3.0.4(typescript@6.0.2)(vue@3.5.31(typescript@6.0.2)))(vue@3.5.31(typescript@6.0.2))
+      vue-sonner:
+        specifier: ^2.0.9
+        version: 2.0.9
       words-count:
         specifier: 2.0.2
         version: 2.0.2
@@ -661,12 +664,6 @@ packages:
     resolution: {integrity: sha512-xgsc93MibRQ0d1glBxN1BrEREHTIf3BPYs/3R+UZHNqawFFoWBV6iJ7uVCXMqoEKZdE2c78B3aKt5gfGqo8I5A==}
     peerDependencies:
       vue: '>=3.2.0'
-
-  '@icon-park/vue-next@1.4.2':
-    resolution: {integrity: sha512-+QklF255wkfBOabY+xw6FAI0Bwln/RhdwCunNy/9sKdKuChtaU67QZqU67KGAvZUTeeBgsL+yaHHxqfQeGZXEQ==}
-    engines: {node: '>= 8.0.0', npm: '>= 5.0.0'}
-    peerDependencies:
-      vue: 3.x
 
   '@iconify-json/octicon@1.2.22':
     resolution: {integrity: sha512-6m0IXGRR3ooNDXoQetk4JR8rijoXQGqSKPFsOYBFx7xMJeLgIo1dTRCY8P/4FJbIHUvWj/DfRzkFrPLAW8gHCQ==}
@@ -2700,6 +2697,11 @@ packages:
   lru-cache@5.1.1:
     resolution: {integrity: sha512-KpNARQA3Iwv+jTA0utUVVbrh+Jlrr1Fv0e56GGzAFOXN7dk/FviaDW8LHmK52DlcH4WP2n6gI8vN1aesBFgo9w==}
 
+  lucide-vue-next@1.0.0:
+    resolution: {integrity: sha512-V6SPvx1IHTj/UY+FrIYWV5faISsPSb8BnWSFDxAtezWKvWc9ZZ40PDrdu1/Qb5vg4lHWr1hs1BAMGVGm6V1Xdg==}
+    peerDependencies:
+      vue: '>=3.0.1'
+
   magic-regexp@0.10.0:
     resolution: {integrity: sha512-Uly1Bu4lO1hwHUW0CQeSWuRtzCMNO00CmXtS8N6fyvB3B979GOEEeAkiTUDsmbYLAbvpUS/Kt5c4ibosAzVyVg==}
 
@@ -3594,6 +3596,20 @@ packages:
       pinia:
         optional: true
 
+  vue-sonner@2.0.9:
+    resolution: {integrity: sha512-i6BokNlNDL93fpzNxN/LZSn6D6MzlO+i3qXt6iVZne3x1k7R46d5HlFB4P8tYydhgqOrRbIZEsnRd3kG7qGXyw==}
+    peerDependencies:
+      '@nuxt/kit': ^4.0.3
+      '@nuxt/schema': ^4.0.3
+      nuxt: ^4.0.3
+    peerDependenciesMeta:
+      '@nuxt/kit':
+        optional: true
+      '@nuxt/schema':
+        optional: true
+      nuxt:
+        optional: true
+
   vue@3.5.31:
     resolution: {integrity: sha512-iV/sU9SzOlmA/0tygSmjkEN6Jbs3nPoIPFhCMLD2STrjgOU8DX7ZtzMhg4ahVwf5Rp9KoFzcXeB1ZrVbLBp5/Q==}
     peerDependencies:
@@ -4064,10 +4080,6 @@ snapshots:
   '@giscus/vue@3.1.1(vue@3.5.31(typescript@6.0.2))':
     dependencies:
       giscus: 1.6.0
-      vue: 3.5.31(typescript@6.0.2)
-
-  '@icon-park/vue-next@1.4.2(vue@3.5.31(typescript@6.0.2))':
-    dependencies:
       vue: 3.5.31(typescript@6.0.2)
 
   '@iconify-json/octicon@1.2.22':
@@ -5918,6 +5930,10 @@ snapshots:
     dependencies:
       yallist: 3.1.1
 
+  lucide-vue-next@1.0.0(vue@3.5.31(typescript@6.0.2)):
+    dependencies:
+      vue: 3.5.31(typescript@6.0.2)
+
   magic-regexp@0.10.0:
     dependencies:
       estree-walker: 3.0.3
@@ -6943,6 +6959,8 @@ snapshots:
     optionalDependencies:
       '@vue/compiler-sfc': 3.5.31
       pinia: 3.0.4(typescript@6.0.2)(vue@3.5.31(typescript@6.0.2))
+
+  vue-sonner@2.0.9: {}
 
   vue@3.5.31(typescript@6.0.2):
     dependencies:

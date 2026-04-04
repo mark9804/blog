@@ -5,7 +5,7 @@ import { ref, computed, onUnmounted, watch, useTemplateRef } from "vue";
 import { useImageStore } from "../../../stores/imageStore";
 import { clamp } from "./_utils/numberUtils";
 import { useRaf } from "./_utils/useAnimationUtils";
-import { Close } from "@icon-park/vue-next";
+import { ChevronLeft, ChevronRight, X as Close } from "lucide-vue-next";
 
 const imageStore = useImageStore();
 
@@ -250,14 +250,14 @@ onUnmounted(() => {
             class="elysium-ui__image-preview__button elysium-ui__image-preview__button__nav elysium-ui__image-preview__button__nav--prev"
             @click="handlePrev"
           >
-            <IconLeft />
+            <ChevronLeft />
           </button>
           <button
             v-if="shouldShowNav"
             class="elysium-ui__image-preview__button elysium-ui__image-preview__button__nav elysium-ui__image-preview__button__nav--next"
             @click="handleNext"
           >
-            <IconRight />
+            <ChevronRight />
           </button>
           <!-- Close -->
           <button
@@ -280,7 +280,7 @@ onUnmounted(() => {
 
     &__nav {
       @apply top-1/2 rounded-[3px];
-      @apply w-10 xs:w-8 h-10 xs:h-8 flex items-center justify-center;
+      @apply w-10 h-10 flex items-center justify-center;
       &--prev {
         @apply left-4;
       }
