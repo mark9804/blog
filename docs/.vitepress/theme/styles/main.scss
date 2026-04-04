@@ -199,15 +199,7 @@ a.title span,
 
       sup {
         display: inline-block;
-        &::before {
-          display: inline-block;
-          content: "";
-          height: 2px;
-          width: 100%;
-          background-color: $color-accent-secondary;
-          position: absolute;
-          top: 0.5em;
-        }
+        text-decoration: underline $color-accent-secondary 2px;
       }
     }
   }
