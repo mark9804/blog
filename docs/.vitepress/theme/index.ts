@@ -8,14 +8,13 @@ import ElyImage from "./components/ElysiumUI/ElyImage.vue";
 import ElyImageGallery from "./components/ElysiumUI/ElyImageGallery.vue";
 import ElySpace from "./components/ElysiumUI/ElySpace.vue";
 import FootnoteRef from "./components/FootnoteRef.vue";
+import ElyToastMessage from "./components/ElysiumUI/ElyToastMessage.vue";
 
 import type { App } from "vue";
 
 import "./styles/main.scss";
 import "uno.css";
-
-// 已经装了 unocss，不需要引入
-// import "@nolebase/vitepress-plugin-git-changelog/client/style.css";
+import "vue-sonner/style.css";
 
 const pinia = createPinia();
 
@@ -38,6 +37,7 @@ export default {
       .component("ElyImage", ElyImage)
       .component("ElyImageGallery", ElyImageGallery)
       .component("ElySpace", ElySpace)
-      .component("FootnoteRef", FootnoteRef);
+      .component("FootnoteRef", FootnoteRef)
+      .component("ElyToastMessage", ElyToastMessage);
   },
 };

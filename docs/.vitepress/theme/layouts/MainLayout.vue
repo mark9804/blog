@@ -111,6 +111,7 @@ router.onAfterRouteChange = () => {
 </script>
 
 <template>
+  <ElyToastMessage />
   <SpeedInsights v-if="SpeedInsights" />
   <transition name="fade-in-out">
     <GlobalLoader v-if="isLoading" />

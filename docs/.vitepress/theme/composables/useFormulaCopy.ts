@@ -1,5 +1,6 @@
 import { onMounted, onUnmounted } from "vue";
 import { useClipboard } from "@vueuse/core";
+import { toast } from "vue-sonner";
 
 const SELECTOR = "[data-formula]";
 
@@ -18,10 +19,14 @@ export function useFormulaCopy() {
     const text = isBlock ? `$$${formula}$$` : `$${formula}$`;
 
     copy(text).then(() => {
-      console.log("Copied", text);
-
-      // TODO: use message component
-      // window?.alert?.(`Copied: ${text}`);
+      const delimiter = isBlock ? "$$" : "$";
+      const preview =
+        formula.length > 20
+          ? `${delimiter}${formula.slice(0, 20)}...${delimiter}`
+          : text;
+      toast.success(`Copied ${preview}`, {
+        position: "top-center",
+      });
     });
 
     e.stopPropagation();

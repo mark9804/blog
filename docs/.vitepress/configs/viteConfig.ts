@@ -47,7 +47,7 @@ export function createViteConfig(mode: string) {
       port: 5500,
       open: true,
     },
-    ssr: { noExternal: ["@arco-design/web-vue"] },
+    ssr: { noExternal: [] },
     plugins: [
       vueJsx(),
       AutoImport({
@@ -61,14 +61,7 @@ export function createViteConfig(mode: string) {
           ".vitepress/theme/components/ElysiumUI/ElyIcon",
           ".vitepress/theme/components",
         ],
-        resolvers: [
-          RekaResolver(),
-          IconsResolver({
-            alias: {
-              park: "icon-park",
-            },
-          }),
-        ],
+        resolvers: [RekaResolver(), IconsResolver()],
       }),
       Icons(),
       mode === "development" && vueDevTools(),
