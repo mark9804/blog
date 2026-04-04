@@ -92,7 +92,7 @@ function handleOpenChange(next: boolean) {
       </TooltipTrigger>
       <TooltipPortal>
         <TooltipContent
-          class="ely-tooltip__content max-w-75 rounded-sm px-3 py-[6px] text-sm color-[var(--color-accent-base)] bg-[var(--color-accent-text-primary)]"
+          class="ely-tooltip__content max-w-80 rounded-sm px-3 py-[6px] text-sm color-[var(--color-accent-base)] bg-[var(--color-accent-text-primary)]"
           :side="side"
           :align="align"
           :side-offset="sideOffset"
