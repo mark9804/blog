@@ -19,7 +19,7 @@
       "git add"
     ]
   },
-  "packageManager": "pnpm@10.12.1",
+  "packageManager": "pnpm@10.33.0",
   "devDependencies": {
     "@iconify-json/octicon": "1.2.22",
     "@nolebase/vitepress-plugin-git-changelog": "2.18.2",
@@ -62,12 +62,12 @@
   "dependencies": {
     "@date-fns/tz": "^1.4.1",
     "@giscus/vue": "^3.1.1",
-    "@mdit/plugin-img-size": "0.23.1",
-    "@mdit/plugin-mark": "0.23.1",
-    "@mdit/plugin-ruby": "0.23.1",
-    "@mdit/plugin-spoiler": "0.23.1",
-    "@mdit/plugin-sub": "0.24.1",
-    "@mdit/plugin-sup": "0.24.1",
+    "@mdit/plugin-img-size": "0.23.2",
+    "@mdit/plugin-mark": "0.23.2",
+    "@mdit/plugin-ruby": "0.23.2",
+    "@mdit/plugin-spoiler": "0.23.2",
+    "@mdit/plugin-sub": "0.24.2",
+    "@mdit/plugin-sup": "0.24.2",
     "@vercel/speed-insights": "^2.0.0",
     "@vitejs/plugin-vue-jsx": "5.1.5",
     "@vueuse/components": "12.5.0",
