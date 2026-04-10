@@ -151,7 +151,7 @@ $$
 \delta(\lambda) = \theta_{i1} + \theta_{i4} - \alpha.
 $$
 
-而对于 CASSI 系统中常使用的薄棱镜（顶角 $\alpha$ 较小），且光线以近乎垂直的角度入射的情况时，我们可以对上述方程进行一阶泰勒展开近似，得到 $\sin\theta \approx \theta$，此时 Snell's law 会退化为
+而对于 CASSI 系统中常使用的薄棱镜（顶角 $\alpha$ 较一般三棱镜小，比如 30°），且光线以近乎垂直的角度入射的情况时，我们可以对上述方程进行一阶泰勒展开近似，得到 $\sin\theta \approx \theta$，此时 Snell's law 会退化为
 
 $$
 \begin{cases}
