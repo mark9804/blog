@@ -1,10 +1,10 @@
 import {
   defineConfig,
   presetIcons,
-  presetUno,
   transformerDirectives,
   transformerVariantGroup,
 } from "unocss";
+import presetWind3 from "@unocss/preset-wind3";
 
 const borderAccents = [1, 2, 3, 4, 5, 6, 7, 8, 9].map(
   i =>
@@ -26,7 +26,8 @@ export default defineConfig({
     ...borderAccents,
   ],
   presets: [
-    presetUno(),
+    //@ts-expect-error
+    presetWind3(),
     presetIcons({
       scale: 1.2,
       warn: true,
