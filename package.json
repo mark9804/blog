@@ -54,7 +54,8 @@
       "@parcel/watcher",
       "@vercel/speed-insights",
       "esbuild",
-      "sharp"
+      "sharp",
+      "vue-demi"
     ],
     "patchedDependencies": {
       "vitepress-sidebar": "patches/vitepress-sidebar.patch"
