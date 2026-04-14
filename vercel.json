@@ -3,8 +3,9 @@
     "silent": true
   },
   "framework": "vitepress",
-  "installCommand": "git pull --unshallow https://github.com/mark9804/blog master && pnpm install",
-  "buildCommand": "PLATFORM=vercel pnpm build --base /",
+  "bunVersion": "1.x",
+  "installCommand": "git pull --unshallow https://github.com/mark9804/blog master && bun install",
+  "buildCommand": "PLATFORM=vercel bun run build --base /",
   "cleanUrls": true,
   "redirects": [
     {

@@ -8,7 +8,7 @@ on:
       - "docs/**"
       - ".github/workflows/deploy.yml"
       - "../../docs/.vitepress/plugins/**"
-      - "pnpm-lock.yaml"
+      - "bun.lock"
 
 concurrency:
   group: "blog"
@@ -28,17 +28,13 @@ jobs:
       - uses: actions/checkout@main
         with:
           fetch-depth: 0
-      - uses: actions/setup-node@main
+      - uses: oven-sh/setup-bun@main
         with:
-          node-version: 24.x
-      - uses: pnpm/action-setup@master
-        with:
-          # version: latest
-          run_install: |
-            - recursive: true
-
+          bun-version: latest
+      - name: Install dependencies
+        run: bun install
       - name: Build
-        run:  pnpm build
+        run:  bun run build
       - name: Setup Pages
         uses: actions/configure-pages@main
       - name: Upload artifact

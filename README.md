@@ -62,7 +62,7 @@
 
 ## 技术栈
 
-- 基础框架：[VitePress](https://vitepress.vuejs.org/)（自动跟随上游版本号） + `husky@v9` + `lint-staged` + `prettier` + `oxlint@v1`
+- 基础框架：[bun](https://bun.sh/) + [VitePress](https://vitepress.vuejs.org/)（自动跟随上游版本号） + `husky@v9` + `lint-staged` + `prettier` + `oxlint@v1`
 - CSS 框架：[UnoCss](https://unocss.dev/)
 - DX/CI/CD：
   - 自动导入：[unplugin-auto-import](https://github.com/unplugin/unplugin-auto-import#readme)

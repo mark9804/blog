@@ -19,7 +19,6 @@
       "git add"
     ]
   },
-  "packageManager": "pnpm@10.33.0",
   "devDependencies": {
     "@iconify-json/octicon": "1.2.22",
     "@nolebase/vitepress-plugin-git-changelog": "2.18.2",
@@ -56,10 +55,7 @@
       "esbuild",
       "sharp",
       "vue-demi"
-    ],
-    "patchedDependencies": {
-      "vitepress-sidebar": "patches/vitepress-sidebar.patch"
-    }
+    ]
   },
   "dependencies": {
     "@date-fns/tz": "^1.4.1",
@@ -95,5 +91,8 @@
     "vue-router": "5.0.4",
     "vue-sonner": "^2.0.9",
     "words-count": "2.0.2"
+  },
+  "patchedDependencies": {
+    "vitepress-sidebar": "patches/vitepress-sidebar.patch"
   }
 }
