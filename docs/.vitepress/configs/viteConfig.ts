@@ -107,7 +107,7 @@ export function createViteConfig(mode: string) {
       },
     },
     build: {
-      chunkSizeWarningLimit: 1000,
+      chunkSizeWarningLimit: 1500,
     },
   };
 }
