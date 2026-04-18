@@ -13,6 +13,9 @@
 
 稳定之前无制作主题包计划，但有一定程度的抽象，喜欢的请 fork 后自行修改样式文件。或者不修改直接把文章换成自己的也行。
 
+> [!NOTE]
+> 如果你也有需要在文章中插入引用脚注的需求，推荐使用我的插件：[Zotero LaTeX Citation Picker](https://open-vsx.org/extension/mark9804/zotero-latex-cite)，它支持从 Zotero 中选取文件并自动根据 LaTeX / Markdown 文档格式生成标准引用。
+
 ## Feature
 
 - 定制 [Elysium](./docs/.vitepress/theme/components/ElysiumUI) 主题。
