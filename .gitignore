@@ -24,3 +24,6 @@ docs/.vitepress/cache/
 docs/.vitepress/dist/
 .vitepress/cache/
 .obsidian/
+
+# Local Netlify folder
+.netlify
