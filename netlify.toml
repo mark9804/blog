@@ -1,10 +1,9 @@
 [build]
-  command = "curl -fsSL https://bun.com/install | bash && bun --version && bun run build --base /"
+  command = "bun run build --base /"
   publish = "docs/.vitepress/dist"
 
 [build.environment]
-  # NODE_VERSION = "24"
-  NETLIFY_GIT_FETCH_DEPTH = "0"
+  NODE_VERSION = "24"
 
 [[redirects]]
   from = "/blog/*"
