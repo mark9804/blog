@@ -31,7 +31,7 @@
     "autoprefixer": "10.5.0",
     "markdown-it-container": "^4.0.0",
     "markdown-it-mathjax3": "4.3.2",
-    "oxfmt": "^0.46.0",
+    "oxfmt": "^0.47.0",
     "oxlint": "^1.57.0",
     "postcss": "8.5.12",
     "prettier": "3.8.3",
