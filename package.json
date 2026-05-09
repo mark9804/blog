@@ -31,17 +31,17 @@
     "autoprefixer": "10.5.0",
     "markdown-it-container": "^4.0.0",
     "markdown-it-mathjax3": "4.3.2",
-    "oxfmt": "^0.47.0",
+    "oxfmt": "^0.48.0",
     "oxlint": "^1.57.0",
-    "postcss": "8.5.12",
+    "postcss": "8.5.14",
     "prettier": "3.8.3",
     "typescript": "6.0.3",
     "unocss": "66.6.8",
     "unplugin-auto-import": "21.0.0",
     "vite-plugin-vue-devtools": "8.1.1",
     "vitepress": "2.0.0-alpha.17",
-    "vitepress-sidebar": "1.33.1",
-    "vue": "3.5.33"
+    "vitepress-sidebar": "1.33.2",
+    "vue": "3.5.34"
   },
   "pnpm": {
     "peerDependencyRules": {
