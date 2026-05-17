@@ -20,7 +20,7 @@
     ]
   },
   "devDependencies": {
-    "@iconify-json/octicon": "1.2.23",
+    "@iconify-json/octicon": "1.2.24",
     "@nolebase/vitepress-plugin-git-changelog": "2.18.2",
     "@types/cross-spawn": "6.0.6",
     "@types/markdown-it": "^14.1.2",
@@ -87,7 +87,7 @@
     "sass": "1.99.0",
     "unplugin-icons": "23.0.1",
     "unplugin-vue-components": "32.0.0",
-    "vite": "8.0.12",
+    "vite": "8.0.13",
     "vitepress-plugin-rss": "0.4.4",
     "vue-router": "5.0.7",
     "vue-sonner": "^2.0.9",
