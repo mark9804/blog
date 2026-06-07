@@ -41,7 +41,7 @@
         "words-count": "2.0.2",
       },
       "devDependencies": {
-        "@iconify-json/octicon": "1.2.26",
+        "@iconify-json/octicon": "1.2.27",
         "@nolebase/vitepress-plugin-git-changelog": "2.18.2",
         "@types/cross-spawn": "6.0.6",
         "@types/markdown-it": "^14.1.2",
@@ -205,7 +205,7 @@
 
     "@giscus/vue": ["@giscus/vue@3.1.1", "", { "dependencies": { "giscus": "1.6.0" }, "peerDependencies": { "vue": "3.5.32" } }, "sha512-xgsc93MibRQ0d1glBxN1BrEREHTIf3BPYs/3R+UZHNqawFFoWBV6iJ7uVCXMqoEKZdE2c78B3aKt5gfGqo8I5A=="],
 
-    "@iconify-json/octicon": ["@iconify-json/octicon@1.2.26", "", { "dependencies": { "@iconify/types": "*" } }, "sha512-p93XseuWFcRczXl/WPkz5Bn0EBKkuSeBkRp64/dRFbeZF2NGHqvOH9w1WdV60KWn+3fC12WqjOhW/CMZRZtFLQ=="],
+    "@iconify-json/octicon": ["@iconify-json/octicon@1.2.27", "", { "dependencies": { "@iconify/types": "*" } }, "sha512-iwJugdmcnnHnivX3wddv3pyeDEQeLwU25jxGPpGT1RHgmXElMRo8oIxRa5/WnlQtUQqHN1Pe3yXGO+3/nXJi7Q=="],
 
     "@iconify-json/simple-icons": ["@iconify-json/simple-icons@1.2.75", "", { "dependencies": { "@iconify/types": "2.0.0" } }, "sha512-KvcCUbvcBWb0sbqLIxHoY8z5/piXY08wcY9gfMhF+ph3AfzGMaSmZFkUY71HSXAljQngXkgs4bdKdekO0HQWvg=="],
 
