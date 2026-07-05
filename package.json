@@ -60,7 +60,7 @@
   "dependencies": {
     "@date-fns/tz": "^1.4.1",
     "@giscus/vue": "^3.1.1",
-    "@mdit/plugin-img-size": "0.23.2",
+    "@mdit/plugin-img-size": "1.0.1",
     "@mdit/plugin-mark": "1.0.1",
     "@mdit/plugin-ruby": "0.23.2",
     "@mdit/plugin-spoiler": "0.23.2",
