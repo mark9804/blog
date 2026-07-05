@@ -10,7 +10,7 @@
         "@mdit/plugin-img-size": "1.0.1",
         "@mdit/plugin-mark": "1.0.1",
         "@mdit/plugin-ruby": "1.0.1",
-        "@mdit/plugin-spoiler": "0.23.2",
+        "@mdit/plugin-spoiler": "1.0.1",
         "@mdit/plugin-sub": "0.24.2",
         "@mdit/plugin-sup": "0.24.2",
         "@vercel/speed-insights": "^2.0.0",
@@ -291,7 +291,7 @@
 
     "@mdit/plugin-ruby": ["@mdit/plugin-ruby@1.0.1", "", { "dependencies": { "@types/markdown-it": "^14.1.2" }, "peerDependencies": { "markdown-it": "^14.2.0" }, "optionalPeers": ["markdown-it"] }, "sha512-kozbK7fjbQropAvh6tk+ilIxYfiYGnYjSRk2lbJpd/4Htrp8IoES2HWSHxaw9CJiKspTVxRcmEG2aannJ+vfKA=="],
 
-    "@mdit/plugin-spoiler": ["@mdit/plugin-spoiler@0.23.2", "", { "dependencies": { "@mdit/plugin-inline-rule": "0.23.2", "@types/markdown-it": "14.1.2" }, "optionalDependencies": { "markdown-it": "14.1.0" } }, "sha512-rCUGTp7WqxK40tYQYseR0RuLOS001fMOn55bgj1Evrf2oI6RydEeOtlbeh48bZK9na/swmUtwV3yYC4wZi6kNQ=="],
+    "@mdit/plugin-spoiler": ["@mdit/plugin-spoiler@1.0.1", "", { "dependencies": { "@mdit/plugin-inline-rule": "1.0.1", "@types/markdown-it": "^14.1.2" }, "peerDependencies": { "markdown-it": "^14.2.0" }, "optionalPeers": ["markdown-it"] }, "sha512-8aGi1iMDrDw6o2onimo/+eRAbGv+iqvNhj0bGYD3sCUpW9bdQ4GN8hiTEkeWM6Mn09l0HrbpRib1I9UhQGHSHg=="],
 
     "@mdit/plugin-sub": ["@mdit/plugin-sub@0.24.2", "", { "dependencies": { "@mdit/plugin-inline-rule": "0.23.2", "@types/markdown-it": "14.1.2" }, "optionalDependencies": { "markdown-it": "14.1.0" } }, "sha512-E4wNJ5mDIoJbjvGj9D/GTlhWhUmR94UQjEtPCEQf/oy9nZMhetA0qFjCCFnGpJQHpHcBEkxWc5hEVdMiWhQBFA=="],
 
@@ -1423,8 +1423,6 @@
 
     "@img/sharp-wasm32/@emnapi/runtime": ["@emnapi/runtime@1.7.1", "", { "dependencies": { "tslib": "2.8.1" } }, "sha512-PVtJr5CmLwYAU9PZDMITZoR5iAOShYREoR45EyyLrbntV50mdePTgUn4AmOw90Ifcj+x2kRjdzr1HP3RrNiHGA=="],
 
-    "@mdit/plugin-spoiler/@mdit/plugin-inline-rule": ["@mdit/plugin-inline-rule@0.23.2", "", { "dependencies": { "@mdit/helper": "0.23.2", "@types/markdown-it": "14.1.2" }, "optionalDependencies": { "markdown-it": "14.1.0" } }, "sha512-+w8ORGQ08zgY61Vz/9xHKwpMitCV7pdI80MOq03tlZQRUANUQRaM3mnA6/B51bzubJvnB8NPQdRAJ2Mwt6ZILg=="],
-
     "@mdit/plugin-sub/@mdit/plugin-inline-rule": ["@mdit/plugin-inline-rule@0.23.2", "", { "dependencies": { "@mdit/helper": "0.23.2", "@types/markdown-it": "14.1.2" }, "optionalDependencies": { "markdown-it": "14.1.0" } }, "sha512-+w8ORGQ08zgY61Vz/9xHKwpMitCV7pdI80MOq03tlZQRUANUQRaM3mnA6/B51bzubJvnB8NPQdRAJ2Mwt6ZILg=="],
 
     "@mdit/plugin-sup/@mdit/plugin-inline-rule": ["@mdit/plugin-inline-rule@0.23.2", "", { "dependencies": { "@mdit/helper": "0.23.2", "@types/markdown-it": "14.1.2" }, "optionalDependencies": { "markdown-it": "14.1.0" } }, "sha512-+w8ORGQ08zgY61Vz/9xHKwpMitCV7pdI80MOq03tlZQRUANUQRaM3mnA6/B51bzubJvnB8NPQdRAJ2Mwt6ZILg=="],
@@ -1742,8 +1740,6 @@
     "@babel/plugin-proposal-decorators/@babel/helper-create-class-features-plugin/@babel/helper-skip-transparent-expression-wrappers": ["@babel/helper-skip-transparent-expression-wrappers@7.27.1", "", { "dependencies": { "@babel/traverse": "7.29.0", "@babel/types": "7.29.0" } }, "sha512-Tub4ZKEXqbPjXgWLl2+3JpQAYBJ8+ikpQ2Ocj/q/r0LwE3UhENh7EUabyHjz2kCEsrRY83ew2DQdHluuiDQFzg=="],
 
     "@babel/traverse/@babel/generator/@babel/parser": ["@babel/parser@7.29.0", "", { "dependencies": { "@babel/types": "7.29.0" }, "bin": "./bin/babel-parser.js" }, "sha512-IyDgFV5GeDUVX4YdF/3CPULtVGSXXMLh1xVIgdCgxApktqnQV0r7/8Nqthg+8YLGaAtdyIlo2qIdZrbCv4+7ww=="],
-
-    "@mdit/plugin-spoiler/@mdit/plugin-inline-rule/@mdit/helper": ["@mdit/helper@0.23.2", "", { "dependencies": { "@types/markdown-it": "14.1.2" }, "optionalDependencies": { "markdown-it": "14.1.0" } }, "sha512-w4oja7kZYnkSiodfn4Neg1gmlIkvQtmCBJTLvLFOaET7xt8KomDNPQeumpGobQ9dWkXFqBKHlxjTYgroPH+CvA=="],
 
     "@mdit/plugin-sub/@mdit/plugin-inline-rule/@mdit/helper": ["@mdit/helper@0.23.2", "", { "dependencies": { "@types/markdown-it": "14.1.2" }, "optionalDependencies": { "markdown-it": "14.1.0" } }, "sha512-w4oja7kZYnkSiodfn4Neg1gmlIkvQtmCBJTLvLFOaET7xt8KomDNPQeumpGobQ9dWkXFqBKHlxjTYgroPH+CvA=="],
 
