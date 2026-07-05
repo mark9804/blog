@@ -9,7 +9,7 @@
         "@giscus/vue": "^3.1.1",
         "@mdit/plugin-img-size": "1.0.1",
         "@mdit/plugin-mark": "1.0.1",
-        "@mdit/plugin-ruby": "0.23.2",
+        "@mdit/plugin-ruby": "1.0.1",
         "@mdit/plugin-spoiler": "0.23.2",
         "@mdit/plugin-sub": "0.24.2",
         "@mdit/plugin-sup": "0.24.2",
@@ -289,7 +289,7 @@
 
     "@mdit/plugin-mark": ["@mdit/plugin-mark@1.0.1", "", { "dependencies": { "@mdit/plugin-inline-rule": "1.0.1", "@types/markdown-it": "^14.1.2" }, "peerDependencies": { "markdown-it": "^14.2.0" }, "optionalPeers": ["markdown-it"] }, "sha512-7a3UFjTM7ov5awj302crbj0IGpzPB0ofueaouMCsFJLmOfbrq07XR2USDruks3EmGWWhYoiOo+6ZFVHjmleGTw=="],
 
-    "@mdit/plugin-ruby": ["@mdit/plugin-ruby@0.23.2", "", { "dependencies": { "@types/markdown-it": "14.1.2" }, "optionalDependencies": { "markdown-it": "14.1.0" } }, "sha512-dj2IMJg/WifTZaWq9hXQohc66pCiSeaBJH/PFcxaELzVCtq/BC8F7lp39oU7lgNUPP8XMozduQ6EJide5QJnqw=="],
+    "@mdit/plugin-ruby": ["@mdit/plugin-ruby@1.0.1", "", { "dependencies": { "@types/markdown-it": "^14.1.2" }, "peerDependencies": { "markdown-it": "^14.2.0" }, "optionalPeers": ["markdown-it"] }, "sha512-kozbK7fjbQropAvh6tk+ilIxYfiYGnYjSRk2lbJpd/4Htrp8IoES2HWSHxaw9CJiKspTVxRcmEG2aannJ+vfKA=="],
 
     "@mdit/plugin-spoiler": ["@mdit/plugin-spoiler@0.23.2", "", { "dependencies": { "@mdit/plugin-inline-rule": "0.23.2", "@types/markdown-it": "14.1.2" }, "optionalDependencies": { "markdown-it": "14.1.0" } }, "sha512-rCUGTp7WqxK40tYQYseR0RuLOS001fMOn55bgj1Evrf2oI6RydEeOtlbeh48bZK9na/swmUtwV3yYC4wZi6kNQ=="],
 
