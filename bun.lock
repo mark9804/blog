@@ -7,7 +7,7 @@
       "dependencies": {
         "@date-fns/tz": "^1.4.1",
         "@giscus/vue": "^3.1.1",
-        "@mdit/plugin-img-size": "0.23.2",
+        "@mdit/plugin-img-size": "1.0.1",
         "@mdit/plugin-mark": "1.0.1",
         "@mdit/plugin-ruby": "0.23.2",
         "@mdit/plugin-spoiler": "0.23.2",
@@ -283,7 +283,7 @@
 
     "@mdit/helper": ["@mdit/helper@1.0.1", "", { "dependencies": { "@types/markdown-it": "^14.1.2" }, "peerDependencies": { "markdown-it": "^14.2.0" }, "optionalPeers": ["markdown-it"] }, "sha512-zAzShsRZmkqjuoOFg6/zTCYVpvghj9a30Cl/eOGkE0xzRJJJG8T18eqb2lgceQhjVLWHK02HNVkzyfNHc429lQ=="],
 
-    "@mdit/plugin-img-size": ["@mdit/plugin-img-size@0.23.2", "", { "dependencies": { "@types/markdown-it": "14.1.2" }, "optionalDependencies": { "markdown-it": "14.1.0" } }, "sha512-WsMBjy32leLRwTVvZj/88+QqvoKU5ZM1znx7kLnaUJUYjw6fqd82RTC3P3wmQa0/dxKk3m17oFQPlDshzXhEiA=="],
+    "@mdit/plugin-img-size": ["@mdit/plugin-img-size@1.0.1", "", { "dependencies": { "@types/markdown-it": "^14.1.2" }, "peerDependencies": { "markdown-it": "^14.2.0" }, "optionalPeers": ["markdown-it"] }, "sha512-9NBklpT1DZqcdQ9vL3bveA/XN9GxDwaFpXp8Udy6i2i1dctydLSzvxFOIuO3X5kAym3/XpZfXSTen15mj35tHQ=="],
 
     "@mdit/plugin-inline-rule": ["@mdit/plugin-inline-rule@1.0.1", "", { "dependencies": { "@mdit/helper": "1.0.1", "@types/markdown-it": "^14.1.2" }, "peerDependencies": { "markdown-it": "^14.2.0" }, "optionalPeers": ["markdown-it"] }, "sha512-SdCbSS+f43j9tB0LzYCmgoXusDEiyWQKs3lrWa0dI5aJRZDqqa7w95ZyzeazcbGviFUP5NHZUHI2AsC5mSBGgQ=="],
 
