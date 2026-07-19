@@ -79,7 +79,7 @@
     "lucide-vue-next": "^1.0.0",
     "markdown-it-implicit-figures": "0.12.0",
     "p-map": "7.0.5",
-    "pinia": "3.0.4",
+    "pinia": "4.0.2",
     "pinia-plugin-persistedstate": "4.7.1",
     "postcss-plugin-px2rem": "0.8.1",
     "radashi": "^12.3.4",
