@@ -10,7 +10,7 @@
         "@mdit/plugin-img-size": "1.0.1",
         "@mdit/plugin-mark": "2.0.0",
         "@mdit/plugin-ruby": "1.0.1",
-        "@mdit/plugin-spoiler": "1.0.1",
+        "@mdit/plugin-spoiler": "2.0.0",
         "@mdit/plugin-sub": "0.24.2",
         "@mdit/plugin-sup": "0.24.2",
         "@vercel/speed-insights": "^2.0.0",
@@ -291,7 +291,7 @@
 
     "@mdit/plugin-ruby": ["@mdit/plugin-ruby@1.0.1", "", { "dependencies": { "@types/markdown-it": "^14.1.2" }, "peerDependencies": { "markdown-it": "^14.2.0" }, "optionalPeers": ["markdown-it"] }, "sha512-kozbK7fjbQropAvh6tk+ilIxYfiYGnYjSRk2lbJpd/4Htrp8IoES2HWSHxaw9CJiKspTVxRcmEG2aannJ+vfKA=="],
 
-    "@mdit/plugin-spoiler": ["@mdit/plugin-spoiler@1.0.1", "", { "dependencies": { "@mdit/plugin-inline-rule": "1.0.1", "@types/markdown-it": "^14.1.2" }, "peerDependencies": { "markdown-it": "^14.2.0" }, "optionalPeers": ["markdown-it"] }, "sha512-8aGi1iMDrDw6o2onimo/+eRAbGv+iqvNhj0bGYD3sCUpW9bdQ4GN8hiTEkeWM6Mn09l0HrbpRib1I9UhQGHSHg=="],
+    "@mdit/plugin-spoiler": ["@mdit/plugin-spoiler@2.0.0", "", { "dependencies": { "@mdit/plugin-inline-rule": "2.0.0", "@types/markdown-it": "^14.1.2" }, "peerDependencies": { "markdown-it": "^14.2.0" }, "optionalPeers": ["markdown-it"] }, "sha512-M4iZwIPUUog3yBcbZRDt4qdlANVGDxDqHjUMu9EPSS8vu6hySbUl7Zz9Gsy4MJgwMoZrBVnz7s8oZNJt5Gq15w=="],
 
     "@mdit/plugin-sub": ["@mdit/plugin-sub@0.24.2", "", { "dependencies": { "@mdit/plugin-inline-rule": "0.23.2", "@types/markdown-it": "14.1.2" }, "optionalDependencies": { "markdown-it": "14.1.0" } }, "sha512-E4wNJ5mDIoJbjvGj9D/GTlhWhUmR94UQjEtPCEQf/oy9nZMhetA0qFjCCFnGpJQHpHcBEkxWc5hEVdMiWhQBFA=="],
 
@@ -1382,8 +1382,6 @@
     "@babel/traverse/@babel/parser": ["@babel/parser@7.29.2", "", { "dependencies": { "@babel/types": "7.29.0" }, "bin": "./bin/babel-parser.js" }, "sha512-4GgRzy/+fsBa72/RZVJmGKPmZu9Byn8o4MoLpmNe1m8ZfYnz5emHLQz3U4gLud6Zwl0RZIcgiLD7Uq7ySFuDLA=="],
 
     "@img/sharp-wasm32/@emnapi/runtime": ["@emnapi/runtime@1.7.1", "", { "dependencies": { "tslib": "2.8.1" } }, "sha512-PVtJr5CmLwYAU9PZDMITZoR5iAOShYREoR45EyyLrbntV50mdePTgUn4AmOw90Ifcj+x2kRjdzr1HP3RrNiHGA=="],
-
-    "@mdit/plugin-spoiler/@mdit/plugin-inline-rule": ["@mdit/plugin-inline-rule@1.0.1", "", { "dependencies": { "@mdit/helper": "1.0.1", "@types/markdown-it": "^14.1.2" }, "peerDependencies": { "markdown-it": "^14.2.0" }, "optionalPeers": ["markdown-it"] }, "sha512-SdCbSS+f43j9tB0LzYCmgoXusDEiyWQKs3lrWa0dI5aJRZDqqa7w95ZyzeazcbGviFUP5NHZUHI2AsC5mSBGgQ=="],
 
     "@mdit/plugin-sub/@mdit/plugin-inline-rule": ["@mdit/plugin-inline-rule@0.23.2", "", { "dependencies": { "@mdit/helper": "0.23.2", "@types/markdown-it": "14.1.2" }, "optionalDependencies": { "markdown-it": "14.1.0" } }, "sha512-+w8ORGQ08zgY61Vz/9xHKwpMitCV7pdI80MOq03tlZQRUANUQRaM3mnA6/B51bzubJvnB8NPQdRAJ2Mwt6ZILg=="],
 
