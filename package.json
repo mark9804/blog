@@ -20,7 +20,7 @@
     ]
   },
   "devDependencies": {
-    "@iconify-json/octicon": "1.2.30",
+    "@iconify-json/octicon": "1.2.31",
     "@nolebase/vitepress-plugin-git-changelog": "2.18.2",
     "@types/cross-spawn": "6.0.6",
     "@types/markdown-it": "^14.1.2",
@@ -33,14 +33,14 @@
     "markdown-it-mathjax3": "4.3.2",
     "oxfmt": "^0.62.0",
     "oxlint": "^1.57.0",
-    "postcss": "8.5.25",
+    "postcss": "8.5.26",
     "prettier": "3.9.6",
     "typescript": "6.0.3",
     "unocss": "66.7.5",
     "unplugin-auto-import": "21.1.0",
     "vite-plugin-vue-devtools": "8.1.1",
     "vitepress": "2.0.0-alpha.19",
-    "vitepress-sidebar": "1.37.0",
+    "vitepress-sidebar": "1.38.0",
     "vue": "3.5.41"
   },
   "pnpm": {
@@ -87,7 +87,7 @@
     "sass": "1.102.0",
     "unplugin-icons": "23.0.1",
     "unplugin-vue-components": "32.1.0",
-    "vite": "8.2.0",
+    "vite": "8.2.1",
     "vitepress-plugin-rss": "0.4.4",
     "vue-router": "5.2.0",
     "vue-sonner": "^2.0.9",
