@@ -3,7 +3,8 @@
     "silent": true
   },
   "framework": "vitepress",
-  "buildCommand": "git fetch --unshallow && PLATFORM=vercel pnpm build --base /",
+  "installCommand": "corepack pnpm install --frozen-lockfile",
+  "buildCommand": "git fetch --unshallow && PLATFORM=vercel corepack pnpm build --base /",
   "cleanUrls": true,
   "redirects": [
     {
