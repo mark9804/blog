@@ -3,9 +3,7 @@
     "silent": true
   },
   "framework": "vitepress",
-  "bunVersion": "1.x",
-  "installCommand": "git pull --unshallow https://github.com/mark9804/blog master && rm -rf node_modules && bun install",
-  "buildCommand": "PLATFORM=vercel bun run build --base /",
+  "buildCommand": "git fetch --unshallow && PLATFORM=vercel pnpm build --base /",
   "cleanUrls": true,
   "redirects": [
     {

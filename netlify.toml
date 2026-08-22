@@ -1,9 +1,5 @@
 [build]
-  # netlify's cache system is causing issues with bun
-  # so node_modules must be cleared before building
-  # before netlify explicitly offers an option to disable caching
-  # in netlify.toml
-  command = "rm -rf node_modules && bun install && bun run build --base /"
+  command = "pnpm build --base /"
   publish = "docs/.vitepress/dist"
 
 [build.environment]
@@ -30,4 +26,3 @@
 
   [plugins.inputs.settings]
     preset = "desktop"
-

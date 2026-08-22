@@ -2,6 +2,7 @@
   "name": "@mark9804/blog",
   "private": true,
   "type": "module",
+  "packageManager": "pnpm@10.34.5",
   "scripts": {
     "dev": "vitepress dev docs --host",
     "build": "vitepress build docs",
@@ -55,7 +56,10 @@
       "esbuild",
       "sharp",
       "vue-demi"
-    ]
+    ],
+    "patchedDependencies": {
+      "vitepress-sidebar": "patches/vitepress-sidebar.patch"
+    }
   },
   "dependencies": {
     "@date-fns/tz": "^1.4.1",
@@ -92,8 +96,5 @@
     "vue-router": "5.2.0",
     "vue-sonner": "^2.0.9",
     "words-count": "2.0.2"
-  },
-  "patchedDependencies": {
-    "vitepress-sidebar": "patches/vitepress-sidebar.patch"
   }
 }
