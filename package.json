@@ -2,7 +2,7 @@
   "name": "@mark9804/blog",
   "private": true,
   "type": "module",
-  "packageManager": "pnpm@10.34.5",
+  "packageManager": "pnpm@11.22.0",
   "scripts": {
     "dev": "vitepress dev docs --host",
     "build": "vitepress build docs",
