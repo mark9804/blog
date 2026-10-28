@@ -28,7 +28,9 @@ const waterfallData = computed(() =>
 
 const articleTitleRef = useTemplateRef<HTMLHeadingElement>("articleTitleRef");
 const { isDark: themeIsDark } = useData();
-const isDark = computed(() => useDark().value || themeIsDark.value);
+const isDark = computed(
+  () => useDark({ disableTransition: false }).value || themeIsDark.value
+);
 const accentColor = ref(useCssVar("--color-accent").value);
 const backgroundColor = ref(useCssVar("--color-accent-quaternary").value);
 
