@@ -86,8 +86,8 @@ importers:
         specifier: 0.8.1
         version: 0.8.1
       radashi:
-        specifier: ^12.3.4
-        version: 12.9.8
+        specifier: ^13.0.0
+        version: 13.0.1
       reka-ui:
         specifier: ^2.9.3
         version: 2.11.0(vue@3.5.44(typescript@6.0.3))
@@ -2684,9 +2684,9 @@ packages:
   queue-microtask@1.2.3:
     resolution: {integrity: sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==}
 
-  radashi@12.9.8:
-    resolution: {integrity: sha512-bNwO4F/2vlBvIQc64GaMbwNKLljoeIT7B1wU7uYNjcfA6GNcy1TlCFr1T2kxeXtuAL0PNYSOnvSKHo3VTAP3/w==}
-    engines: {node: '>=16.0.0'}
+  radashi@13.0.1:
+    resolution: {integrity: sha512-rn7Rg2qfyRl64XMraDtAQenu5UdTAayne8QKe4pmTAKMgkD5C6crAol00ho3THqwgYCm8xgWdmYND1WYP9VrfA==}
+    engines: {node: '>=18.0.0'}
 
   readdirp@5.1.1:
     resolution: {integrity: sha512-Kko+Y5XQ6fM+Ce3dq3m9YGxnacYZYl9cA1wZjaF3Vbry2L3i1qVg8+CAgNPsXRArPMUMCaOR7oa9Nqntc43JKA==}
@@ -5534,7 +5534,7 @@ snapshots:
 
   queue-microtask@1.2.3: {}
 
-  radashi@12.9.8: {}
+  radashi@13.0.1: {}
 
   readdirp@5.1.1: {}
 
