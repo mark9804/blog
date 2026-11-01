@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { nextTick, computed, ref, watch, useTemplateRef, onMounted } from "vue";
-import { useDark, useCssVar, useElementSize } from "@vueuse/core";
+import { useCssVar, useElementSize } from "@vueuse/core";
 import { useData } from "vitepress";
 import {
   postData,
@@ -9,7 +9,7 @@ import {
 } from "../utils/usePostData";
 import VPNavBarSearch from "vitepress/dist/client/theme-default/components/VPNavBarSearch.vue";
 
-const { theme } = useData();
+const { theme, isDark } = useData();
 const props = computed(() => {
   if (theme.value.userProfile) {
     const { name, avatar, bio, email, social } = theme.value.userProfile || {};
@@ -27,10 +27,6 @@ const waterfallData = computed(() =>
 );
 
 const articleTitleRef = useTemplateRef<HTMLHeadingElement>("articleTitleRef");
-const { isDark: themeIsDark } = useData();
-const isDark = computed(
-  () => useDark({ disableTransition: false }).value || themeIsDark.value
-);
 const accentColor = ref(useCssVar("--color-accent").value);
 const backgroundColor = ref(useCssVar("--color-accent-quaternary").value);
 
@@ -41,27 +37,7 @@ function updateCssVar() {
   backgroundColor.value = useCssVar("--color-accent-quaternary").value;
 }
 
-watch(
-  () => isDark.value,
-  newVal => {
-    nextTick(() => {
-      updateCssVar();
-      setThemeOnActivated();
-    });
-  }
-);
-
-function setThemeOnActivated() {
-  nextTick(() => {
-    const htmlElement = document.documentElement;
-    if (isDark.value) {
-      htmlElement.classList.add("dark");
-    } else {
-      htmlElement.classList.remove("dark");
-    }
-    updateCssVar();
-  });
-}
+watch(isDark, () => nextTick(updateCssVar));
 
 function toggleWaterfall(type: "breves" | "quavers") {
   postType.value = type;
@@ -69,7 +45,7 @@ function toggleWaterfall(type: "breves" | "quavers") {
 
 onMounted(() => {
   toggleWaterfall("breves");
-  setThemeOnActivated();
+  nextTick(updateCssVar);
 });
 </script>
 

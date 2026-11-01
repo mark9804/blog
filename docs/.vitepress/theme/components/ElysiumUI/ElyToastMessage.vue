@@ -10,13 +10,9 @@ import {
 } from "lucide-vue-next";
 import { Toaster, toast } from "vue-sonner";
 import { useData } from "vitepress";
-import { useDark } from "@vueuse/core";
 const props = defineProps<ToasterProps>();
 
-const { isDark: themeIsDark } = useData();
-const isDark = computed(
-  () => useDark({ disableTransition: false }).value || themeIsDark.value
-);
+const { isDark } = useData();
 
 // 导出 toast 函数供外部调用
 defineExpose({
