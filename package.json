@@ -86,7 +86,7 @@
     "pinia": "4.1.0",
     "pinia-plugin-persistedstate": "4.7.1",
     "postcss-plugin-px2rem": "0.8.1",
-    "radashi": "^12.3.4",
+    "radashi": "^13.0.0",
     "reka-ui": "^2.9.3",
     "sass": "1.107.0",
     "unplugin-icons": "24.0.0",
