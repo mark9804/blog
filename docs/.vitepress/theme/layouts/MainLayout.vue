@@ -1,12 +1,4 @@
 <script setup lang="ts">
-declare global {
-  interface Document {
-    startViewTransition(callback: () => Promise<void> | void): {
-      ready: Promise<void>;
-    };
-  }
-}
-
 import { useData, useRouter } from "vitepress";
 import GlobalLoader from "../components/GlobalLoader.vue";
 import GiscusComment from "../components/GiscusComment.vue";
@@ -49,10 +41,7 @@ provide("toggle-appearance", async () => {
     return;
   }
 
-  // Disable CSS transitions to prevent them from firing
-  // when view transition pseudo-elements are removed and the live DOM is revealed.
-  // Chrome/Firefox re-trigger `transition: all` from the last painted state,
-  // causing a white flash. Safari does not.
+  // Keep CSS transitions disabled until the snapshots have been removed.
   document.documentElement.classList.add("vt-transitioning");
 
   const transition = document.startViewTransition(async () => {
@@ -62,16 +51,18 @@ provide("toggle-appearance", async () => {
 
   await transition.ready;
 
-  const animation = document.documentElement.animate(
+  document.documentElement.animate(
     { opacity: isDark.value ? [1, 0] : [0, 1] },
     {
       duration: 300,
       easing: "ease-in-out",
+      // Keep the faded-out snapshot hidden until the view transition removes it.
+      fill: "forwards",
       pseudoElement: `::view-transition-${isDark.value ? "old" : "new"}(root)`,
     }
   );
 
-  await animation.finished;
+  await transition.finished;
   document.documentElement.classList.remove("vt-transitioning");
 });
 
