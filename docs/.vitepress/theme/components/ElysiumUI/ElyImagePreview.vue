@@ -5,7 +5,7 @@ import { ref, computed, onUnmounted, watch, useTemplateRef } from "vue";
 import { useImageStore } from "../../../stores/imageStore";
 import { clamp } from "./_utils/numberUtils";
 import { useRaf } from "./_utils/useAnimationUtils";
-import { ChevronLeft, ChevronRight, X as Close } from "lucide-vue-next";
+import { ChevronLeft, ChevronRight, X as Close } from "@lucide/vue";
 
 const imageStore = useImageStore();
 
@@ -265,7 +265,7 @@ onUnmounted(() => {
             @click="handleClose"
             aria-label="关闭图像预览"
           >
-            <close />
+            <Close />
           </button>
         </div>
       </Transition>

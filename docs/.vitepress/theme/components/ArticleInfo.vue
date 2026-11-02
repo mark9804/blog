@@ -3,7 +3,7 @@ import { useData, useRoute, withBase } from "vitepress";
 import { computed } from "vue";
 import { postData } from "../utils/usePostData";
 import { formatDateTime } from "../utils/timeUtils";
-import { Timer, History } from "lucide-vue-next";
+import { Timer, History } from "@lucide/vue";
 import { useSearchTags } from "../utils/tagSearchUtils";
 import { useCustomStore } from "../../stores/piniaStore";
 
@@ -60,8 +60,8 @@ function handleTagClick(tag: string) {
         v-if="!frontmatter?.meta?.hideEditTime"
       >
         <!-- 数字比汉字来得矮，size 要小一些 -->
-        <history :size="13" stroke-linecap="square" v-if="hasPostUpdate" />
-        <timer :size="13" stroke-linecap="square" v-else />
+        <History :size="13" stroke-linecap="square" v-if="hasPostUpdate" />
+        <Timer :size="13" stroke-linecap="square" v-else />
         {{ createdAt }} (GMT+8)
       </span>
     </ElyTooltip>
@@ -74,7 +74,7 @@ function handleTagClick(tag: string) {
         class="text-sm flex items-center gap-1 text-gray-500 dark:text-gray-400"
         v-if="!frontmatter?.meta?.hideReadingTime"
       >
-        <timer
+        <Timer
           theme="outline"
           :size="14"
           :color="isDark ? '#9ca3af' : '#6b7280'"

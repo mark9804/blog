@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { TagProps } from "./types/TagProps";
 import { computed, ref, watch } from "vue";
-import { Tag, X as Close } from "lucide-vue-next";
+import { Tag, X as Close } from "@lucide/vue";
 
 const props = withDefaults(defineProps<TagProps>(), {
   id: "",
@@ -68,7 +68,7 @@ const handleClose = (e: Event) => {
   >
     <span class="elysium-ui__tag--icon">
       <slot name="icon">
-        <tag :size="12" :stroke-width="2.25" />
+        <Tag :size="12" :stroke-width="2.25" />
       </slot>
     </span>
     <span class="elysium-ui__tag--content font-bold">
@@ -81,7 +81,7 @@ const handleClose = (e: Event) => {
       role="button"
       aria-label="移除标签"
     >
-      <close :size="12" :stroke-width="2.25" />
+      <Close :size="12" :stroke-width="2.25" />
     </span>
   </span>
 </template>

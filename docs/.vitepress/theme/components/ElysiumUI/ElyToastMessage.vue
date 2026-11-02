@@ -7,7 +7,7 @@ import {
   OctagonX,
   TriangleAlert,
   X as Close,
-} from "lucide-vue-next";
+} from "@lucide/vue";
 import { Toaster, toast } from "vue-sonner";
 import { useData } from "vitepress";
 const props = defineProps<ToasterProps>();
@@ -28,20 +28,20 @@ defineExpose({
     :theme="isDark ? 'dark' : 'light'"
   >
     <template #success-icon>
-      <circle-check class="size-4" />
+      <CircleCheck class="size-4" />
     </template>
     <template #info-icon>
-      <info class="size-4" />
+      <Info class="size-4" />
     </template>
     <template #warning-icon>
-      <triangle-alert class="size-4" />
+      <TriangleAlert class="size-4" />
     </template>
     <template #error-icon>
-      <octagon-x class="size-4" />
+      <OctagonX class="size-4" />
     </template>
     <template #loading-icon>
       <div>
-        <loader2 class="size-4 animate-spin" />
+        <Loader2 class="size-4 animate-spin" />
       </div>
     </template>
     <template #close-icon>

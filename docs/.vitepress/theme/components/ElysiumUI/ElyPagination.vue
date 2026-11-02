@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, ref, watch } from "vue";
 import ElyButton from "./ElyButton.vue";
-import { ChevronLeft, ChevronRight, Ellipsis } from "lucide-vue-next";
+import { ChevronLeft, ChevronRight, Ellipsis } from "@lucide/vue";
 import { clamp } from "./_utils/numberUtils";
 const props = withDefaults(
   defineProps<{
@@ -121,7 +121,7 @@ watch(userCurrent, () => {
         :aria-label="`Page ${item.value}`"
       >
         <template v-if="item.type === 'number'">{{ item.value }}</template>
-        <ellipsis v-else :size="ICON_SIZE" />
+        <Ellipsis v-else :size="ICON_SIZE" />
       </ElyButton>
     </template>
 
