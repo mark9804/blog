@@ -13,4 +13,8 @@ export type ProfileProps = {
     link: string;
     openInNewTab?: boolean;
   }[];
+  meta?: {
+    name: unknown;
+    value: unknown;
+  }[];
 };

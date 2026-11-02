@@ -5,3 +5,5 @@ gitChangelog: false
 ---
 
 # Publications
+
+<PublicationShowcase />

@@ -38,4 +38,11 @@ export const userProfile: ProfileProps = {
       link: "/about",
     },
   ],
+  meta: [
+    {
+      name: "google-scholar-api-endpoint",
+      value:
+        "https://cse.bth.se/~fer/googlescholar-api/googlescholar.php?user=tZfLIL0AAAAJ",
+    },
+  ],
 };
