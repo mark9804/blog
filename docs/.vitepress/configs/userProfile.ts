@@ -14,9 +14,14 @@ export const userProfile: ProfileProps = {
       link: "https://github.com/mark9804",
       openInNewTab: true,
     },
+    // {
+    //   alias: "LinkedIn",
+    //   link: "https://www.linkedin.com/in/zhaolu-chen/",
+    //   openInNewTab: true,
+    // },
     {
-      alias: "LinkedIn",
-      link: "https://www.linkedin.com/in/zhaolu-chen/",
+      alias: "Publications",
+      link: "/publications",
       openInNewTab: true,
     },
     {
@@ -31,6 +36,13 @@ export const userProfile: ProfileProps = {
     {
       alias: "About",
       link: "/about",
+    },
+  ],
+  meta: [
+    {
+      name: "google-scholar-api-endpoint",
+      value:
+        "https://cse.bth.se/~fer/googlescholar-api/googlescholar.php?user=tZfLIL0AAAAJ",
     },
   ],
 };
