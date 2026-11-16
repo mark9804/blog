@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { computed, ref, watch, nextTick, useTemplateRef } from "vue";
 import { cluster } from "radashi";
-import { clamp } from "./ElysiumUI/_utils/numberUtils";
 import type { Post } from "../types/Post";
 import ElyPagination from "./ElysiumUI/ElyPagination.vue";
 import ElyEmptyState from "./ElysiumUI/ElyEmptyState.vue";
@@ -19,18 +18,19 @@ const props = withDefaults(
 const currentPage = ref(1);
 const pageSize = ref(20);
 
+const GUTTER = 28;
+const MIN_CARD_WIDTH = 272;
+
 const waterfallCount = computed(() =>
-  Math.max(Math.floor(props.width / 290), 1)
+  Math.max(Math.floor((props.width + GUTTER) / (MIN_CARD_WIDTH + GUTTER)), 1)
 );
 
-const cardWidth = computed(() => (props.width >= 375 ? 280 : props.width));
+const gapSize = computed(() => GUTTER);
 
-const gapSize = computed(() =>
-  clamp(
-    (props.width - waterfallCount.value * cardWidth.value) /
-      (waterfallCount.value - 1 || 1),
-    24,
-    32
+const cardWidth = computed(() =>
+  Math.floor(
+    (props.width - (waterfallCount.value - 1) * gapSize.value) /
+      waterfallCount.value
   )
 );
 
@@ -139,7 +139,5 @@ function handlePageChange(page: number) {
 </template>
 
 <style scoped lang="scss">
-.article-list__waterfall__articles-container {
-  filter: drop-shadow(0 0.25rem 2rem var(--color-accent-shadow-200));
-}
+// Flat matte gouache layout: zero blurry container drop-shadows
 </style>

@@ -20,7 +20,16 @@
   font-weight: 700;
 }
 
+// Strict two-font system for UI & prose (plus mono reserved strictly for code/math)
 /* prettier-ignore */
-$font-family-base: "Wix Madefor", "HarmonyOS Sans SC", "Microsoft YaHei", "PingFang SC", -apple-system, system-ui, "Segoe UI", Roboto, Ubuntu, Cantarell, "Noto Sans", BlinkMacSystemFont, "Helvetica Neue", "Hiragino Sans GB", Arial, sans-serif;
+$font-family-serif: "Newsreader", "Noto Serif SC", "Source Han Serif SC", "Songti SC", "STSong", Georgia, serif;
 /* prettier-ignore */
-$font-family-mono: "SFMono-Regular", "Consolas", "Liberation Mono", "Menlo", "Courier", "monospace";
+$font-family-base: "Wix Madefor", "HarmonyOS Sans SC", "PingFang SC", "Microsoft YaHei", -apple-system, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+/* prettier-ignore */
+$font-family-mono: "SFMono-Regular", "Consolas", "Liberation Mono", "Menlo", "Courier", monospace;
+
+:root {
+  --font-family-serif: #{$font-family-serif};
+  --font-family-base: #{$font-family-base};
+  --font-family-mono: #{$font-family-mono};
+}

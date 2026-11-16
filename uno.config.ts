@@ -16,10 +16,11 @@ const borderAccents = [1, 2, 3, 4, 5, 6, 7, 8, 9].map(
 
 export default defineConfig({
   rules: [
-    [
-      "shadow-card-hover",
-      { filter: "drop-shadow(0 1rem 3rem var(--color-accent-shadow-100))" },
-    ],
+    ["font-serif-editorial", { "font-family": "var(--font-family-serif)" }],
+    ["font-sans-base", { "font-family": "var(--font-family-base)" }],
+    ["bg-paper", { "background-color": "var(--gouache-paper)" }],
+    ["bg-chalk", { "background-color": "var(--gouache-chalk)" }],
+    ["bg-wash", { "background-color": "var(--gouache-wash)" }],
     ["text-primary", { color: "var(--color-accent-text-primary)" }],
     ["text-secondary", { color: "var(--color-accent-text-secondary)" }],
     ["text-tertiary", { color: "var(--color-accent-text-tertiary)" }],

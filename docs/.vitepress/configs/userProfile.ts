@@ -7,7 +7,7 @@ export const userProfile: ProfileProps = {
   },
   email: "mark.zhaolu.chen@rikkyo.ac.jp",
   avatar: "https://avatars.githubusercontent.com/u/9006264?v=4",
-  bio: "Per aspera ad astra",
+  bio: "Per aspera ad astra.",
   social: [
     {
       alias: "GitHub",

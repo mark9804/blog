@@ -116,7 +116,6 @@ watch(userCurrent, () => {
       <ElyButton
         :secondary="item.value !== userCurrent"
         :style="{ width: '32px', height: '32px', padding: '0' }"
-        :class="{ 'bg-primary text-white': item.value === userCurrent }"
         @click="handleGoToPage(item.value)"
         :aria-label="`Page ${item.value}`"
       >

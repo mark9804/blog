@@ -10,8 +10,8 @@ import { formalizeString } from "./_utils/stringUtils";
 const store = useCustomStore();
 
 const emit = defineEmits<{
-  (e: "loaded"): void; // 图片加载完成
-  (e: "suspense"): void; // 图片加载时间过长
+  (e: "loaded"): void;
+  (e: "suspense"): void;
 }>();
 
 const isLoaded = ref(false);
@@ -48,9 +48,6 @@ const props = withDefaults(defineProps<CardProps>(), {
 
 const isLink = computed(() => props.as === "link");
 
-const minWidth = computed(() => Math.min(props.maxWidth, 280));
-const maxWidth = computed(() => Math.max(props.maxWidth, 280));
-
 function handleTagClick(tag: string) {
   store.resetTags();
   store.pushSelectedTags(tag);
@@ -63,42 +60,33 @@ const relativeTime = ref(
 
 let timer: ReturnType<typeof setInterval> | null = null;
 
-// 根据时间单位设置不同的更新频率
 function setupTimeUpdateInterval() {
-  // 清除现有的定时器
   if (timer !== null) {
     clearInterval(timer);
   }
 
-  // 获取合适的更新间隔
   const updateInterval = getUpdateInterval(props.content.createdAt);
 
-  // 设置新的定时器
   timer = setInterval(() => {
     relativeTime.value = formatRelativeTime(props.content.createdAt);
-    // 更新后重新检查是否需要调整更新频率
     setupTimeUpdateInterval();
   }, updateInterval);
 }
 
 onMounted(async () => {
-  // 初始设置更新频率
   setupTimeUpdateInterval();
 
-  await nextTick(); // 先等待 DOM 更新
-  // 如果没有封面图片，则直接认为图片加载完成
+  await nextTick();
   if (!props.content.frontmatter.cover) {
     isLoaded.value = true;
     emit("loaded");
   } else {
-    // 如果存在封面图片，延时判断，如果没加载完成发送 suspense 事件避免阻塞
     setTimeout(() => {
       if (!isLoaded.value) {
         emit("suspense");
       }
     }, 1000);
   }
-  // 添加一个小延迟，平滑淡入效果
   requestAnimationFrame(() => {
     isVisible.value = true;
   });
@@ -116,15 +104,14 @@ const shouldAriaLabelHide = ref(false);
 <template>
   <component
     :is="isLink ? 'a' : 'div'"
-    class="elysium-ui__card__container w-full grid rounded-[3px] overflow-hidden hover:shadow-card-hover hover:scale-102 transition-all duration-500 relative"
+    class="elysium-ui__card__container w-full grid relative"
     :class="{
       'no-cover': !props.content.frontmatter.cover,
       'opacity-0': !isVisible,
       'opacity-100': isVisible,
     }"
     :style="{
-      minWidth: `${minWidth}px`,
-      maxWidth: `${maxWidth}px`,
+      maxWidth: `${props.maxWidth}px`,
     }"
     :href="isLink && withBase(props.content.url)"
   >
@@ -138,7 +125,7 @@ const shouldAriaLabelHide = ref(false);
       @mouseover="shouldAriaLabelHide = false"
       @mouseleave="shouldAriaLabelHide = true"
     />
-    <div class="elysium-ui__card--content flex flex-col pb-4">
+    <div class="elysium-ui__card--content flex flex-col pb-5">
       <div
         class="elysium-ui__card--cover-container z-0 relative w-full h-full overflow-hidden"
         v-if="props.content.frontmatter.cover"
@@ -154,7 +141,7 @@ const shouldAriaLabelHide = ref(false);
           loading="eager"
         />
       </div>
-      <h2 class="elysium-ui__card--title font-bold text-lg pt-4 pl-4 pr-4">
+      <h2 class="elysium-ui__card--title pt-4 pl-4 pr-4 m-0">
         <a :href="withBase(props.content.url)">
           {{ formalizeString(props.content.frontmatter.title) }}
         </a>
@@ -163,10 +150,10 @@ const shouldAriaLabelHide = ref(false);
         :size="0"
         divider="・"
         wrap
-        class="pt-1 pl-4 pr-4 text-tertiary text-xs"
+        class="pt-1.5 pl-4 pr-4 text-tertiary text-xs"
       >
         <span>{{ relativeTime }}</span>
-        <span>{{ props.content.wordsCount }} 字{{}}</span>
+        <span>{{ props.content.wordsCount }} 字</span>
         <span v-if="props.content.imgCount > 0"
           >{{ props.content.imgCount }} 张图片</span
         >
@@ -174,11 +161,14 @@ const shouldAriaLabelHide = ref(false);
       </ElySpace>
       <p
         v-if="props.content.frontmatter.description"
-        class="elysium-ui__card--description text-tertiary pt-4 pl-4 pr-4 text-sm"
+        class="elysium-ui__card--description pt-3 pl-4 pr-4 m-0 text-sm"
       >
         {{ props.content.frontmatter.description }}
       </p>
-      <div class="elysium-ui__card--tags flex flex-wrap gap-2 pt-4 pl-4 pr-4">
+      <div
+        v-if="props.content.frontmatter.tags?.length"
+        class="elysium-ui__card--tags flex flex-wrap gap-1.5 pt-4 pl-4 pr-4"
+      >
         <ElyTag
           v-for="tag in props.content.frontmatter.tags"
           :key="tag"
@@ -197,23 +187,78 @@ const shouldAriaLabelHide = ref(false);
 </template>
 
 <style scoped lang="scss">
-@use "../../styles/colors";
-
 .elysium-ui__card {
   &__container {
     grid-template-areas:
       "cover"
       "content";
-    background-color: colors.$color-accent-base;
+    background-color: var(--gouache-chalk);
+    border: 1px solid var(--color-accent-border-200);
+    border-radius: 2px;
+    isolation: isolate;
+    transition:
+      opacity 0.45s ease,
+      transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+      border-color 0.3s ease;
 
     &.no-cover {
       grid-template-areas: "content";
+    }
+
+    // Flat gouache backing plane revealed on hover (figure-ground counterchange, zero blur)
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      border-radius: 2px;
+      background-color: var(--gouache-wash);
+      border: 1px solid transparent;
+      transform: translate3d(0, 0, 0);
+      opacity: 0;
+      pointer-events: none;
+      transition:
+        transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+        opacity 0.3s ease,
+        border-color 0.3s ease;
+    }
+
+    // Subtle open upper-left drafting tick on hover
+    &::after {
+      content: "";
+      position: absolute;
+      top: -5px;
+      left: -5px;
+      width: 12px;
+      height: 12px;
+      border-top: 1px solid var(--gouache-pigment);
+      border-left: 1px solid var(--gouache-pigment);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+    }
+
+    &:hover {
+      transform: translate3d(-2px, -2px, 0);
+      border-color: var(--color-accent-border-500);
+
+      &::before {
+        transform: translate3d(5px, 5px, 0);
+        opacity: 1;
+        border-color: var(--color-accent-border-200);
+      }
+
+      &::after {
+        opacity: 1;
+      }
     }
   }
 
   &--cover-container {
     grid-area: cover;
-    background-color: colors.$color-accent-base;
+    background-color: var(--gouache-wash);
+    border-bottom: 1px solid var(--color-accent-border-100);
+    border-radius: 1px 1px 0 0;
   }
 
   &--cover {
@@ -226,6 +271,39 @@ const shouldAriaLabelHide = ref(false);
 
   &--content {
     grid-area: content;
+    background-color: var(--gouache-chalk);
+    border-radius: 1px;
+  }
+
+  // Unified editorial serif title matching the frontispiece
+  &--title {
+    font-family: var(--font-family-serif);
+    font-weight: 600;
+    font-size: 1.15rem;
+    line-height: 1.45;
+    letter-spacing: 0.015em;
+    color: var(--gouache-ink);
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+  }
+
+  &--description {
+    font-family: var(--font-family-base);
+    line-height: 1.65;
+    color: var(--color-accent-text-secondary);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .elysium-ui__card__container {
+    transition: none !important;
+
+    &:hover {
+      transform: none;
+    }
   }
 }
 </style>
