@@ -51,7 +51,7 @@ provide("toggle-appearance", async () => {
 
   await transition.ready;
 
-  document.documentElement.animate(
+  const animation = document.documentElement.animate(
     { opacity: isDark.value ? [1, 0] : [0, 1] },
     {
       duration: 300,
@@ -63,6 +63,8 @@ provide("toggle-appearance", async () => {
   );
 
   await transition.finished;
+  // Release the fill effect before the pseudo-element is used again.
+  animation.cancel();
   document.documentElement.classList.remove("vt-transitioning");
 });
 
