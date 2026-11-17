@@ -146,7 +146,7 @@ router.onAfterRouteChange = () => {
         align="center"
         v-else
       >
-        <span class="text-[var(--color-text-3)] !select-none cursor-not-allowed"
+        <span class="text-tertiary !select-none cursor-not-allowed"
           >本页面禁止评论</span
         >
       </ElySpace>

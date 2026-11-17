@@ -4,26 +4,39 @@
 @use "sass:color";
 
 %transition-base {
-  transition: all 0.3s ease-in-out;
+  transition:
+    color 0.25s ease,
+    background-color 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
 %image-hover {
   cursor: pointer;
+  border: 1px solid var(--color-accent-border-200);
   @extend %transition-base;
+
   &:hover {
-    transform: scale(1.002);
-    box-shadow: 0 4px 24px color.adjust(colors.$light-text-base, $alpha: -0.97);
+    border-color: var(--color-accent-border-500);
+    box-shadow: 4px 4px 0 0 var(--gouache-wash);
   }
 }
 
 %bold-font {
-  font-weight: 700;
+  font-weight: 600;
   font-family: "Wix Madefor", "HarmonyOS Sans SC Bold", fonts.$font-family-base;
+}
+
+%serif-heading {
+  font-family: fonts.$font-family-serif;
+  font-weight: 600;
+  letter-spacing: 0.015em;
+  color: var(--gouache-ink);
 }
 
 body {
   font-size: 16px !important;
-  line-height: 24px;
+  line-height: 26px;
   font-family: fonts.$font-family-base !important;
   font-weight: 450;
   background-color: var(--gouache-paper);
@@ -47,33 +60,131 @@ html.dark {
 
   figure img,
   .elysium-ui__card--cover {
-    filter: brightness(0.86);
+    filter: brightness(0.88);
   }
 }
 
+// ---------------------------------------------------------------------------
+// Global Navigation, Sidebar, Search Modal & Footer Chrome
+// ---------------------------------------------------------------------------
 .VPImage.logo {
-  border-radius: 3px;
+  border-radius: 0;
+  border: 1px solid var(--color-accent-border-300);
 }
 
 .VPNav {
-  .VPNavBar:not(.home .top) {
-    .content-body.content-body.content-body {
-      backdrop-filter: blur(10px);
-      background: radial-gradient(
-        $color-accent-base,
-        $color-accent-transparent 2px
-      );
-      background-size: 3px 3px;
+  .VPNavBar {
+    background-color: var(--gouache-paper) !important;
+    border-bottom: 1px solid var(--color-accent-border-200) !important;
 
-      @media (max-width: 767px) {
-        column-gap: 0.5rem;
-        background: none;
-      }
+    .wrapper,
+    .container,
+    .content,
+    .content-body.content-body.content-body {
+      background: var(--gouache-paper) !important;
+      backdrop-filter: none !important;
+    }
+
+    .divider {
+      display: none !important;
     }
   }
-  .VPNavBar:not(.has-sidebar) {
-    background-color: transparent !important;
+
+  .VPNavBarTitle .title {
+    border-bottom: none !important;
+
+    span {
+      font-family: fonts.$font-family-serif;
+      font-weight: 600;
+      font-size: 1.05rem;
+      letter-spacing: 0.02em;
+      color: var(--gouache-ink);
+    }
   }
+
+  .VPNavBarSearchButton {
+    border-radius: 0 !important;
+    background-color: color-mix(
+      in srgb,
+      var(--gouache-wash) 55%,
+      var(--gouache-paper)
+    ) !important;
+    border: 1px solid var(--color-accent-border-200) !important;
+    transition:
+      border-color 0.25s ease,
+      background-color 0.25s ease;
+
+    &:hover {
+      border-color: var(--color-accent-border-500) !important;
+      background-color: var(--gouache-wash) !important;
+    }
+
+    .keys kbd {
+      font-family: fonts.$font-family-base;
+      background-color: var(--gouache-paper);
+      border: none;
+      box-shadow: none;
+      border-radius: 0;
+    }
+  }
+
+  // Architectural square appearance switch with hollow paper thumb
+  .VPSwitch {
+    border-radius: 0 !important;
+    border: 1px solid var(--color-accent-border-300) !important;
+    background-color: var(--gouache-wash) !important;
+
+    .check {
+      border-radius: 0 !important;
+      background-color: var(--gouache-paper) !important;
+      box-shadow: none !important;
+    }
+  }
+}
+
+// Flyout dropdown menus & local search modal: crisp 1px line + off-register gouache plane
+.VPMenu,
+.VPLocalSearchBox .shell {
+  border-radius: 0 !important;
+  border: 1px solid var(--color-accent-border-300) !important;
+  background-color: var(--gouache-paper) !important;
+  box-shadow: 5px 5px 0 0 var(--gouache-wash) !important;
+}
+
+.VPMenuLink .link {
+  border-radius: 0 !important;
+
+  &:hover {
+    background-color: var(--gouache-wash) !important;
+    color: var(--gouache-ink) !important;
+  }
+}
+
+.VPLocalSearchBox {
+  .search-bar {
+    border-radius: 0 !important;
+    border: 1px solid var(--color-accent-border-300) !important;
+    background-color: var(--gouache-paper) !important;
+  }
+
+  .result {
+    border-radius: 0 !important;
+    border: 1px solid var(--color-accent-border-200) !important;
+  }
+}
+
+.VPSidebar {
+  background-color: var(--gouache-paper) !important;
+  border-right: 1px solid var(--color-accent-border-200) !important;
+
+  .curtain {
+    background-color: var(--gouache-paper) !important;
+  }
+}
+
+.VPLocalNav {
+  background-color: var(--gouache-paper) !important;
+  border-bottom: 1px solid var(--color-accent-border-200) !important;
 }
 
 .Layout:has(.home-page) .VPLocalNav {
@@ -81,29 +192,68 @@ html.dark {
 }
 
 .VPFooter {
+  border-top: 1px solid var(--color-accent-border-200) !important;
+  background-color: var(--gouache-paper) !important;
+
   .message,
   .copyright {
     color: $color-accent-text-tertiary;
   }
 }
 
-kbd {
-  background-color: var(--vp-c-bg-soft);
-  border: solid 1px var(--vp-c-border);
+// Prev / Next article cards at bottom of posts: off-register gouache + drafting hairline
+.VPDocFooter {
+  .prev-next {
+    border-top: 1px solid var(--color-accent-border-200) !important;
 
-  border-radius: 4px;
-  padding: 2px 4px;
-  box-shadow: inset 0 -2px 0 var(--vp-c-border);
+    .pager-link {
+      border-radius: 0 !important;
+      border: 1px solid var(--color-accent-border-200) !important;
+      background-color: var(--gouache-paper);
+      box-shadow: 4px 4px 0 0
+        color-mix(in srgb, var(--gouache-wash) 72%, var(--gouache-paper));
+      transition:
+        border-color 0.25s ease,
+        box-shadow 0.25s ease;
 
-  &:hover {
-    box-shadow: inset 0 0 0 transparent;
+      &:hover {
+        border-color: var(--color-accent-border-600) !important;
+        box-shadow: 6px 6px 0 0 var(--gouache-wash);
+      }
+
+      .title {
+        font-family: fonts.$font-family-serif;
+        font-weight: 600;
+        color: var(--gouache-ink);
+      }
+    }
   }
+}
+
+// Nolebase Git Changelog block alignment
+.vp-nolebase-git-changelog {
+  border-radius: 0 !important;
+  border: 1px solid var(--color-accent-border-200) !important;
+  background-color: color-mix(
+    in srgb,
+    var(--gouache-wash) 38%,
+    var(--gouache-paper)
+  ) !important;
+}
+
+kbd {
+  background-color: var(--gouache-wash);
+  border: 1px solid var(--color-accent-border-200);
+  border-radius: 0;
+  padding: 1px 5px;
+  box-shadow: none;
 }
 
 .custom-block p > code {
   padding: 1px 5px;
   background-color: var(--gouache-paper);
   border: none;
+  border-radius: 0;
   color: $color-accent-code;
 }
 
@@ -120,7 +270,7 @@ figure {
   margin-top: 20px;
 
   figcaption {
-    font-size: 14px;
+    font-size: 13px;
     line-height: 20px;
     color: $color-accent-text-tertiary;
     text-align: center;
@@ -134,18 +284,16 @@ figure + .elysium-ui__gallery,
 
 mark {
   background-color: var(--color-accent-mark-background);
-  color: color-contrast(
-    var(--color-accent-mark-background) vs var(--vp-c-text-1),
-    #fff
-  );
-  border-radius: 2px;
+  color: inherit;
+  padding: 0 3px;
+  border-radius: 0;
 }
 
 .spoiler {
   color: transparent;
   background-color: $color-accent;
   padding: 0 4px;
-  border-radius: 4px;
+  border-radius: 0;
   @extend %transition-base;
   cursor: help;
 
@@ -153,106 +301,85 @@ mark {
   &:focus,
   &:active {
     color: inherit;
-    background-color: transparent;
+    background-color: var(--gouache-wash);
   }
 }
 
-a.title span,
 .VPNavBarMenuLink.active,
-.item h2.text,
 .font-bold,
-.pager-link .title,
-.VPSidebarItem.is-active .text.text {
+.VPSidebarItem.is-active > .item .text.text {
   @extend %bold-font;
 }
 
+// ---------------------------------------------------------------------------
+// Article & Markdown Prose Styling (.vp-doc)
+// ---------------------------------------------------------------------------
 .vp-doc {
-  [class*="language-"] code .highlighted {
-    background-color: $color-accent-quaternary;
-  }
+  line-height: 1.8;
 
-  :not(pre, h1, h2, h3, h4, h5, h6) > code {
-    color: $color-accent-code;
-  }
-
-  blockquote {
-    border-left: 3px solid $color-accent-text-tertiary;
-    color: $color-accent-text-secondary;
-  }
-
-  code {
-    font-family: fonts.$font-family-mono;
-  }
-
-  a {
-    color: $color-accent;
-    text-decoration-color: $color-accent-secondary;
-    text-decoration-thickness: 1.5px;
-    text-underline-offset: 3px;
-
-    &::before {
-      color: $color-accent-tertiary;
-      @extend %transition-base;
-    }
-
-    &:hover::before {
-      color: $color-accent;
-    }
-
-    &:target {
-      animation: background-blink 1s;
-    }
-
-    @keyframes background-blink {
-      0% {
-        background-color: transparent;
-      }
-      50% {
-        background-color: orange;
-      }
-      100% {
-        background-color: transparent;
-      }
-    }
-
-    &.footnote-backref {
-      text-decoration: none;
-
-      sup {
-        display: inline-block;
-        text-decoration: underline $color-accent-secondary 2px;
-      }
-    }
-  }
-
-  s {
-    color: $color-accent-text-tertiary;
-    text-decoration-thickness: 2px;
-  }
-
-  .elysium-ui__image {
-    max-width: 100%;
-    border-radius: 3px;
-    @extend %image-hover;
-  }
-
+  // Editorial Serif hierarchy for structural headings (Two-Font Rule)
   h1 {
-    margin: 0.67em 0;
+    @extend %serif-heading;
+    font-size: clamp(1.85rem, 3vw, 2.25rem);
+    line-height: 1.3;
+    margin: 0.5em 0 0.65em;
   }
 
   h2 {
-    border: none;
-    margin-top: 16px;
-  }
+    @extend %serif-heading;
+    position: relative;
+    font-size: 1.5rem;
+    line-height: 1.4;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    padding-top: 0;
+    padding-bottom: 0.45rem;
+    border-top: none;
+    border-bottom: 1px solid var(--color-accent-border-200);
 
-  @for $i from 1 through 6 {
-    h#{$i},
-    h#{$i} a {
-      @extend %bold-font;
+    // Subtle overhanging drafting crosshair tick at bottom-left of h2 rule
+    &::before {
+      content: "";
+      position: absolute;
+      left: -8px;
+      bottom: -1px;
+      width: 8px;
+      height: 1px;
+      background-color: var(--color-accent-border-400);
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -6px;
+      width: 1px;
+      height: 11px;
+      background-color: var(--color-accent-border-300);
     }
   }
 
-  .title,
+  h3 {
+    @extend %serif-heading;
+    font-size: 1.22rem;
+    line-height: 1.45;
+    margin-top: 1.85rem;
+  }
+
+  h4,
+  h5,
+  h6 {
+    @extend %bold-font;
+    color: var(--gouache-ink);
+  }
+
+  h1 a,
+  h2 a,
+  h3 a {
+    font-family: inherit;
+    font-weight: inherit;
+  }
+
   strong,
   .custom-block-title,
   thead,
@@ -265,38 +392,160 @@ a.title span,
     text-autospace: normal;
   }
 
-  table {
-    display: table;
-    width: 100%;
+  hr {
+    border: none;
+    border-top: 1px solid var(--color-accent-border-200);
+    margin: 2.25rem 0;
+  }
 
-    td {
-      line-height: 22px;
-      border: inherit;
+  blockquote {
+    border-left: 2px solid var(--gouache-pigment);
+    background-color: color-mix(
+      in srgb,
+      var(--gouache-wash) 30%,
+      var(--gouache-paper)
+    );
+    padding: 8px 16px;
+    color: $color-accent-text-secondary;
+  }
+
+  // Crisp architectural custom blocks (tip, info, warning, details)
+  .custom-block {
+    border-radius: 0;
+    border: 1px solid var(--color-accent-border-200);
+    border-left: 2px solid var(--color-accent);
+    box-shadow: 4px 4px 0 0
+      color-mix(in srgb, var(--gouache-wash) 60%, var(--gouache-paper));
+  }
+
+  // Inline code & fenced code blocks
+  :not(pre, h1, h2, h3, h4, h5, h6) > code {
+    color: $color-accent-code;
+    border-radius: 0;
+    padding: 2px 5px;
+  }
+
+  code {
+    font-family: fonts.$font-family-mono;
+  }
+
+  div[class*="language-"] {
+    border-radius: 0;
+    border: 1px solid var(--color-accent-border-200);
+    box-shadow: 4px 4px 0 0
+      color-mix(in srgb, var(--gouache-wash) 55%, var(--gouache-paper));
+    margin: 20px 0;
+
+    code .highlighted {
+      background-color: $color-accent-quaternary;
+    }
+  }
+
+  .vp-code-group .tabs {
+    border-radius: 0;
+    border: 1px solid var(--color-accent-border-200);
+    border-bottom: none;
+    background-color: var(--gouache-card);
+  }
+
+  a {
+    color: $color-accent;
+    text-decoration-color: $color-accent-secondary;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+
+    &::before {
+      color: $color-accent-tertiary;
+      @extend %transition-base;
     }
 
-    th,
-    .arco-table-th {
-      border: none;
-    }
+    &:hover {
+      text-decoration-color: $color-accent;
 
-    tr {
-      background-color: transparent;
-
-      &:nth-child(2n) {
-        background-color: $color-accent-quinary;
+      &::before {
+        color: $color-accent;
       }
+    }
 
-      &:hover {
-        background-color: $color-accent-quaternary;
+    &:target {
+      animation: background-blink 1s;
+    }
+
+    @keyframes background-blink {
+      0%,
+      100% {
+        background-color: transparent;
+      }
+      50% {
+        background-color: var(--gouache-wash);
+      }
+    }
+
+    &.footnote-backref {
+      text-decoration: none;
+
+      sup {
+        display: inline-block;
+        text-decoration: underline $color-accent-secondary 1px;
       }
     }
   }
 
-  // 内嵌视频，通常是哔哩哔哩
-  iframe {
+  s {
+    color: $color-accent-text-tertiary;
+    text-decoration-thickness: 1.5px;
+  }
+
+  .elysium-ui__image {
+    max-width: 100%;
+    border-radius: 0;
+    @extend %image-hover;
+  }
+
+  table {
+    display: table;
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid var(--color-accent-border-200);
+
+    th,
+    td {
+      border: 1px solid var(--color-accent-border-200);
+      padding: 8px 12px;
+      line-height: 22px;
+    }
+
+    thead tr {
+      background-color: color-mix(
+        in srgb,
+        var(--gouache-wash) 55%,
+        var(--gouache-paper)
+      );
+    }
+
+    tbody tr {
+      background-color: transparent;
+
+      &:nth-child(2n) {
+        background-color: color-mix(
+          in srgb,
+          var(--gouache-wash) 25%,
+          var(--gouache-paper)
+        );
+      }
+
+      &:hover {
+        background-color: var(--gouache-wash);
+      }
+    }
+  }
+
+  // Embedded videos (typically Bilibili)
+  iframe:not(.giscus-frame) {
     margin-top: 16px;
     width: 100%;
     height: 360px;
+    border: 1px solid var(--color-accent-border-200);
   }
 }
 
@@ -306,9 +555,11 @@ a.title span,
 
 // Click-to-copy hint for math formulas
 mjx-container[data-formula] {
-  @apply cursor-pointer border-1 rounded-md border-solid border-transparent;
+  @apply cursor-pointer border-1 border-solid border-transparent;
   padding: 3px 2px;
-  transition: all 0.175s ease-in-out;
+  transition:
+    background-color 0.175s ease-in-out,
+    border-color 0.175s ease-in-out;
 
   &:hover {
     @apply border-[var(--color-accent-tertiary)] bg-[var(--color-accent-quaternary)];

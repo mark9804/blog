@@ -5,7 +5,7 @@
 @mixin tag-base {
   display: inline-flex;
   align-items: center;
-  border-radius: 2px;
+  border-radius: 0;
   font-family: var(--font-family-base);
   font-weight: 500;
   transition:

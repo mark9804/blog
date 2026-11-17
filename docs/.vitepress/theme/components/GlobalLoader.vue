@@ -25,8 +25,4 @@
   background-color: $color-accent-transparent;
   backdrop-filter: blur(4px);
 }
-
-:global(.dark) .global-loader {
-  background-color: rgba(0, 0, 0, 0.6);
-}
 </style>

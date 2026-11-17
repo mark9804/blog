@@ -114,10 +114,10 @@ const shouldAriaLabelHide = ref(false);
     }"
     :href="isLink && withBase(props.content.url)"
   >
-    <!-- Bottom-right offset matte gouache strip sliced by the crosshair -->
-    <span aria-hidden="true" class="elysium-ui__card--offset-bar" />
+    <!-- Layer 0: Same-size matte gouache plane offset by (4px, 4px) -->
+    <span aria-hidden="true" class="elysium-ui__card--gouache-plane" />
 
-    <!-- Closed drafting perimeter with overhanging crosshairs at top-left & bottom-right -->
+    <!-- Layer 1: Closed drafting perimeter with overhanging diagonal crosshairs -->
     <div
       aria-hidden="true"
       class="elysium-ui__card--crosshairs pointer-events-none absolute inset-0 z-1"
@@ -210,13 +210,9 @@ const shouldAriaLabelHide = ref(false);
         background-color: var(--color-accent-border-600);
       }
 
-      .elysium-ui__card--offset-bar {
-        transform: scaleX(1);
-        background-color: color-mix(
-          in srgb,
-          var(--gouache-pigment) 30%,
-          var(--gouache-wash)
-        );
+      .elysium-ui__card--gouache-plane {
+        transform: translate3d(6px, 6px, 0);
+        background-color: var(--gouache-wash);
       }
 
       .elysium-ui__card--title {
@@ -225,25 +221,25 @@ const shouldAriaLabelHide = ref(false);
     }
   }
 
-  // Subtle off-register gouache strip anchoring the bottom edge of each grid cell
-  &--offset-bar {
+  // Same-size matte gouache backing plane shifted off-register by (x=4px, y=4px)
+  &--gouache-plane {
     position: absolute;
-    right: -5px;
-    bottom: -5px;
-    width: calc(100% - 14px);
-    height: 10px;
-    background-color: var(--gouache-wash);
-    transform-origin: right center;
-    transform: scaleX(0.62);
+    inset: 0;
+    background-color: color-mix(
+      in srgb,
+      var(--gouache-wash) 72%,
+      var(--gouache-paper)
+    );
+    transform: translate3d(4px, 4px, 0);
     pointer-events: none;
     z-index: 0;
     transition:
-      transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
       background-color 0.25s ease;
   }
 
   &--cover-container {
-    background-color: var(--gouache-wash);
+    background-color: var(--gouache-paper);
   }
 
   &--cover {
@@ -273,6 +269,11 @@ const shouldAriaLabelHide = ref(false);
     font-family: var(--font-family-base);
     line-height: 1.65;
     color: var(--color-accent-text-secondary);
+  }
+
+  // Default tags match the page ground to punch hollow cutouts through the gouache plane
+  &--tags :deep(.elysium-ui__tag--primary:not(:hover)) {
+    background-color: var(--gouache-paper);
   }
 }
 
@@ -312,7 +313,7 @@ const shouldAriaLabelHide = ref(false);
 
 @media (prefers-reduced-motion: reduce) {
   .elysium-ui__card__container,
-  .elysium-ui__card--offset-bar,
+  .elysium-ui__card--gouache-plane,
   .card-crosshair {
     transition: none !important;
   }

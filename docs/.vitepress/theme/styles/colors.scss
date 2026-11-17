@@ -227,10 +227,37 @@ html.dark {
   --vp-button-brand-active-text: var(--gouache-chalk);
   --vp-button-brand-active-bg: var(--vp-c-brand-1);
 
+  // Sync VitePress layout surfaces & remove default blurry Material shadows
+  --vp-sidebar-bg-color: var(--gouache-paper);
+  --vp-nav-bg-color: var(--gouache-paper);
+  --vp-nav-screen-bg-color: var(--gouache-paper);
+  --vp-local-search-bg: var(--gouache-paper);
+  --vp-local-search-result-bg: var(--gouache-paper);
+  --vp-local-search-result-selected-bg: var(--gouache-wash);
+  --vp-shadow-1: 3px 3px 0 0 var(--gouache-wash);
+  --vp-shadow-2: 4px 4px 0 0 var(--gouache-wash);
+  --vp-shadow-3: 5px 5px 0 0 var(--gouache-wash);
+  --vp-shadow-4: 6px 6px 0 0 var(--gouache-wash);
+  --vp-shadow-5: 6px 6px 0 0 var(--gouache-wash);
+
   // Custom Block
-  --vp-custom-block-tip-border: transparent;
+  --vp-custom-block-tip-border: var(--color-accent-border-200);
   --vp-custom-block-tip-text: var(--vp-c-text-1);
-  --vp-custom-block-tip-bg: var(--gouache-card);
-  --vp-custom-block-info-bg: var(--gouache-card);
-  --vp-custom-block-details-bg: var(--gouache-card);
+  --vp-custom-block-tip-bg: color-mix(
+    in srgb,
+    var(--gouache-wash) 45%,
+    var(--gouache-paper)
+  );
+  --vp-custom-block-info-border: var(--color-accent-border-200);
+  --vp-custom-block-info-bg: color-mix(
+    in srgb,
+    var(--gouache-wash) 38%,
+    var(--gouache-paper)
+  );
+  --vp-custom-block-details-border: var(--color-accent-border-200);
+  --vp-custom-block-details-bg: color-mix(
+    in srgb,
+    var(--gouache-wash) 38%,
+    var(--gouache-paper)
+  );
 }
