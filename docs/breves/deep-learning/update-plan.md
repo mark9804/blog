@@ -8,6 +8,6 @@ title: 文章更新计划
 
 高光谱重建任务入门可能最近会再补充一点，但是优先级不一定高，接下来几篇的思路暂定：
 
-KL 散度-KL 散度与 MSE 的关系推导-（变分推断）-分布匹配蒸馏（Distribution Matching Distillation, DMD）技术
+KL 散度 - KL 散度与 MSE 的关系推导 -（变分推断）- 分布匹配蒸馏（Distribution Matching Distillation, DMD）技术 - 在策略蒸馏 (On-Policy Distillation) 技术
 
 这种总结性文章越写越感到苏神的伟大，他是怎么一边上班整活一边还有时间写文章的，这就是强者的世界吗。
