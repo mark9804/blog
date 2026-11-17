@@ -8,7 +8,7 @@ import {
   useWindowSize,
 } from "@vueuse/core";
 import { isExternalUrl } from "../../../utils/urlUtils";
-import { Mail, Moon, Sun } from "@lucide/vue";
+import { Mail, Moon, Quote, Sun } from "@lucide/vue";
 
 const props = defineProps<ProfileProps>();
 
@@ -22,11 +22,11 @@ const toggleAppearance = inject("toggle-appearance", () => {
   isDark.value = !isDark.value;
 });
 
+const activeLocale = ref("en-US");
+
 const displayName = computed(
   () =>
-    props.name[preferredLanguages.value[0]] ||
-    props.name["en-US"] ||
-    props.name["zh-CN"]
+    props.name[activeLocale.value] || props.name["en-US"] || props.name["zh-CN"]
 );
 
 const isMounted = ref(false);
@@ -56,6 +56,9 @@ function handlePointerLeave() {
 }
 
 onMounted(() => {
+  if (preferredLanguages.value[0]) {
+    activeLocale.value = preferredLanguages.value[0];
+  }
   requestAnimationFrame(() => {
     isMounted.value = true;
   });
@@ -152,17 +155,26 @@ function handleSocialLinkClick(social: {
           </div>
 
           <div class="flex flex-col gap-2 min-w-0">
-            <ClientOnly>
-              <h1 class="ely-frontispiece__name m-0">
-                {{ displayName }}
-              </h1>
-            </ClientOnly>
+            <h1 class="ely-frontispiece__name m-0">
+              {{ displayName }}
+            </h1>
             <p
               v-if="props.bio"
-              class="ely-frontispiece__bio m-0 flex items-center gap-3"
+              class="ely-frontispiece__bio m-0 inline-flex self-start items-center gap-2"
             >
-              <span class="ely-frontispiece__bio-rule" aria-hidden="true" />
+              <Quote
+                aria-hidden="true"
+                :size="12"
+                :stroke-width="1.5"
+                class="ely-frontispiece__bio-quote ely-frontispiece__bio-quote--open"
+              />
               <span>{{ props.bio }}</span>
+              <Quote
+                aria-hidden="true"
+                :size="12"
+                :stroke-width="1.5"
+                class="ely-frontispiece__bio-quote ely-frontispiece__bio-quote--close"
+              />
             </p>
           </div>
         </div>
@@ -299,12 +311,19 @@ function handleSocialLinkClick(social: {
     color: var(--color-accent-text-secondary);
   }
 
-  &__bio-rule {
-    display: inline-block;
-    width: 24px;
-    height: 1px;
-    background-color: var(--gouache-pigment);
+  &__bio-quote {
+    color: var(--gouache-pigment);
     flex-shrink: 0;
+
+    &--open {
+      align-self: flex-start;
+      transform: translateY(-1px) rotate(180deg);
+    }
+
+    &--close {
+      align-self: flex-end;
+      transform: translateY(3px);
+    }
   }
 
   &__footer {

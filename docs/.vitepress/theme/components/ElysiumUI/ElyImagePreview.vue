@@ -223,7 +223,7 @@ onUnmounted(() => {
     <Teleport to="body">
       <Transition name="fade">
         <div
-          v-if="shouldShowPreview"
+          v-if="shouldShowPreview && imgList[imgIndex]"
           class="elysium-ui elysium-ui__image-preview__container fixed z-999 top-0 left-0 w-full h-full bg-black/40 flex flex-col items-center justify-center gap-4"
           @wheel="handleScroll"
           @touchstart="handleTouch"

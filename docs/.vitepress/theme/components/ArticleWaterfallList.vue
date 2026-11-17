@@ -1,5 +1,13 @@
 <script setup lang="ts">
-import { computed, ref, watch, nextTick, useTemplateRef } from "vue";
+import {
+  computed,
+  ref,
+  watch,
+  nextTick,
+  onMounted,
+  onUnmounted,
+  useTemplateRef,
+} from "vue";
 import { cluster } from "radashi";
 import type { Post } from "../types/Post";
 import ElyPagination from "./ElysiumUI/ElyPagination.vue";
@@ -11,12 +19,13 @@ const props = withDefaults(
     width?: number;
   }>(),
   {
-    width: 1280,
+    width: 0,
   }
 );
 
 const currentPage = ref(1);
 const pageSize = ref(20);
+const isClientReady = ref(false);
 
 const GUTTER = 28;
 const MIN_CARD_WIDTH = 272;
@@ -39,21 +48,21 @@ const waterfallContainerRef = useTemplateRef<HTMLDivElement[]>(
 );
 const waterfallItemsList = ref<Post[][]>([]);
 
-/**
- * 找到一个高度最短的列
- * @param {number} assumeImageHeight 假设的图片高度
- * @returns {number} 最短列的索引
- */
-async function findShortestColumn(assumeImageHeight = 0) {
+let layoutEpoch = 0;
+let isUnmounted = false;
+
+async function findShortestColumn(assumeImageHeight = 0): Promise<number> {
   await nextTick();
   const containers = waterfallContainerRef.value;
-  if (!containers) return 0;
+  if (!containers || containers.length === 0) return 0;
 
   let minHeight = Infinity;
   let targetColumnIndex = 0;
 
   for (let i = 0; i < containers.length; i++) {
-    const height = containers[i].offsetHeight + assumeImageHeight;
+    const col = containers[i];
+    if (!col) continue;
+    const height = col.offsetHeight + assumeImageHeight;
     if (height < minHeight) {
       minHeight = height;
       targetColumnIndex = i;
@@ -63,45 +72,66 @@ async function findShortestColumn(assumeImageHeight = 0) {
   return targetColumnIndex;
 }
 
-function handleLoaded() {
-  findShortestColumn();
+const chunkedPosts = computed(() => cluster(props.posts, pageSize.value));
+
+const paginatedPosts = computed(
+  () => chunkedPosts.value[currentPage.value - 1] ?? []
+);
+
+async function distributeWaterfall() {
+  if (!isClientReady.value || props.width <= 0) return;
+
+  const epoch = ++layoutEpoch;
+  const colCount = waterfallCount.value;
+  const items = paginatedPosts.value;
+
+  waterfallItemsList.value = Array.from({ length: colCount }, () => []);
+
+  if (items.length === 0) return;
+
+  for (const post of items) {
+    const targetColumnIndex = await findShortestColumn();
+    // Abort stale async runs so concurrent ResizeObserver/router updates never duplicate keys
+    if (isUnmounted || epoch !== layoutEpoch) return;
+    const bucket = waterfallItemsList.value[targetColumnIndex];
+    if (bucket) {
+      bucket.push(post);
+    }
+  }
 }
 
-function handleSuspense() {
-  findShortestColumn(400);
-}
-
-const chunkedPosts = computed(() => {
-  return cluster(props.posts, pageSize.value);
-});
-
-const paginatedPosts = computed(() => {
-  return chunkedPosts.value[currentPage.value - 1];
-});
+// Re-distribute only when column count, post slice, or initial non-zero measurement changes.
+// Pure cardWidth adjustments within the same column count resize smoothly via CSS.
+const hasMeasuredWidth = computed(() => props.width > 0);
 
 watch(
-  () => [waterfallCount.value, cardWidth.value, paginatedPosts.value],
-  async () => {
-    waterfallItemsList.value = Array.from(
-      { length: waterfallCount.value },
-      () => []
-    );
+  () => [hasMeasuredWidth.value, waterfallCount.value, paginatedPosts.value],
+  () => {
+    distributeWaterfall();
+  }
+);
 
-    if (paginatedPosts.value.length === 0) {
-      return;
-    }
-
-    // 找到一个高度最短的列，把文章卡片塞进去
-    for (const post of paginatedPosts.value) {
-      const targetColumnIndex = await findShortestColumn();
-      waterfallItemsList.value[targetColumnIndex].push(post);
-    }
+// Reset to page 1 when switching tabs or tag filters shrinks total page count
+watch(
+  () => props.posts,
+  () => {
+    currentPage.value = 1;
   }
 );
 
 function handlePageChange(page: number) {
   currentPage.value = page;
 }
+
+onMounted(() => {
+  isClientReady.value = true;
+  distributeWaterfall();
+});
+
+onUnmounted(() => {
+  isUnmounted = true;
+  layoutEpoch += 1;
+});
 </script>
 
 <template>
@@ -115,7 +145,8 @@ function handlePageChange(page: number) {
       <div
         class="article-list__waterfall-item flex flex-col"
         :style="{ gap: `${gapSize}px`, width: `${cardWidth}px` }"
-        v-for="items in waterfallItemsList"
+        v-for="(items, colIdx) in waterfallItemsList"
+        :key="colIdx"
         ref="waterfallContainerRef"
       >
         <ElyCard
@@ -123,8 +154,6 @@ function handlePageChange(page: number) {
           :key="post.url"
           :content="post"
           :max-width="cardWidth"
-          @loaded="handleLoaded"
-          @suspense="handleSuspense"
         />
       </div>
     </div>

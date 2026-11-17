@@ -102,29 +102,54 @@ html.dark {
     }
   }
 
+  .VPNavBar:not(.has-sidebar) .VPNavBarTitle {
+    @media (min-width: 48rem) {
+      margin-inline-end: 20px;
+    }
+  }
+
+  .VPNavBarSearch {
+    padding: 0 !important;
+  }
+
   .VPNavBarSearchButton {
     border-radius: 0 !important;
-    background-color: color-mix(
-      in srgb,
-      var(--gouache-wash) 55%,
-      var(--gouache-paper)
-    ) !important;
+    background-color: transparent !important;
     border: 1px solid var(--color-accent-border-200) !important;
     transition:
       border-color 0.25s ease,
       background-color 0.25s ease;
+
+    @media (min-width: 48rem) {
+      display: grid !important;
+      grid-template-columns: min-content 1fr min-content;
+      gap: 10px;
+      justify-items: start;
+      align-items: center;
+      width: 320px;
+      height: 36px;
+      padding: 0 12px !important;
+    }
 
     &:hover {
       border-color: var(--color-accent-border-500) !important;
       background-color: var(--gouache-wash) !important;
     }
 
-    .keys kbd {
-      font-family: fonts.$font-family-base;
-      background-color: var(--gouache-paper);
-      border: none;
-      box-shadow: none;
-      border-radius: 0;
+    .keys {
+      border: none !important;
+      border-radius: 0 !important;
+      padding: 0 !important;
+      background: transparent !important;
+
+      kbd {
+        font-family: fonts.$font-family-base;
+        background-color: var(--gouache-paper);
+        border: none;
+        box-shadow: none;
+        border-radius: 0;
+        padding: 2px 5px;
+      }
     }
   }
 
@@ -228,17 +253,6 @@ html.dark {
       }
     }
   }
-}
-
-// Nolebase Git Changelog block alignment
-.vp-nolebase-git-changelog {
-  border-radius: 0 !important;
-  border: 1px solid var(--color-accent-border-200) !important;
-  background-color: color-mix(
-    in srgb,
-    var(--gouache-wash) 38%,
-    var(--gouache-paper)
-  ) !important;
 }
 
 kbd {

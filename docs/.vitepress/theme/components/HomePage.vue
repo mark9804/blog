@@ -170,7 +170,7 @@ function toggleWaterfall(type: "breves" | "quavers") {
 }
 
 :deep(.VPNavBarSearch) {
-  padding: 0;
+  padding: 0 !important;
   justify-content: flex-end;
 }
 
@@ -181,38 +181,46 @@ function toggleWaterfall(type: "breves" | "quavers") {
 }
 
 :deep(.VPNavBarSearchButton) {
-  display: grid;
-  grid-template-columns: min-content 1fr min-content;
-  gap: 10px;
-  justify-items: start;
-  align-items: center;
-  flex-grow: 1;
-  max-width: 260px;
   height: 36px;
-  padding: 0 12px;
+  padding: 0 10px;
   border-radius: 0;
-  background-color: color-mix(
-    in srgb,
-    var(--gouache-wash) 55%,
-    var(--gouache-paper)
-  );
+  background-color: transparent;
   border: 1px solid var(--color-accent-border-200);
   transition:
     border-color 0.25s ease,
     background-color 0.25s ease;
+
+  @media (min-width: 48rem) {
+    display: grid;
+    grid-template-columns: min-content 1fr min-content;
+    gap: 10px;
+    justify-items: start;
+    align-items: center;
+    width: 320px;
+    max-width: 100%;
+    padding: 0 12px;
+  }
 
   &:hover {
     border-color: var(--color-accent-border-500);
     background-color: var(--gouache-wash);
   }
 
-  // Negative-space paper cutouts inside the search bar
-  .keys kbd {
-    font-family: var(--font-family-base);
-    background-color: var(--gouache-paper);
+  // Negative-space paper cutouts inside the search bar (strip VitePress .keys wrapper border)
+  .keys {
     border: none;
-    box-shadow: none;
     border-radius: 0;
+    padding: 0;
+    background: transparent;
+
+    kbd {
+      font-family: var(--font-family-base);
+      background-color: var(--gouache-paper);
+      border: none;
+      box-shadow: none;
+      border-radius: 0;
+      padding: 2px 5px;
+    }
   }
 }
 </style>

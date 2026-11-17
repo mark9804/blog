@@ -1,29 +1,77 @@
 <script setup lang="ts">
 import { computed, onMounted, ref } from "vue";
 import { useData } from "vitepress";
+import { Calendar, Quote } from "@lucide/vue";
 import { userProfile } from "../../configs/userProfile";
 import { data as buildTimeData } from "../loaders/publications.data";
 import type { ScholarData } from "../types/Publication";
-import { fetchScholarData, getScholarEndpoint } from "../utils/scholarUtils";
+import { fetchScholarData } from "../utils/scholarUtils";
+import ElyCard from "./ElysiumUI/ElyCard.vue";
+import ElyTag from "./ElysiumUI/ElyTag.vue";
+
+const CACHE_KEY = "elysium:openalex-scholar:v1";
+const CACHE_TTL_MS = 30 * 60 * 1000;
+
+interface CachedScholarPayload {
+  timestamp: number;
+  data: ScholarData;
+}
 
 const { theme } = useData();
 
 const scholarData = ref<ScholarData>(buildTimeData);
 const isRefreshing = ref(false);
 
-const endpoint = computed(() =>
-  getScholarEndpoint(theme.value?.userProfile?.meta ?? userProfile.meta)
+const scholarConfig = computed(
+  () => theme.value?.userProfile?.scholar ?? userProfile.scholar
 );
 
 const publications = computed(() => scholarData.value.publications);
 
+function readSessionCache(): ScholarData | null {
+  try {
+    const raw = sessionStorage.getItem(CACHE_KEY);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw) as CachedScholarPayload;
+    if (
+      Date.now() - parsed.timestamp < CACHE_TTL_MS &&
+      Array.isArray(parsed.data?.publications) &&
+      parsed.data.publications.length > 0
+    ) {
+      return parsed.data;
+    }
+  } catch {
+    // Ignore storage errors in restricted browser contexts
+  }
+  return null;
+}
+
+function writeSessionCache(data: ScholarData) {
+  try {
+    const payload: CachedScholarPayload = {
+      timestamp: Date.now(),
+      data,
+    };
+    sessionStorage.setItem(CACHE_KEY, JSON.stringify(payload));
+  } catch {
+    // Ignore storage errors
+  }
+}
+
 onMounted(async () => {
-  if (!endpoint.value) return;
+  if (!scholarConfig.value) return;
+
+  const cached = readSessionCache();
+  if (cached) {
+    scholarData.value = cached;
+    return;
+  }
 
   isRefreshing.value = true;
-  const freshData = await fetchScholarData(endpoint.value);
+  const freshData = await fetchScholarData(scholarConfig.value);
   if (freshData && freshData.publications.length > 0) {
     scholarData.value = freshData;
+    writeSessionCache(freshData);
   }
   isRefreshing.value = false;
 });
@@ -32,38 +80,32 @@ onMounted(async () => {
 <template>
   <div
     v-if="publications.length > 0"
-    class="publication-showcase flex flex-col gap-7 my-8"
+    class="publication-showcase vp-raw flex flex-col gap-7 my-8"
   >
-    <article
-      v-for="(pub, index) in publications"
-      :key="`${pub.title}-${index}`"
-      class="publication-item relative"
+    <ElyCard
+      v-for="pub in publications"
+      :key="pub.id"
+      max-width="100%"
+      :href="pub.url"
+      :aria-label="pub.title"
+      :external="Boolean(pub.url)"
     >
-      <!-- Layer 0: Same-size matte gouache plane offset by (4px, 4px) -->
-      <span aria-hidden="true" class="publication-item__gouache-plane" />
-
-      <!-- Layer 1: Closed drafting perimeter with diagonal overhanging crosshairs -->
-      <div
-        aria-hidden="true"
-        class="publication-item__crosshairs pointer-events-none absolute inset-0 z-1"
-      >
-        <span class="pub-crosshair pub-crosshair--top" />
-        <span class="pub-crosshair pub-crosshair--left" />
-        <span class="pub-crosshair pub-crosshair--bottom" />
-        <span class="pub-crosshair pub-crosshair--right" />
-      </div>
-
-      <!-- Layer 2: Publication metadata & hollow negative-space badges -->
-      <div
-        class="publication-item__content relative z-1 flex flex-col gap-2 p-5"
-      >
-        <div class="publication-item__title leading-snug">
+      <template #title>
+        <a
+          v-if="pub.url"
+          :href="pub.url"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           {{ pub.title }}
-        </div>
+        </a>
+        <span v-else>{{ pub.title }}</span>
+      </template>
 
+      <template #meta>
         <div
           v-if="pub.authors.length > 0"
-          class="publication-item__authors text-sm leading-relaxed"
+          class="publication-showcase__authors pt-2 text-sm leading-relaxed"
         >
           <template
             v-for="(author, idx) in pub.authors"
@@ -72,85 +114,52 @@ onMounted(async () => {
             <span v-if="idx > 0">, </span>
             <span
               :class="{
-                'publication-item__author--self': author.isSelf,
+                'publication-showcase__author--self': author.isSelf,
               }"
             >
               {{ author.name }}
             </span>
           </template>
         </div>
+      </template>
 
+      <template #footer>
         <div
-          class="publication-item__meta flex flex-wrap items-center justify-between gap-2 pt-1 text-xs"
+          class="w-full flex flex-wrap items-center justify-between gap-2 text-xs"
         >
-          <span class="publication-item__venue">{{ pub.venue }}</span>
-          <div class="flex items-center gap-2 shrink-0">
-            <span v-if="pub.citations > 0" class="publication-item__badge">
+          <span class="publication-showcase__venue">{{ pub.venue }}</span>
+          <div class="flex items-center gap-1.5 shrink-0">
+            <ElyTag v-if="pub.citations > 0" size="small">
+              <template #icon>
+                <Quote :size="10" :stroke-width="1.75" />
+              </template>
               Cited by {{ pub.citations }}
-            </span>
-            <span
+            </ElyTag>
+            <ElyTag
               v-if="pub.year"
-              class="publication-item__badge publication-item__badge--year"
+              size="small"
+              class="publication-showcase__year"
             >
+              <template #icon>
+                <Calendar :size="10" :stroke-width="1.75" />
+              </template>
               {{ pub.year }}
-            </span>
+            </ElyTag>
           </div>
         </div>
-      </div>
-    </article>
+      </template>
+    </ElyCard>
   </div>
 
   <div v-else-if="isRefreshing" class="flex items-center justify-center py-12">
-    <ElySpinner size="32" stroke-width="3" />
+    <ElySpinner :size="32" label="LOADING PUBLICATIONS" />
   </div>
 
   <ElyEmptyState v-else class="py-12" />
 </template>
 
 <style lang="scss" scoped>
-.publication-item {
-  background-color: transparent;
-
-  &:hover {
-    .pub-crosshair {
-      background-color: var(--color-accent-border-600);
-    }
-
-    .publication-item__gouache-plane {
-      transform: translate3d(6px, 6px, 0);
-      background-color: var(--gouache-wash);
-    }
-
-    .publication-item__title {
-      color: var(--color-accent);
-    }
-  }
-
-  &__gouache-plane {
-    position: absolute;
-    inset: 0;
-    background-color: color-mix(
-      in srgb,
-      var(--gouache-wash) 72%,
-      var(--gouache-paper)
-    );
-    transform: translate3d(4px, 4px, 0);
-    pointer-events: none;
-    z-index: 0;
-    transition:
-      transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
-      background-color 0.25s ease;
-  }
-
-  &__title {
-    font-family: var(--font-family-serif);
-    font-weight: 600;
-    font-size: 1.125rem;
-    letter-spacing: 0.01em;
-    color: var(--gouache-ink);
-    transition: color 0.25s ease;
-  }
-
+.publication-showcase {
   &__authors {
     font-family: var(--font-family-base);
     color: var(--color-accent-text-secondary);
@@ -163,62 +172,14 @@ onMounted(async () => {
     text-underline-offset: 4px;
   }
 
-  &__meta {
+  &__venue {
     font-family: var(--font-family-base);
     color: var(--color-accent-text-tertiary);
   }
 
-  // Hollow paper cutouts matching card tags
-  &__badge {
-    padding: 1px 8px;
-    background-color: var(--gouache-paper);
-    color: var(--color-accent);
-    font-weight: 500;
-
-    &--year {
-      color: var(--gouache-ink);
-    }
-  }
-}
-
-.pub-crosshair {
-  position: absolute;
-  background-color: var(--color-accent-border-200);
-  transition: background-color 0.25s ease;
-
-  &--top {
-    top: 0;
-    left: -9px;
-    right: 0;
-    height: 1px;
-  }
-
-  &--left {
-    top: -9px;
-    left: 0;
-    bottom: 0;
-    width: 1px;
-  }
-
-  &--bottom {
-    bottom: 0;
-    left: 0;
-    right: -9px;
-    height: 1px;
-  }
-
-  &--right {
-    top: 0;
-    right: 0;
-    bottom: -9px;
-    width: 1px;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .publication-item__gouache-plane,
-  .pub-crosshair {
-    transition: none !important;
+  &__year :deep(.elysium-ui__tag--content),
+  &__year :deep(.elysium-ui__tag--icon) {
+    color: var(--gouache-ink);
   }
 }
 </style>

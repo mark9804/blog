@@ -75,7 +75,6 @@ function handleReload() {
   armFallbackTimerIfVisible();
 }
 
-// Flush post so VitePress finishes toggling html.dark before sampling CSS custom properties
 watch(
   isDark,
   async () => {
@@ -105,7 +104,7 @@ onUnmounted(() => {
 <template>
   <section ref="sectionRef" class="giscus-section" aria-label="文章评论">
     <header
-      class="giscus-section__header relative mb-6 pb-2.5 flex items-baseline justify-between gap-4"
+      class="giscus-section__header relative mb-6 pb-2.5 flex flex-wrap items-baseline justify-between gap-4"
     >
       <h2 class="giscus-section__title m-0">Comments</h2>
       <button

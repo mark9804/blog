@@ -5,20 +5,9 @@ import AutoImport from "unplugin-auto-import/vite";
 import RekaResolver from "reka-ui/resolver";
 import Components from "unplugin-vue-components/vite";
 import UnoCSS from "unocss/vite";
-import {
-  presetAttributify,
-  presetIcons,
-  presetWind3,
-  transformerDirectives,
-} from "unocss";
-import Icons from "unplugin-icons/vite";
-import IconsResolver from "unplugin-icons/resolver";
+import { presetAttributify, presetWind3, transformerDirectives } from "unocss";
 import vueDevTools from "vite-plugin-vue-devtools";
 import { RssPlugin } from "vitepress-plugin-rss";
-import {
-  GitChangelog,
-  GitChangelogMarkdownSection,
-} from "@nolebase/vitepress-plugin-git-changelog/vite";
 
 import { rssConfig } from "./rssConfig";
 
@@ -61,31 +50,12 @@ export function createViteConfig(mode: string) {
           ".vitepress/theme/components/ElysiumUI/ElyIcon",
           ".vitepress/theme/components",
         ],
-        resolvers: [RekaResolver(), IconsResolver()],
+        resolvers: [RekaResolver()],
       }),
-      Icons(),
       mode === "development" && vueDevTools(),
       UnoCSS({
-        presets: [
-          presetWind3(),
-          presetIcons({
-            extraProperties: {
-              display: "inline-block",
-              "vertical-align": "middle",
-            },
-          }),
-          presetAttributify(),
-        ],
+        presets: [presetWind3(), presetAttributify()],
         transformers: [transformerDirectives()],
-      }),
-      GitChangelog({
-        repoURL: () => "https://github.com/mark9804/blog",
-      }),
-      GitChangelogMarkdownSection({
-        sections: {
-          disableChangelog: true,
-          disableContributors: true,
-        },
       }),
       RssPlugin(rssConfig),
     ],

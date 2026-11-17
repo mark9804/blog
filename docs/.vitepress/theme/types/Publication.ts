@@ -4,11 +4,13 @@ export interface AuthorSegment {
 }
 
 export interface PublicationItem {
+  id: string;
   title: string;
   authors: AuthorSegment[];
   venue: string;
   citations: number;
   year: number;
+  url?: string;
 }
 
 export interface ScholarData {

@@ -139,12 +139,15 @@ const buttonTag = computed(() => (isLink.value ? "a" : "button"));
   }
 }
 
-@keyframes spin {
-  from {
-    transform: rotate(0deg);
+@keyframes pulse-frame {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
   }
-  to {
-    transform: rotate(360deg);
+  50% {
+    opacity: 0.35;
+    transform: scale(0.78);
   }
 }
 </style>

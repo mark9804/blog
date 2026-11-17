@@ -42,8 +42,10 @@ const classes = computed(() => ({
   "select-none": true,
 }));
 
-const handleClick = () => {
+const handleClick = (e: Event) => {
   if (!props.disabled && props.clickable) {
+    e.stopPropagation();
+    e.preventDefault();
     isActive.value = !isActive.value;
     emit("click", props.id);
   }

@@ -1,6 +1,5 @@
 import {
   defineConfig,
-  presetIcons,
   transformerDirectives,
   transformerVariantGroup,
 } from "unocss";
@@ -29,11 +28,6 @@ export default defineConfig({
   presets: [
     //@ts-expect-error
     presetWind3(),
-    presetIcons({
-      scale: 1.2,
-      warn: true,
-      unit: "em",
-    }),
   ],
   transformers: [transformerDirectives(), transformerVariantGroup()],
   theme: {

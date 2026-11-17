@@ -146,7 +146,7 @@ function buildIframeSrc(): string {
 
 function sendSetConfig() {
   const win = iframeRef.value?.contentWindow;
-  if (!win || !hasIframeLoaded.value) return;
+  if (!win) return;
 
   win.postMessage(
     {
@@ -172,7 +172,6 @@ function sendSetConfig() {
 }
 
 function handleIframeLoad() {
-  hasIframeLoaded.value = true;
   sendSetConfig();
 }
 
@@ -182,6 +181,7 @@ function handleMessage(event: MessageEvent) {
   if (typeof payload !== "object" || !payload?.giscus) return;
 
   const giscusData = payload.giscus;
+  hasIframeLoaded.value = true;
   emit("loaded");
 
   if (
@@ -189,7 +189,6 @@ function handleMessage(event: MessageEvent) {
     giscusData.resizeHeight > 0
   ) {
     iframeHeight.value = giscusData.resizeHeight;
-    hasIframeLoaded.value = true;
   }
 
   if (giscusData.signOut) {
@@ -269,7 +268,14 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="ely-giscus w-full">
+  <div class="ely-giscus relative w-full min-h-[150px]">
+    <div
+      v-if="!hasIframeLoaded"
+      class="ely-giscus__loader absolute inset-0 flex items-center justify-center py-10 pointer-events-none"
+    >
+      <ElySpinner :size="28" label="LOADING COMMENTS" />
+    </div>
+
     <iframe
       v-if="isClientMounted && initialIframeSrc"
       :key="reloadNonce"
@@ -288,14 +294,16 @@ onUnmounted(() => {
 </template>
 
 <style scoped lang="scss">
-.ely-giscus__iframe {
-  min-height: 150px;
-  background-color: transparent;
-  color-scheme: light dark;
-  transition: opacity 0.28s ease;
+.ely-giscus {
+  &__iframe {
+    min-height: 150px;
+    background-color: transparent;
+    color-scheme: light dark;
+    transition: opacity 0.28s ease;
 
-  &.is-loading {
-    opacity: 0;
+    &.is-loading {
+      opacity: 0;
+    }
   }
 }
 </style>

@@ -73,11 +73,9 @@
 
 @mixin loading-spinner {
   display: inline-block;
-  width: 16px;
-  height: 16px;
-  border: 2px solid currentColor;
-  border-radius: 50%;
-  border-right-color: transparent;
+  width: 12px;
+  height: 12px;
+  border: 1.5px solid currentColor;
   margin-right: layouts.$spinner-margin-right;
-  animation: spin 1s linear infinite;
+  animation: pulse-frame 1.2s ease-in-out infinite;
 }
