@@ -101,9 +101,9 @@ kbd {
 }
 
 .custom-block p > code {
-  padding: 1px 4px;
-  backdrop-filter: brightness(60%);
-  border: solid 1px $color-accent-code;
+  padding: 1px 5px;
+  background-color: var(--gouache-paper);
+  border: none;
   color: $color-accent-code;
 }
 
@@ -185,9 +185,10 @@ a.title span,
   }
 
   a {
-    color: inherit;
+    color: $color-accent;
     text-decoration-color: $color-accent-secondary;
-    text-decoration-thickness: 2px;
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 3px;
 
     &::before {
       color: $color-accent-tertiary;

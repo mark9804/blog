@@ -104,9 +104,8 @@ const shouldAriaLabelHide = ref(false);
 <template>
   <component
     :is="isLink ? 'a' : 'div'"
-    class="elysium-ui__card__container w-full grid relative"
+    class="elysium-ui__card__container w-full flex flex-col relative"
     :class="{
-      'no-cover': !props.content.frontmatter.cover,
       'opacity-0': !isVisible,
       'opacity-100': isVisible,
     }"
@@ -115,19 +114,33 @@ const shouldAriaLabelHide = ref(false);
     }"
     :href="isLink && withBase(props.content.url)"
   >
+    <!-- Bottom-right offset matte gouache strip sliced by the crosshair -->
+    <span aria-hidden="true" class="elysium-ui__card--offset-bar" />
+
+    <!-- Closed drafting perimeter with overhanging crosshairs at top-left & bottom-right -->
+    <div
+      aria-hidden="true"
+      class="elysium-ui__card--crosshairs pointer-events-none absolute inset-0 z-1"
+    >
+      <span class="card-crosshair card-crosshair--top" />
+      <span class="card-crosshair card-crosshair--left" />
+      <span class="card-crosshair card-crosshair--bottom" />
+      <span class="card-crosshair card-crosshair--right" />
+    </div>
+
     <a
       v-if="props.content.url"
       :href="withBase(props.content.url)"
-      class="absolute inset-0 w-full h-full z-1"
+      class="absolute inset-0 w-full h-full z-2"
       tabindex="-1"
       :aria-hidden="shouldAriaLabelHide"
       :aria-label="`Read more about ${props.content.frontmatter.title}`"
       @mouseover="shouldAriaLabelHide = false"
       @mouseleave="shouldAriaLabelHide = true"
     />
-    <div class="elysium-ui__card--content flex flex-col pb-5">
+    <div class="elysium-ui__card--content relative z-1 flex flex-col py-5 px-5">
       <div
-        class="elysium-ui__card--cover-container z-0 relative w-full h-full overflow-hidden"
+        class="elysium-ui__card--cover-container z-0 relative w-full overflow-hidden mb-4"
         v-if="props.content.frontmatter.cover"
       >
         <img
@@ -141,7 +154,7 @@ const shouldAriaLabelHide = ref(false);
           loading="eager"
         />
       </div>
-      <h2 class="elysium-ui__card--title pt-4 pl-4 pr-4 m-0">
+      <h2 class="elysium-ui__card--title m-0">
         <a :href="withBase(props.content.url)">
           {{ formalizeString(props.content.frontmatter.title) }}
         </a>
@@ -150,7 +163,7 @@ const shouldAriaLabelHide = ref(false);
         :size="0"
         divider="・"
         wrap
-        class="pt-1.5 pl-4 pr-4 text-tertiary text-xs"
+        class="pt-1.5 text-tertiary text-xs"
       >
         <span>{{ relativeTime }}</span>
         <span>{{ props.content.wordsCount }} 字</span>
@@ -161,18 +174,18 @@ const shouldAriaLabelHide = ref(false);
       </ElySpace>
       <p
         v-if="props.content.frontmatter.description"
-        class="elysium-ui__card--description pt-3 pl-4 pr-4 m-0 text-sm"
+        class="elysium-ui__card--description pt-3.5 m-0 text-sm"
       >
         {{ props.content.frontmatter.description }}
       </p>
       <div
         v-if="props.content.frontmatter.tags?.length"
-        class="elysium-ui__card--tags flex flex-wrap gap-1.5 pt-4 pl-4 pr-4"
+        class="elysium-ui__card--tags flex flex-wrap gap-1.5 pt-4"
       >
         <ElyTag
           v-for="tag in props.content.frontmatter.tags"
           :key="tag"
-          class="z-2"
+          class="z-3"
           :id="tag"
           :title="`搜索含有「${tag}」标签的文章`"
           size="small"
@@ -189,76 +202,48 @@ const shouldAriaLabelHide = ref(false);
 <style scoped lang="scss">
 .elysium-ui__card {
   &__container {
-    grid-template-areas:
-      "cover"
-      "content";
-    background-color: var(--gouache-chalk);
-    border: 1px solid var(--color-accent-border-200);
-    border-radius: 2px;
-    isolation: isolate;
-    transition:
-      opacity 0.45s ease,
-      transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
-      border-color 0.3s ease;
-
-    &.no-cover {
-      grid-template-areas: "content";
-    }
-
-    // Flat gouache backing plane revealed on hover (figure-ground counterchange, zero blur)
-    &::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      z-index: -1;
-      border-radius: 2px;
-      background-color: var(--gouache-wash);
-      border: 1px solid transparent;
-      transform: translate3d(0, 0, 0);
-      opacity: 0;
-      pointer-events: none;
-      transition:
-        transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
-        opacity 0.3s ease,
-        border-color 0.3s ease;
-    }
-
-    // Subtle open upper-left drafting tick on hover
-    &::after {
-      content: "";
-      position: absolute;
-      top: -5px;
-      left: -5px;
-      width: 12px;
-      height: 12px;
-      border-top: 1px solid var(--gouache-pigment);
-      border-left: 1px solid var(--gouache-pigment);
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.25s ease;
-    }
+    background-color: transparent;
+    transition: opacity 0.45s ease;
 
     &:hover {
-      transform: translate3d(-2px, -2px, 0);
-      border-color: var(--color-accent-border-500);
-
-      &::before {
-        transform: translate3d(5px, 5px, 0);
-        opacity: 1;
-        border-color: var(--color-accent-border-200);
+      .card-crosshair {
+        background-color: var(--color-accent-border-600);
       }
 
-      &::after {
-        opacity: 1;
+      .elysium-ui__card--offset-bar {
+        transform: scaleX(1);
+        background-color: color-mix(
+          in srgb,
+          var(--gouache-pigment) 30%,
+          var(--gouache-wash)
+        );
+      }
+
+      .elysium-ui__card--title {
+        color: var(--color-accent);
       }
     }
   }
 
-  &--cover-container {
-    grid-area: cover;
+  // Subtle off-register gouache strip anchoring the bottom edge of each grid cell
+  &--offset-bar {
+    position: absolute;
+    right: -5px;
+    bottom: -5px;
+    width: calc(100% - 14px);
+    height: 10px;
     background-color: var(--gouache-wash);
-    border-bottom: 1px solid var(--color-accent-border-100);
-    border-radius: 1px 1px 0 0;
+    transform-origin: right center;
+    transform: scaleX(0.62);
+    pointer-events: none;
+    z-index: 0;
+    transition:
+      transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+      background-color 0.25s ease;
+  }
+
+  &--cover-container {
+    background-color: var(--gouache-wash);
   }
 
   &--cover {
@@ -269,13 +254,6 @@ const shouldAriaLabelHide = ref(false);
     }
   }
 
-  &--content {
-    grid-area: content;
-    background-color: var(--gouache-chalk);
-    border-radius: 1px;
-  }
-
-  // Unified editorial serif title matching the frontispiece
   &--title {
     font-family: var(--font-family-serif);
     font-weight: 600;
@@ -283,6 +261,7 @@ const shouldAriaLabelHide = ref(false);
     line-height: 1.45;
     letter-spacing: 0.015em;
     color: var(--gouache-ink);
+    transition: color 0.25s ease;
 
     a {
       color: inherit;
@@ -297,13 +276,45 @@ const shouldAriaLabelHide = ref(false);
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .elysium-ui__card__container {
-    transition: none !important;
+.card-crosshair {
+  position: absolute;
+  background-color: var(--color-accent-border-200);
+  transition: background-color 0.25s ease;
 
-    &:hover {
-      transform: none;
-    }
+  &--top {
+    top: 0;
+    left: -9px;
+    right: 0;
+    height: 1px;
+  }
+
+  &--left {
+    top: -9px;
+    left: 0;
+    bottom: 0;
+    width: 1px;
+  }
+
+  &--bottom {
+    bottom: 0;
+    left: 0;
+    right: -9px;
+    height: 1px;
+  }
+
+  &--right {
+    top: 0;
+    right: 0;
+    bottom: -9px;
+    width: 1px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .elysium-ui__card__container,
+  .elysium-ui__card--offset-bar,
+  .card-crosshair {
+    transition: none !important;
   }
 }
 </style>

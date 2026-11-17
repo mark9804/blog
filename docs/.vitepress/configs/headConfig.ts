@@ -1,10 +1,10 @@
 export const headConfig = [
-  ["meta", { name: "theme-color", content: "#f5f3ed" }],
+  ["meta", { name: "theme-color", content: "#f9f8f6" }],
   [
     "meta",
     {
       name: "theme-color",
-      content: "#13181e",
+      content: "#0c1218",
       media: "(prefers-color-scheme: dark)",
     },
   ],

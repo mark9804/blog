@@ -190,22 +190,22 @@ function toggleWaterfall(type: "breves" | "quavers") {
   max-width: 260px;
   height: 36px;
   padding: 0 12px;
-  border-radius: 2px;
-  background-color: var(--gouache-chalk);
-  border: 1px solid var(--color-accent-border-200);
-  transition:
-    border-color 0.25s ease,
-    background-color 0.25s ease;
+  border-radius: 3px;
+  background-color: var(--gouache-card);
+  border: none;
+  transition: background-color 0.25s ease;
 
   &:hover {
-    border-color: var(--color-accent-border-500);
     background-color: var(--gouache-wash);
   }
 
+  // Negative-space paper cutouts inside the borderless chalk search bar
   .keys kbd {
     font-family: var(--font-family-base);
+    background-color: var(--gouache-paper);
+    border: none;
     box-shadow: none;
-    border-radius: 2px;
+    border-radius: 1px;
   }
 }
 </style>
