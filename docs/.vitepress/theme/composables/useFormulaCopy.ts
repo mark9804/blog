@@ -21,11 +21,16 @@ export function useFormulaCopy() {
     copy(text).then(() => {
       const delimiter = isBlock ? "$$" : "$";
       const preview =
-        formula.length > 20
-          ? `${delimiter}${formula.slice(0, 20)}...${delimiter}`
+        formula.length > 24
+          ? `${delimiter}${formula.slice(0, 24)}...${delimiter}`
           : text;
-      toast.success(`Copied ${preview}`, {
+      toast.success("已复制公式", {
+        description: preview,
         position: "top-center",
+        classes: {
+          content: "ely-toast__inline-content",
+          description: "ely-toast__code-chip",
+        },
       });
     });
 
