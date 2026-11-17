@@ -223,7 +223,7 @@ onUnmounted(() => {
     <Teleport to="body">
       <Transition name="fade">
         <div
-          v-if="shouldShowPreview"
+          v-if="shouldShowPreview && imgList[imgIndex]"
           class="elysium-ui elysium-ui__image-preview__container fixed z-999 top-0 left-0 w-full h-full bg-black/40 flex flex-col items-center justify-center gap-4"
           @wheel="handleScroll"
           @touchstart="handleTouch"
@@ -279,8 +279,9 @@ onUnmounted(() => {
     @apply absolute bg-black/50 text-white/80;
 
     &__nav {
-      @apply top-1/2 rounded-[3px];
+      @apply top-1/2 rounded-none;
       @apply w-10 h-10 flex items-center justify-center;
+      border: 1px solid rgba(255, 255, 255, 0.22);
       &--prev {
         @apply left-4;
       }
@@ -290,7 +291,8 @@ onUnmounted(() => {
     }
 
     &--close {
-      @apply top-4 right-4 w-10 h-10 rounded-full flex items-center justify-center;
+      @apply top-4 right-4 w-10 h-10 rounded-none flex items-center justify-center;
+      border: 1px solid rgba(255, 255, 255, 0.22);
     }
   }
 }

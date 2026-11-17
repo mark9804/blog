@@ -1,3 +1,8 @@
+export interface ScholarConfig {
+  orcid?: string;
+  openAlexAuthorIds?: string[];
+}
+
 export type ProfileProps = {
   accent?: string;
   background?: string;
@@ -13,6 +18,7 @@ export type ProfileProps = {
     link: string;
     openInNewTab?: boolean;
   }[];
+  scholar?: ScholarConfig;
   meta?: {
     name: unknown;
     value: unknown;

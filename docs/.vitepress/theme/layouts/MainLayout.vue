@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { useData, useRouter } from "vitepress";
-import GlobalLoader from "../components/GlobalLoader.vue";
 import GiscusComment from "../components/GiscusComment.vue";
 import {
   nextTick,
@@ -15,7 +14,7 @@ import type { ArticleInfo } from "../types/ArticleInfo";
 import { useSearchTags } from "../utils/tagSearchUtils";
 import { useCustomStore } from "../../stores/piniaStore";
 import { useFormulaCopy } from "../composables/useFormulaCopy";
-import { NolebaseGitChangelog } from "@nolebase/vitepress-plugin-git-changelog/client";
+import ElyGitChangelog from "../components/ElysiumUI/ElyGitChangelog.vue";
 declare const __INJECT_SPEED_INSIGHTS__: boolean;
 
 const SpeedInsights = __INJECT_SPEED_INSIGHTS__
@@ -107,7 +106,7 @@ router.onAfterRouteChange = () => {
   <ElyToastMessage />
   <SpeedInsights v-if="SpeedInsights" />
   <transition name="fade-in-out">
-    <GlobalLoader v-if="isLoading" />
+    <ElySpinner v-if="isLoading" :size="34" label="LOADING" fullscreen />
   </transition>
   <Layout>
     <template #doc-footer-before>
@@ -129,7 +128,7 @@ router.onAfterRouteChange = () => {
         </ElyTag>
       </div>
       <div class="mb-5">
-        <NolebaseGitChangelog />
+        <ElyGitChangelog />
       </div>
     </template>
     <template #layout-bottom>
@@ -146,7 +145,7 @@ router.onAfterRouteChange = () => {
         align="center"
         v-else
       >
-        <span class="text-[var(--color-text-3)] !select-none cursor-not-allowed"
+        <span class="text-tertiary !select-none cursor-not-allowed"
           >本页面禁止评论</span
         >
       </ElySpace>
@@ -184,11 +183,5 @@ router.onAfterRouteChange = () => {
 .fade-in-out-enter-from,
 .fade-in-out-leave-to {
   opacity: 0;
-}
-
-h2#页面历史 {
-  opacity: 0;
-  width: 0;
-  height: 0;
 }
 </style>

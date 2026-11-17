@@ -10,7 +10,6 @@ import container from "markdown-it-container";
 import * as MarkdownIt from "markdown-it";
 import type { MarkdownOptions } from "vitepress";
 import type { Token } from "../theme/types/Token";
-import { footnote } from "../plugins/mdit-plugins-footnote";
 
 interface MarkdownItRenderer {
   renderToken: (
@@ -39,8 +38,42 @@ export const markdownConfig: MarkdownOptions = {
       .use(spoiler)
       .use(imgSize)
       .use(sub)
-      .use(sup)
-      .use(footnote);
+      .use(sup);
+
+    // Customize VitePress 2's built-in footnote renderer for hover tooltips and BACK links
+    const getFootnoteSubIdSuffix = (tokens: MarkdownIt.Token[], idx: number) =>
+      (tokens[idx].meta?.subId ?? 0) > 0 ? `:${tokens[idx].meta.subId}` : "";
+
+    md.renderer.rules.footnote_ref = (tokens, idx, options, env, self) => {
+      const id = self.rules.footnote_anchor_name!(
+        tokens,
+        idx,
+        options,
+        env,
+        self
+      );
+      const caption = self.rules.footnote_caption!(
+        tokens,
+        idx,
+        options,
+        env,
+        self
+      );
+      const suffix = getFootnoteSubIdSuffix(tokens, idx);
+      return `<FootnoteRef id="${id}" caption="${caption}" suffix="${suffix}" />`;
+    };
+
+    md.renderer.rules.footnote_anchor = (tokens, idx, options, env, self) => {
+      const id = self.rules.footnote_anchor_name!(
+        tokens,
+        idx,
+        options,
+        env,
+        self
+      );
+      const suffix = getFootnoteSubIdSuffix(tokens, idx);
+      return ` <a href="#footnote-ref${id}${suffix}" class="footnote-backref"><sup>BACK</sup></a>`;
+    };
 
     md.renderer.rules.heading_close = (
       tokens: Token[],

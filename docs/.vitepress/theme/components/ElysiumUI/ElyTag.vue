@@ -42,8 +42,10 @@ const classes = computed(() => ({
   "select-none": true,
 }));
 
-const handleClick = () => {
+const handleClick = (e: Event) => {
   if (!props.disabled && props.clickable) {
+    e.stopPropagation();
+    e.preventDefault();
     isActive.value = !isActive.value;
     emit("click", props.id);
   }
@@ -68,10 +70,10 @@ const handleClose = (e: Event) => {
   >
     <span class="elysium-ui__tag--icon">
       <slot name="icon">
-        <Tag :size="12" :stroke-width="2.25" />
+        <Tag :size="11" :stroke-width="1.75" />
       </slot>
     </span>
-    <span class="elysium-ui__tag--content font-bold">
+    <span class="elysium-ui__tag--content">
       <slot></slot>
     </span>
     <span
@@ -130,7 +132,8 @@ const handleClose = (e: Event) => {
     cursor: pointer;
 
     &:hover {
-      opacity: 0.8;
+      background-color: colors.$color-accent;
+      color: colors.$color-accent-base;
     }
   }
 

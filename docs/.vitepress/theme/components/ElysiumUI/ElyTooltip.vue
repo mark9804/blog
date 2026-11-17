@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { computed, ref, useSlots } from "vue";
 import {
-  TooltipArrow,
   TooltipContent,
   TooltipPortal,
   TooltipProvider,
@@ -12,7 +11,7 @@ import type { TooltipProps } from "./types/TooltipProps";
 
 const props = withDefaults(defineProps<TooltipProps>(), {
   position: "top",
-  sideOffset: 5,
+  sideOffset: 8,
   defaultOpen: false,
   open: undefined,
   disableHoverableContent: undefined,
@@ -92,14 +91,13 @@ function handleOpenChange(next: boolean) {
       </TooltipTrigger>
       <TooltipPortal>
         <TooltipContent
-          class="ely-tooltip__content max-w-80 rounded-sm px-3 py-[6px] text-sm color-[var(--color-accent-base)] bg-[var(--color-accent-text-primary)]"
+          class="ely-tooltip__content relative max-w-80 px-2.5 py-1.5 text-xs"
           :side="side"
           :align="align"
           :side-offset="sideOffset"
         >
           <slot v-if="slots.content" name="content" />
           <template v-else>{{ content }}</template>
-          <TooltipArrow class="ely-tooltip__arrow" :width="8" :height="4" />
         </TooltipContent>
       </TooltipPortal>
     </TooltipRoot>
@@ -108,12 +106,62 @@ function handleOpenChange(next: boolean) {
 
 <style lang="scss">
 .ely-tooltip__content {
-  will-change: transform, opacity;
   z-index: 100;
-  transform-origin: var(--reka-tooltip-content-transform-origin);
-  animation-duration: 0.175s;
-  animation-timing-function: cubic-bezier(0.3, 1.3, 0.3, 1);
+  font-family: var(--font-family-base);
+  line-height: 1.55;
+  letter-spacing: 0.01em;
+  color: var(--color-accent-text-primary);
+  background-color: var(--gouache-paper);
+  border: 1px solid var(--color-accent-border-300);
+  border-radius: 0;
+  box-shadow: 3px 3px 0 0
+    color-mix(in srgb, var(--gouache-wash) 78%, var(--gouache-paper));
+  will-change: transform, opacity;
+  animation-duration: 0.18s;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
   animation-fill-mode: forwards;
+
+  // Top-left overhanging registration crosshair matching cards & frontispiece
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    background-color: var(--color-accent-border-500);
+    pointer-events: none;
+  }
+
+  &::before {
+    top: -1px;
+    left: -5px;
+    width: 11px;
+    height: 1px;
+  }
+
+  &::after {
+    top: -5px;
+    left: -1px;
+    width: 1px;
+    height: 11px;
+  }
+
+  // Clean resets for rich HTML footnote tooltips
+  p {
+    margin: 0;
+  }
+
+  a {
+    color: var(--color-accent);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  code {
+    font-family: var(--font-family-mono);
+    font-size: 0.92em;
+    padding: 0 4px;
+    background-color: var(--gouache-wash);
+    color: var(--color-accent-code);
+  }
 
   &[data-side="top"] {
     animation-name: ely-tooltip-top;
@@ -130,56 +178,58 @@ function handleOpenChange(next: boolean) {
 
   &[data-state="closed"] {
     opacity: 0;
-    transition: opacity 0.1s cubic-bezier(0.3, 1.3, 0.3, 1);
+    transition: opacity 0.12s ease;
   }
 }
 
-// Each direction slides in from the opposite side
 @keyframes ely-tooltip-top {
   from {
     opacity: 0;
-    transform: scale(0.96) translateY(4px);
+    transform: translate3d(0, 3px, 0);
   }
   to {
     opacity: 1;
-    transform: scale(1) translateY(0);
+    transform: translate3d(0, 0, 0);
   }
 }
 
 @keyframes ely-tooltip-bottom {
   from {
     opacity: 0;
-    transform: scale(0.96) translateY(-4px);
+    transform: translate3d(0, -3px, 0);
   }
   to {
     opacity: 1;
-    transform: scale(1) translateY(0);
+    transform: translate3d(0, 0, 0);
   }
 }
 
 @keyframes ely-tooltip-left {
   from {
     opacity: 0;
-    transform: scale(0.96) translateX(4px);
+    transform: translate3d(3px, 0, 0);
   }
   to {
     opacity: 1;
-    transform: scale(1) translateX(0);
+    transform: translate3d(0, 0, 0);
   }
 }
 
 @keyframes ely-tooltip-right {
   from {
     opacity: 0;
-    transform: scale(0.96) translateX(-4px);
+    transform: translate3d(-3px, 0, 0);
   }
   to {
     opacity: 1;
-    transform: scale(1) translateX(0);
+    transform: translate3d(0, 0, 0);
   }
 }
 
-.ely-tooltip__arrow {
-  fill: var(--color-accent-text-primary);
+@media (prefers-reduced-motion: reduce) {
+  .ely-tooltip__content {
+    animation: none !important;
+    transition: none !important;
+  }
 }
 </style>

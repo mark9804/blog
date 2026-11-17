@@ -5,8 +5,13 @@
 @mixin tag-base {
   display: inline-flex;
   align-items: center;
-  border-radius: layouts.$border-radius-sm;
-  transition: layouts.$transition-normal;
+  border-radius: 0;
+  font-family: var(--font-family-base);
+  font-weight: 500;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
   cursor: default;
 }
 
@@ -18,11 +23,11 @@
 
 @mixin tag-primary {
   color: var(--color-accent);
-  background-color: var(--color-accent-quaternary);
+  background-color: var(--gouache-wash);
 }
 
 @mixin tag-secondary {
   color: var(--color-accent);
   background-color: transparent;
-  border: 1px solid var(--color-accent);
+  border: 1px solid var(--color-accent-border-300);
 }

@@ -1,11 +1,33 @@
 export const headConfig = [
-  ["meta", { name: "theme-color", content: "#fbfaf8" }],
+  ["meta", { name: "theme-color", content: "#f9f8f6" }],
   [
     "meta",
     {
       name: "theme-color",
-      content: "#3c3834",
+      content: "#0c1218",
       media: "(prefers-color-scheme: dark)",
+    },
+  ],
+  [
+    "link",
+    {
+      rel: "preconnect",
+      href: "https://fonts.googleapis.com",
+    },
+  ],
+  [
+    "link",
+    {
+      rel: "preconnect",
+      href: "https://fonts.gstatic.com",
+      crossorigin: "",
+    },
+  ],
+  [
+    "link",
+    {
+      rel: "stylesheet",
+      href: "https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400..600;1,6..72,400..500&family=Noto+Serif+SC:wght@500;600&display=swap",
     },
   ],
   [

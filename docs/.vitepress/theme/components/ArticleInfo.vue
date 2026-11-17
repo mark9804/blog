@@ -8,7 +8,7 @@ import { useSearchTags } from "../utils/tagSearchUtils";
 import { useCustomStore } from "../../stores/piniaStore";
 
 const store = useCustomStore();
-const { frontmatter, page, isDark } = useData();
+const { frontmatter, page } = useData();
 const route = useRoute();
 
 const currentPathWithoutBase = computed(
@@ -46,44 +46,46 @@ function handleTagClick(tag: string) {
 
 <template>
   <div
-    class="article-info flex flex-wrap gap-4 items-center mb-5"
+    class="article-info flex flex-wrap gap-x-5 gap-y-2.5 items-center pb-4 mb-7"
     v-if="!frontmatter?.meta?.hideArticleInfo"
   >
     <ElyTooltip
       v-if="lastUpdated || createdAt || !frontmatter?.meta?.hideEditTime"
-      :content="`文章${hasPostUpdate ? '最后更新于' + lastUpdated : '创建于' + createdAt} (GMT+8)`"
+      :content="`文章${hasPostUpdate ? '最后更新于 ' + lastUpdated : '创建于 ' + createdAt} (GMT+8)`"
       position="right"
       disable-hoverable-content
     >
       <span
-        class="text-sm flex items-center gap-1 text-gray-500 dark:text-gray-400"
+        class="text-xs flex items-center gap-1.5 text-tertiary"
         v-if="!frontmatter?.meta?.hideEditTime"
       >
-        <!-- 数字比汉字来得矮，size 要小一些 -->
-        <History :size="13" stroke-linecap="square" v-if="hasPostUpdate" />
-        <Timer :size="13" stroke-linecap="square" v-else />
-        {{ createdAt }} (GMT+8)
+        <History
+          :size="13"
+          :stroke-width="1.5"
+          stroke-linecap="square"
+          v-if="hasPostUpdate"
+        />
+        <Timer :size="13" :stroke-width="1.5" stroke-linecap="square" v-else />
+        <span>{{ createdAt }} (GMT+8)</span>
       </span>
     </ElyTooltip>
     <ElyTooltip
-      :content="`全文共 ${wordsCount} 字${imgCount ? `， ${imgCount} 张图片` : ''}`"
+      :content="`全文共 ${wordsCount} 字${imgCount ? `，${imgCount} 张图片` : ''}`"
       position="right"
       disable-hoverable-content
     >
       <span
-        class="text-sm flex items-center gap-1 text-gray-500 dark:text-gray-400"
+        class="text-xs flex items-center gap-1.5 text-tertiary"
         v-if="!frontmatter?.meta?.hideReadingTime"
       >
-        <Timer
-          theme="outline"
-          :size="14"
-          :color="isDark ? '#9ca3af' : '#6b7280'"
-        />阅读时间 {{ readingTime }} 分钟
+        <Timer :size="13" :stroke-width="1.5" stroke-linecap="square" />
+        <span>阅读时间 {{ readingTime }} 分钟</span>
       </span>
     </ElyTooltip>
-    <span v-if="frontmatter?.tags?.length" class="flex flex-wrap gap-2">
+    <span v-if="frontmatter?.tags?.length" class="flex flex-wrap gap-1.5">
       <ElyTag
         v-for="tag in frontmatter?.tags"
+        :key="tag"
         size="small"
         :id="tag"
         clickable
@@ -94,3 +96,9 @@ function handleTagClick(tag: string) {
     </span>
   </div>
 </template>
+
+<style scoped lang="scss">
+.article-info {
+  border-bottom: 1px solid var(--color-accent-border-200);
+}
+</style>

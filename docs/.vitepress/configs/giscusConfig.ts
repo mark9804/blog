@@ -1,4 +1,4 @@
-import type { GiscusProps } from "@giscus/vue";
+import type { GiscusProps } from "../theme/components/ElysiumUI/types/GiscusProps";
 
 export const giscusConfig: GiscusProps = {
   repo: "mark9804/blog",
@@ -11,5 +11,4 @@ export const giscusConfig: GiscusProps = {
   loading: "lazy",
   reactionsEnabled: "1",
   emitMetadata: "0",
-  theme: "preferred_color_scheme",
 };
