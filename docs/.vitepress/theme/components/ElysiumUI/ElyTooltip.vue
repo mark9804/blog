@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, onUnmounted, ref, useSlots } from "vue";
+import { useData } from "vitepress";
 import {
   TooltipContent,
   TooltipPortal,
@@ -11,6 +12,8 @@ import type { TooltipProps } from "./types/TooltipProps";
 
 type Side = "top" | "right" | "bottom" | "left";
 type Align = "start" | "center" | "end";
+
+const DEFAULT_CLOSE_DELAY = 400;
 
 // Map position shorthand directly to reka-ui side + align
 const POSITION_MAP: Record<
@@ -31,10 +34,19 @@ const props = withDefaults(defineProps<TooltipProps>(), {
   position: "top",
   sideOffset: 8,
   disableHoverableContent: undefined,
-  closeDelay: 0,
+  closeDelay: undefined,
 });
 
+const { theme } = useData();
 const slots = useSlots();
+
+const resolvedCloseDelay = computed(() =>
+  props.closeDelay !== undefined
+    ? props.closeDelay
+    : typeof theme.value?.tooltipCloseDelay === "number"
+      ? theme.value.tooltipCloseDelay
+      : DEFAULT_CLOSE_DELAY
+);
 
 const placement = computed(
   () => POSITION_MAP[props.position] ?? POSITION_MAP.top
@@ -53,14 +65,23 @@ function clearCloseTimer() {
 function handleOpenChange(next: boolean) {
   clearCloseTimer();
 
-  if (next || props.closeDelay <= 0) {
+  if (next || resolvedCloseDelay.value <= 0) {
     isOpen.value = next;
   } else {
     closeTimer = setTimeout(() => {
       isOpen.value = false;
       closeTimer = null;
-    }, props.closeDelay);
+    }, resolvedCloseDelay.value);
   }
+}
+
+function handleTriggerPointerUp(event: PointerEvent) {
+  if (event.pointerType !== "touch") return;
+  if (event.target instanceof Element && event.target.closest("a[href]")) {
+    return;
+  }
+  clearCloseTimer();
+  isOpen.value = !isOpen.value;
 }
 
 onUnmounted(clearCloseTimer);
@@ -71,8 +92,12 @@ onUnmounted(clearCloseTimer);
     :delay-duration="0"
     :disable-hoverable-content="disableHoverableContent"
   >
-    <TooltipRoot :open="isOpen" @update:open="handleOpenChange">
-      <TooltipTrigger as-child>
+    <TooltipRoot
+      :open="isOpen"
+      disable-closing-trigger
+      @update:open="handleOpenChange"
+    >
+      <TooltipTrigger as-child @pointerup="handleTriggerPointerUp">
         <slot />
       </TooltipTrigger>
       <TooltipPortal>

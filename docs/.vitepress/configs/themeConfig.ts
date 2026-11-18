@@ -5,6 +5,7 @@ import { userProfile } from "./userProfile.ts";
 export const themeConfig = {
   userProfile,
   logo: userProfile.avatar,
+  tooltipCloseDelay: 400,
   lastUpdated: {
     text: "最后更新于",
     formatOptions: {
