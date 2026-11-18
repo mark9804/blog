@@ -3,10 +3,11 @@ import { useData, useRouter } from "vitepress";
 import DefaultTheme from "vitepress/theme-without-fonts";
 import {
   nextTick,
+  onMounted,
   onUnmounted,
   provide,
   ref,
-  defineAsyncComponent,
+  watch,
   type ComputedRef,
 } from "vue";
 import GiscusComment from "../components/GiscusComment.vue";
@@ -21,14 +22,6 @@ import { useTagNavigation } from "../composables/useTagNavigation";
 import { useFormulaCopy } from "../composables/useFormulaCopy";
 
 declare const __INJECT_SPEED_INSIGHTS__: boolean;
-
-const SpeedInsights = __INJECT_SPEED_INSIGHTS__
-  ? defineAsyncComponent(() =>
-      import("@vercel/speed-insights/vue").then(m => ({
-        default: m.SpeedInsights,
-      }))
-    )
-  : null;
 
 useFormulaCopy();
 const { navigateToTag } = useTagNavigation();
@@ -77,6 +70,33 @@ provide("toggle-appearance", async () => {
 const router = useRouter();
 const isLoading = ref(false);
 let loadingTimer: ReturnType<typeof setTimeout> | null = null;
+let stopSpeedInsightsWatch: (() => void) | null = null;
+let isLayoutUnmounted = false;
+
+if (__INJECT_SPEED_INSIGHTS__) {
+  onMounted(async () => {
+    const { injectSpeedInsights, computeRoute } =
+      await import("@vercel/speed-insights");
+    if (isLayoutUnmounted) return;
+    const tracker = injectSpeedInsights(
+      {
+        framework: "vitepress",
+        basePath: import.meta.env.VITE_VERCEL_OBSERVABILITY_BASEPATH,
+      },
+      import.meta.env.VITE_VERCEL_OBSERVABILITY_CLIENT_CONFIG
+    );
+    if (!tracker) return;
+    stopSpeedInsightsWatch = watch(
+      () => router.route.path,
+      path => {
+        const params = router.route.data.params as
+          Record<string, string | string[]> | undefined;
+        tracker.setRoute(computeRoute(path, params ?? null));
+      },
+      { immediate: true }
+    );
+  });
+}
 
 function clearLoadingTimer() {
   if (loadingTimer !== null) {
@@ -108,6 +128,9 @@ router.onAfterRouteChange = async to => {
 };
 
 onUnmounted(() => {
+  isLayoutUnmounted = true;
+  stopSpeedInsightsWatch?.();
+  stopSpeedInsightsWatch = null;
   clearLoadingTimer();
   router.onBeforeRouteChange = prevBeforeRouteChange;
   router.onAfterRouteChange = prevAfterRouteChange;
@@ -116,7 +139,6 @@ onUnmounted(() => {
 
 <template>
   <ElyToastMessage />
-  <SpeedInsights v-if="SpeedInsights" />
   <transition name="fade-in-out">
     <ElySpinner v-if="isLoading" :size="34" label="LOADING" fullscreen />
   </transition>
