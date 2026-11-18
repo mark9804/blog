@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { OnClickOutside } from "@vueuse/components";
-import { useElementBounding, useThrottleFn, useWindowSize } from "@vueuse/core";
+import { useThrottleFn, useWindowSize } from "@vueuse/core";
 import {
   computed,
   nextTick,
@@ -22,26 +21,24 @@ const imageStore = useImageStore();
 const currentImage = computed(() => imageStore.images[imageStore.index]);
 const shouldShowNav = computed(() => imageStore.images.length > 1);
 
-// Ignore navigation and close buttons when detecting backdrop clicks
-const clickOutsideOptions = {
-  ignore: [".elysium-ui__image-preview__button"],
-};
-
 const MIN_SCALE = 0.5;
 const MAX_SCALE = 3;
+const TAP_SLOP_PX = 4;
 
 const scale = ref(1);
 const offset = ref({ translateX: 0, translateY: 0 });
-const isDragging = ref(false);
+const baseSize = ref({ width: 0, height: 0 });
 const previewState = ref<PreviewLoadState>("loading");
+
 const imageRef = useTemplateRef<HTMLImageElement>("imageRef");
+const fallbackRef = useTemplateRef<HTMLDivElement>("fallbackRef");
 
 // Track active pointers uniformly across mouse drag, single-touch pan, and two-finger pinch
 const activePointers = new Map<number, { x: number; y: number }>();
 let lastPinchDistance = 0;
 let dragDistance = 0;
+let hadMultiTouch = false;
 
-const { width: imageWidth, height: imageHeight } = useElementBounding(imageRef);
 const { width: windowWidth, height: windowHeight } = useWindowSize();
 
 enum ScrollIntent {
@@ -55,11 +52,25 @@ const setIntentThrottled = useThrottleFn((intent: ScrollIntent) => {
   scrollIntent.value = intent;
 }, 500);
 
+function syncBaseSize() {
+  const el = imageRef.value;
+  if (!el) return;
+  baseSize.value = {
+    width: el.offsetWidth,
+    height: el.offsetHeight,
+  };
+}
+
 watch(
-  () => [imageWidth.value, imageHeight.value],
-  ([newWidth, newHeight]) => {
-    // Switch wheel behavior to panning when zoomed image exceeds the viewport
-    if (newWidth > windowWidth.value || newHeight > windowHeight.value) {
+  () => [
+    baseSize.value.width * scale.value,
+    baseSize.value.height * scale.value,
+    windowWidth.value,
+    windowHeight.value,
+  ],
+  ([scaledWidth, scaledHeight, winW, winH]) => {
+    // Switch wheel behavior to panning when the scaled visual box exceeds the viewport
+    if (scaledWidth > winW || scaledHeight > winH) {
       setIntentThrottled(ScrollIntent.Pan);
     } else {
       setIntentThrottled(ScrollIntent.Resize);
@@ -67,13 +78,21 @@ watch(
   }
 );
 
+watch([windowWidth, windowHeight], () => {
+  if (imageStore.visible && previewState.value === "loaded") {
+    syncBaseSize();
+  }
+});
+
 function resetTransform() {
   scale.value = 1;
   offset.value = { translateX: 0, translateY: 0 };
+  baseSize.value = { width: 0, height: 0 };
+  scrollIntent.value = ScrollIntent.Resize;
   activePointers.clear();
   lastPinchDistance = 0;
   dragDistance = 0;
-  isDragging.value = false;
+  hadMultiTouch = false;
 }
 
 function updateScale(delta: number) {
@@ -84,8 +103,8 @@ function updateOffset(deltaX = 0, deltaY = 0) {
   // CSS transform order is scale() then translate3d() (right-to-left),
   // so divide by scale to keep panning 1:1 with pointer movement.
   const s = scale.value;
-  const maxX = Math.max(imageWidth.value, 1);
-  const maxY = Math.max(imageHeight.value, 1);
+  const maxX = Math.max(baseSize.value.width || windowWidth.value, 1);
+  const maxY = Math.max(baseSize.value.height || windowHeight.value, 1);
   offset.value = {
     translateX: clamp(offset.value.translateX + deltaX / s, -maxX, maxX),
     translateY: clamp(offset.value.translateY + deltaY / s, -maxY, maxY),
@@ -120,12 +139,16 @@ function handlePointerDown(event: PointerEvent) {
     event.pointerId
   );
   activePointers.set(event.pointerId, { x: event.clientX, y: event.clientY });
+
   if (activePointers.size === 1) {
     dragDistance = 0;
-  } else if (activePointers.size === 2) {
-    lastPinchDistance = getPinchDistance();
+    hadMultiTouch = false;
+  } else {
+    hadMultiTouch = true;
+    if (activePointers.size === 2) {
+      lastPinchDistance = getPinchDistance();
+    }
   }
-  isDragging.value = true;
 }
 
 function handlePointerMove(event: PointerEvent) {
@@ -151,14 +174,54 @@ function handlePointerMove(event: PointerEvent) {
   }
 }
 
-function handlePointerEnd(event: PointerEvent) {
-  activePointers.delete(event.pointerId);
+function releasePointer(pointerId: number) {
+  activePointers.delete(pointerId);
   if (activePointers.size < 2) {
     lastPinchDistance = 0;
   }
-  if (activePointers.size === 0) {
-    isDragging.value = false;
+}
+
+// Geometric hit-test against getBoundingClientRect(), which natively reflects
+// the post-scale() and post-translate3d() visual box rather than the unscaled DOM layout box.
+function isPointInsideActiveContent(clientX: number, clientY: number): boolean {
+  const targetEl =
+    previewState.value === "loaded"
+      ? imageRef.value
+      : previewState.value === "error"
+        ? fallbackRef.value
+        : null;
+
+  if (!targetEl) return false;
+  const rect = targetEl.getBoundingClientRect();
+  return (
+    clientX >= rect.left &&
+    clientX <= rect.right &&
+    clientY >= rect.top &&
+    clientY <= rect.bottom
+  );
+}
+
+function handlePointerUp(event: PointerEvent) {
+  if (!activePointers.has(event.pointerId)) return;
+  releasePointer(event.pointerId);
+
+  if (
+    activePointers.size === 0 &&
+    !hadMultiTouch &&
+    dragDistance <= TAP_SLOP_PX &&
+    !isPointInsideActiveContent(event.clientX, event.clientY)
+  ) {
+    handleClose();
   }
+}
+
+function handlePointerCancel(event: PointerEvent) {
+  releasePointer(event.pointerId);
+}
+
+function handleImageLoad() {
+  previewState.value = "loaded";
+  syncBaseSize();
 }
 
 function handleKeydown(event: KeyboardEvent) {
@@ -187,7 +250,12 @@ function syncPreviewState() {
   }
   const el = imageRef.value;
   if (!el || !el.complete) return;
-  previewState.value = el.naturalWidth > 0 ? "loaded" : "error";
+  if (el.naturalWidth > 0) {
+    previewState.value = "loaded";
+    syncBaseSize();
+  } else {
+    previewState.value = "error";
+  }
 }
 
 watch(
@@ -212,11 +280,6 @@ function handleClose() {
   imageStore.closeImagePreview();
 }
 
-function handleClickOutside() {
-  if (isDragging.value || dragDistance > 4) return;
-  handleClose();
-}
-
 onUnmounted(() => {
   document.removeEventListener("keydown", handleKeydown);
   resetTransform();
@@ -230,13 +293,13 @@ onUnmounted(() => {
       <Transition name="fade">
         <div
           v-if="imageStore.visible && currentImage"
-          class="elysium-ui elysium-ui__image-preview__container fixed z-999 inset-0 flex flex-col items-center justify-center gap-4 select-none"
+          class="elysium-ui elysium-ui__image-preview__container fixed z-999 inset-0 flex items-center justify-center select-none"
           @wheel="handleScroll"
           @pointerdown="handlePointerDown"
           @pointermove="handlePointerMove"
-          @pointerup="handlePointerEnd"
-          @pointercancel="handlePointerEnd"
-          @lostpointercapture="handlePointerEnd"
+          @pointerup="handlePointerUp"
+          @pointercancel="handlePointerCancel"
+          @lostpointercapture="handlePointerCancel"
         >
           <ElySpinner
             v-if="previewState === 'loading'"
@@ -245,30 +308,29 @@ onUnmounted(() => {
             class="pointer-events-none absolute"
           />
 
-          <OnClickOutside
-            :options="clickOutsideOptions"
-            @trigger="handleClickOutside"
+          <img
+            v-if="previewState !== 'error'"
+            :key="currentImage.src"
+            ref="imageRef"
+            draggable="false"
+            class="elysium-ui__image-preview--image block"
+            :class="{ 'opacity-0': previewState === 'loading' }"
+            :src="currentImage.src"
+            :alt="currentImage.alt || 'Image preview'"
+            :style="{
+              transform: `scale(${scale}) translate3d(${offset.translateX}px, ${offset.translateY}px, 0)`,
+            }"
+            @load="handleImageLoad"
+            @error="previewState = 'error'"
+          />
+          <div
+            v-else
+            ref="fallbackRef"
+            class="elysium-ui__image-preview__fallback"
           >
-            <img
-              v-if="previewState !== 'error'"
-              :key="currentImage.src"
-              ref="imageRef"
-              draggable="false"
-              class="elysium-ui__image-preview--image w-full max-w-screen-md object-contain flex-1"
-              :class="{ 'opacity-0': previewState === 'loading' }"
-              :src="currentImage.src"
-              :alt="currentImage.alt || 'Image preview'"
-              :style="{
-                transform: `scale(${scale}) translate3d(${offset.translateX}px, ${offset.translateY}px, 0)`,
-              }"
-              @load="previewState = 'loaded'"
-              @error="previewState = 'error'"
-            />
-            <div v-else class="elysium-ui__image-preview__fallback">
-              <ImageOff :size="24" :stroke-width="1.5" />
-              <span>图片加载失败</span>
-            </div>
-          </OnClickOutside>
+            <ImageOff :size="24" :stroke-width="1.5" />
+            <span>图片加载失败</span>
+          </div>
 
           <ElyButton
             v-if="shouldShowNav"
@@ -312,6 +374,15 @@ onUnmounted(() => {
   &__container {
     touch-action: none;
     background-color: color-mix(in srgb, var(--gouache-paper) 84%, transparent);
+  }
+
+  &--image {
+    width: auto;
+    height: auto;
+    max-width: min(92vw, 48rem);
+    max-height: 88dvh;
+    object-fit: contain;
+    will-change: transform;
   }
 
   &__button {

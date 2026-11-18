@@ -35,9 +35,6 @@ importers:
       '@vercel/speed-insights':
         specifier: ^2.0.0
         version: 2.1.0(vue@3.5.45(typescript@6.0.3))
-      '@vueuse/components':
-        specifier: 12.5.0
-        version: 12.5.0(typescript@6.0.3)
       '@vueuse/core':
         specifier: 12.5.0
         version: 12.5.0(typescript@6.0.3)
@@ -1305,9 +1302,6 @@ packages:
 
   '@vue/shared@3.5.45':
     resolution: {integrity: sha512-ue9fgHmVNPlP7iW3+cxoBX/Cnlw53dHlVSw0JKGY6z1lObg8pHoj928M2nzG4/yVsMZ3NaRZ2s2z61uC16NDwQ==}
-
-  '@vueuse/components@12.5.0':
-    resolution: {integrity: sha512-aLgEW8bidRZ4qkVOIl958NAev+XKYTtbfsIj5ObjiDwvBDqxmGVCwMQvWHUQN37tb8JSkRF22gTUbXNt0iSwLQ==}
 
   '@vueuse/core@12.5.0':
     resolution: {integrity: sha512-GVyH1iYqNANwcahAx8JBm6awaNgvR/SwZ1fjr10b8l1HIgDp82ngNbfzJUgOgWEoxjL+URAggnlilAEXwCOZtg==}
@@ -3797,14 +3791,6 @@ snapshots:
   '@vue/shared@3.5.44': {}
 
   '@vue/shared@3.5.45': {}
-
-  '@vueuse/components@12.5.0(typescript@6.0.3)':
-    dependencies:
-      '@vueuse/core': 12.5.0(typescript@6.0.3)
-      '@vueuse/shared': 12.5.0(typescript@6.0.3)
-      vue: 3.5.45(typescript@6.0.3)
-    transitivePeerDependencies:
-      - typescript
 
   '@vueuse/core@12.5.0(typescript@6.0.3)':
     dependencies:
