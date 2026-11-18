@@ -1,117 +1,75 @@
 <script setup lang="ts">
-import {
-  computed,
-  ref,
-  watch,
-  nextTick,
-  onMounted,
-  onUnmounted,
-  useTemplateRef,
-} from "vue";
-import { cluster } from "radashi";
+import { computed, ref, useTemplateRef, watch } from "vue";
+import { useElementSize } from "@vueuse/core";
 import type { Post } from "../types/Post";
+import ElyCard from "./ElysiumUI/ElyCard.vue";
 import ElyPagination from "./ElysiumUI/ElyPagination.vue";
 import ElyEmptyState from "./ElysiumUI/ElyEmptyState.vue";
 
-const props = withDefaults(
-  defineProps<{
-    posts: Post[];
-    width?: number;
-  }>(),
-  {
-    width: 0,
-  }
-);
+const props = defineProps<{
+  posts: Post[];
+}>();
 
-const currentPage = ref(1);
-const pageSize = ref(20);
-const isClientReady = ref(false);
-
+const PAGE_SIZE = 20;
+const DEFAULT_SSR_COLUMNS = 3;
 const GUTTER = 28;
 const MIN_CARD_WIDTH = 272;
 
-const waterfallCount = computed(() =>
-  Math.max(Math.floor((props.width + GUTTER) / (MIN_CARD_WIDTH + GUTTER)), 1)
+const currentPage = ref(1);
+const containerRef = useTemplateRef<HTMLDivElement>("containerRef");
+const { width } = useElementSize(containerRef);
+
+// Default to 3 columns on SSR and initial hydration before ResizeObserver fires
+const colCount = computed(() =>
+  width.value > 0
+    ? Math.max(
+        1,
+        Math.floor((width.value + GUTTER) / (MIN_CARD_WIDTH + GUTTER))
+      )
+    : DEFAULT_SSR_COLUMNS
 );
 
-const gapSize = computed(() => GUTTER);
+const paginatedPosts = computed(() => {
+  const start = (currentPage.value - 1) * PAGE_SIZE;
+  return props.posts.slice(start, start + PAGE_SIZE);
+});
 
-const cardWidth = computed(() =>
-  Math.floor(
-    (props.width - (waterfallCount.value - 1) * gapSize.value) /
-      waterfallCount.value
-  )
-);
+// Deterministic card height estimate from post metadata (zero DOM reflows)
+function estimatePostWeight(post: Post): number {
+  const baseChrome = 112;
+  const coverWeight = post.frontmatter.cover ? 200 : 0;
+  const titleLines = Math.max(
+    1,
+    Math.ceil((post.frontmatter.title?.length ?? 0) / 16)
+  );
+  const descLength = post.frontmatter.description?.length ?? 0;
+  const descWeight = descLength > 0 ? 14 + Math.ceil(descLength / 22) * 23 : 0;
+  const tagCount = post.frontmatter.tags?.length ?? 0;
+  const tagWeight = tagCount > 0 ? 16 + Math.ceil(tagCount / 3) * 26 : 0;
 
-const waterfallContainerRef = useTemplateRef<HTMLDivElement[]>(
-  "waterfallContainerRef"
-);
-const waterfallItemsList = ref<Post[][]>([]);
-
-let layoutEpoch = 0;
-let isUnmounted = false;
-
-async function findShortestColumn(assumeImageHeight = 0): Promise<number> {
-  await nextTick();
-  const containers = waterfallContainerRef.value;
-  if (!containers || containers.length === 0) return 0;
-
-  let minHeight = Infinity;
-  let targetColumnIndex = 0;
-
-  for (let i = 0; i < containers.length; i++) {
-    const col = containers[i];
-    if (!col) continue;
-    const height = col.offsetHeight + assumeImageHeight;
-    if (height < minHeight) {
-      minHeight = height;
-      targetColumnIndex = i;
-    }
-  }
-
-  return targetColumnIndex;
+  return baseChrome + coverWeight + titleLines * 26 + descWeight + tagWeight;
 }
 
-const chunkedPosts = computed(() => cluster(props.posts, pageSize.value));
+const waterfallColumns = computed<Post[][]>(() => {
+  const count = colCount.value;
+  const columns: Post[][] = Array.from({ length: count }, () => []);
+  const heights = new Array<number>(count).fill(0);
 
-const paginatedPosts = computed(
-  () => chunkedPosts.value[currentPage.value - 1] ?? []
-);
-
-async function distributeWaterfall() {
-  if (!isClientReady.value || props.width <= 0) return;
-
-  const epoch = ++layoutEpoch;
-  const colCount = waterfallCount.value;
-  const items = paginatedPosts.value;
-
-  waterfallItemsList.value = Array.from({ length: colCount }, () => []);
-
-  if (items.length === 0) return;
-
-  for (const post of items) {
-    const targetColumnIndex = await findShortestColumn();
-    // Abort stale async runs so concurrent ResizeObserver/router updates never duplicate keys
-    if (isUnmounted || epoch !== layoutEpoch) return;
-    const bucket = waterfallItemsList.value[targetColumnIndex];
-    if (bucket) {
-      bucket.push(post);
+  for (const post of paginatedPosts.value) {
+    let targetIdx = 0;
+    for (let i = 1; i < count; i++) {
+      if (heights[i] < heights[targetIdx]) {
+        targetIdx = i;
+      }
     }
+    columns[targetIdx].push(post);
+    heights[targetIdx] += estimatePostWeight(post) + GUTTER;
   }
-}
 
-// Re-distribute only when column count, post slice, or initial non-zero measurement changes.
-// Pure cardWidth adjustments within the same column count resize smoothly via CSS.
-const hasMeasuredWidth = computed(() => props.width > 0);
+  return columns;
+});
 
-watch(
-  () => [hasMeasuredWidth.value, waterfallCount.value, paginatedPosts.value],
-  () => {
-    distributeWaterfall();
-  }
-);
-
-// Reset to page 1 when switching tabs or tag filters shrinks total page count
+// Reset to page 1 when switching tabs or tag filters changes the post list
 watch(
   () => props.posts,
   () => {
@@ -122,45 +80,32 @@ watch(
 function handlePageChange(page: number) {
   currentPage.value = page;
 }
-
-onMounted(() => {
-  isClientReady.value = true;
-  distributeWaterfall();
-});
-
-onUnmounted(() => {
-  isUnmounted = true;
-  layoutEpoch += 1;
-});
 </script>
 
 <template>
   <div
     v-if="posts.length > 0"
+    ref="containerRef"
     class="article-list__waterfall flex flex-col w-full gap-8"
   >
-    <div
-      class="article-list__waterfall__articles-container flex justify-between w-full items-start"
-    >
+    <div class="article-list__waterfall__articles-container">
       <div
-        class="article-list__waterfall-item flex flex-col"
-        :style="{ gap: `${gapSize}px`, width: `${cardWidth}px` }"
-        v-for="(items, colIdx) in waterfallItemsList"
+        v-for="(items, colIdx) in waterfallColumns"
         :key="colIdx"
-        ref="waterfallContainerRef"
+        class="article-list__waterfall-item"
       >
         <ElyCard
           v-for="post in items"
           :key="post.url"
           :content="post"
-          :max-width="cardWidth"
+          max-width="100%"
         />
       </div>
     </div>
     <ElyPagination
       :total="posts.length"
       :current="currentPage"
-      :page-size="pageSize"
+      :page-size="PAGE_SIZE"
       @change="handlePageChange"
     />
   </div>
@@ -168,5 +113,20 @@ onUnmounted(() => {
 </template>
 
 <style scoped lang="scss">
-// Flat matte gouache layout: zero blurry container drop-shadows
+.article-list__waterfall {
+  &__articles-container {
+    display: flex;
+    align-items: flex-start;
+    gap: 28px;
+    width: 100%;
+  }
+
+  &-item {
+    flex: 1 1 0;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+}
 </style>

@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import type { ToasterProps } from "vue-sonner";
 import { Check, Info, OctagonX, TriangleAlert, X as Close } from "@lucide/vue";
-import { Toaster, toast } from "vue-sonner";
+import { Toaster } from "vue-sonner";
 import { useData } from "vitepress";
 import ElySpinner from "./ElySpinner.vue";
 
@@ -10,10 +10,6 @@ const props = withDefaults(defineProps<ToasterProps>(), {
 });
 
 const { isDark } = useData();
-
-defineExpose({
-  toast,
-});
 </script>
 
 <template>

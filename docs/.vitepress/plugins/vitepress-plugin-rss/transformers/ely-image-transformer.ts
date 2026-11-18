@@ -1,49 +1,106 @@
-export function elyImageTransformer(content: string): string {
-  // 匹配 ElyImage 组件的正则表达式，width 和 height 为可选属性
-  const regex =
-    /<ElyImage :image="\{\'src\':\'(.*?)\',\'alt\':\'(.*?)\'(?:,\'width\':\'(\d+px)\')?(?:,\'height\':\'(\d+px)\')?\}" lazy \/>/g;
+import { decodeHTML } from "entities";
+import type { ImageBase } from "../../../theme/components/ElysiumUI/types/ImageBase.ts";
 
-  // 替换为标准 img 标签，如果存在 width 和 height 则添加这些属性
-  return content.replace(regex, (_, src, alt, width, height) => {
-    const widthAttr = width ? ` width="${width}"` : "";
-    const heightAttr = height ? ` height="${height}"` : "";
-    return `<img src="${src}" alt="${alt}"${widthAttr}${heightAttr} />`;
+function escapeHtml(value: string): string {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+}
+
+function escapeHtmlAttr(value: string): string {
+  return escapeHtml(value).replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+}
+
+function extractAttr(attrs: string, name: string): string | undefined {
+  const doubleQuoted = new RegExp(`(?:^|\\s)${name}="([^"]*)"`).exec(attrs);
+  if (doubleQuoted) return decodeHTML(doubleQuoted[1]);
+
+  const singleQuoted = new RegExp(`(?:^|\\s)${name}='([^']*)'`).exec(attrs);
+  if (singleQuoted) return decodeHTML(singleQuoted[1]);
+
+  return undefined;
+}
+
+function parseElyImagePayload(rawAttr: string): ImageBase | null {
+  try {
+    return JSON.parse(rawAttr) as ImageBase;
+  } catch {
+    try {
+      return JSON.parse(rawAttr.replace(/'/g, '"')) as ImageBase;
+    } catch {
+      return null;
+    }
+  }
+}
+
+export function stripArticleInfoTransformer(content: string): string {
+  return content.replace(
+    /<ArticleInfo\b[^>]*?(?:\/>|>[\s\S]*?<\/ArticleInfo>)/g,
+    ""
+  );
+}
+
+export function footnoteRefTransformer(content: string): string {
+  return content.replace(
+    /<FootnoteRef\b([^>]*?)\/>/g,
+    (match, attrs: string) => {
+      const id = extractAttr(attrs, "id");
+      if (!id) return match;
+
+      const caption = extractAttr(attrs, "caption") ?? id;
+      const suffix = extractAttr(attrs, "suffix") ?? "";
+      const label = caption.startsWith("[")
+        ? escapeHtml(caption)
+        : `[${escapeHtml(caption)}]`;
+      const anchorId = escapeHtmlAttr(`footnote-ref${id}${suffix}`);
+      const href = escapeHtmlAttr(`#footnote${id}`);
+
+      return `<sup class="footnote-ref"><a id="${anchorId}" href="${href}">${label}</a></sup>`;
+    }
+  );
+}
+
+export function elyImageTransformer(content: string): string {
+  return content.replace(/<ElyImage\b([^>]*?)\/?>/g, (match, attrs: string) => {
+    const rawImage = extractAttr(attrs, ":image");
+    if (!rawImage) return match;
+
+    const image = parseElyImagePayload(rawImage);
+    if (!image?.src) return match;
+
+    const srcAttr = ` src="${escapeHtmlAttr(image.src)}"`;
+    const altAttr = ` alt="${escapeHtmlAttr(image.alt ?? "")}"`;
+    const widthAttr = image.width
+      ? ` width="${escapeHtmlAttr(String(image.width))}"`
+      : "";
+    const heightAttr = image.height
+      ? ` height="${escapeHtmlAttr(String(image.height))}"`
+      : "";
+
+    return `<img${srcAttr}${altAttr}${widthAttr}${heightAttr} />`;
   });
 }
 
 export function elyImageGalleryTransformer(content: string): string {
-  // 匹配 ElyImageGallery 组件的正则表达式
-  const regex = /<ElyImageGallery name="(.*?)" :imgList="(\[.*?\])" \/>/g;
-
-  return content.replace(regex, (match, name, imgListStr) => {
-    try {
-      // 将字符串转换为可解析的JSON格式
-      const jsonStr = imgListStr.replace(/'/g, '"');
-      const imgList = JSON.parse(jsonStr);
-
-      // 生成图片标签集合
-      const imgTags = imgList
-        .map((img: { src: string; alt: string }) => {
-          return `<img src="${img.src}" alt="${img.alt || name}" />`;
-        })
-        .join("\n");
-
-      // 添加一个包装div，包含图集名称和所有图片
-      return `<div class="image-gallery">
-  ${!!name ? "<h4>" + name + "</h4>" : ""}
-  ${imgTags}
-</div>`;
-    } catch (error) {
-      console.error("Error parsing ElyImageGallery:", error);
-      return match; // 如果解析失败，保留原始标签
+  return content.replace(
+    /<ElyImageGallery\b([^>]*)>([\s\S]*?)<\/ElyImageGallery>/g,
+    (_, attrs: string, innerHtml: string) => {
+      const name = extractAttr(attrs, "name")?.trim() ?? "";
+      const body = innerHtml.trim();
+      const captionHtml = name
+        ? `\n  <figcaption>${escapeHtml(name)}</figcaption>`
+        : "";
+      return `<figure class="image-gallery">\n  ${body}${captionHtml}\n</figure>`;
     }
-  });
+  );
 }
 
-// 组合转换器函数，按顺序应用所有转换器
 export function applyAllImageTransformers(content: string): string {
-  let transformedContent = content;
-  transformedContent = elyImageTransformer(transformedContent);
-  transformedContent = elyImageGalleryTransformer(transformedContent);
-  return transformedContent;
+  let transformed = content;
+  transformed = stripArticleInfoTransformer(transformed);
+  transformed = footnoteRefTransformer(transformed);
+  transformed = elyImageTransformer(transformed);
+  transformed = elyImageGalleryTransformer(transformed);
+  return transformed;
 }

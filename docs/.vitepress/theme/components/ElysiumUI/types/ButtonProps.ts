@@ -1,16 +1,7 @@
 export type ButtonProps = {
-  as?: "link" | "button";
+  size?: "small" | "medium" | "icon";
+  secondary?: boolean;
   active?: boolean;
   disabled?: boolean;
-  bold?: boolean;
-  size?: "mini" | "small" | "medium" | "large";
-  bordered?: boolean;
-  wide?: boolean;
-  loading?: boolean;
-  /* 按钮类型 */
-  primary?: boolean;
-  secondary?: boolean;
-  text?: boolean;
-  href?: string;
   ariaLabel?: string;
 };

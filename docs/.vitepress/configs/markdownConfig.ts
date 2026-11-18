@@ -1,22 +1,22 @@
-import implicitFigures from "markdown-it-implicit-figures";
+import { imgSize } from "@mdit/plugin-img-size";
 import { mark } from "@mdit/plugin-mark";
 import { ruby } from "@mdit/plugin-ruby";
 import { spoiler } from "@mdit/plugin-spoiler";
-import { imgSize } from "@mdit/plugin-img-size";
 import { sub } from "@mdit/plugin-sub";
 import { sup } from "@mdit/plugin-sup";
-import { generateImgComponent } from "../theme/utils/generateImgComponent";
+import type { Token } from "markdown-it";
 import container from "markdown-it-container";
-import * as MarkdownIt from "markdown-it";
+import implicitFigures from "markdown-it-implicit-figures";
 import type { MarkdownOptions } from "vitepress";
-import type { Token } from "../theme/types/Token";
+import { generateImgComponent } from "../theme/utils/generateImgComponent.ts";
 
-interface MarkdownItRenderer {
-  renderToken: (
-    tokens: Token[],
-    idx: number,
-    options: MarkdownIt.Options
-  ) => string;
+function escapeAttr(value: string): string {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
 }
 
 export const markdownConfig: MarkdownOptions = {
@@ -25,7 +25,7 @@ export const markdownConfig: MarkdownOptions = {
     level: [2, 6],
   },
   image: {
-    lazyLoading: true,
+    lazyLoad: true,
   },
   lineNumbers: true,
   config: md => {
@@ -41,7 +41,7 @@ export const markdownConfig: MarkdownOptions = {
       .use(sup);
 
     // Customize VitePress 2's built-in footnote renderer for hover tooltips and BACK links
-    const getFootnoteSubIdSuffix = (tokens: MarkdownIt.Token[], idx: number) =>
+    const getFootnoteSubIdSuffix = (tokens: Token[], idx: number): string =>
       (tokens[idx].meta?.subId ?? 0) > 0 ? `:${tokens[idx].meta.subId}` : "";
 
     md.renderer.rules.footnote_ref = (tokens, idx, options, env, self) => {
@@ -60,7 +60,7 @@ export const markdownConfig: MarkdownOptions = {
         self
       );
       const suffix = getFootnoteSubIdSuffix(tokens, idx);
-      return `<FootnoteRef id="${id}" caption="${caption}" suffix="${suffix}" />`;
+      return `<FootnoteRef id="${escapeAttr(id)}" caption="${escapeAttr(caption)}" suffix="${escapeAttr(suffix)}" />`;
     };
 
     md.renderer.rules.footnote_anchor = (tokens, idx, options, env, self) => {
@@ -72,17 +72,10 @@ export const markdownConfig: MarkdownOptions = {
         self
       );
       const suffix = getFootnoteSubIdSuffix(tokens, idx);
-      return ` <a href="#footnote-ref${id}${suffix}" class="footnote-backref"><sup>BACK</sup></a>`;
+      return ` <a href="#footnote-ref${escapeAttr(id + suffix)}" class="footnote-backref"><sup>BACK</sup></a>`;
     };
 
-    md.renderer.rules.heading_close = (
-      tokens: Token[],
-      idx: number,
-      // @ts-ignore
-      options: MarkdownIt.Options,
-      env: Record<string, unknown>,
-      self: MarkdownItRenderer
-    ) => {
+    md.renderer.rules.heading_close = (tokens, idx, options, _env, self) => {
       let parsedResult = self.renderToken(tokens, idx, options);
       if (tokens[idx].tag === "h1") {
         parsedResult += `\n<ArticleInfo />\n`;
@@ -90,25 +83,22 @@ export const markdownConfig: MarkdownOptions = {
       return parsedResult;
     };
 
-    md.renderer.rules.image = (tokens: Token[], idx: number) => {
+    md.renderer.rules.image = (tokens, idx) => {
       return generateImgComponent(tokens[idx]);
     };
 
     // Gallery container
-    md.use(container, "gallery", {
-      render(tokens: Token[], idx: number) {
+    container(md as unknown as Parameters<typeof container>[0], "gallery", {
+      render(tokens: Token[], idx: number): string {
         if (tokens[idx].nesting === 1) {
           const name = tokens[idx].info.trim().slice("gallery".length).trim();
-          return `<ElyImageGallery name="${name}">\n`;
+          return `<ElyImageGallery name="${escapeAttr(name)}">\n`;
         }
         return `</ElyImageGallery>\n`;
       },
     });
 
     // Inject data-formula attribute into mathjax output for click-to-copy
-    const escapeAttr = (s: string) =>
-      s.replace(/&/g, "&amp;").replace(/"/g, "&quot;");
-
     const origInline = md.renderer.rules.math_inline!;
     md.renderer.rules.math_inline = function (...args) {
       const html = origInline.apply(this, args);

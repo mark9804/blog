@@ -1,25 +1,17 @@
 import { onMounted, onUnmounted } from "vue";
-import { useClipboard } from "@vueuse/core";
 import { toast } from "vue-sonner";
 
 const SELECTOR = "[data-formula]";
 
 export function useFormulaCopy() {
-  const { copy } = useClipboard();
+  async function copyFormula(formula: string, isBlock: boolean) {
+    if (!navigator.clipboard?.writeText) return;
 
-  function onClick(e: MouseEvent) {
-    const target = (e.target as HTMLElement).closest(SELECTOR) as HTMLElement;
-    if (!target) return;
+    const delimiter = isBlock ? "$$" : "$";
+    const text = `${delimiter}${formula}${delimiter}`;
 
-    const formula = target.dataset.formula?.trim();
-    if (!formula) return;
-
-    // Block formulas already have display="true" from mathjax3
-    const isBlock = target.getAttribute("display") === "true";
-    const text = isBlock ? `$$${formula}$$` : `$${formula}$`;
-
-    copy(text).then(() => {
-      const delimiter = isBlock ? "$$" : "$";
+    try {
+      await navigator.clipboard.writeText(text);
       const preview =
         formula.length > 24
           ? `${delimiter}${formula.slice(0, 24)}...${delimiter}`
@@ -32,9 +24,27 @@ export function useFormulaCopy() {
           description: "ely-toast__code-chip",
         },
       });
-    });
+    } catch {
+      toast.error("复制公式失败", {
+        position: "top-center",
+      });
+    }
+  }
+
+  function onClick(e: MouseEvent) {
+    if (!(e.target instanceof Element)) return;
+
+    const target = e.target.closest<HTMLElement>(SELECTOR);
+    if (!target) return;
+
+    const formula = target.dataset.formula?.trim();
+    if (!formula) return;
 
     e.stopPropagation();
+
+    // Block formulas already have display="true" from mathjax3
+    const isBlock = target.getAttribute("display") === "true";
+    void copyFormula(formula, isBlock);
   }
 
   onMounted(() => {

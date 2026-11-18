@@ -1,53 +1,22 @@
 <script setup lang="ts">
-import {
-  computed,
-  onMounted,
-  onUnmounted,
-  ref,
-  nextTick,
-  useSlots,
-  useTemplateRef,
-} from "vue";
-import type { CardProps } from "./types/CardProps";
+import { computed, onMounted, ref, useSlots, useTemplateRef, watch } from "vue";
 import { withBase } from "vitepress";
-import {
-  formatDateTime,
-  formatRelativeTime,
-  getUpdateInterval,
-} from "../../utils/timeUtils";
-import { useSearchTags } from "../../utils/tagSearchUtils";
-import { useCustomStore } from "../../../stores/piniaStore";
-import { formalizeString } from "./_utils/stringUtils";
-
-const store = useCustomStore();
-const slots = useSlots();
-
-const emit = defineEmits<{
-  (e: "loaded"): void;
-  (e: "suspense"): void;
-}>();
-
-const isLoaded = ref(false);
-const isVisible = ref(false);
-const imageLoaded = ref(false);
-const coverImgRef = useTemplateRef<HTMLImageElement>("coverImgRef");
-
-const handleImageLoad = () => {
-  if (imageLoaded.value) return;
-  imageLoaded.value = true;
-  isLoaded.value = true;
-  emit("loaded");
-};
+import type { CardProps } from "./types/CardProps";
+import { formatDateTime, formatRelativeTime } from "../../utils/timeUtils";
+import { useTagNavigation } from "../../composables/useTagNavigation";
 
 const props = withDefaults(defineProps<CardProps>(), {
   maxWidth: 280,
   href: "",
   ariaLabel: "",
   external: false,
-  as: "card",
 });
 
-const isLink = computed(() => props.as === "link");
+const slots = useSlots();
+const { navigateToTag } = useTagNavigation();
+
+const imageLoaded = ref(false);
+const coverImgRef = useTemplateRef<HTMLImageElement>("coverImgRef");
 
 const resolvedMaxWidth = computed(() =>
   typeof props.maxWidth === "number" ? `${props.maxWidth}px` : props.maxWidth
@@ -65,74 +34,31 @@ const resolvedAriaLabel = computed(() => {
     : undefined;
 });
 
-function handleTagClick(tag: string) {
-  store.resetTags();
-  store.pushSelectedTags(tag);
-  useSearchTags.go();
-}
+const formattedTitle = computed(
+  () => props.content?.frontmatter.title?.replace(/`/g, "") ?? ""
+);
 
-// Deterministic build-time fallback avoids SSR/client hydration clock skew
+// Deterministic build-time date avoids SSR/client hydration clock skew
 const relativeTime = ref(
   props.content?.createdAt
     ? formatDateTime(props.content.createdAt).slice(0, 10)
     : ""
 );
 
-let timer: ReturnType<typeof setInterval> | null = null;
-let suspenseTimer: ReturnType<typeof setTimeout> | null = null;
-
-function setupTimeUpdateInterval() {
-  if (timer !== null) {
-    clearInterval(timer);
-    timer = null;
-  }
-
-  const createdAt = props.content?.createdAt;
-  if (!createdAt) return;
-
-  relativeTime.value = formatRelativeTime(createdAt);
-  const updateInterval = getUpdateInterval(createdAt);
-
-  timer = setInterval(() => {
-    relativeTime.value = formatRelativeTime(createdAt);
-    setupTimeUpdateInterval();
-  }, updateInterval);
+function syncRelativeTime() {
+  if (typeof window === "undefined") return;
+  relativeTime.value = props.content?.createdAt
+    ? formatRelativeTime(props.content.createdAt)
+    : "";
 }
 
-onMounted(async () => {
-  setupTimeUpdateInterval();
+watch(() => props.content?.createdAt, syncRelativeTime);
 
-  await nextTick();
-  if (!props.content?.frontmatter.cover) {
-    isLoaded.value = true;
-    emit("loaded");
-  } else if (coverImgRef.value?.complete) {
-    // Cached images on SPA router return already have complete === true before @load fires
-    if (coverImgRef.value.naturalWidth > 0) {
-      handleImageLoad();
-    } else {
-      emit("suspense");
-    }
-  } else {
-    suspenseTimer = setTimeout(() => {
-      if (!isLoaded.value) {
-        emit("suspense");
-      }
-    }, 1000);
-  }
-  requestAnimationFrame(() => {
-    isVisible.value = true;
-  });
-});
-
-onUnmounted(() => {
-  if (timer !== null) {
-    clearInterval(timer);
-    timer = null;
-  }
-  if (suspenseTimer !== null) {
-    clearTimeout(suspenseTimer);
-    suspenseTimer = null;
+onMounted(() => {
+  syncRelativeTime();
+  // Cached images on SPA router return already have complete === true before @load fires
+  if (coverImgRef.value?.complete && coverImgRef.value.naturalWidth > 0) {
+    imageLoaded.value = true;
   }
 });
 
@@ -140,19 +66,11 @@ const shouldAriaLabelHide = ref(false);
 </script>
 
 <template>
-  <component
-    :is="isLink ? 'a' : 'div'"
+  <div
     class="elysium-ui__card__container w-full flex flex-col relative"
-    :class="{
-      'opacity-0': !isVisible,
-      'opacity-100': isVisible,
-    }"
     :style="{
       maxWidth: resolvedMaxWidth,
     }"
-    :href="isLink && resolvedHref ? resolvedHref : undefined"
-    :target="isLink && props.external ? '_blank' : undefined"
-    :rel="isLink && props.external ? 'noopener noreferrer' : undefined"
   >
     <!-- Layer 0: Same-size matte gouache plane offset by (4px, 4px) -->
     <span aria-hidden="true" class="elysium-ui__card--gouache-plane" />
@@ -170,7 +88,7 @@ const shouldAriaLabelHide = ref(false);
 
     <!-- Middle Layer (z-2): Full-card hyperlink for pointer & screen-reader spatial selection -->
     <a
-      v-if="resolvedHref && !isLink"
+      v-if="resolvedHref"
       :href="resolvedHref"
       :target="props.external ? '_blank' : undefined"
       :rel="props.external ? 'noopener noreferrer' : undefined"
@@ -181,6 +99,7 @@ const shouldAriaLabelHide = ref(false);
       @mouseover="shouldAriaLabelHide = false"
       @mouseleave="shouldAriaLabelHide = true"
     />
+
     <!-- Bottom Presentation Layer (z-auto: no stacking context, so z-3 tags escape above z-2 link) -->
     <div class="elysium-ui__card--content relative flex flex-col py-5 px-5">
       <div
@@ -194,8 +113,7 @@ const shouldAriaLabelHide = ref(false);
           :src="props.content.frontmatter.cover"
           :alt="props.content.frontmatter.title"
           :aria-label="`文章「${props.content.frontmatter.title}」的封面图片`"
-          @load="handleImageLoad"
-          @error="emit('suspense')"
+          @load="imageLoaded = true"
           loading="eager"
         />
       </div>
@@ -207,7 +125,7 @@ const shouldAriaLabelHide = ref(false);
             :target="props.external ? '_blank' : undefined"
             :rel="props.external ? 'noopener noreferrer' : undefined"
           >
-            {{ formalizeString(props.content.frontmatter.title) }}
+            {{ formattedTitle }}
           </a>
         </slot>
       </h2>
@@ -245,18 +163,17 @@ const shouldAriaLabelHide = ref(false);
             v-for="tag in props.content?.frontmatter.tags"
             :key="tag"
             class="relative z-3"
-            :id="tag"
             :title="`搜索含有「${tag}」标签的文章`"
             size="small"
             clickable
-            @click="handleTagClick(tag)"
+            @click="navigateToTag(tag)"
           >
             {{ tag }}
           </ElyTag>
         </slot>
       </div>
     </div>
-  </component>
+  </div>
 </template>
 
 <style scoped lang="scss">
@@ -264,7 +181,6 @@ const shouldAriaLabelHide = ref(false);
   &__container {
     isolation: isolate;
     background-color: transparent;
-    transition: opacity 0.45s ease;
 
     &:hover {
       .card-crosshair {
@@ -402,6 +318,7 @@ const shouldAriaLabelHide = ref(false);
 @media (prefers-reduced-motion: reduce) {
   .elysium-ui__card__container,
   .elysium-ui__card--gouache-plane,
+  .elysium-ui__card--cover,
   .card-crosshair {
     transition: none !important;
   }

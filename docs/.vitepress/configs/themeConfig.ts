@@ -1,9 +1,9 @@
-import { userProfile } from "./userProfile";
-import { navConfig } from "./navConfig";
-import { tokenize } from "../utils/tokenizer";
+import { tokenize } from "../theme/utils/tokenizer.ts";
+import { navConfig } from "./navConfig.ts";
+import { userProfile } from "./userProfile.ts";
 
 export const themeConfig = {
-  userProfile: userProfile,
+  userProfile,
   logo: userProfile.avatar,
   lastUpdated: {
     text: "最后更新于",

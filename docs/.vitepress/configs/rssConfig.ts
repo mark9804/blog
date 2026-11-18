@@ -1,6 +1,6 @@
-import { RSSOptions } from "vitepress-plugin-rss";
-import { applyAllImageTransformers } from "../plugins/vitepress-plugin-rss/transformers/ely-image-transformer";
-import { DOMAIN } from "../constants";
+import type { RSSOptions } from "vitepress-plugin-rss";
+import { DOMAIN } from "../constants.ts";
+import { applyAllImageTransformers } from "../plugins/vitepress-plugin-rss/transformers/ely-image-transformer.ts";
 
 export const rssConfig: RSSOptions = {
   title: "今天没有早睡",

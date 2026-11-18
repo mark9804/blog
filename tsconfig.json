@@ -4,36 +4,22 @@
     "useDefineForClassFields": true,
     "module": "ES2022",
     "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "noEmit": true,
     "strict": true,
-    "jsx": "preserve",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
-    "lib": ["ES2021", "DOM"],
-    "skipLibCheck": true,
-    "outDir": "dist",
-    "declaration": true,
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["./docs/src/*"]
-    }
+    "lib": ["ES2022", "DOM"],
+    "skipLibCheck": true
   },
   "include": [
-    "docs/src/**/*.ts",
-    "docs/src/**/*.d.ts",
+    "uno.config.ts",
     "docs/.vitepress/**/*.ts",
     "docs/.vitepress/**/*.d.ts",
     "docs/auto-imports.d.ts",
     "docs/components.d.ts",
-    "docs/**/*.vue",
-    "docs/.vitepress/vite-env.d.ts",
-    "docs/.vitepress/plugins/**/*.ts",
-    "docs/.vitepress/plugins/**/*.d.ts"
-  ],
-  "references": [
-    {
-      "path": "./tsconfig.node.json"
-    }
+    "docs/**/*.vue"
   ]
 }

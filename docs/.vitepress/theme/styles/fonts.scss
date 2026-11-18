@@ -1,6 +1,3 @@
-@import url("https://fonts.blue-archive.io/harmonyos-sans-webfont/harmonyos-sans-sc-400.css");
-@import url("https://fonts.blue-archive.io/harmonyos-sans-webfont/harmonyos-sans-sc-700.css");
-
 @font-face {
   font-family: "Wix Madefor";
   src:
@@ -12,12 +9,6 @@
       format("truetype");
   font-display: swap;
   font-weight: 400 800;
-}
-
-@font-face {
-  font-family: "HarmonyOS Sans SC Bold";
-  src: local("HarmonyOS Sans SC Bold");
-  font-weight: 700;
 }
 
 // Strict two-font system for UI & prose (plus mono reserved strictly for code/math)
@@ -32,4 +23,6 @@ $font-family-mono: "SFMono-Regular", "Consolas", "Liberation Mono", "Menlo", "Co
   --font-family-serif: #{$font-family-serif};
   --font-family-base: #{$font-family-base};
   --font-family-mono: #{$font-family-mono};
+  --vp-font-family-base: var(--font-family-base);
+  --vp-font-family-mono: var(--font-family-mono);
 }

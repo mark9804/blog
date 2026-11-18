@@ -1,4 +1,4 @@
-import type { ProfileProps } from "../theme/components/ElysiumUI/types/ProfileProps";
+import type { ProfileProps } from "../theme/components/ElysiumUI/types/ProfileProps.ts";
 
 export const userProfile: ProfileProps = {
   name: {

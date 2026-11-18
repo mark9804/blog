@@ -1,9 +1,8 @@
-import type { InjectionKey } from "vue";
+import type { ComputedRef, InjectionKey } from "vue";
 import type { ImageBase } from "./ImageBase";
 
 export interface GalleryContext {
-  images: ImageBase[];
-  registerImage: (image: ImageBase) => number;
+  images: ComputedRef<ImageBase[]>;
 }
 
 export const GALLERY_INJECTION_KEY: InjectionKey<GalleryContext> =

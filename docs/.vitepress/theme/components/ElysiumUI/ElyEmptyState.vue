@@ -4,18 +4,13 @@ import ElyIconBlackHole from "./ElyIcon/ElyIconBlackHole.vue";
 
 <template>
   <div class="ely-empty-state flex flex-col items-center justify-center gap-4">
-    <ElyIconBlackHole size="100" color="var(--color-accent-text-tertiary)" />
-    <p class="text-sm text-tertiary ellipsis-followed">
-      你似乎来到了一片空白宇宙
-    </p>
+    <ElyIconBlackHole :size="96" class="elysium-ui__empty-state__icon" />
+    <p class="text-sm text-tertiary m-0">你似乎来到了一片空白宇宙……</p>
   </div>
 </template>
 
 <style scoped lang="scss">
-.ellipsis-followed::after {
-  content: "……";
-  display: inline-block;
-  overflow: hidden;
-  vertical-align: bottom;
+.elysium-ui__empty-state__icon {
+  color: var(--color-accent-text-tertiary);
 }
 </style>

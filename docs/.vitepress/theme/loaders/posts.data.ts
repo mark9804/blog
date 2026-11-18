@@ -1,107 +1,133 @@
-import { spawn } from "cross-spawn";
-import { readFileSync, existsSync } from "fs";
-import { join, dirname, basename } from "path";
-import pMap from "p-map";
+import { TZDate } from "@date-fns/tz";
 import { createContentLoader } from "vitepress";
-import wordsCount from "words-count";
-import type Config from "words-count";
+import wordsCountModule from "words-count";
+import type { Post, PostFrontmatter } from "../types/Post.ts";
+import { DEFAULT_TIMEZONE } from "../utils/timeUtils.ts";
+import { collectGitHistory } from "./_gitHistory.ts";
 
 declare global {
-  var VITEPRESS_CONFIG: {
-    srcDir: string;
-    rewrites: {
-      inv: Record<string, string>;
-    };
-  };
-}
-
-interface WordsCount {
-  default: (text: string, config?: typeof Config) => number;
-  wordsCount: (text: string, config?: typeof Config) => number;
-  wordsSplit: (text: string, config?: typeof Config) => string[];
-  wordsDetect: (
-    text: string,
-    config?: typeof Config
-  ) => { count: number; words: string[] };
-}
-
-function transformUrlToPath(url: string) {
-  const siteConfig = globalThis.VITEPRESS_CONFIG;
-
-  let file = url.replace(/(^|\/)$/, "$1index").replace(/(\.html)?$/, ".md");
-  file = siteConfig.rewrites.inv[file] || file;
-  return join(siteConfig.srcDir, file);
-}
-
-// getCreatedAt function to fetch the created (first commit) time of a markdown file
-async function getCreatedAt(url: string) {
-  const file = transformUrlToPath(url);
-
-  return new Promise((resolve, reject) => {
-    const cwd = dirname(file);
-    if (!existsSync(cwd)) return resolve(0);
-    const fileName = basename(file);
-    const child = spawn(
-      "git",
-      ["log", "--diff-filter=A", "--follow", "--format=%ai", "-1", fileName],
-      {
-        cwd,
-      }
-    );
-    let output = "";
-    child.stdout.on("data", (data: Buffer) => (output += String(data)));
-    child.on("close", () => resolve(new Date(output).getTime()));
-    child.on("error", reject);
-  });
-}
-
-function getWordCount(content: string) {
-  const postContent = content.replace(/---[\s\S]*?---/, "");
-  return (wordsCount as unknown as WordsCount).wordsCount(postContent);
-}
-
-function getImgCount(content: string) {
-  return content.match(/!\[.*?\]\(.*?\)/g)?.length || 0;
-}
-
-function getReadingTime(content: string, wpms = 200) {
-  // 将样本图片输入 CLIP 得到描述，平均字数约为 229 汉字，以此为标准计算图片阅读时间
-  return Math.ceil((getWordCount(content) + getImgCount(content) * 229) / wpms);
-}
-
-// Define the custom loader using createContentLoader
-const loader = createContentLoader("**/*.md", {
-  async transform(rawData) {
-    return await pMap(
-      rawData,
-      async item => {
-        if (item.url.endsWith("/")) return { ...item, createdAt: 0 };
-        const file = transformUrlToPath(item.url);
-        const frontmatter = item.frontmatter;
-        const wpms = 200 * (frontmatter?.meta?.timeAmp ?? 1);
-        const content = readFileSync(file, "utf-8");
-
-        const createdAt =
-          item.frontmatter?.createdAt ??
-          ((await getCreatedAt(item.url)) as unknown as number);
-        const wordsCount = getWordCount(content);
-        const imgCount = getImgCount(content);
-        const readingTime = getReadingTime(content, wpms);
-
-        return {
-          ...item,
-          createdAt,
-          wordsCount,
-          imgCount,
-          readingTime,
-          src: item.src,
+  var VITEPRESS_CONFIG:
+    | {
+        rewrites?: {
+          inv?: Record<string, string>;
         };
-      },
-      { concurrency: 64 }
+      }
+    | undefined;
+}
+
+type WordsCountFn = (text: string) => number;
+
+const countWords: WordsCountFn =
+  typeof wordsCountModule === "function"
+    ? wordsCountModule
+    : (wordsCountModule as { wordsCount: WordsCountFn }).wordsCount;
+
+const FRONTMATTER_BLOCK_RE = /^---\r?\n[\s\S]*?\r?\n---\r?\n?/;
+const MARKDOWN_IMAGE_RE = /!\[.*?\]\(.*?\)/g;
+const LOCAL_DATETIME_RE =
+  /^(\d{4})[-/](\d{1,2})[-/](\d{1,2})(?:[T\s]+(\d{1,2}):(\d{1,2})(?::(\d{1,2}))?)?$/;
+const EXPLICIT_OFFSET_RE = /(?:Z|[+-]\d{2}:?\d{2})$/i;
+
+// Average caption equivalence (~229 Chinese characters per image)
+const WORDS_PER_IMAGE = 229;
+const BASE_WORDS_PER_MINUTE = 200;
+
+function urlToDocPath(url: string): string {
+  const raw = url
+    .replace(/^\//, "")
+    .replace(/(^|\/)$/, "$1index")
+    .replace(/(\.html)?$/, ".md");
+  return globalThis.VITEPRESS_CONFIG?.rewrites?.inv?.[raw] || raw;
+}
+
+function parseCreatedAt(raw: unknown): number | null {
+  if (typeof raw === "number") {
+    return Number.isFinite(raw) && raw > 0 ? raw : null;
+  }
+
+  if (raw instanceof Date) {
+    const ms = raw.getTime();
+    return Number.isFinite(ms) && ms > 0 ? ms : null;
+  }
+
+  if (typeof raw !== "string") {
+    return null;
+  }
+
+  const trimmed = raw.trim();
+  if (!trimmed) return null;
+
+  if (/^\d+$/.test(trimmed)) {
+    const numeric = Number(trimmed);
+    return Number.isFinite(numeric) && numeric > 0 ? numeric : null;
+  }
+
+  if (EXPLICIT_OFFSET_RE.test(trimmed)) {
+    const parsed = Date.parse(trimmed);
+    return Number.isFinite(parsed) && parsed > 0 ? parsed : null;
+  }
+
+  const match = LOCAL_DATETIME_RE.exec(trimmed);
+  if (match) {
+    const [, year, month, day, hour = "0", minute = "0", second = "0"] = match;
+    const tzDate = new TZDate(
+      Number(year),
+      Number(month) - 1,
+      Number(day),
+      Number(hour),
+      Number(minute),
+      Number(second),
+      DEFAULT_TIMEZONE
     );
+    const ms = tzDate.getTime();
+    return Number.isFinite(ms) && ms > 0 ? ms : null;
+  }
+
+  const fallback = Date.parse(trimmed);
+  return Number.isFinite(fallback) && fallback > 0 ? fallback : null;
+}
+
+declare const data: Post[];
+export { data };
+
+export default createContentLoader<Post[]>("**/*.md", {
+  includeSrc: true,
+  transform(rawData): Post[] {
+    const { initialTimestamps } = collectGitHistory();
+    const posts: Post[] = [];
+
+    for (const item of rawData) {
+      const frontmatter = (item.frontmatter ?? {}) as PostFrontmatter;
+      if (item.url.endsWith("/") || frontmatter.publish === false) {
+        continue;
+      }
+
+      const docPath = urlToDocPath(item.url);
+      const createdAt =
+        parseCreatedAt(frontmatter.createdAt) ??
+        initialTimestamps[docPath] ??
+        0;
+
+      const body = (item.src ?? "").replace(FRONTMATTER_BLOCK_RE, "");
+      const wordsCount = countWords(body);
+      const imgCount = body.match(MARKDOWN_IMAGE_RE)?.length ?? 0;
+      const wpms = BASE_WORDS_PER_MINUTE * (frontmatter.meta?.timeAmp ?? 1);
+      const readingTime = Math.ceil(
+        (wordsCount + imgCount * WORDS_PER_IMAGE) /
+          (wpms > 0 ? wpms : BASE_WORDS_PER_MINUTE)
+      );
+
+      posts.push({
+        url: item.url,
+        createdAt,
+        readingTime,
+        wordsCount,
+        imgCount,
+        frontmatter,
+      });
+    }
+
+    posts.sort((a, b) => b.createdAt - a.createdAt);
+    return posts;
   },
 });
-
-// Export the data and the loader
-export const data = loader.load();
-export default loader;

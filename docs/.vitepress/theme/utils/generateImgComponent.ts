@@ -1,18 +1,25 @@
-import type { Token } from "../types/Token";
-import type { ImageBase } from "../components/ElysiumUI/types/ImageBase";
+import type { Token } from "markdown-it";
+import type { ImageBase } from "../components/ElysiumUI/types/ImageBase.ts";
 
-export function getImgInfo(imgToken: Token) {
-  const src = imgToken?.attrs?.find(attr => attr[0] === "src")?.[1];
-  const alt = imgToken.content;
-  const width = imgToken?.attrs?.find(attr => attr[0] === "width")?.[1];
-  const height = imgToken?.attrs?.find(attr => attr[0] === "height")?.[1];
-  return { src, alt, width, height };
+function escapeHtmlAttr(value: string): string {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
 }
 
-export function generateImgComponent(imgToken: Token) {
-  const { src, alt, width, height } = getImgInfo(imgToken);
+export function getImgInfo(imgToken: Token): ImageBase {
+  return {
+    src: imgToken.attrGet("src") ?? "",
+    alt: imgToken.content ?? "",
+    width: imgToken.attrGet("width") ?? undefined,
+    height: imgToken.attrGet("height") ?? undefined,
+  };
+}
 
-  const image: ImageBase = { src, alt, width, height };
-  // @ts-ignore
-  return `<ElyImage :image="${JSON.stringify(image).replaceAll('"', "'")}" lazy />`;
+export function generateImgComponent(imgToken: Token): string {
+  const image = getImgInfo(imgToken);
+  return `<ElyImage :image="${escapeHtmlAttr(JSON.stringify(image))}" lazy />`;
 }

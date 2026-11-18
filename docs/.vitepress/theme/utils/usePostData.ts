@@ -1,14 +1,14 @@
-import { data as rawPosts } from "../loaders/posts.data";
-import type { Post } from "../types/Post";
-import { unique, sift } from "radashi";
-import { compareDates } from "./timeUtils";
+import { sift, unique } from "radashi";
+import { data as posts } from "../loaders/posts.data.ts";
+import type { Post } from "../types/Post.ts";
 
-export function createFilter(pattern?: string) {
-  return function (post: Post) {
+export function createFilter(prefix?: string) {
+  const normalizedPrefix = prefix ? `/${prefix}/` : "";
+  return function (post: Post): boolean {
     return (
       post.frontmatter?.publish !== false &&
       !post.url.endsWith("/") &&
-      !!post.url.match(new RegExp(pattern ?? "" + "/"))
+      (!normalizedPrefix || post.url.startsWith(normalizedPrefix))
     );
   };
 }
@@ -16,18 +16,27 @@ export function createFilter(pattern?: string) {
 export const defaultFilter = createFilter("breves");
 export const defaultQuaversFilter = createFilter("quavers");
 
-const posts = rawPosts as unknown as Post[];
+const postMap = new Map<string, Post>(posts.map(post => [post.url, post]));
 
 export const postData = {
   posts,
-  getPost(url: string) {
-    return posts.find(el => el.url === url);
+  getPost(url: string): Post | undefined {
+    return postMap.get(url);
   },
-  getAllPosts(filter?: (post: Post) => boolean) {
-    const filteredPosts = filter ? posts.filter(filter) : posts;
-    return filteredPosts.sort((a, b) => compareDates(a.createdAt, b.createdAt));
+  getAllPosts(filter?: (post: Post) => boolean): Post[] {
+    const selected = filter ? posts.filter(filter) : [...posts];
+    return selected.sort((a, b) => b.createdAt - a.createdAt);
   },
-  getAllTags() {
-    return unique(sift(posts.map(el => el.frontmatter?.tags).flat()));
+  getAllTags(): string[] {
+    return unique(
+      sift(
+        posts
+          .filter(
+            post =>
+              post.frontmatter?.publish !== false && !post.url.endsWith("/")
+          )
+          .flatMap(post => post.frontmatter?.tags ?? [])
+      )
+    );
   },
 };

@@ -1,19 +1,18 @@
 <script setup lang="ts">
 import { computed, inject, onMounted, onUnmounted, ref } from "vue";
-import { useData, useRouter, withBase } from "vitepress";
+import { useData, withBase } from "vitepress";
 import type { ProfileProps } from "./types/ProfileProps";
 import {
   usePreferredLanguages,
   usePreferredReducedMotion,
   useWindowSize,
 } from "@vueuse/core";
-import { isExternalUrl } from "../../../utils/urlUtils";
+import { isExternalUrl } from "../../utils/urlUtils";
 import { Mail, Moon, Quote, Sun } from "@lucide/vue";
 
 const props = defineProps<ProfileProps>();
 
 const { isDark } = useData();
-const router = useRouter();
 const preferredMotion = usePreferredReducedMotion();
 const preferredLanguages = usePreferredLanguages();
 const { height: windowHeight } = useWindowSize();
@@ -24,10 +23,14 @@ const toggleAppearance = inject("toggle-appearance", () => {
 
 const activeLocale = ref("en-US");
 
-const displayName = computed(
-  () =>
+const displayName = computed(() => {
+  if (activeLocale.value.toLowerCase().startsWith("zh")) {
+    return props.name["zh-CN"] || props.name["en-US"];
+  }
+  return (
     props.name[activeLocale.value] || props.name["en-US"] || props.name["zh-CN"]
-);
+  );
+});
 
 const isMounted = ref(false);
 const parallaxX = ref(0);
@@ -75,21 +78,6 @@ function handleScrollIndicatorClick() {
     top: windowHeight.value,
     behavior: preferredMotion.value === "reduce" ? "auto" : "smooth",
   });
-}
-
-function handleSocialLinkClick(social: {
-  link: string;
-  openInNewTab?: boolean;
-}) {
-  if (social.openInNewTab) {
-    window.open(withBase(social.link), "_blank");
-    return;
-  }
-  if (isExternalUrl(social.link)) {
-    window.open(social.link, "_self");
-    return;
-  }
-  router.go(withBase(social.link));
 }
 </script>
 
@@ -206,9 +194,13 @@ function handleSocialLinkClick(social: {
               >
               <a
                 class="ely-frontispiece__nav-link"
-                :href="withBase(social.link)"
-                @click.prevent="handleSocialLinkClick(social)"
-                @keydown.enter="handleSocialLinkClick(social)"
+                :href="
+                  isExternalUrl(social.link)
+                    ? social.link
+                    : withBase(social.link)
+                "
+                :target="social.openInNewTab ? '_blank' : undefined"
+                :rel="social.openInNewTab ? 'noopener noreferrer' : undefined"
                 >{{ social.alias }}</a
               >
             </template>

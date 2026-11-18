@@ -2,7 +2,6 @@
 import { useData, useRoute } from "vitepress";
 import {
   computed,
-  nextTick,
   onMounted,
   onUnmounted,
   ref,
@@ -12,6 +11,7 @@ import {
 import { useIntersectionObserver } from "@vueuse/core";
 import { RotateCw } from "@lucide/vue";
 import { giscusConfig } from "../../configs/giscusConfig";
+import ElyButton from "./ElysiumUI/ElyButton.vue";
 import ElyGiscus from "./ElysiumUI/ElyGiscus.vue";
 import { buildGiscusThemeDataUri } from "./ElysiumUI/_utils/giscusTheme";
 
@@ -27,7 +27,7 @@ const isNearViewport = ref(false);
 const showFallbackHint = ref(false);
 const themeDataUri = ref("");
 
-let fallbackTimer: number | null = null;
+let fallbackTimer: ReturnType<typeof setTimeout> | null = null;
 
 function updateThemeDataUri() {
   themeDataUri.value = buildGiscusThemeDataUri(isDark.value);
@@ -35,26 +35,29 @@ function updateThemeDataUri() {
 
 function clearFallbackTimer() {
   if (fallbackTimer !== null) {
-    window.clearTimeout(fallbackTimer);
+    clearTimeout(fallbackTimer);
     fallbackTimer = null;
   }
 }
 
 function armFallbackTimerIfVisible() {
   if (loaded.value || !isNearViewport.value || fallbackTimer !== null) return;
-  fallbackTimer = window.setTimeout(() => {
+  fallbackTimer = setTimeout(() => {
     if (!loaded.value) {
       showFallbackHint.value = true;
     }
   }, 4000);
 }
 
-const { stop: stopObserver } = useIntersectionObserver(
+useIntersectionObserver(
   sectionRef,
-  ([{ isIntersecting }]) => {
-    if (isIntersecting) {
-      isNearViewport.value = true;
+  ([entry]) => {
+    const intersecting = Boolean(entry?.isIntersecting);
+    isNearViewport.value = intersecting;
+    if (intersecting) {
       armFallbackTimerIfVisible();
+    } else {
+      clearFallbackTimer();
     }
   },
   { rootMargin: "300px" }
@@ -77,8 +80,7 @@ function handleReload() {
 
 watch(
   isDark,
-  async () => {
-    await nextTick();
+  () => {
     updateThemeDataUri();
   },
   { flush: "post" }
@@ -96,7 +98,6 @@ onMounted(() => {
 });
 
 onUnmounted(() => {
-  stopObserver();
   clearFallbackTimer();
 });
 </script>
@@ -104,33 +105,24 @@ onUnmounted(() => {
 <template>
   <section ref="sectionRef" class="giscus-section" aria-label="文章评论">
     <header
-      class="giscus-section__header relative mb-6 pb-2.5 flex flex-wrap items-baseline justify-between gap-4"
+      class="giscus-section__header ely-section-header mb-6 pb-2.5 flex flex-wrap items-baseline justify-between gap-4"
     >
       <h2 class="giscus-section__title m-0">Comments</h2>
-      <button
+      <ElyButton
         v-if="showFallbackHint"
-        type="button"
-        class="giscus-section__reload inline-flex items-center gap-1.5 cursor-pointer"
+        secondary
+        size="small"
         @click="handleReload"
       >
         <RotateCw :size="12" :stroke-width="1.5" />
         <span>加载不出评论？点击重试</span>
-      </button>
+      </ElyButton>
     </header>
 
     <ElyGiscus
       v-if="themeDataUri"
       ref="giscusRef"
-      :repo="giscusConfig.repo"
-      :repo-id="giscusConfig.repoId"
-      :category="giscusConfig.category"
-      :category-id="giscusConfig.categoryId"
-      :mapping="giscusConfig.mapping"
-      :input-position="giscusConfig.inputPosition"
-      :lang="giscusConfig.lang"
-      :loading="giscusConfig.loading"
-      :reactions-enabled="giscusConfig.reactionsEnabled"
-      :emit-metadata="giscusConfig.emitMetadata"
+      v-bind="giscusConfig"
       :theme="themeDataUri"
       :route-key="routeKey"
       @loaded="handleLoaded"
@@ -142,30 +134,6 @@ onUnmounted(() => {
 .giscus-section {
   margin-top: 48px;
 
-  &__header {
-    border-bottom: 1px solid var(--color-accent-border-200);
-
-    &::before {
-      content: "";
-      position: absolute;
-      left: -10px;
-      bottom: -1px;
-      width: 10px;
-      height: 1px;
-      background-color: var(--color-accent-border-400);
-    }
-
-    &::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: -7px;
-      width: 1px;
-      height: 13px;
-      background-color: var(--color-accent-border-300);
-    }
-  }
-
   &__title {
     font-family: var(--font-family-serif);
     font-weight: 500;
@@ -173,23 +141,6 @@ onUnmounted(() => {
     line-height: 1.25;
     letter-spacing: 0.025em;
     color: var(--gouache-ink);
-  }
-
-  &__reload {
-    padding: 3px 9px;
-    font-family: var(--font-family-base);
-    font-size: 12px;
-    color: var(--color-accent-text-secondary);
-    background-color: var(--gouache-wash);
-    border: 1px solid var(--color-accent-border-200);
-    transition:
-      background-color 0.2s ease,
-      color 0.2s ease;
-
-    &:hover {
-      background-color: var(--color-accent);
-      color: var(--gouache-paper);
-    }
   }
 }
 </style>

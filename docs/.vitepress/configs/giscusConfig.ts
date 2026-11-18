@@ -1,4 +1,4 @@
-import type { GiscusProps } from "../theme/components/ElysiumUI/types/GiscusProps";
+import type { GiscusProps } from "../theme/components/ElysiumUI/types/GiscusProps.ts";
 
 export const giscusConfig: GiscusProps = {
   repo: "mark9804/blog",

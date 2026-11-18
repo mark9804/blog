@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, useSlots } from "vue";
+import { computed, onUnmounted, ref, useSlots } from "vue";
 import {
   TooltipContent,
   TooltipPortal,
@@ -9,61 +9,49 @@ import {
 } from "reka-ui";
 import type { TooltipProps } from "./types/TooltipProps";
 
+type Side = "top" | "right" | "bottom" | "left";
+type Align = "start" | "center" | "end";
+
+// Map position shorthand directly to reka-ui side + align
+const POSITION_MAP: Record<
+  NonNullable<TooltipProps["position"]>,
+  { side: Side; align: Align }
+> = {
+  top: { side: "top", align: "center" },
+  bottom: { side: "bottom", align: "center" },
+  left: { side: "left", align: "center" },
+  right: { side: "right", align: "center" },
+  tl: { side: "top", align: "start" },
+  tr: { side: "top", align: "end" },
+  bl: { side: "bottom", align: "start" },
+  br: { side: "bottom", align: "end" },
+};
+
 const props = withDefaults(defineProps<TooltipProps>(), {
   position: "top",
   sideOffset: 8,
-  defaultOpen: false,
-  open: undefined,
   disableHoverableContent: undefined,
   closeDelay: 0,
 });
 
 const slots = useSlots();
 
-// Map position shorthand to reka-ui side + align
-const side = computed(() => {
-  const map: Record<string, "top" | "right" | "bottom" | "left"> = {
-    top: "top",
-    bottom: "bottom",
-    left: "left",
-    right: "right",
-    tl: "top",
-    tr: "top",
-    bl: "bottom",
-    br: "bottom",
-  };
-  return map[props.position] ?? "top";
-});
+const placement = computed(
+  () => POSITION_MAP[props.position] ?? POSITION_MAP.top
+);
 
-const align = computed(() => {
-  const map: Record<string, "start" | "center" | "end"> = {
-    tl: "start",
-    tr: "end",
-    bl: "start",
-    br: "end",
-  };
-  return map[props.position] ?? "center";
-});
-
-const _internalOpen = ref(props.defaultOpen);
-const isControlled = computed(() => props.open !== undefined);
-
-const isOpen = computed({
-  get: () => (isControlled.value ? props.open! : _internalOpen.value),
-  set: (val: boolean) => {
-    if (!isControlled.value) {
-      _internalOpen.value = val;
-    }
-  },
-});
-
+const isOpen = ref(false);
 let closeTimer: ReturnType<typeof setTimeout> | null = null;
 
-function handleOpenChange(next: boolean) {
-  if (closeTimer) {
+function clearCloseTimer() {
+  if (closeTimer !== null) {
     clearTimeout(closeTimer);
     closeTimer = null;
   }
+}
+
+function handleOpenChange(next: boolean) {
+  clearCloseTimer();
 
   if (next || props.closeDelay <= 0) {
     isOpen.value = next;
@@ -74,6 +62,8 @@ function handleOpenChange(next: boolean) {
     }, props.closeDelay);
   }
 }
+
+onUnmounted(clearCloseTimer);
 </script>
 
 <template>
@@ -81,19 +71,15 @@ function handleOpenChange(next: boolean) {
     :delay-duration="0"
     :disable-hoverable-content="disableHoverableContent"
   >
-    <TooltipRoot
-      :default-open="defaultOpen"
-      @update:open="handleOpenChange"
-      :open="isOpen"
-    >
+    <TooltipRoot :open="isOpen" @update:open="handleOpenChange">
       <TooltipTrigger as-child>
         <slot />
       </TooltipTrigger>
       <TooltipPortal>
         <TooltipContent
           class="ely-tooltip__content relative max-w-80 px-2.5 py-1.5 text-xs"
-          :side="side"
-          :align="align"
+          :side="placement.side"
+          :align="placement.align"
           :side-offset="sideOffset"
         >
           <slot v-if="slots.content" name="content" />
