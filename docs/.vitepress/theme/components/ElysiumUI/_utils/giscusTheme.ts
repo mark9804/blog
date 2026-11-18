@@ -4,7 +4,6 @@
 
 interface ResolvedGiscusTokens {
   paper: string;
-  card: string;
   wash: string;
   pigment: string;
   ink: string;
@@ -24,7 +23,6 @@ function readRootTokens(isDark: boolean): ResolvedGiscusTokens {
 
   return {
     paper: pick("--gouache-paper", isDark ? "#0c1218" : "#f9f8f6"),
-    card: pick("--gouache-card", isDark ? "#192029" : "#e9ecee"),
     wash: pick("--gouache-wash", isDark ? "#242d39" : "#d7e3f1"),
     pigment: pick("--gouache-pigment", isDark ? "#657992" : "#7a91ae"),
     ink: pick("--gouache-ink", isDark ? "#ebeae8" : "#13181e"),

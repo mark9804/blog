@@ -1,13 +1,14 @@
 <script setup lang="ts">
-import { computed, ref, watch } from "vue";
-import ElyButton from "./ElyButton.vue";
+import { computed } from "vue";
 import { ChevronLeft, ChevronRight, Ellipsis } from "@lucide/vue";
+import ElyButton from "./ElyButton.vue";
 import { clamp } from "./_utils/numberUtils";
+
 const props = withDefaults(
   defineProps<{
     total: number;
-    current: number;
-    pageSize: number;
+    current?: number;
+    pageSize?: number;
   }>(),
   {
     current: 1,
@@ -15,23 +16,25 @@ const props = withDefaults(
   }
 );
 
+const emit = defineEmits<{
+  (event: "change", page: number): void;
+}>();
+
 const ICON_SIZE = 18;
 
-const userCurrent = ref(props.current);
+const totalPages = computed(() =>
+  Math.max(1, Math.ceil(props.total / props.pageSize))
+);
+
+const currentPage = computed(() => clamp(props.current, 1, totalPages.value));
+
 const computedPaginationItems = computed<
   { type: "number" | "ellipsis"; value: number }[]
 >(() => {
-  // 以 userCurrent 为中心，最多显示连续五个页码
-  // 显示开头和结尾页码
-  // 其余部分显示省略号
-  // ellipsis 时 value 为 current + 5，最大为 total，最小为 1
   const pages: { type: "number" | "ellipsis"; value: number }[] = [];
-
-  // 总页数
   const total = totalPages.value;
-  const current = userCurrent.value;
+  const current = currentPage.value;
 
-  // 如果总页数小于等于7，直接显示所有页码
   if (total <= 7) {
     for (let i = 1; i <= total; i++) {
       pages.push({ type: "number", value: i });
@@ -39,14 +42,12 @@ const computedPaginationItems = computed<
     return pages;
   }
 
-  // 添加第一页
   pages.push({ type: "number", value: 1 });
 
-  // 计算中间显示的页码范围
   let startPage = Math.max(2, current - 2);
   let endPage = Math.min(total - 1, current + 2);
 
-  // 调整范围确保显示5个连续页码
+  // Keep 5 contiguous middle page numbers near the start or end edges
   if (endPage - startPage < 4) {
     if (startPage === 2) {
       endPage = Math.min(total - 1, startPage + 4);
@@ -55,47 +56,35 @@ const computedPaginationItems = computed<
     }
   }
 
-  // 添加前省略号
   if (startPage > 2) {
     pages.push({ type: "ellipsis", value: Math.max(1, current - 5) });
   }
 
-  // 添加中间页码
   for (let i = startPage; i <= endPage; i++) {
     pages.push({ type: "number", value: i });
   }
 
-  // 添加后省略号
   if (endPage < total - 1) {
     pages.push({ type: "ellipsis", value: Math.min(total, current + 5) });
   }
 
-  // 添加最后一页
   pages.push({ type: "number", value: total });
 
   return pages;
 });
 
-function handleSwitchPage(direction: "prev" | "next") {
-  userCurrent.value =
-    direction === "prev"
-      ? clamp(userCurrent.value - 1, 1, props.total)
-      : clamp(userCurrent.value + 1, 1, props.total);
-}
-
 function handleGoToPage(page: number) {
-  userCurrent.value = clamp(page, 1, props.total);
+  const next = clamp(page, 1, totalPages.value);
+  if (next !== props.current) {
+    emit("change", next);
+  }
 }
 
-const totalPages = computed(() => Math.ceil(props.total / props.pageSize));
-
-const emit = defineEmits<{
-  (event: "change", page: number): void;
-}>();
-
-watch(userCurrent, () => {
-  emit("change", userCurrent.value);
-});
+function handleSwitchPage(direction: "prev" | "next") {
+  handleGoToPage(
+    direction === "prev" ? currentPage.value - 1 : currentPage.value + 1
+  );
+}
 </script>
 
 <template>
@@ -103,10 +92,10 @@ watch(userCurrent, () => {
     class="elysium-ui__pagination w-full flex justify-center items-center gap-2"
   >
     <ElyButton
+      size="icon"
       secondary
-      :style="{ width: '32px', height: '32px', padding: '0' }"
       @click="handleSwitchPage('prev')"
-      :disabled="userCurrent === 1"
+      :disabled="currentPage <= 1"
       aria-label="Previous Page"
     >
       <ChevronLeft :size="ICON_SIZE" />
@@ -114,8 +103,9 @@ watch(userCurrent, () => {
 
     <template v-for="(item, index) in computedPaginationItems" :key="index">
       <ElyButton
-        :secondary="item.value !== userCurrent"
-        :style="{ width: '32px', height: '32px', padding: '0' }"
+        size="icon"
+        :secondary="item.value !== currentPage"
+        :active="item.value === currentPage"
         @click="handleGoToPage(item.value)"
         :aria-label="`Page ${item.value}`"
       >
@@ -125,15 +115,13 @@ watch(userCurrent, () => {
     </template>
 
     <ElyButton
+      size="icon"
       secondary
-      :style="{ width: '32px', height: '32px', padding: '0' }"
       @click="handleSwitchPage('next')"
-      :disabled="userCurrent === totalPages"
+      :disabled="currentPage >= totalPages"
       aria-label="Next Page"
     >
       <ChevronRight :size="ICON_SIZE" />
     </ElyButton>
   </div>
 </template>
-
-<style scoped lang="scss"></style>

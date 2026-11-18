@@ -3,151 +3,110 @@ import { computed } from "vue";
 import type { ButtonProps } from "./types/ButtonProps";
 
 const props = withDefaults(defineProps<ButtonProps>(), {
-  as: "button",
   size: "medium",
-  primary: true,
+  secondary: false,
+  active: false,
+  disabled: false,
 });
-
-const classes = computed(() => ({
-  "ely-button": true,
-  "cursor-pointer": !props.disabled,
-  "ely-button--primary": props.primary && !props.secondary && !props.text,
-  "ely-button--secondary": props.secondary && !props.text,
-  "ely-button--text": props.text,
-  "ely-button--mini": props.size === "mini",
-  "ely-button--small": props.size === "small",
-  "ely-button--medium": props.size === "medium",
-  "ely-button--large": props.size === "large",
-  "ely-button--bordered": props.bordered,
-  "ely-button--wide": props.wide,
-  "ely-button--active": props.active,
-  "ely-button--disabled": props.disabled,
-  "ely-button--loading": props.loading,
-  "font-bold": props.bold,
-}));
 
 const emit = defineEmits<{
   (event: "click", e: MouseEvent): void;
 }>();
 
+const classes = computed(() => ({
+  "ely-button--small": props.size === "small",
+  "ely-button--medium": props.size === "medium",
+  "ely-button--icon": props.size === "icon",
+  "ely-button--secondary": props.secondary && !props.active,
+  "ely-button--active": props.active,
+  "ely-button--disabled": props.disabled,
+}));
+
 function handleClick(event: MouseEvent) {
   if (props.disabled) return;
   emit("click", event);
 }
-
-const isLink = computed(() => props.as === "link");
-const buttonTag = computed(() => (isLink.value ? "a" : "button"));
 </script>
 
 <template>
-  <component
-    :is="buttonTag"
+  <button
+    type="button"
+    class="ely-button inline-flex items-center justify-center gap-1.5 select-none"
     :class="classes"
-    class="select-none"
-    :disabled="disabled"
-    :href="isLink ? props.href : null"
-    @click="handleClick"
-    tabindex="0"
+    :disabled="props.disabled"
     :aria-label="props.ariaLabel"
+    @click="handleClick"
   >
-    <span v-if="loading" class="ely-button__loading">
-      <span class="loading-spinner"></span>
-    </span>
-    <span class="ely-button__content">
-      <slot></slot>
-    </span>
-  </component>
+    <slot />
+  </button>
 </template>
 
 <style lang="scss" scoped>
-@use "./_mixins/button.scss" as button;
-@use "./_config/theme_colors" as colors;
-
 .ely-button {
-  @include button.button-base;
+  box-sizing: border-box;
+  border-radius: 0;
+  border: 1px solid var(--gouache-ink);
+  background-color: var(--gouache-ink);
+  color: var(--gouache-paper);
+  font-family: var(--font-family-base);
+  font-weight: 500;
+  line-height: 1.2;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
 
-  &:focus,
   &:focus-visible {
     outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
   }
 
-  // Size variants
-  &--mini {
-    @include button.button-size("mini");
+  &:not(:disabled):hover {
+    background-color: var(--color-accent);
+    border-color: var(--color-accent);
+    color: var(--gouache-paper);
   }
 
   &--small {
-    @include button.button-size("small");
+    padding: 4px 10px;
+    font-size: 12px;
   }
 
   &--medium {
-    @include button.button-size("medium");
+    padding: 8px 16px;
+    font-size: 14px;
   }
 
-  &--large {
-    @include button.button-size("large");
-  }
-
-  // Style variants
-  &--primary {
-    @include button.button-variant("primary");
+  &--icon {
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    font-size: 13px;
   }
 
   &--secondary {
-    @include button.button-variant("secondary");
-  }
+    background-color: var(--gouache-wash);
+    color: var(--color-accent-text-primary);
+    border-color: var(--color-accent-border-200);
 
-  &--text {
-    background-color: transparent;
-    color: var(--color-accent);
-
-    &::before {
+    &:not(:disabled):hover {
       background-color: var(--color-accent);
-    }
-
-    &:hover {
-      &::before {
-        opacity: 0.1;
-      }
+      border-color: var(--color-accent);
+      color: var(--gouache-paper);
     }
   }
 
-  // Modifiers
-  &--bordered {
-    border: 1px solid currentColor;
-  }
-
-  &--wide {
-    width: 100%;
-  }
-
+  &:disabled,
   &--disabled {
-    opacity: colors.$disabled-opacity;
+    opacity: 0.45;
     cursor: not-allowed;
-  }
-
-  // Loading state
-  &--loading {
-    cursor: wait;
-    .ely-button__content {
-      opacity: colors.$disabled-opacity;
-    }
-  }
-
-  .loading-spinner {
-    @include button.loading-spinner;
   }
 }
 
-@keyframes pulse-frame {
-  0%,
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.35;
-    transform: scale(0.78);
+@media (prefers-reduced-motion: reduce) {
+  .ely-button {
+    transition: none !important;
   }
 }
 </style>

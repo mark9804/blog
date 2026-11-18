@@ -1,38 +1,34 @@
 <script setup lang="ts">
 import { OnClickOutside } from "@vueuse/components";
-import { useElementBounding, useWindowSize, useThrottleFn } from "@vueuse/core";
-import { ref, computed, onUnmounted, watch, useTemplateRef } from "vue";
-import { useImageStore } from "../../../stores/imageStore";
-import { clamp } from "./_utils/numberUtils";
-import { useRaf } from "./_utils/useAnimationUtils";
+import { useElementBounding, useThrottleFn, useWindowSize } from "@vueuse/core";
+import { computed, onUnmounted, ref, useTemplateRef, watch } from "vue";
 import { ChevronLeft, ChevronRight, X as Close } from "@lucide/vue";
+import { useImageStore } from "../../../stores/imageStore";
+import ElyButton from "./ElyButton.vue";
+import { clamp } from "./_utils/numberUtils";
 
 const imageStore = useImageStore();
 
-const shouldShowPreview = computed(() => imageStore.getImagePreviewVisibility);
+const currentImage = computed(() => imageStore.images[imageStore.index]);
+const shouldShowNav = computed(() => imageStore.images.length > 1);
 
-const imgList = computed(() => imageStore.getImageList);
-
-const shouldShowNav = computed(
-  () => Array.isArray(imgList.value) && imgList.value.length > 1
-);
-
-const imgIndex = computed(() => imageStore.getImagePreviewIndex ?? 0);
-
-// 配置点击外部的选项，忽略导航和关闭按钮
+// Ignore navigation and close buttons when detecting backdrop clicks
 const clickOutsideOptions = {
   ignore: [".elysium-ui__image-preview__button"],
 };
 
-const scale = ref(1);
-const offset = ref({ translateX: 0, translateY: 0 }); // 最终单位 px
 const MIN_SCALE = 0.5;
 const MAX_SCALE = 3;
-const PAN_THRESHOLD = 2;
-const lastTouchDistance = ref(0);
-const lastClickPosition = ref({ x: 0, y: 0 }); // 拖动检测通用
+
+const scale = ref(1);
+const offset = ref({ translateX: 0, translateY: 0 });
 const isDragging = ref(false);
-const imageRef = useTemplateRef("imageRef");
+const imageRef = useTemplateRef<HTMLImageElement>("imageRef");
+
+// Track active pointers uniformly across mouse drag, single-touch pan, and two-finger pinch
+const activePointers = new Map<number, { x: number; y: number }>();
+let lastPinchDistance = 0;
+let dragDistance = 0;
 
 const { width: imageWidth, height: imageHeight } = useElementBounding(imageRef);
 const { width: windowWidth, height: windowHeight } = useWindowSize();
@@ -51,7 +47,7 @@ const setIntentThrottled = useThrottleFn((intent: ScrollIntent) => {
 watch(
   () => [imageWidth.value, imageHeight.value],
   ([newWidth, newHeight]) => {
-    // 如果图像某一边尺寸超过窗口，默认操作为平移
+    // Switch wheel behavior to panning when zoomed image exceeds the viewport
     if (newWidth > windowWidth.value || newHeight > windowHeight.value) {
       setIntentThrottled(ScrollIntent.Pan);
     } else {
@@ -60,112 +56,98 @@ watch(
   }
 );
 
-function updateScale(delta: number) {
-  useRaf(() => {
-    const newScale = scale.value + delta * 0.01;
-    scale.value = clamp(newScale, MIN_SCALE, MAX_SCALE);
-  });
+function resetTransform() {
+  scale.value = 1;
+  offset.value = { translateX: 0, translateY: 0 };
+  activePointers.clear();
+  lastPinchDistance = 0;
+  dragDistance = 0;
+  isDragging.value = false;
 }
 
-function updateOffset(deltaTranslateX = 0, deltaTranslateY = 0) {
+function updateScale(delta: number) {
+  scale.value = clamp(scale.value + delta * 0.01, MIN_SCALE, MAX_SCALE);
+}
+
+function updateOffset(deltaX = 0, deltaY = 0) {
   // CSS transform order is scale() then translate3d() (right-to-left),
-  // so translations are visually amplified by scale.
-  // Divide by scale to keep panning 1:1 with pointer movement.
-  useRaf(() => {
-    const s = scale.value;
-    if (Math.abs(deltaTranslateX) > PAN_THRESHOLD) {
-      offset.value.translateX = clamp(
-        offset.value.translateX + deltaTranslateX / s,
-        imageWidth.value * -1,
-        imageWidth.value
-      );
-    }
-    if (Math.abs(deltaTranslateY) > PAN_THRESHOLD) {
-      offset.value.translateY = clamp(
-        offset.value.translateY + deltaTranslateY / s,
-        imageHeight.value * -1,
-        imageHeight.value
-      );
-    }
-  });
+  // so divide by scale to keep panning 1:1 with pointer movement.
+  const s = scale.value;
+  const maxX = Math.max(imageWidth.value, 1);
+  const maxY = Math.max(imageHeight.value, 1);
+  offset.value = {
+    translateX: clamp(offset.value.translateX + deltaX / s, -maxX, maxX),
+    translateY: clamp(offset.value.translateY + deltaY / s, -maxY, maxY),
+  };
+}
+
+function getPinchDistance(): number {
+  const pts = Array.from(activePointers.values());
+  if (pts.length < 2) return 0;
+  return Math.hypot(pts[1].x - pts[0].x, pts[1].y - pts[0].y);
 }
 
 function handleScroll(event: WheelEvent) {
-  // 阻止默认滚动行为，避免 scroll chaining
   event.preventDefault();
-
-  // 只处理 pinch zoom 手势
-  //（触摸板上的捏合手势会转换为 ctrl + wheel 事件）
-  if (event.ctrlKey) {
-    // 有 Ctrl，一定是缩放
+  if (event.ctrlKey || scrollIntent.value === ScrollIntent.Resize) {
     updateScale(-event.deltaY);
   } else {
-    // 没有 Ctrl，分流意图
-    if (scrollIntent.value === ScrollIntent.Resize) {
-      updateScale(-event.deltaY);
-    } else {
-      updateOffset(-event.deltaX, -event.deltaY);
-    }
+    updateOffset(-event.deltaX, -event.deltaY);
   }
 }
 
-function handleTouch(event: TouchEvent) {
-  // 处理单指事件（点击等）
-  if (event.touches.length === 1) {
-    switch (event.type) {
-      case "touchstart":
-        lastClickPosition.value = {
-          x: event.touches[0].clientX,
-          y: event.touches[0].clientY,
-        };
-        break;
-      case "touchmove":
-        event.preventDefault();
-        const deltaX = event.touches[0].clientX - lastClickPosition.value.x;
-        const deltaY = event.touches[0].clientY - lastClickPosition.value.y;
-        // Update position so next delta is frame-to-frame, not cumulative
-        lastClickPosition.value = {
-          x: event.touches[0].clientX,
-          y: event.touches[0].clientY,
-        };
-        updateOffset(deltaX, deltaY);
-        break;
-    }
-  }
-
-  // 过滤双指以外的触摸事件
-  if (event.touches.length !== 2) return;
-
-  // 获取触摸点
-  const touch1 = event.touches[0];
-  const touch2 = event.touches[1];
-
-  // 计算两点间距离
-  const distance = Math.hypot(
-    touch2.clientX - touch1.clientX,
-    touch2.clientY - touch1.clientY
-  );
-
-  if (event.type === "touchstart") {
-    event.preventDefault(); // 仅在开始缩放时阻止默认行为
-    lastTouchDistance.value = distance;
+function handlePointerDown(event: PointerEvent) {
+  if (event.pointerType === "mouse" && event.button !== 0) return;
+  if (
+    event.target instanceof Element &&
+    event.target.closest(".elysium-ui__image-preview__button")
+  ) {
     return;
   }
 
-  // 计算距离变化，只有在变化超过阈值时才认为是缩放
-  const delta = distance - lastTouchDistance.value;
-  if (Math.abs(delta) > 1) {
-    // 添加一个小阈值，避免误触
-    event.preventDefault();
-    updateScale(delta);
-    lastTouchDistance.value = distance;
+  (event.currentTarget as HTMLElement | null)?.setPointerCapture?.(
+    event.pointerId
+  );
+  activePointers.set(event.pointerId, { x: event.clientX, y: event.clientY });
+  if (activePointers.size === 1) {
+    dragDistance = 0;
+  } else if (activePointers.size === 2) {
+    lastPinchDistance = getPinchDistance();
+  }
+  isDragging.value = true;
+}
+
+function handlePointerMove(event: PointerEvent) {
+  const prev = activePointers.get(event.pointerId);
+  if (!prev) return;
+
+  const curr = { x: event.clientX, y: event.clientY };
+  activePointers.set(event.pointerId, curr);
+
+  if (activePointers.size === 1) {
+    const dx = curr.x - prev.x;
+    const dy = curr.y - prev.y;
+    dragDistance += Math.hypot(dx, dy);
+    updateOffset(dx, dy);
+  } else if (activePointers.size === 2) {
+    const distance = getPinchDistance();
+    const delta = distance - lastPinchDistance;
+    dragDistance += Math.abs(delta);
+    if (Math.abs(delta) > 1) {
+      updateScale(delta);
+      lastPinchDistance = distance;
+    }
   }
 }
 
-function handleMouseMove(event: MouseEvent) {
-  if (!isDragging.value) return;
-
-  updateOffset(event.movementX, event.movementY);
+function handlePointerEnd(event: PointerEvent) {
+  activePointers.delete(event.pointerId);
+  if (activePointers.size < 2) {
+    lastPinchDistance = 0;
+  }
+  if (activePointers.size === 0) {
+    isDragging.value = false;
+  }
 }
 
 function handleKeydown(event: KeyboardEvent) {
@@ -187,34 +169,33 @@ function handleKeydown(event: KeyboardEvent) {
   }
 }
 
-watch(shouldShowPreview, newVal => {
-  if (newVal) {
-    document.addEventListener("keydown", handleKeydown);
-  } else {
-    document.removeEventListener("keydown", handleKeydown);
+watch(
+  [() => imageStore.visible, () => imageStore.index],
+  ([visible], [prevVisible]) => {
+    resetTransform();
+    if (visible !== prevVisible) {
+      if (visible) {
+        document.addEventListener("keydown", handleKeydown);
+      } else {
+        document.removeEventListener("keydown", handleKeydown);
+      }
+    }
   }
-});
-
-function handlePrev() {
-  imageStore.prevImagePreview();
-}
-
-function handleNext() {
-  imageStore.nextImagePreview();
-}
+);
 
 function handleClose() {
-  if (isDragging.value) return;
-
   imageStore.closeImagePreview();
+}
 
-  // 重置状态
-  scale.value = 1;
-  offset.value = { translateX: 0, translateY: 0 };
+function handleClickOutside() {
+  if (isDragging.value || dragDistance > 4) return;
+  handleClose();
 }
 
 onUnmounted(() => {
-  handleClose();
+  document.removeEventListener("keydown", handleKeydown);
+  resetTransform();
+  imageStore.closeImagePreview();
 });
 </script>
 
@@ -223,50 +204,62 @@ onUnmounted(() => {
     <Teleport to="body">
       <Transition name="fade">
         <div
-          v-if="shouldShowPreview && imgList[imgIndex]"
-          class="elysium-ui elysium-ui__image-preview__container fixed z-999 top-0 left-0 w-full h-full bg-black/40 flex flex-col items-center justify-center gap-4"
+          v-if="imageStore.visible && currentImage"
+          class="elysium-ui elysium-ui__image-preview__container fixed z-999 inset-0 flex flex-col items-center justify-center gap-4 select-none"
           @wheel="handleScroll"
-          @touchstart="handleTouch"
-          @touchmove="handleTouch"
-          @mousemove="handleMouseMove"
-          @mousedown="isDragging = true"
-          @mouseup="isDragging = false"
+          @pointerdown="handlePointerDown"
+          @pointermove="handlePointerMove"
+          @pointerup="handlePointerEnd"
+          @pointercancel="handlePointerEnd"
+          @lostpointercapture="handlePointerEnd"
         >
-          <OnClickOutside :options="clickOutsideOptions" @trigger="handleClose">
+          <OnClickOutside
+            :options="clickOutsideOptions"
+            @trigger="handleClickOutside"
+          >
             <img
+              ref="imageRef"
               draggable="false"
               class="elysium-ui__image-preview--image w-full max-w-screen-md object-contain flex-1"
-              :src="imgList[imgIndex].src"
+              :src="currentImage.src"
+              :alt="currentImage.alt || 'Image preview'"
               :style="{
                 transform: `scale(${scale}) translate3d(${offset.translateX}px, ${offset.translateY}px, 0)`,
               }"
-              alt="Image preview"
-              ref="imageRef"
             />
           </OnClickOutside>
-          <!-- Switch image -->
-          <button
+
+          <ElyButton
             v-if="shouldShowNav"
-            class="elysium-ui__image-preview__button elysium-ui__image-preview__button__nav elysium-ui__image-preview__button__nav--prev"
-            @click="handlePrev"
+            secondary
+            size="icon"
+            class="elysium-ui__image-preview__button elysium-ui__image-preview__button__nav elysium-ui__image-preview__button__nav--prev -translate-y-1/2"
+            aria-label="上一张图像"
+            @click="imageStore.prevImagePreview()"
           >
-            <ChevronLeft />
-          </button>
-          <button
+            <ChevronLeft :size="18" />
+          </ElyButton>
+
+          <ElyButton
             v-if="shouldShowNav"
-            class="elysium-ui__image-preview__button elysium-ui__image-preview__button__nav elysium-ui__image-preview__button__nav--next"
-            @click="handleNext"
+            secondary
+            size="icon"
+            class="elysium-ui__image-preview__button elysium-ui__image-preview__button__nav elysium-ui__image-preview__button__nav--next -translate-y-1/2"
+            aria-label="下一张图像"
+            @click="imageStore.nextImagePreview()"
           >
-            <ChevronRight />
-          </button>
-          <!-- Close -->
-          <button
+            <ChevronRight :size="18" />
+          </ElyButton>
+
+          <ElyButton
+            secondary
+            size="icon"
             class="elysium-ui__image-preview__button elysium-ui__image-preview__button--close"
-            @click="handleClose"
             aria-label="关闭图像预览"
+            @click="handleClose"
           >
-            <Close />
-          </button>
+            <Close :size="18" />
+          </ElyButton>
         </div>
       </Transition>
     </Teleport>
@@ -275,35 +268,50 @@ onUnmounted(() => {
 
 <style lang="scss" scoped>
 .elysium-ui__image-preview {
+  &__container {
+    touch-action: none;
+    background-color: color-mix(in srgb, var(--gouache-paper) 84%, transparent);
+  }
+
   &__button {
-    @apply absolute bg-black/50 text-white/80;
+    position: absolute;
+    background-color: var(--gouache-paper);
+    border: 1px solid var(--color-accent-border-300);
 
     &__nav {
-      @apply top-1/2 rounded-none;
-      @apply w-10 h-10 flex items-center justify-center;
-      border: 1px solid rgba(255, 255, 255, 0.22);
+      top: 50%;
+      transform: translateY(-50%);
+
       &--prev {
-        @apply left-4;
+        left: 16px;
       }
+
       &--next {
-        @apply right-4;
+        right: 16px;
       }
     }
 
     &--close {
-      @apply top-4 right-4 w-10 h-10 rounded-none flex items-center justify-center;
-      border: 1px solid rgba(255, 255, 255, 0.22);
+      top: 16px;
+      right: 16px;
     }
   }
 }
 
 .fade-enter-active,
 .fade-leave-active {
-  @apply transition-opacity duration-300;
+  transition: opacity 0.25s ease;
 }
 
 .fade-enter-from,
 .fade-leave-to {
-  @apply opacity-0;
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fade-enter-active,
+  .fade-leave-active {
+    transition: none !important;
+  }
 }
 </style>

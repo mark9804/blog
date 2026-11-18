@@ -1,59 +1,43 @@
 import { defineStore } from "pinia";
-import { ImagePreviewConfig } from "../theme/types/ImagePreviewConfig";
-import { ref, computed } from "vue";
+import { ref } from "vue";
+import type { ImageBase } from "../theme/components/ElysiumUI/types/ImageBase";
 
 export const useImageStore = defineStore("vitepress-image-store", () => {
-  const imagePreviewSettings = ref<ImagePreviewConfig>({
-    show: false,
-    image: [{ src: "", alt: "" }],
-    index: 0,
-  });
-  const getImagePreviewSettings = computed(() => imagePreviewSettings.value);
-  const getImagePreviewVisibility = computed(
-    () => imagePreviewSettings.value.show
-  );
-  const getImageList = computed(() => {
-    return Array.isArray(imagePreviewSettings.value.image)
-      ? imagePreviewSettings.value.image
-      : [imagePreviewSettings.value.image];
-  });
-  const getImagePreviewIndex = computed(() => imagePreviewSettings.value.index);
-  function toggleImagePreview() {
-    imagePreviewSettings.value.show = !imagePreviewSettings.value.show;
-  }
-  function closeImagePreview() {
-    imagePreviewSettings.value.show = false;
-  }
+  const visible = ref(false);
+  const images = ref<ImageBase[]>([]);
+  const index = ref(0);
+
   function openImagePreview(
-    image: ImagePreviewConfig["image"],
-    index?: number
-  ) {
-    imagePreviewSettings.value.image = image;
-    imagePreviewSettings.value.index = index ?? 0;
-    imagePreviewSettings.value.show = true;
+    input: ImageBase | ImageBase[],
+    startIndex = 0
+  ): void {
+    const normalized = Array.isArray(input) ? input : [input];
+    if (normalized.length === 0) return;
+
+    images.value = normalized;
+    index.value = Math.min(Math.max(0, startIndex), normalized.length - 1);
+    visible.value = true;
   }
-  function prevImagePreview() {
-    imagePreviewSettings.value.index = Math.max(
-      imagePreviewSettings.value.index - 1,
-      0
-    );
+
+  function closeImagePreview(): void {
+    visible.value = false;
   }
-  function nextImagePreview() {
-    imagePreviewSettings.value.index = Math.min(
-      imagePreviewSettings.value.index + 1,
-      getImageList.value.length - 1
-    );
+
+  function prevImagePreview(): void {
+    index.value = Math.max(0, index.value - 1);
+  }
+
+  function nextImagePreview(): void {
+    if (images.value.length === 0) return;
+    index.value = Math.min(images.value.length - 1, index.value + 1);
   }
 
   return {
-    imagePreviewSettings,
-    getImagePreviewSettings,
-    getImagePreviewVisibility,
-    getImageList,
-    getImagePreviewIndex,
-    toggleImagePreview,
-    closeImagePreview,
+    visible,
+    images,
+    index,
     openImagePreview,
+    closeImagePreview,
     prevImagePreview,
     nextImagePreview,
   };

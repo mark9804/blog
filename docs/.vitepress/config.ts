@@ -1,35 +1,31 @@
-import { type UserConfigFn } from "vitepress";
-import { HeadConfig, DefaultTheme } from "vitepress";
-import { BASE_URL, DOMAIN } from "./constants";
-import { headConfig } from "./configs/headConfig";
-import { markdownConfig } from "./configs/markdownConfig";
-import { themeConfig } from "./configs/themeConfig";
-import { createViteConfig } from "./configs/viteConfig";
-import { sidebarConfig } from "./configs/sidebarConfig";
+import type { DefaultTheme, HeadConfig, UserConfigFn } from "vitepress";
 import { withSidebar } from "vitepress-sidebar";
+import { BASE_URL, DOMAIN } from "./constants.ts";
+import { headConfig } from "./configs/headConfig.ts";
+import { markdownConfig } from "./configs/markdownConfig.ts";
+import { sidebarConfig } from "./configs/sidebarConfig.ts";
+import { themeConfig } from "./configs/themeConfig.ts";
+import { createViteConfig } from "./configs/viteConfig.ts";
 
 const SIDEBAR_BOTTOM_PATTERNS = ["考古"];
+
+function isBottomSidebarItem(item: DefaultTheme.SidebarItem): boolean {
+  return SIDEBAR_BOTTOM_PATTERNS.some(pattern => item.text?.includes(pattern));
+}
 
 function fixSidebarLinks(
   sidebar: DefaultTheme.SidebarItem[]
 ): DefaultTheme.SidebarItem[] {
-  const processedItems = sidebar.map(item => {
-    if (item.items) {
-      item.items = fixSidebarLinks(item.items);
-    }
-    if (item.link && !item.link.startsWith("/")) {
-      item.link = "/" + item.link;
-    }
-    return item;
-  });
-
-  return processedItems.sort((a, b) => {
-    const aBottom = SIDEBAR_BOTTOM_PATTERNS.some(p => a.text?.includes(p));
-    const bBottom = SIDEBAR_BOTTOM_PATTERNS.some(p => b.text?.includes(p));
-    if (aBottom && !bBottom) return 1;
-    if (!aBottom && bBottom) return -1;
-    return 0;
-  });
+  return sidebar
+    .map(item => ({
+      ...item,
+      link:
+        item.link && !item.link.startsWith("/") ? `/${item.link}` : item.link,
+      items: item.items ? fixSidebarLinks(item.items) : undefined,
+    }))
+    .sort(
+      (a, b) => Number(isBottomSidebarItem(a)) - Number(isBottomSidebarItem(b))
+    );
 }
 
 function processLinks(sidebar: DefaultTheme.Sidebar): DefaultTheme.Sidebar {
@@ -46,7 +42,6 @@ function processLinks(sidebar: DefaultTheme.Sidebar): DefaultTheme.Sidebar {
   return processedSidebar;
 }
 
-// https://vitepress.dev/reference/site-config
 const config: UserConfigFn<DefaultTheme.Config> = ({ mode }) => ({
   base: BASE_URL,
   cleanUrls: true,
@@ -55,7 +50,7 @@ const config: UserConfigFn<DefaultTheme.Config> = ({ mode }) => ({
   description: "",
   lang: "zh-CN",
   sitemap: {
-    hostname: DOMAIN + BASE_URL,
+    hostname: DOMAIN,
   },
   lastUpdated: true,
   markdown: markdownConfig,

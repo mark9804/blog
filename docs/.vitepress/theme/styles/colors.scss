@@ -4,9 +4,6 @@
 
 $accent: theme.$accent;
 $base-opacity: theme.$base-opacity;
-$code-brightness-tune: theme.$code-brightness-tune;
-$code-saturation-tune: theme.$code-saturation-tune;
-$disabled-opacity: theme.$disabled-opacity;
 
 // Extract hue safely in OKLCH, falling back to slate-cerulean for achromatic seeds
 @function extract-oklch-hue($ok-color) {
@@ -53,12 +50,10 @@ $light-accent: ok-rgb(41%, $gouache-chroma * 0.95, $seed-hue);
 $light-accent-secondary: $light-pigment;
 $light-accent-tertiary: color.mix($light-pigment, $light-wash, 55%);
 $light-accent-quaternary: $light-wash;
-$light-accent-quinary: $light-card;
 $light-accent-base: $light-chalk;
 
 // Neutral-charcoal reading ink (~16.9:1 on paper) so accent code/links stand out clearly
-$light-text-base: ok-rgb(20.5%, 0.014, $seed-hue);
-$light-text-primary: $light-text-base;
+$light-text-primary: ok-rgb(20.5%, 0.014, $seed-hue);
 $light-text-secondary: ok-rgb(40%, $gouache-chroma * 0.35, $seed-hue);
 $light-text-tertiary: ok-rgb(50.5%, $gouache-chroma * 0.3, $seed-hue);
 
@@ -75,29 +70,16 @@ $dark-accent: ok-rgb(76%, $gouache-chroma * 0.82, $seed-hue);
 $dark-accent-secondary: $dark-pigment;
 $dark-accent-tertiary: color.mix($dark-pigment, $dark-wash, 55%);
 $dark-accent-quaternary: $dark-wash;
-$dark-accent-quinary: $dark-card;
 $dark-accent-base: $dark-chalk;
 
 // High-clarity warm chalk reading ink (~15.7:1 on dark ground)
-$dark-text-base: color.mix(
+$dark-text-primary: color.mix(
   ok-rgb(93.8%, 0.006, 92deg),
   ok-rgb(93.8%, 0.006, $seed-hue),
   80%
 );
-$dark-text-primary: $dark-text-base;
 $dark-text-secondary: ok-rgb(78%, $gouache-chroma * 0.26, $seed-hue);
 $dark-text-tertiary: ok-rgb(65%, $gouache-chroma * 0.24, $seed-hue);
-
-$button-colors: (
-  "primary": (
-    "background": var(--color-accent),
-    "text": var(--color-accent-base),
-  ),
-  "secondary": (
-    "background": var(--color-accent-quaternary),
-    "text": var(--color-accent),
-  ),
-);
 
 /* ------------------------------------------------------------ */
 
@@ -113,7 +95,6 @@ html {
   --color-accent-secondary: #{$light-accent-secondary};
   --color-accent-tertiary: #{$light-accent-tertiary};
   --color-accent-quaternary: #{$light-accent-quaternary};
-  --color-accent-quinary: #{$light-accent-quinary};
   --color-accent-base: #{$light-accent-base};
   --color-accent-transparent: #{rgba($light-paper, $base-opacity)};
   --color-accent-text-primary: #{$light-text-primary};
@@ -128,7 +109,6 @@ html {
 
   @for $i from 1 through 9 {
     --color-accent-border-#{$i}00: #{rgba($light-accent, $i * 0.1)};
-    --color-accent-shadow-#{$i}00: #{rgba($light-accent, $i * 0.08)};
   }
 
   background-color: var(--gouache-paper);
@@ -147,7 +127,6 @@ html.dark {
   --color-accent-secondary: #{$dark-accent-secondary};
   --color-accent-tertiary: #{$dark-accent-tertiary};
   --color-accent-quaternary: #{$dark-accent-quaternary};
-  --color-accent-quinary: #{$dark-accent-quinary};
   --color-accent-base: #{$dark-accent-base};
   --color-accent-transparent: #{rgba($dark-paper, $base-opacity)};
   --color-accent-text-primary: #{$dark-text-primary};
@@ -162,21 +141,8 @@ html.dark {
 
   @for $i from 1 through 9 {
     --color-accent-border-#{$i}00: #{rgba($dark-accent, $i * 0.1)};
-    --color-accent-shadow-#{$i}00: #{rgba($dark-accent, $i * 0.08)};
   }
 }
-
-$color-accent: var(--color-accent);
-$color-accent-secondary: var(--color-accent-secondary);
-$color-accent-tertiary: var(--color-accent-tertiary);
-$color-accent-quaternary: var(--color-accent-quaternary);
-$color-accent-quinary: var(--color-accent-quinary);
-$color-accent-base: var(--color-accent-base);
-$color-accent-transparent: var(--color-accent-transparent);
-$color-accent-text-primary: var(--color-accent-text-primary);
-$color-accent-text-secondary: var(--color-accent-text-secondary);
-$color-accent-text-tertiary: var(--color-accent-text-tertiary);
-$color-accent-code: var(--color-accent-code);
 
 :root,
 html.dark {
@@ -189,24 +155,24 @@ html.dark {
   --vp-c-divider: var(--color-accent-border-200);
   --vp-c-gutter: var(--color-accent-border-200);
 
-  --vp-c-default-1: #{$color-accent-text-primary};
-  --vp-c-default-2: #{$color-accent-quaternary};
-  --vp-c-default-3: #{$color-accent-tertiary};
+  --vp-c-default-1: var(--color-accent-text-primary);
+  --vp-c-default-2: var(--color-accent-quaternary);
+  --vp-c-default-3: var(--color-accent-tertiary);
   --vp-c-default-soft: var(--gouache-wash);
 
-  --vp-c-brand-1: #{$color-accent};
-  --vp-c-brand-2: #{$color-accent-secondary};
-  --vp-c-brand-3: #{$color-accent-tertiary};
+  --vp-c-brand-1: var(--color-accent);
+  --vp-c-brand-2: var(--color-accent-secondary);
+  --vp-c-brand-3: var(--color-accent-tertiary);
   --vp-c-brand-soft: var(--gouache-wash);
 
-  --vp-c-tip-1: #{$color-accent};
-  --vp-c-tip-2: #{$color-accent-secondary};
-  --vp-c-tip-3: #{$color-accent-tertiary};
+  --vp-c-tip-1: var(--color-accent);
+  --vp-c-tip-2: var(--color-accent-secondary);
+  --vp-c-tip-3: var(--color-accent-tertiary);
   --vp-c-tip-soft: var(--gouache-wash);
 
-  --vp-c-text-1: #{$color-accent-text-primary};
-  --vp-c-text-2: #{$color-accent-text-secondary};
-  --vp-c-text-3: #{$color-accent-text-tertiary};
+  --vp-c-text-1: var(--color-accent-text-primary);
+  --vp-c-text-2: var(--color-accent-text-secondary);
+  --vp-c-text-3: var(--color-accent-text-tertiary);
 
   --vp-code-bg: var(--gouache-wash);
   --vp-code-color: var(--color-accent-code);
@@ -230,7 +196,10 @@ html.dark {
   // Sync VitePress layout surfaces & remove default blurry Material shadows
   --vp-sidebar-bg-color: var(--gouache-paper);
   --vp-nav-bg-color: var(--gouache-paper);
+  --vp-nav-home-bg-color: var(--gouache-paper);
   --vp-nav-screen-bg-color: var(--gouache-paper);
+  --vp-nav-divider-color: transparent;
+  --vp-local-nav-divider-color: var(--color-accent-border-200);
   --vp-local-search-bg: var(--gouache-paper);
   --vp-local-search-result-bg: var(--gouache-paper);
   --vp-local-search-result-selected-bg: var(--gouache-wash);

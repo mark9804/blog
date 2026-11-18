@@ -1,87 +1,100 @@
 <script setup lang="ts">
+import {
+  Comment,
+  Fragment,
+  cloneVNode,
+  computed,
+  provide,
+  useSlots,
+  type VNode,
+  type VNodeArrayChildren,
+} from "vue";
 import type { ImageBase } from "./types/ImageBase";
-import { provide, reactive, computed, useSlots, type VNode } from "vue";
 import { GALLERY_INJECTION_KEY } from "./types/GalleryContext";
-import { isElement, isComponent, isArrayChildren } from "./_utils/vueUtils";
 
 defineProps<{
   name?: string;
 }>();
 
-// Shared gallery context: child ElyImage components register themselves
-// here via inject so they can open a preview scoped to this gallery.
-const galleryImages = reactive<ImageBase[]>([]);
-
-function registerImage(image: ImageBase): number {
-  const index = galleryImages.length;
-  galleryImages.push(image);
-  return index;
-}
-
-provide(GALLERY_INJECTION_KEY, { images: galleryImages, registerImage });
-
-// Extract component VNodes from slot, digging through wrapper elements
-// like <p> that markdown-it inserts around inline content.
-function extractComponents(vnodes: VNode[] | undefined): VNode[] {
+// Extract child component VNodes in reading order, unwrapping <p> or Fragment nodes
+// inserted by markdown-it around inline images.
+function extractComponentVNodes(
+  vnodes: VNodeArrayChildren | undefined
+): VNode[] {
   if (!vnodes) return [];
   const result: VNode[] = [];
   for (const vn of vnodes) {
-    if (isComponent(vn)) {
+    if (Array.isArray(vn)) {
+      result.push(...extractComponentVNodes(vn));
+      continue;
+    }
+    if (typeof vn !== "object" || vn === null || vn.type === Comment) {
+      continue;
+    }
+    if (
+      (typeof vn.type === "object" && vn.type !== null) ||
+      typeof vn.type === "function"
+    ) {
       result.push(vn);
-    } else if (isElement(vn) && Array.isArray(vn.children)) {
-      result.push(...extractComponents(vn.children as VNode[]));
-    } else if (isArrayChildren(vn, vn.children)) {
-      result.push(...extractComponents(vn.children));
+    } else if (
+      (vn.type === Fragment || typeof vn.type === "string") &&
+      Array.isArray(vn.children)
+    ) {
+      result.push(...extractComponentVNodes(vn.children));
     }
   }
   return result;
 }
 
-// Distribute slot children round-robin into 3 columns,
-// replicating the original masonry layout.
 const slots = useSlots();
+
+const orderedChildren = computed(() =>
+  extractComponentVNodes(slots.default?.())
+);
+
+const orderedImages = computed<ImageBase[]>(() =>
+  orderedChildren.value
+    .map(vn => vn.props?.image as ImageBase | undefined)
+    .filter((img): img is ImageBase => Boolean(img))
+);
+
+provide(GALLERY_INJECTION_KEY, { images: orderedImages });
+
+// Distribute images round-robin into 3 columns while preserving reading-order index
 const columns = computed(() => {
-  const children = extractComponents(slots.default?.());
-  const result: VNode[][] = [[], [], []];
-  children.forEach((child, i) => {
-    result[i % 3].push(child);
+  const buckets: VNode[][] = [[], [], []];
+  orderedChildren.value.forEach((child, i) => {
+    buckets[i % 3].push(cloneVNode(child, { galleryIndex: i }));
   });
-  return result.filter(col => col.length > 0);
+  return buckets.filter(col => col.length > 0);
 });
 </script>
 
 <template>
-  <ClientOnly>
-    <div class="elysium-ui elysium-ui__gallery flex flex-col gap-2 container">
-      <div class="elysium-ui elysium-ui__gallery__img-container flex gap-2">
-        <ElySpace
-          v-for="(col, colIndex) in columns"
-          :key="colIndex"
-          size="small"
-          direction="vertical"
-        >
-          <component :is="child" v-for="(child, i) in col" :key="i" />
-        </ElySpace>
-      </div>
-      <figcaption
-        v-if="name && name.length > 0"
-        class="text-sm text-[var(--color-accent-text-tertiary)] text-center"
+  <figure class="elysium-ui elysium-ui__gallery m-0 flex flex-col gap-2">
+    <div class="elysium-ui elysium-ui__gallery__img-container flex gap-2">
+      <ElySpace
+        v-for="(col, colIndex) in columns"
+        :key="colIndex"
+        size="small"
+        direction="vertical"
+        class="flex-1 min-w-0"
       >
-        {{ name }}
-      </figcaption>
+        <component :is="child" v-for="(child, i) in col" :key="i" />
+      </ElySpace>
     </div>
-  </ClientOnly>
+    <figcaption
+      v-if="name && name.length > 0"
+      class="text-sm text-[var(--color-accent-text-tertiary)] text-center"
+    >
+      {{ name }}
+    </figcaption>
+  </figure>
 </template>
 
 <style scoped lang="scss">
 .elysium-ui__gallery {
   container-type: inline-size;
-
-  // markdown-it wrap inline contents in <p>, which fails flexbox layout
-  // We need to deliberately neutralize it in image gallery component
-  :deep(p) {
-    display: contents;
-  }
 
   @container (max-width: 375px) {
     &__img-container {

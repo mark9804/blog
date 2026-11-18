@@ -4,8 +4,6 @@ export interface ScholarConfig {
 }
 
 export type ProfileProps = {
-  accent?: string;
-  background?: string;
   name: {
     "zh-CN": string;
     [key: string]: string;
@@ -19,8 +17,4 @@ export type ProfileProps = {
     openInNewTab?: boolean;
   }[];
   scholar?: ScholarConfig;
-  meta?: {
-    name: unknown;
-    value: unknown;
-  }[];
 };

@@ -1,10 +1,10 @@
 import { decodeHTML } from "entities";
-import type { ScholarConfig } from "../components/ElysiumUI/types/ProfileProps";
+import type { ScholarConfig } from "../components/ElysiumUI/types/ProfileProps.ts";
 import type {
   AuthorSegment,
   PublicationItem,
   ScholarData,
-} from "../types/Publication";
+} from "../types/Publication.ts";
 
 const OPENALEX_WORKS_API = "https://api.openalex.org/works";
 const OPENALEX_SELECT_FIELDS =

@@ -6,5 +6,4 @@ export type CardProps = {
   href?: string;
   ariaLabel?: string;
   external?: boolean;
-  as?: "card" | "link";
 };

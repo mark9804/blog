@@ -2,11 +2,12 @@
 import { computed, onMounted, ref } from "vue";
 import { useData } from "vitepress";
 import { Calendar, Quote } from "@lucide/vue";
-import { userProfile } from "../../configs/userProfile";
 import { data as buildTimeData } from "../loaders/publications.data";
 import type { ScholarData } from "../types/Publication";
 import { fetchScholarData } from "../utils/scholarUtils";
 import ElyCard from "./ElysiumUI/ElyCard.vue";
+import ElyEmptyState from "./ElysiumUI/ElyEmptyState.vue";
+import ElySpinner from "./ElysiumUI/ElySpinner.vue";
 import ElyTag from "./ElysiumUI/ElyTag.vue";
 
 const CACHE_KEY = "elysium:openalex-scholar:v1";
@@ -22,9 +23,7 @@ const { theme } = useData();
 const scholarData = ref<ScholarData>(buildTimeData);
 const isRefreshing = ref(false);
 
-const scholarConfig = computed(
-  () => theme.value?.userProfile?.scholar ?? userProfile.scholar
-);
+const scholarConfig = computed(() => theme.value?.userProfile?.scholar);
 
 const publications = computed(() => scholarData.value.publications);
 

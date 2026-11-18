@@ -1,7 +1,7 @@
 import { defineLoader } from "vitepress";
-import { userProfile } from "../../configs/userProfile";
-import type { ScholarData } from "../types/Publication";
-import { EMPTY_SCHOLAR_DATA, fetchScholarData } from "../utils/scholarUtils";
+import { userProfile } from "../../configs/userProfile.ts";
+import type { ScholarData } from "../types/Publication.ts";
+import { EMPTY_SCHOLAR_DATA, fetchScholarData } from "../utils/scholarUtils.ts";
 
 declare const data: ScholarData;
 export { data };

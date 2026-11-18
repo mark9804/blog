@@ -181,8 +181,10 @@ function handleMessage(event: MessageEvent) {
   if (typeof payload !== "object" || !payload?.giscus) return;
 
   const giscusData = payload.giscus;
-  hasIframeLoaded.value = true;
-  emit("loaded");
+  if (!hasIframeLoaded.value) {
+    hasIframeLoaded.value = true;
+    emit("loaded");
+  }
 
   if (
     typeof giscusData.resizeHeight === "number" &&
@@ -216,7 +218,6 @@ function handleMessage(event: MessageEvent) {
 }
 
 function reload() {
-  clearSession();
   hasIframeLoaded.value = false;
   iframeHeight.value = 160;
   initialIframeSrc.value = buildIframeSrc();

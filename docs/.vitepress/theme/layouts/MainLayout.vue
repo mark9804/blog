@@ -1,20 +1,25 @@
 <script setup lang="ts">
 import { useData, useRouter } from "vitepress";
-import GiscusComment from "../components/GiscusComment.vue";
+import DefaultTheme from "vitepress/theme-without-fonts";
 import {
   nextTick,
-  onBeforeMount,
+  onUnmounted,
   provide,
-  ComputedRef,
   ref,
   defineAsyncComponent,
+  type ComputedRef,
 } from "vue";
-import DefaultTheme from "vitepress/theme";
-import type { ArticleInfo } from "../types/ArticleInfo";
-import { useSearchTags } from "../utils/tagSearchUtils";
-import { useCustomStore } from "../../stores/piniaStore";
-import { useFormulaCopy } from "../composables/useFormulaCopy";
+import GiscusComment from "../components/GiscusComment.vue";
 import ElyGitChangelog from "../components/ElysiumUI/ElyGitChangelog.vue";
+import ElyImagePreview from "../components/ElysiumUI/ElyImagePreview.vue";
+import ElySpace from "../components/ElysiumUI/ElySpace.vue";
+import ElySpinner from "../components/ElysiumUI/ElySpinner.vue";
+import ElyTag from "../components/ElysiumUI/ElyTag.vue";
+import ElyToastMessage from "../components/ElysiumUI/ElyToastMessage.vue";
+import type { PostFrontmatter } from "../types/Post";
+import { useTagNavigation } from "../composables/useTagNavigation";
+import { useFormulaCopy } from "../composables/useFormulaCopy";
+
 declare const __INJECT_SPEED_INSIGHTS__: boolean;
 
 const SpeedInsights = __INJECT_SPEED_INSIGHTS__
@@ -25,10 +30,12 @@ const SpeedInsights = __INJECT_SPEED_INSIGHTS__
     )
   : null;
 
-const store = useCustomStore();
 useFormulaCopy();
+const { navigateToTag } = useTagNavigation();
 
-const { isDark } = useData();
+const { isDark, frontmatter: rawFrontmatter } = useData();
+const frontmatter = rawFrontmatter as ComputedRef<PostFrontmatter>;
+const { Layout } = DefaultTheme;
 
 const enableTransitions = () =>
   "startViewTransition" in document &&
@@ -67,39 +74,44 @@ provide("toggle-appearance", async () => {
   document.documentElement.classList.remove("vt-transitioning");
 });
 
-const data = useData();
-const { Layout } = DefaultTheme;
-const frontmatter = data.frontmatter as unknown as ComputedRef<
-  ArticleInfo["frontmatter"]
->;
-
-function handleTagClick(tag: string) {
-  store.resetTags();
-  store.pushSelectedTags(tag);
-  useSearchTags.go();
-}
-
 const router = useRouter();
-
 const isLoading = ref(false);
-let loadingTimer: number | null = null;
+let loadingTimer: ReturnType<typeof setTimeout> | null = null;
 
-// 给过长的路由切换（用户网不好时）添加 loading 效果
-// 防止用户认为页面无响应
-router.onBeforeRouteChange = () => {
-  if (loadingTimer) clearTimeout(loadingTimer);
-  loadingTimer = window.setTimeout(() => {
-    isLoading.value = true;
-  }, 200); // 200ms 后再显示 loading，避免网络正常时闪烁打断心流
-};
-
-router.onAfterRouteChange = () => {
-  if (loadingTimer) {
+function clearLoadingTimer() {
+  if (loadingTimer !== null) {
     clearTimeout(loadingTimer);
     loadingTimer = null;
   }
-  isLoading.value = false;
+}
+
+const prevBeforeRouteChange = router.onBeforeRouteChange;
+const prevAfterRouteChange = router.onAfterRouteChange;
+
+// Delay spinner by 200ms so normal fast SPA route transitions never flash
+router.onBeforeRouteChange = async to => {
+  const shouldContinue = await prevBeforeRouteChange?.(to);
+  if (shouldContinue === false) return false;
+
+  clearLoadingTimer();
+  if (!import.meta.env.SSR) {
+    loadingTimer = setTimeout(() => {
+      isLoading.value = true;
+    }, 200);
+  }
 };
+
+router.onAfterRouteChange = async to => {
+  clearLoadingTimer();
+  isLoading.value = false;
+  await prevAfterRouteChange?.(to);
+};
+
+onUnmounted(() => {
+  clearLoadingTimer();
+  router.onBeforeRouteChange = prevBeforeRouteChange;
+  router.onAfterRouteChange = prevAfterRouteChange;
+});
 </script>
 
 <template>
@@ -111,18 +123,18 @@ router.onAfterRouteChange = () => {
   <Layout>
     <template #doc-footer-before>
       <div
+        v-if="frontmatter.tags?.length"
         class="flex flex-wrap items-center gap-2 pb-4"
-        v-if="frontmatter?.tags?.length"
       >
         <span class="text-sm text-secondary"
-          >Tag{{ frontmatter?.tags?.length > 1 ? "s" : "" }}:
+          >Tag{{ frontmatter.tags.length > 1 ? "s" : "" }}:
         </span>
         <ElyTag
-          v-for="tag in frontmatter?.tags"
+          v-for="tag in frontmatter.tags"
+          :key="tag"
           size="small"
-          :id="tag"
           clickable
-          @click="handleTagClick(tag)"
+          @click="navigateToTag(tag)"
         >
           {{ tag }}
         </ElyTag>
@@ -138,16 +150,14 @@ router.onAfterRouteChange = () => {
     <template #doc-after>
       <GiscusComment v-if="frontmatter.comment !== false" />
       <ElySpace
-        class="justify-center mt-10 text-sm"
-        wide
-        :size="0"
-        padding="0"
-        align="center"
         v-else
+        wide
+        justify="center"
+        align="center"
+        :size="0"
+        class="mt-10 text-sm"
       >
-        <span class="text-tertiary !select-none cursor-not-allowed"
-          >本页面禁止评论</span
-        >
+        <span class="text-tertiary select-none">本页面禁止评论</span>
       </ElySpace>
     </template>
   </Layout>
@@ -183,5 +193,12 @@ router.onAfterRouteChange = () => {
 .fade-in-out-enter-from,
 .fade-in-out-leave-to {
   opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fade-in-out-enter-active,
+  .fade-in-out-leave-active {
+    transition: none;
+  }
 }
 </style>

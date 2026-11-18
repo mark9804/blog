@@ -1,22 +1,19 @@
-import vueJsx from "@vitejs/plugin-vue-jsx";
-// @ts-ignore
+import { fileURLToPath } from "node:url";
+// @ts-expect-error postcss-plugin-px2rem does not ship TypeScript declarations
 import px2rem from "postcss-plugin-px2rem";
-import AutoImport from "unplugin-auto-import/vite";
-import RekaResolver from "reka-ui/resolver";
-import Components from "unplugin-vue-components/vite";
 import UnoCSS from "unocss/vite";
-import { presetAttributify, presetWind3, transformerDirectives } from "unocss";
+import AutoImport from "unplugin-auto-import/vite";
+import Components from "unplugin-vue-components/vite";
+import type { UserConfig } from "vite";
 import vueDevTools from "vite-plugin-vue-devtools";
 import { RssPlugin } from "vitepress-plugin-rss";
-
-import { rssConfig } from "./rssConfig";
+import { rssConfig } from "./rssConfig.ts";
 
 const platform = process.env.PLATFORM || "default";
+const docsSrcDir = fileURLToPath(new URL("../../src", import.meta.url));
 
-export function createViteConfig(mode: string) {
-  console.log(`platform: ${platform}\nmode: ${mode}`);
-
-  // Vercel speed-insights analytics component should only be injected on vercel
+export function createViteConfig(mode: string): UserConfig {
+  // Vercel speed-insights analytics component should only be injected on Vercel
   const shouldInjectVercelSpeedInsightsComponent =
     mode === "production" && platform === "vercel";
 
@@ -27,51 +24,34 @@ export function createViteConfig(mode: string) {
       ),
     },
     resolve: {
-      tsconfigPaths: true,
+      // Required by demo imports in docs/breves/frontend/create-fluent-2-styled-input-vue.md
       alias: {
-        "@": "/src",
+        "@": docsSrcDir,
       },
     },
     server: {
       port: 5500,
       open: true,
     },
-    ssr: { noExternal: [] },
     plugins: [
-      vueJsx(),
       AutoImport({
-        resolvers: [RekaResolver()],
         imports: ["vue"],
       }),
       Components({
         include: [/\.vue$/, /\.md$/, /\.ts$/],
-        dirs: [
-          ".vitepress/theme/components/ElysiumUI",
-          ".vitepress/theme/components/ElysiumUI/ElyIcon",
-          ".vitepress/theme/components",
-        ],
-        resolvers: [RekaResolver()],
+        dirs: [".vitepress/theme/components"],
       }),
       mode === "development" && vueDevTools(),
-      UnoCSS({
-        presets: [presetWind3(), presetAttributify()],
-        transformers: [transformerDirectives()],
-      }),
+      UnoCSS(),
       RssPlugin(rssConfig),
     ],
     css: {
-      preprocessorOptions: {
-        scss: {
-          additionalData: "",
-          api: "modern-compiler",
-        },
-      },
       postcss: {
         plugins: [
           px2rem({
             rootValue: 16,
             propBlackList: ["font-size", "border", "border-width"],
-            exclude: /(node_module)/,
+            exclude: /node_modules/,
           }),
         ],
       },

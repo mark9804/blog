@@ -1,44 +1,15 @@
-import type { VitePressSidebarOptions } from "vitepress-sidebar";
+import type { VitePressSidebarOptions } from "vitepress-sidebar/types";
 
 const commonConfig: VitePressSidebarOptions = {
   documentRootPath: "/docs",
   useTitleFromFileHeading: true,
   useTitleFromFrontmatter: true,
   useFolderTitleFromIndexFile: true,
-  // useFolderLinkFromIndexFile: false,
-  // hyphenToSpace: true,
-  // underscoreToSpace: true,
-  // capitalizeFirst: true,
-  // capitalizeEachWords: true,
   collapsed: true,
   sortFolderTo: "top",
-  // collapseDepth: 2,
-  // sortMenusByName: false,
-  // sortMenusByFrontmatterOrder: false,
-  // sortMenusByFrontmatterDate: false,
-  // sortMenusOrderByDescending: false,
-  // sortMenusOrderNumericallyFromTitle: false,
-  // sortMenusOrderNumericallyFromLink: false,
-  // frontmatterOrderDefaultValue: 0,
-  // manualSortFileNameByPriority: ['first.md', 'second', 'third.md'],
-  // removePrefixAfterOrdering: true,
-  // prefixSeparator: ".",
-  // excludePattern: ["tags.md"],
-  // excludeFilesByFrontmatter: false,
-  // includeDotFiles: false,
-  // includeRootIndexFile: false,
-  // includeFolderIndexFile: false,
-  // includeEmptyFolder: false,
-  // rootGroupText: 'Contents',
-  // rootGroupLink: 'https://github.com/jooy2',
-  // rootGroupCollapsed: false,
-  // convertSameNameSubFileToGroupIndexPage: false,
-  // folderLinkNotIncludesFileName: false,
-  // keepMarkdownSyntaxFromTitle: false,
-  // debugPrint: true,
 };
 
-export const sidebarConfig = [
+export const sidebarConfig: VitePressSidebarOptions[] = [
   {
     scanStartPath: "breves",
     resolvePath: "/breves",
@@ -49,4 +20,4 @@ export const sidebarConfig = [
     resolvePath: "/quavers",
     ...commonConfig,
   },
-] as VitePressSidebarOptions[];
+];
