@@ -9,17 +9,6 @@
     box-shadow 0.25s ease;
 }
 
-%image-hover {
-  cursor: pointer;
-  border: 1px solid var(--color-accent-border-200);
-  @extend %transition-base;
-
-  &:hover {
-    border-color: var(--color-accent-border-500);
-    box-shadow: 4px 4px 0 0 var(--gouache-wash);
-  }
-}
-
 %bold-font {
   font-weight: 700;
   font-family: var(--font-family-base);
@@ -519,12 +508,6 @@ mark {
   s {
     color: var(--color-accent-text-tertiary);
     text-decoration-thickness: 1.5px;
-  }
-
-  .elysium-ui__image {
-    max-width: 100%;
-    border-radius: 0;
-    @extend %image-hover;
   }
 
   table {

@@ -25,7 +25,7 @@ const overhangPx = computed(() =>
 </script>
 
 <template>
-  <div
+  <span
     role="status"
     :aria-label="props.label || '加载中'"
     class="elysium-ui elysium-ui__loader select-none"
@@ -34,7 +34,7 @@ const overhangPx = computed(() =>
       'elysium-ui__loader--inline': !props.fullscreen,
     }"
   >
-    <div
+    <span
       class="elysium-ui__loader-body flex flex-col items-center justify-center gap-3.5"
     >
       <span
@@ -81,8 +81,8 @@ const overhangPx = computed(() =>
       <span v-if="props.label" class="elysium-ui__loader-label">
         {{ props.label }}
       </span>
-    </div>
-  </div>
+    </span>
+  </span>
 </template>
 
 <style scoped lang="scss">

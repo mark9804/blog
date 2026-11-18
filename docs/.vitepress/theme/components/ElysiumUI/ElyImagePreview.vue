@@ -1,11 +1,21 @@
 <script setup lang="ts">
 import { OnClickOutside } from "@vueuse/components";
 import { useElementBounding, useThrottleFn, useWindowSize } from "@vueuse/core";
-import { computed, onUnmounted, ref, useTemplateRef, watch } from "vue";
-import { ChevronLeft, ChevronRight, X as Close } from "@lucide/vue";
+import {
+  computed,
+  nextTick,
+  onUnmounted,
+  ref,
+  useTemplateRef,
+  watch,
+} from "vue";
+import { ChevronLeft, ChevronRight, ImageOff, X as Close } from "@lucide/vue";
 import { useImageStore } from "../../../stores/imageStore";
 import ElyButton from "./ElyButton.vue";
+import ElySpinner from "./ElySpinner.vue";
 import { clamp } from "./_utils/numberUtils";
+
+type PreviewLoadState = "loading" | "loaded" | "error";
 
 const imageStore = useImageStore();
 
@@ -23,6 +33,7 @@ const MAX_SCALE = 3;
 const scale = ref(1);
 const offset = ref({ translateX: 0, translateY: 0 });
 const isDragging = ref(false);
+const previewState = ref<PreviewLoadState>("loading");
 const imageRef = useTemplateRef<HTMLImageElement>("imageRef");
 
 // Track active pointers uniformly across mouse drag, single-touch pan, and two-finger pinch
@@ -169,10 +180,24 @@ function handleKeydown(event: KeyboardEvent) {
   }
 }
 
+function syncPreviewState() {
+  if (!currentImage.value?.src) {
+    previewState.value = "error";
+    return;
+  }
+  const el = imageRef.value;
+  if (!el || !el.complete) return;
+  previewState.value = el.naturalWidth > 0 ? "loaded" : "error";
+}
+
 watch(
   [() => imageStore.visible, () => imageStore.index],
   ([visible], [prevVisible]) => {
     resetTransform();
+    if (visible) {
+      previewState.value = currentImage.value?.src ? "loading" : "error";
+      nextTick(syncPreviewState);
+    }
     if (visible !== prevVisible) {
       if (visible) {
         document.addEventListener("keydown", handleKeydown);
@@ -213,20 +238,36 @@ onUnmounted(() => {
           @pointercancel="handlePointerEnd"
           @lostpointercapture="handlePointerEnd"
         >
+          <ElySpinner
+            v-if="previewState === 'loading'"
+            :size="28"
+            label="LOADING"
+            class="pointer-events-none absolute"
+          />
+
           <OnClickOutside
             :options="clickOutsideOptions"
             @trigger="handleClickOutside"
           >
             <img
+              v-if="previewState !== 'error'"
+              :key="currentImage.src"
               ref="imageRef"
               draggable="false"
               class="elysium-ui__image-preview--image w-full max-w-screen-md object-contain flex-1"
+              :class="{ 'opacity-0': previewState === 'loading' }"
               :src="currentImage.src"
               :alt="currentImage.alt || 'Image preview'"
               :style="{
                 transform: `scale(${scale}) translate3d(${offset.translateX}px, ${offset.translateY}px, 0)`,
               }"
+              @load="previewState = 'loaded'"
+              @error="previewState = 'error'"
             />
+            <div v-else class="elysium-ui__image-preview__fallback">
+              <ImageOff :size="24" :stroke-width="1.5" />
+              <span>图片加载失败</span>
+            </div>
           </OnClickOutside>
 
           <ElyButton
@@ -295,6 +336,21 @@ onUnmounted(() => {
       top: 16px;
       right: 16px;
     }
+  }
+
+  &__fallback {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 36px 48px;
+    font-family: var(--font-family-base);
+    font-size: 13px;
+    color: var(--color-accent-text-tertiary);
+    background-color: var(--gouache-paper);
+    border: 1px dashed var(--color-accent-border-300);
+    box-shadow: 5px 5px 0 0 var(--gouache-wash);
   }
 }
 

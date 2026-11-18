@@ -16,6 +16,7 @@ const slots = useSlots();
 const { navigateToTag } = useTagNavigation();
 
 const imageLoaded = ref(false);
+const imageError = ref(false);
 const coverImgRef = useTemplateRef<HTMLImageElement>("coverImgRef");
 
 const resolvedMaxWidth = computed(() =>
@@ -54,11 +55,24 @@ function syncRelativeTime() {
 
 watch(() => props.content?.createdAt, syncRelativeTime);
 
+watch(
+  () => props.content?.frontmatter.cover,
+  () => {
+    imageLoaded.value = false;
+    imageError.value = false;
+  }
+);
+
 onMounted(() => {
   syncRelativeTime();
   // Cached images on SPA router return already have complete === true before @load fires
-  if (coverImgRef.value?.complete && coverImgRef.value.naturalWidth > 0) {
-    imageLoaded.value = true;
+  const coverEl = coverImgRef.value;
+  if (coverEl?.complete) {
+    if (coverEl.naturalWidth > 0) {
+      imageLoaded.value = true;
+    } else {
+      imageError.value = true;
+    }
   }
 });
 
@@ -104,7 +118,7 @@ const shouldAriaLabelHide = ref(false);
     <div class="elysium-ui__card--content relative flex flex-col py-5 px-5">
       <div
         class="elysium-ui__card--cover-container relative w-full overflow-hidden mb-4"
-        v-if="props.content?.frontmatter.cover"
+        v-if="props.content?.frontmatter.cover && !imageError"
       >
         <img
           ref="coverImgRef"
@@ -113,8 +127,10 @@ const shouldAriaLabelHide = ref(false);
           :src="props.content.frontmatter.cover"
           :alt="props.content.frontmatter.title"
           :aria-label="`文章「${props.content.frontmatter.title}」的封面图片`"
+          loading="lazy"
+          decoding="async"
           @load="imageLoaded = true"
-          loading="eager"
+          @error="imageError = true"
         />
       </div>
       <h2 class="elysium-ui__card--title m-0">
