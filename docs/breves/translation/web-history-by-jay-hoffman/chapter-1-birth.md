@@ -4,6 +4,7 @@ tags:
   - 翻译
   - 互联网历史
   - Jay Hoffman
+ai_usage: false
 ---
 
 # 互联网历史 第一章：诞生

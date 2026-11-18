@@ -1,5 +1,8 @@
 ---
 title: 文章更新计划
+ai_usage:
+  used: false
+  summary: 连画饼也怀疑我用了 AI 吗，你这家伙……
 ---
 
 # 文章更新计划

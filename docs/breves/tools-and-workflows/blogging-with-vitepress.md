@@ -7,6 +7,7 @@ tags:
   - VSCode
   - Markdown
   - Watermarkly
+ai_usage: false
 ---
 
 # 我的 VitePress 博客写作流程

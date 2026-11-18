@@ -5,6 +5,7 @@ tags:
   - 主题
   - 前端
   - Obsidian
+ai_usage: false
 ---
 
 # Obsidian Border 定制主题：Arco

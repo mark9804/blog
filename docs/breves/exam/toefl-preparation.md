@@ -4,6 +4,7 @@ description: 工具只要干好自己份内的活就好了，但是怎么用好�
 tags:
   - 学习
   - TOEFL
+ai_usage: false
 ---
 
 # 托福备考经验

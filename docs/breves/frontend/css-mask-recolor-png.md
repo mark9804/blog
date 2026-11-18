@@ -5,6 +5,7 @@ tags:
   - CSS
   - CSS 蒙版
 createdAt: "2022-01-08 17:53"
+ai_usage: false
 ---
 
 # 用 CSS 蒙版给任意带有透明通道的 PNG 图片重新着色

@@ -4,6 +4,7 @@ description: 使用 Content Loader 和 git 获取 markdown 文件的创建日期
 tags:
   - 前端
   - VitePress
+ai_usage: false
 ---
 
 # 获取 VitePress 文章的最早创建日期

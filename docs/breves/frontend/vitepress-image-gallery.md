@@ -5,6 +5,7 @@ tags:
   - VitePress
   - Vue
   - 自定义
+ai_usage: false
 ---
 
 # 在 VitePress 中加入图册功能

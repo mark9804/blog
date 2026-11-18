@@ -4,6 +4,7 @@ description: 我迁移到 VitePress 的经过。
 tags:
   - VitePress
   - Vercel
+ai_usage: false
 ---
 
 # VitePress 从迁移到部署

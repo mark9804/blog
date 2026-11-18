@@ -4,6 +4,13 @@ description: 在前端实现平滑的捏合缩放和滚轮缩放
 tags:
   - 前端
   - 平滑缩放
+ai_usage:
+  used: true
+  level: assist
+  summary: 正文由作者撰写，AI 参与了高刷设备增量丢失勘误与 scale 几何命中检测后记的补充。
+  llms:
+    - name: "gemini"
+      summary: "技术细节审校与踩坑补充章节整理"
 ---
 
 # 平滑缩放的前端实现
@@ -20,42 +27,46 @@ tags:
 
 一个多端友好的图片预览组件应该要做到以下几点：
 
-- 组件应该支持移动端和 PC 端，因此需要同时监听滚动事件和触摸事件。
-- 缩放手势可能会被浏览器识别为缩放整个页面，因此需要拦截默认事件。
-- 应该只阻止缩放手势的默认事件，不能粗暴阻止所有默认滚动/点击事件。
-- 在触摸交互设备上滚动事件会被高频触发，因此需要对滚动事件设置节流。
-- 缩放比例应该对用户操作幅度敏感，因此不能简单地在 `wheel` 事件上设置一个固定步长，应该获取滚动事件中具体的滚动/移动距离。
+- 组件应该支持移动端和 PC 端，因此需要同时兼顾滚轮/触控板事件与触屏手势。
+- 缩放手势可能会被浏览器识别为缩放整个页面或带动背景页面滚动，因此需要拦截默认行为。
+- 应该区分单指点击（关闭预览）、单指拖拽（平移画面）与双指捏合（缩放画面），不能粗暴吃掉所有指针事件。
+- 在高采样率触控设备上输入事件会被高频触发，需要合理合并或同步消费帧间增量。
+- 缩放比例应该对用户操作幅度敏感，因此不能简单地在 `wheel` 事件上设置一个固定步长，应该获取事件中具体的滚动/移动距离。
 
 ## 实现
 
 ### 节流和更新缩放比例
 
-因为缩放频率最终只会影响显示效果，不需要参与逻辑计算，因此只需要使用不精确的 `requestAnimationFrame` 函数进行防抖即可。至于这个函数的触发频率是每秒 30 还是 60，甚至是 240 或者 1 次都无所谓。
+缩放尺寸直接通过 CSS `transform: scale()` 在合成层完成即可，避免在高频手势期间反复修改宽高触发布局回流（Reflow）。
 
-缩放尺寸直接调用 `transform: scale` 进行设置，如果想自己捕获然后硬算也不是不行。
+如果使用 `requestAnimationFrame` 对高频事件做帧级节流（Frame Coalescing），有一个非常容易踩的坑：**千万不要在 `rafId` 存在时直接 `return` 丢弃同帧的后续增量**。在 120Hz/240Hz 触屏或触控板上，一帧之内往往会连续触发多次 `touchmove` / `wheel`；如果外部每次事件都推进了上一帧的基准坐标，而 `updateScale` 把同帧第 2、3 次传入的相对 `delta` 直接丢掉，这部分手指位移就会被永久吞掉。
+
+正确做法是先把帧内多次触发的 `delta` 累加起来，在下一帧回调里一次性消费并清零（在 Vue 3 中，响应式状态本身的 DOM 更新已经由框架微任务调度器自动批量合并，直接同步更新 `scale.value` 其实也完全够用）：
 
 ```vue
 <script setup lang="ts">
 const scale = ref(1);
 const MIN_SCALE = 0.5;
 const MAX_SCALE = 3;
-const lastTouchDistance = ref(0);
 
-let rafId: number | null = null; // 节流用
+let rafId: number | null = null;
+let pendingDelta = 0; // 累加同帧内的相对增量，避免高刷设备吞位移
 
 function updateScale(delta: number) {
-  if (!!rafId) return;
+  pendingDelta += delta;
+  if (rafId !== null) return;
 
   rafId = requestAnimationFrame(() => {
-    const newScale = scale.value + delta * 0.01;
+    const newScale = scale.value + pendingDelta * 0.01;
     scale.value = Math.min(Math.max(newScale, MIN_SCALE), MAX_SCALE);
+    pendingDelta = 0;
     rafId = null;
   });
 }
 
 // 极端情况下的请求释放
 onUnmounted(() => {
-  if (rafId) {
+  if (rafId !== null) {
     cancelAnimationFrame(rafId);
   }
 });
@@ -66,15 +77,15 @@ onUnmounted(() => {
 </template>
 ```
 
-### 事件监听
+### 事件监听与合成器手势接管
 
-在 Vue 当中监听滚动和触摸事件，只要在对应 DOM 上挂上事件监听器即可。
+在 Vue 当中监听滚动和触摸事件，只要在全屏遮罩层上挂上事件监听器，并配合 CSS `touch-action: none` 即可：
 
 ```vue
 <template>
   <div
     v-if="shouldShowPreview"
-    class="z-999 top-0 left-0 w-full h-full bg-black/40 flex flex-col items-center justify-center gap-4"
+    class="fixed z-999 inset-0 bg-black/40 touch-none flex flex-col items-center justify-center gap-4"
     @wheel="handleScroll"
     @touchstart="handleTouch"
     @touchmove="handleTouch"
@@ -84,24 +95,26 @@ onUnmounted(() => {
 </template>
 ```
 
+这里遮罩层上的 `touch-action: none`（对应 UnoCSS / Tailwind 的 `touch-none`）非常关键。移动端双指捏合时，两根手指几乎不可能在同一毫秒同时落屏——往往是第一根手指先触发单指 `touchstart`，几十毫秒后第二根手指才落下。如果不加 `touch-action: none`，浏览器合成器线程很可能在第一根手指移动时就已经抢先启动了原生页面滚动，等第二根手指落下再去 `touchmove` 里临时调 `event.preventDefault()`，浏览器会直接忽略并在控制台抛出 `[Intervention] Ignored attempt to cancel a touchmove event with cancelable=false`。用一行 CSS 直接在合成器层关掉遮罩内的原生滚动和页面缩放，比在事件回调里反复围追堵截干净得多。
+
 ### 意图过滤和默认事件拦截
 
-调用 `event.preventDefault()` 即可拦截默认事件。不过触摸事件有一点特殊，正常情况下单指交互包含了点击（点击关闭按钮/点击空白处退出）、拖动（拖动图片查看其他位置），而双指事件才代表缩放。因此需要放过单指事件（或者至少应该使用额外逻辑处理），只针对双指交互计算缩放。
+全屏预览打开时，在 `wheel` 事件中调用 `event.preventDefault()` 可以阻止滚动链（Scroll Chaining）穿透到底层文章页面，同时拦截浏览器原生的页面级缩放。
 
-可以使用 `event.touches` 来获取所有的触摸事件元素，`event.touches.length` 的长度就代表有几根手指在触摸。
+在桌面端 Chromium 与 Firefox 浏览器中，触控板上的双指捏合和扩张会被映射成带有 `ctrlKey === true` 的特殊滚轮事件（<kbd>Ctrl</kbd> + <kbd>Wheel</kbd>），而普通双指滑动则不带 `ctrlKey`。因此我们可以据此分流「捏合缩放」与「双指平移」两种意图（注：macOS Safari 在部分场景下还会额外派发 WebKit 私有的 `GestureEvent`，配合前文的 `touch-action: none` 可以避免把整个网页连带放大）。
 
-在 PC 端上，双指捏合和扩张会被识别成一个特殊的滚轮事件（<kbd>Ctrl</kbd> + <kbd>Wheel</kbd>），因此只需要拦截带有 <kbd>Ctrl</kbd> 键的滚轮事件即可。这样顺带也放过了滚轮的默认事件，不会影响图片的正常滚动。
+触摸事件则可以通过 `event.touches.length` 区分当前屏幕上有几根手指：单指交由点击或拖拽平移处理，双指才进入捏合缩放计算。
 
 ```ts
 function handleScroll(event: WheelEvent) {
-  // 阻止默认滚动行为，避免 scroll chaining
+  // 阻止默认页面缩放及底层页面的 scroll chaining
   event.preventDefault();
 
-  // 只处理 pinch zoom 手势（触摸板上的捏合手势会转换为 ctrl + wheel 事件）
+  // 触摸板上的双指捏合手势会转换为 ctrl + wheel 事件
   if (event.ctrlKey) {
     // …处理缩放逻辑
   } else {
-    // …处理滚动逻辑
+    // …处理平移（或鼠标滚轮缩放）逻辑
   }
 }
 
@@ -129,8 +142,7 @@ function handleScroll(event: WheelEvent) {
   // 阻止默认滚动行为，避免 scroll chaining
   event.preventDefault();
 
-  // 只处理 pinch zoom 手势
-  //（触摸板上的捏合手势会转换为 ctrl + wheel 事件）
+  // 区分触控板捏合缩放与双指滚动平移
   if (event.ctrlKey) {
     updateScale(-event.deltaY);
   } else {
@@ -141,9 +153,9 @@ function handleScroll(event: WheelEvent) {
 
 #### 触摸事件
 
-触摸事件的类型分为 `touchstart`、`touchmove` 和 `touchend` 三种，其中 `touchend` 事件不需要关心，只需要在 `touchstart` 时记录初始距离，在 `touchmove` 时计算当前距离与初始距离的变化即可。
+触摸事件的类型分为 `touchstart`、`touchmove` 和 `touchend` 三种，只需要在双指刚落下（或前一次双指移动后）记录基准距离，在后续 `touchmove` 时计算当前两指距离与基准距离的差值即可。
 
-触摸事件 `TouchEvent` 中的键 `touches` 是一个 Array，记录了所有检测到的触摸点。每个 `touches` 中的元素都含有自身横纵坐标 `clientX`，`clientY`。
+触摸事件 `TouchEvent` 中的键 `touches` 是一个列表，记录了所有当前接触屏幕的触点，每个元素都含有屏幕横纵坐标 `clientX`、`clientY`。
 
 两点之间的距离可以用勾股定理自行计算，这里介绍一种不太常见的方法：把两点之间的距离看作一个向量，使用 `Math.hypot()` 函数计算这个向量的模长。`Math.hypot()` 可以计算任意维度空间中某个向量的模长且模长恒为非负值，即
 
@@ -156,8 +168,10 @@ $$
 ![Math.hypot 浏览器兼容性](https://cdn.sa.net/2025/01/01/PxAFiLbNCYRr3qp.webp)
 
 ```ts
+const lastTouchDistance = ref(0);
+
 function handleTouch(event: TouchEvent) {
-  // 处理单指事件（点击等）
+  // 处理单指事件（点击、平移等）
   if (event.touches.length === 1) {
     // TODO: 平移滚动时平移图片
     return;
@@ -166,7 +180,6 @@ function handleTouch(event: TouchEvent) {
   // 过滤双指以外的触摸事件
   if (event.touches.length !== 2) return;
 
-  // 获取触摸点
   const touch1 = event.touches[0];
   const touch2 = event.touches[1];
 
@@ -177,22 +190,32 @@ function handleTouch(event: TouchEvent) {
   );
 
   if (event.type === "touchstart") {
-    event.preventDefault(); // 仅在开始缩放时阻止默认行为
     lastTouchDistance.value = distance;
     return;
   }
 
-  // 计算距离变化，只有在变化超过阈值时才认为是缩放
+  // 计算帧间距离变化，超过微小阈值时更新缩放并推进基准距离
   const delta = distance - lastTouchDistance.value;
   if (Math.abs(delta) > 1) {
-    // 添加一个小阈值，避免误触
-    event.preventDefault();
     updateScale(delta * 0.1);
     lastTouchDistance.value = distance;
   }
 }
 ```
 
+> 如果不想同时维护 `MouseEvent` 和 `TouchEvent` 两套拖拽/缩放状态，现代浏览器中更简洁的方案是直接改用 **Pointer Events**（`pointerdown` / `pointermove` / `pointerup` 配合 `setPointerCapture`），用一个 `Map<number, { x: number; y: number }>` 按 `pointerId` 追踪活动指针：集合长度为 `1` 时算单指/鼠标平移，长度为 `2` 时算双指距离捏合，逻辑会收敛很多。
+
+## 踩坑补充：`transform: scale` 的两个衍生副作用
+
+使用 `transform: scale()` 虽然避免了布局重排，但它**只改变合成层的视觉绘制尺寸，不会改变元素原本的 DOM 布局盒（Layout Box）**。后续完善组件时，我在这上面连踩了两个坑：
+
+1. **`onClickOutside` 在图片缩小时点击空白处失灵**
+   如果习惯性地在 `<img>` 外面套一层 VueUse 的 `<OnClickOutside>` 来做「点击空白关闭灯箱」，一旦把图片缩小到 `1.0x` 以下（比如 `scale(0.5)`），外层 `<OnClickOutside>` 生成的包装 `<div>` 依然占着 `1.0x` 的原始尺寸——点在图片缩回去让出的那圈空白里，`wrapper.contains(event.target)` 依然返回 `true`，导致预览关不掉。同理，如果给 `<img>` 写了 `w-full flex-1 object-contain`，横图上下、竖图左右的黑边留白其实也在 `<img>` 自身的盒模型内部，点在留白上一样会被吞掉。
+   **解法**：这本质上是 **2D 屏幕几何命中问题**，不是 DOM 树包含问题。去掉 `<OnClickOutside>`，让 `<img>` 的宽高紧贴真实比例（`width: auto; height: auto; max-width: ...; max-height: ...`），并在指针抬起（非多指捏合且累计拖拽位移不超过 `4px`）时调用一次 `imgEl.getBoundingClientRect()`——浏览器返回的 `DOMRect` 会自动把当前的 `scale(...)` 和 `translate3d(...)` 变换矩阵算进去，只要点击坐标落在变换后的视觉矩形之外就关闭预览。
+
+2. **`ResizeObserver` 不会响应 `scale()` 变化**
+   如果想在「图片放大超出视口后」自动把普通滚轮意图从缩放切换为平移，不能依赖 `useElementBounding` 或 `ResizeObserver` 去监听 `<img>` 宽高，因为 CSS `transform` 根本不会触发 `ResizeObserver`。直接在图片 `@load` 时记下基准 `offsetWidth` / `offsetHeight`，后续用 `offsetWidth * scale` 纯算术对比视口尺寸即可，不仅准确，在滚轮和拖拽帧内也是零 DOM 读取。
+
 ## 完整实现
 
-[GitHub](https://github.com/mark9804/blog/blob/a17930e5fa3ebc79d653fab905c3d2052534ad01/docs/.vitepress/theme/components/ElysiumUI/ElyImagePreview.vue)
+本站目前已经采用 Pointer Events + 几何命中检测重写了完整版图片预览组件，源码见 [GitHub - ElyImagePreview.vue](https://github.com/mark9804/blog/blob/master/docs/.vitepress/theme/components/ElysiumUI/ElyImagePreview.vue)。

@@ -3,6 +3,13 @@ title: 使用分块注意力降低推理显存占用
 tags:
   - 大模型
   - 分块注意力
+ai_usage:
+  used: true # true | false
+  level: assist # none | hint | assist | pair | copilot | auto
+  summary: 本文使用 AI 解读代码
+  llms:
+    - name: claude-3.7-sonnet
+      summary: 解释代码
 ---
 
 # 使用分块注意力降低推理显存占用

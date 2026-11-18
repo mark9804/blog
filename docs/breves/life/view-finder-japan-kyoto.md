@@ -8,6 +8,7 @@ tags:
   - 京都
   - View Finder
 cover: https://cdn.sa.net/2024/11/25/uyAvXg59dWnSsOi.webp
+ai_usage: false
 ---
 
 # View Finder：京都

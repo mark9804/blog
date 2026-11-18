@@ -3,6 +3,7 @@ title: "VSCode 中压制 Vue SFC 'Unknown at rule' 警告"
 tags:
   - 前端
   - Vue
+ai_usage: false
 ---
 
 # VSCode 中压制 Vue SFC 'Unknown at rule' 警告

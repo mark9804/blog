@@ -1,6 +1,7 @@
 ---
 title: 神户掠影
 description: 就去了一天学会，实在水不出一点东西
+ai_usage: false
 ---
 
 # 神户掠影

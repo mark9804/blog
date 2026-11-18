@@ -2,6 +2,7 @@
 title: 设置和重置 Homebrew 镜像源
 tags:
   - Homebrew
+ai_usage: false
 ---
 
 # 设置和重置 Homebrew 镜像源

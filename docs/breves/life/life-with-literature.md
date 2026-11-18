@@ -4,6 +4,7 @@ description: 原文是写在B站上的，但是我觉得这里也可以放一下
 tags:
   - 生活
   - 写作
+ai_usage: false
 ---
 
 # 我和文字的故事

@@ -2,6 +2,7 @@
 title: 尝试解决 CursorUIViewService 的内存泄漏
 tags:
   - macOS
+ai_usage: false
 ---
 
 # 尝试解决 CursorUIViewService 的内存泄漏

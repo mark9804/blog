@@ -3,6 +3,13 @@ title: 解决 SFTP 客户端冻结或报错 Received message too long
 tags:
   - 全栈
   - SFTP
+ai_usage:
+  used: true # true | false
+  level: copilot # none | hint | assist | pair | copilot | auto
+  summary: 本文由人类作者提出需求并撰写，AI 参与了问题原因分析与解决方案
+  llms:
+    - name: gemini-3-pro
+      summary: 协助分析问题原因并应用解决方案
 ---
 
 # 解决 SFTP 客户端冻结或报错 Received message too long

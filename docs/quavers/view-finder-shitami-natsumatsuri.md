@@ -7,6 +7,7 @@ tags:
   - 下见（东广岛）
   - 夏日祭
 cover: https://cdn.sa.net/2024/12/01/1WGL9sK4yOcnRQi.webp
+ai_usage: false
 ---
 
 # View Finder：下见夏日祭

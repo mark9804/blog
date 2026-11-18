@@ -4,6 +4,7 @@ description: iOS 上的 Safari 一直有一个 Canvas 合成问题，表现为�
 tags:
   - 前端
   - Safari
+ai_usage: false
 ---
 
 # 解决 iOS 18.4 以下 Safari 的 Canvas 合成 bug

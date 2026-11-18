@@ -4,6 +4,7 @@ description: 在 VSCode 设置中加入一些常用的 Markdown 快捷键，提�
 tags:
   - VSCode
   - Markdown
+ai_usage: false
 ---
 
 # 定制 Visual Studio Code 的 Markdown 快捷键

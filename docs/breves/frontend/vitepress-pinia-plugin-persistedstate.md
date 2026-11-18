@@ -4,6 +4,7 @@ tags:
   - 前端
   - VitePress
   - Pinia
+ai_usage: false
 ---
 
 # 在 VitePress 中正确使用 pinia-plugin-persistedstate

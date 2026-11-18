@@ -4,6 +4,13 @@ description: 使用 graftcp + clash 劫持 antigravity-server 流量
 tags:
   - Antigravity
   - graftcp
+ai_usage:
+  used: true # true | false
+  level: copilot # none | hint | assist | pair | copilot | auto
+  summary: 本文由人类作者提出需求、测试方案与撰写文章，AI 提供具体技术方案与代码细节
+  llms:
+    - name: gemini-3.1-pro
+      summary: 提供具体技术方案与代码细节
 ---
 
 # 在境内服务器上使用 Antigravity

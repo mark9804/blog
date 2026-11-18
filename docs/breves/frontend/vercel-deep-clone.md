@@ -5,6 +5,7 @@ tags:
   - Vercel
   - 前端
   - DevOps
+ai_usage: false
 ---
 
 # 使 Vercel 在部署时克隆完整仓库

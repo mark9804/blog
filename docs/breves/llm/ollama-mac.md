@@ -2,6 +2,13 @@
 title: 使用 Ollama 在 Mac 上部署端侧 LLM 模型
 tags:
   - LLM
+ai_usage:
+  used: true # true | false
+  level: assist # none | hint | assist | pair | copilot | auto
+  summary: 本文使用 AI 测试
+  llms:
+    - name: qwen-2.5-8B
+      summary: 参与测试
 ---
 
 # 使用 Ollama 在 Mac 上部署端侧 LLM 模型

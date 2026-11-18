@@ -104,6 +104,26 @@ Elysium 新增图库语法，支持一次性在文章中插入多张图片并批
 :::
 ```
 
+### AI 创作声明（Frontmatter `ai_usage`）
+
+文章信息栏默认始终展示 AI 创作声明标签（未配置 `ai_usage` 的历史文章默认显示 `AI 声明：未声明`）。全局开关、默认等级、前缀文案及各等级名称与缺省 `defaultSummary` 均集中在 `docs/.vitepress/configs/themeConfig.ts` 的 `aiUsageConfig` 中管理。
+
+在文章顶部 YAML Frontmatter 中可按需覆盖（未使用 AI 时可直接简写为 `ai_usage: false`）：
+
+```yaml
+# 简写（等价于 used: false, level: none）
+ai_usage: false
+
+# 完整对象写法
+ai_usage:
+  used: true # boolean，为 false 或 level 为 none 时显示「AI 声明：未使用」
+  summary: "可选：自定义总体说明，留空则回退至 themeConfig 中对应等级的 defaultSummary"
+  level: assist # undisclosed | none | hint | assist | pair | copilot | auto
+  llms:
+    - name: "gemini"
+      summary: "可选：该模型在本文中的具体分工"
+```
+
 ### RSS 订阅
 
 Elysium 整合了 [vitepress-plugin-rss](https://github.com/ATQQ/sugar-blog/tree/master/packages/vitepress-plugin-rss) 的 RSS 订阅功能，支持在首页和导航栏中显示 RSS 订阅源。RSS 文件在构建时会自动生成。

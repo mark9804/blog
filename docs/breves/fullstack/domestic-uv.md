@@ -3,6 +3,7 @@ title: 在国内环境中使用 UV
 tags:
   - python
   - uv
+ai_usage: false
 ---
 
 # 在国内环境中使用 UV

@@ -4,6 +4,13 @@ tags:
   - LLM
   - 提示工程
   - 幻觉
+ai_usage:
+  used: true # true | false
+  level: assist # none | hint | assist | pair | copilot | auto
+  summary: 本文使用 AI 测试
+  llms:
+    - name: claude-3.7-sonnet
+      summary: 参与测试
 ---
 
 # 幻觉抑制：基于大语言模型的猫娘调教指南（5）

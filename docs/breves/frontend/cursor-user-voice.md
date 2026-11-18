@@ -4,6 +4,7 @@ tags:
   - 前端
   - LLM
   - Cursor
+ai_usage: false
 ---
 
 # Cursor 使用体验

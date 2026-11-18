@@ -5,6 +5,7 @@ tags:
   - 位运算
   - TypeScript
   - Python
+ai_usage: false
 ---
 
 # 北美 Amazon Intern 面试题：能被 4 整除的数（位运算）

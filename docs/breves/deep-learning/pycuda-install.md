@@ -3,6 +3,7 @@ title: pycuda 安装时报错解决
 tags:
   - python
   - 深度学习
+ai_usage: false
 ---
 
 # pycuda 安装时报错解决

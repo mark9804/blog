@@ -4,6 +4,7 @@ description: 你好，“世界”
 cover: https://cdn.sa.net/2024/11/24/zLdXEjmFAPn38tD.webp
 tags:
   - 生活
+ai_usage: false
 ---
 
 # Hello, "World"

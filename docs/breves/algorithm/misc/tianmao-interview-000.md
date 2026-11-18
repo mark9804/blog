@@ -9,6 +9,7 @@ tags:
   - Kadane
   - Python
   - TypeScript
+ai_usage: false
 ---
 
 # 淘天面试题：翻转子串

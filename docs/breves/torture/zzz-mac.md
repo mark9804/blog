@@ -4,6 +4,7 @@ tags:
   - 游戏
   - 绝区零
   - macOS
+ai_usage: false
 ---
 
 # 在 Mac 上游玩 PC 版绝区零

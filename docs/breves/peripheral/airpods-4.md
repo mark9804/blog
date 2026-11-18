@@ -4,6 +4,7 @@ tags:
   - 外设
   - Apple
   - Airpods
+ai_usage: false
 ---
 
 # Airpods 4 ANC：能把人体传感器加回来就好了

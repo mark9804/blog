@@ -5,6 +5,7 @@ tags:
   - CSS
 createdAt: "2022-07-01 14:28"
 cover: https://cdn.sa.net/2024/11/26/VpvA6ne3E9L7cS2.webp
+ai_usage: false
 ---
 
 # 用纯 CSS 画一个圆角三角形

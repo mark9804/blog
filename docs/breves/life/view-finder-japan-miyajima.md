@@ -8,6 +8,7 @@ tags:
   - 宫岛
   - View Finder
 cover: https://cdn.sa.net/2024/11/25/bQfDOewVo9176SR.webp
+ai_usage: false
 ---
 
 # View Finder：宫岛

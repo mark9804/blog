@@ -5,6 +5,7 @@ tags:
   - 明日方舟
   - Python
   - 暴力搜索
+ai_usage: false
 ---
 
 # 用 Python 计算明日方舟 2021 龙门幸运墙期望

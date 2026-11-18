@@ -5,6 +5,7 @@ tags:
   - 前端
   - pnpm
   - 私库
+ai_usage: false
 ---
 
 # Patch npm 第三方包

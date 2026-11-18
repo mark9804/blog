@@ -4,6 +4,7 @@ tags:
   - 前端
   - Vue
 createdAt: "2022-11-24 16:15"
+ai_usage: false
 ---
 
 # 绕过 Vue3 setup defineProps 无法 import 的问题

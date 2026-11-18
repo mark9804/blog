@@ -6,6 +6,7 @@ tags:
   - 机械键盘
   - 阿米洛
   - Muse
+ai_usage: false
 ---
 
 # 阿米洛 Muse 65 上手体验：适合纯文字工作者的高颜值键盘

@@ -4,6 +4,7 @@ tags:
   - 外设
   - 屏幕挂灯
   - Screenbar Halo
+ai_usage: false
 ---
 
 # Screenbar Halo 一年使用体验：成也控制器，败也控制器

@@ -4,6 +4,7 @@ tags:
   - 外设
   - Apple
   - Magic Trackpad
+ai_usage: false
 ---
 
 # Magic Trackpad 4：科技在于换接口

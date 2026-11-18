@@ -4,6 +4,7 @@ tags:
   - python
   - uv
   - monorepo
+ai_usage: false
 ---
 
 # 使用 UV 构建和管理 Monorepo

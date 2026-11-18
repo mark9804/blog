@@ -3,6 +3,7 @@ title: 解决 Dart Sass 警告 `Legacy JS API deprecated`
 tags:
   - 前端
   - Sass
+ai_usage: false
 ---
 
 # 解决 Dart Sass 警告 `Legacy JS API deprecated`

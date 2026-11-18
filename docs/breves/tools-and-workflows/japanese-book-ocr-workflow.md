@@ -6,6 +6,7 @@ tags:
   - briss
   - Acrobat
   - OCR
+ai_usage: false
 ---
 
 # briss + Acrobat 搭建日语书籍屏幕阅读工作流

@@ -5,6 +5,7 @@ tags:
   - 提示工程
   - 预填充
   - Anthropic
+ai_usage: false
 ---
 
 # 预填充：基于大语言模型的猫娘调教指南（4）

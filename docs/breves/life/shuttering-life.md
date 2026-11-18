@@ -4,6 +4,7 @@ cover: https://cdn.sa.net/2024/11/24/J7fazqM1BTPmbw6.webp
 tags:
   - 生活
   - 摄影
+ai_usage: false
 ---
 
 # 定格生活

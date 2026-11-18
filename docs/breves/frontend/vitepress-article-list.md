@@ -4,6 +4,7 @@ description:
 tags:
   - 前端
   - VitePress
+ai_usage: false
 ---
 
 # 在 VitePress 中获取全部文章列表

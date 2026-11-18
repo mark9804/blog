@@ -3,6 +3,7 @@ title: Overleaf 使用 pLaTeX/upLaTeX 模板
 tags:
   - 研究
   - Overleaf
+ai_usage: false
 ---
 
 # Overleaf 使用 pLaTeX / upLaTeX 模板

@@ -8,6 +8,7 @@ tags:
   - 东京
   - View Finder
 cover: https://cdn.sa.net/2024/11/24/RTW4v3V5esj1ozX.webp
+ai_usage: false
 ---
 
 # View Finder：东京

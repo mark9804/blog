@@ -4,6 +4,7 @@ description: 让 VitePress Markdown 转换器正确解析以对象形式传入�
 tags:
   - VitePress
   - Markdown
+ai_usage: false
 ---
 
 # 在 VitePress Markdown 转换器中传入对象参数

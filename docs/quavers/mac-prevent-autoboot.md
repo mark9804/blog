@@ -2,6 +2,7 @@
 title: 关闭 Mac 自动启动
 tags:
   - macOS
+ai_usage: false
 ---
 
 # 关闭 Mac 自动启动

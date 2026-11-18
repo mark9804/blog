@@ -3,6 +3,7 @@ title: nvidia-tensorrt 安装时报错解决
 tags:
   - python
   - 深度学习
+ai_usage: false
 ---
 
 # nvidia-tensorrt 安装时报错解决

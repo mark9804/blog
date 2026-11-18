@@ -6,6 +6,7 @@ tags:
   - 机械键盘
   - 阿米洛
   - Muse
+ai_usage: false
 ---
 
 # 一次抽象的救砖经历：阿米洛 Muse 65

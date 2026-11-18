@@ -2,6 +2,13 @@
 title: 在不支持 systemctl 的服务器上部署 Ollama
 tags:
   - LLM
+ai_usage:
+  used: true # true | false
+  level: assist # none | hint | assist | pair | copilot | auto
+  summary: 本文由人类作者收集信息并撰写，AI 参与了具体脚本编写。
+  llms:
+    - name: gemini-2.5-pro
+      summary: 协助编写 init.d 脚本
 ---
 
 # 在不支持 systemctl 的服务器上部署 Ollama

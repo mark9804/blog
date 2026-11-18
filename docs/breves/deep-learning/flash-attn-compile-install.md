@@ -3,6 +3,7 @@ title: 在国内机器上编译 Flash Attention 并安装
 tags:
   - python
   - 深度学习
+ai_usage: false
 ---
 
 # 在国内机器上编译 Flash Attention 并安装

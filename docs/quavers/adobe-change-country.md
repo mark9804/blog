@@ -3,6 +3,7 @@ title: 记录一下 Adobe 账号转区
 tags:
   - Adobe
   - 对线经验
+ai_usage: false
 ---
 
 # 记录一下 Adobe 账号转区

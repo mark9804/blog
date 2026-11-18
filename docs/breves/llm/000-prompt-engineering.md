@@ -3,6 +3,13 @@ title: 提示工程：基于大语言模型的猫娘调教指南（0）
 tags:
   - LLM
   - 提示工程
+ai_usage:
+  used: true # true | false
+  level: assist # none | hint | assist | pair | copilot | auto
+  summary: 本文使用 AI 测试
+  llms:
+    - name: gpt-3.5-turbo
+      summary: 参与猫娘扮演
 ---
 
 # 提示工程：基于大语言模型的猫娘调教指南（0）

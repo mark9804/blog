@@ -5,6 +5,13 @@ tags:
   - 动态规划
   - MCMC
   - TypeScript
+ai_usage:
+  used: true # true | false
+  level: pair # none | hint | assist | pair | copilot | auto
+  summary: 本文由人类作者收集信息并撰写，AI 参与了具体算法推导与代码实现。
+  llms:
+    - name: gemini-3.1-pro
+      summary: 协助算法推导与算法实现
 ---
 
 # 「明日方舟：终末地」抽卡算法模拟和期望计算

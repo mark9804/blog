@@ -6,6 +6,7 @@ tags:
   - 结构方程模型
   - 社会科学
   - 心理
+ai_usage: false
 ---
 
 # 心理统计世界观：Fischer 检验、线性回归和相关、T 检验、结构方程模型（CLPM 及变体 RI-CLPM）

@@ -3,6 +3,7 @@ title: Tauri 项目开发实战（1）
 tags:
   - Tauri
   - 全栈
+ai_usage: false
 ---
 
 # Tauri 项目开发实战（1）

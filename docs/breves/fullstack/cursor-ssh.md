@@ -4,6 +4,7 @@ description: 使用 open-remote-ssh 插件替换 remote-ssh 插件实现远程�
 tags:
   - Cursor
   - 全栈
+ai_usage: false
 ---
 
 # 使用 Cursor 进行远程开发

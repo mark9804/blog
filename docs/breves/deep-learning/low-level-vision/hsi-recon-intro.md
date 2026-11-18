@@ -6,6 +6,13 @@ tags:
   - low-level vision
   - 高光谱重建
 cover: https://i.see.you/2026/03/25/s7gM/pic_1774433740249.jpg
+ai_usage:
+  used: true # true | false
+  level: assist # none | hint | assist | pair | copilot | auto
+  summary: 本文由人类作者收集信息并撰写，AI 参与校阅与「CASSI 系统中平移步长为波长无关的常数」部分推导
+  llms:
+    - name: gemini-3.1-pro
+      summary: 协助校阅与「CASSI 系统中平移步长为波长无关的常数」部分推导
 ---
 
 # 高光谱重建任务入门
@@ -49,7 +56,7 @@ SCI 是一系列成像系统的统称，而在这一系列系统当中，上图�
 可能有人会提出两个疑问：
 
 1. 为什么不直接在 $F$ 上进行 dispersion，而是要先经历一步 modulation 呢？这不是人为地增加计算复杂度和引入导致质量退化的变量了吗？
-2. 为什么 $M^*$ 是二维掩膜（$M^* \in \mathbb{R}^{H \times W}$），它能不能是三维的（$M^* \in \mathbb{R}^{H \times W \times N_{\lambda}}$）？
+2. 为什么 $M^_$ 是二维掩膜（$M^_ \in \mathbb{R}^{H \times W}$），它能不能是三维的（$M^* \in \mathbb{R}^{H \times W \times N_{\lambda}}$）？
 
 我们一个一个回答。
 
