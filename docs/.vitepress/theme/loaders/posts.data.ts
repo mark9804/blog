@@ -1,7 +1,9 @@
 import { TZDate } from "@date-fns/tz";
 import { createContentLoader } from "vitepress";
 import wordsCountModule from "words-count";
+import { aiUsageConfig } from "../../configs/themeConfig.ts";
 import type { Post, PostFrontmatter } from "../types/Post.ts";
+import { normalizeAiUsage } from "../utils/aiUsageUtils.ts";
 import { DEFAULT_TIMEZONE } from "../utils/timeUtils.ts";
 import { collectGitHistory } from "./_gitHistory.ts";
 
@@ -97,10 +99,18 @@ export default createContentLoader<Post[]>("**/*.md", {
     const posts: Post[] = [];
 
     for (const item of rawData) {
-      const frontmatter = (item.frontmatter ?? {}) as PostFrontmatter;
-      if (item.url.endsWith("/") || frontmatter.publish === false) {
+      const rawFrontmatter = (item.frontmatter ?? {}) as PostFrontmatter;
+      if (item.url.endsWith("/") || rawFrontmatter.publish === false) {
         continue;
       }
+
+      const frontmatter: PostFrontmatter = {
+        ...rawFrontmatter,
+        ai_usage: normalizeAiUsage(
+          rawFrontmatter.ai_usage,
+          aiUsageConfig.defaultLevel
+        ),
+      };
 
       const docPath = urlToDocPath(item.url);
       const createdAt =

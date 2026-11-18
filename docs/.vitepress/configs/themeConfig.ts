@@ -1,11 +1,52 @@
+import type { AiUsageConfig } from "../theme/utils/aiUsageUtils.ts";
 import { tokenize } from "../theme/utils/tokenizer.ts";
 import { navConfig } from "./navConfig.ts";
 import { userProfile } from "./userProfile.ts";
+
+export const aiUsageConfig: AiUsageConfig = {
+  enabled: true,
+  defaultLevel: "undisclosed",
+  prefix: "AI 声明：",
+  modelsHeading: "参与模型",
+  levels: {
+    undisclosed: {
+      label: "未声明",
+      defaultSummary: "本文未针对 AI 使用情况作专门标注。",
+    },
+    none: {
+      label: "未使用",
+      defaultSummary: "本文由作者独立撰写，未使用生成式 AI 参与内容生产。",
+    },
+    hint: {
+      label: "检索启发",
+      defaultSummary: "本文仅在构思、资料检索或概念核对阶段参考了 AI 提示。",
+    },
+    assist: {
+      label: "AI 辅助",
+      defaultSummary: "文章正文由作者撰写，AI 仅用于措辞润色、勘误或格式整理。",
+    },
+    pair: {
+      label: "结对协作",
+      defaultSummary:
+        "本文由人类作者主导结构与核心观点，部分段落或示例与 AI 协作推敲完成。",
+    },
+    copilot: {
+      label: "深度协同",
+      defaultSummary:
+        "本文由人类作者给出详细提纲与技术约束，AI 生成初稿并经作者审校重构。",
+    },
+    auto: {
+      label: "主导生成",
+      defaultSummary: "本文由 AI 主导生成。",
+    },
+  },
+};
 
 export const themeConfig = {
   userProfile,
   logo: userProfile.avatar,
   tooltipCloseDelay: 400,
+  aiUsage: aiUsageConfig,
   lastUpdated: {
     text: "最后更新于",
     formatOptions: {

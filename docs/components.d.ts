@@ -13,6 +13,7 @@ declare module 'vue' {
   export interface GlobalComponents {
     ArticleInfo: typeof import('./.vitepress/theme/components/ArticleInfo.vue')['default']
     ArticleWaterfallList: typeof import('./.vitepress/theme/components/ArticleWaterfallList.vue')['default']
+    ElyAiDeclaration: typeof import('./.vitepress/theme/components/ElysiumUI/ElyAiDeclaration.vue')['default']
     ElyButton: typeof import('./.vitepress/theme/components/ElysiumUI/ElyButton.vue')['default']
     ElyCard: typeof import('./.vitepress/theme/components/ElysiumUI/ElyCard.vue')['default']
     ElyEmptyState: typeof import('./.vitepress/theme/components/ElysiumUI/ElyEmptyState.vue')['default']

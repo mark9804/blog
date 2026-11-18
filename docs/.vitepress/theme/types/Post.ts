@@ -1,9 +1,12 @@
+import type { AiUsage, RawAiUsage } from "../utils/aiUsageUtils.ts";
+
 export interface PostMeta {
   hidden?: boolean;
   timeAmp?: number;
   hideArticleInfo?: boolean;
   hideEditTime?: boolean;
   hideReadingTime?: boolean;
+  hideAiUsage?: boolean;
 }
 
 export interface PostFrontmatter {
@@ -16,6 +19,7 @@ export interface PostFrontmatter {
   gitChangelog?: boolean;
   createdAt?: number | string;
   meta?: PostMeta;
+  ai_usage?: RawAiUsage | AiUsage | boolean;
 }
 
 export interface Post {

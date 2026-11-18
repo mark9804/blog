@@ -45,7 +45,7 @@ watch(
 
 <template>
   <sup class="footnote-ref">
-    <ElyTooltip v-if="hasFootnote" position="bl" :close-delay="400">
+    <ElyTooltip v-if="hasFootnote" position="bl">
       <a
         :href="`#footnote${id}`"
         @pointerenter="ensureFootnoteContent"
