@@ -132,7 +132,7 @@ onUnmounted(() => {
 
 <style scoped lang="scss">
 .giscus-section {
-  margin-top: 48px;
+  margin-top: 64px;
 
   &__title {
     font-family: var(--font-family-serif);

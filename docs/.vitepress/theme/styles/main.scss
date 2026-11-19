@@ -46,7 +46,7 @@ html.dark {
   }
 
   figure img,
-  .elysium-ui__card--cover {
+  .elysium-ui__card--cover-container img {
     filter: brightness(0.88);
   }
 }
@@ -221,9 +221,29 @@ html.dark {
   }
 }
 
-// Prev / Next article cards at bottom of posts: off-register gouache + drafting hairline
-.VPDocFooter {
+// Article colophon (tags + changelog) & sibling post navigation (.prev-next)
+.VPDocFooter.VPDocFooter {
+  // Keep article colophon visually bound to the prose above (override VitePress 4rem)
+  margin-top: 28px;
+
+  // Suppress empty footer shell on standalone pages with neither colophon items nor prev/next
+  &:not(:has(.article-colophon > *, .prev-next)) {
+    display: none;
+  }
+
+  .article-colophon {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    &:not(:has(*)) {
+      display: none;
+    }
+  }
+
   .prev-next {
+    margin-top: 56px;
+    padding-top: 24px;
     border-top: 1px solid var(--color-accent-border-200);
 
     .pager-link {

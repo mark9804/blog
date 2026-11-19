@@ -59,18 +59,19 @@ function handleClick(e: Event) {
   border-radius: 0;
   font-family: var(--font-family-base);
   font-weight: 500;
+  line-height: 1.5;
   cursor: default;
   transition:
     background-color 0.2s ease,
     color 0.2s ease;
 
   &--small {
-    padding: 1px 10px;
+    padding: 2px 9px;
     font-size: 12px;
   }
 
   &--medium {
-    padding: 2px 12px;
+    padding: 3px 12px;
     font-size: 14px;
   }
 

@@ -144,24 +144,25 @@ onUnmounted(() => {
   </transition>
   <Layout>
     <template #doc-footer-before>
-      <div
-        v-if="frontmatter.tags?.length"
-        class="flex flex-wrap items-center gap-2 pb-4"
-      >
-        <span class="text-sm text-secondary"
-          >Tag{{ frontmatter.tags.length > 1 ? "s" : "" }}:
-        </span>
-        <ElyTag
-          v-for="tag in frontmatter.tags"
-          :key="tag"
-          size="small"
-          clickable
-          @click="navigateToTag(tag)"
+      <div class="article-colophon">
+        <div
+          v-if="frontmatter.tags?.length"
+          role="list"
+          aria-label="文章标签"
+          class="article-colophon__tags flex flex-wrap items-center gap-2"
         >
-          {{ tag }}
-        </ElyTag>
-      </div>
-      <div class="mb-5">
+          <ElyTag
+            v-for="tag in frontmatter.tags"
+            :key="tag"
+            role="listitem"
+            size="small"
+            clickable
+            :title="`搜索含有「${tag}」标签的文章`"
+            @click="navigateToTag(tag)"
+          >
+            {{ tag }}
+          </ElyTag>
+        </div>
         <ElyGitChangelog />
       </div>
     </template>
