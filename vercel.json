@@ -4,7 +4,7 @@
   },
   "framework": "vitepress",
   "installCommand": "corepack pnpm install --frozen-lockfile",
-  "buildCommand": "git fetch --unshallow && PLATFORM=vercel corepack pnpm build --base /",
+  "buildCommand": "if [ \"$(git rev-parse --is-shallow-repository)\" = true ]; then git fetch --unshallow --no-tags https://github.com/mark9804/blog.git \"$(git rev-parse HEAD)\"; fi && PLATFORM=vercel corepack pnpm build --base /",
   "cleanUrls": true,
   "redirects": [
     {
