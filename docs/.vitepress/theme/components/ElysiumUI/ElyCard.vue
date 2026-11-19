@@ -1,9 +1,13 @@
 <script setup lang="ts">
-import { computed, onMounted, ref, useSlots, useTemplateRef, watch } from "vue";
+import { computed, onMounted, ref, useSlots, watch } from "vue";
 import { withBase } from "vitepress";
 import type { CardProps } from "./types/CardProps";
+import type { ImageBase } from "./types/ImageBase";
 import { formatDateTime, formatRelativeTime } from "../../utils/timeUtils";
 import { useTagNavigation } from "../../composables/useTagNavigation";
+import ElyImage from "./ElyImage.vue";
+import ElySpace from "./ElySpace.vue";
+import ElyTag from "./ElyTag.vue";
 
 const props = withDefaults(defineProps<CardProps>(), {
   maxWidth: 280,
@@ -14,10 +18,6 @@ const props = withDefaults(defineProps<CardProps>(), {
 
 const slots = useSlots();
 const { navigateToTag } = useTagNavigation();
-
-const imageLoaded = ref(false);
-const imageError = ref(false);
-const coverImgRef = useTemplateRef<HTMLImageElement>("coverImgRef");
 
 const resolvedMaxWidth = computed(() =>
   typeof props.maxWidth === "number" ? `${props.maxWidth}px` : props.maxWidth
@@ -39,6 +39,17 @@ const formattedTitle = computed(
   () => props.content?.frontmatter.title?.replace(/`/g, "") ?? ""
 );
 
+const coverImage = computed<ImageBase | null>(() => {
+  const cover = props.content?.frontmatter.cover;
+  if (!cover) return null;
+  return {
+    src: cover,
+    alt: formattedTitle.value
+      ? `文章「${formattedTitle.value}」的封面图片`
+      : "文章封面图片",
+  };
+});
+
 // Deterministic build-time date avoids SSR/client hydration clock skew
 const relativeTime = ref(
   props.content?.createdAt
@@ -55,25 +66,8 @@ function syncRelativeTime() {
 
 watch(() => props.content?.createdAt, syncRelativeTime);
 
-watch(
-  () => props.content?.frontmatter.cover,
-  () => {
-    imageLoaded.value = false;
-    imageError.value = false;
-  }
-);
-
 onMounted(() => {
   syncRelativeTime();
-  // Cached images on SPA router return already have complete === true before @load fires
-  const coverEl = coverImgRef.value;
-  if (coverEl?.complete) {
-    if (coverEl.naturalWidth > 0) {
-      imageLoaded.value = true;
-    } else {
-      imageError.value = true;
-    }
-  }
 });
 
 const shouldAriaLabelHide = ref(false);
@@ -117,21 +111,10 @@ const shouldAriaLabelHide = ref(false);
     <!-- Bottom Presentation Layer (z-auto: no stacking context, so z-3 tags escape above z-2 link) -->
     <div class="elysium-ui__card--content relative flex flex-col py-5 px-5">
       <div
-        class="elysium-ui__card--cover-container relative w-full overflow-hidden mb-4"
-        v-if="props.content?.frontmatter.cover && !imageError"
+        v-if="coverImage"
+        class="elysium-ui__card--cover-container relative w-full mb-4"
       >
-        <img
-          ref="coverImgRef"
-          class="elysium-ui__card--cover w-full block object-cover transition-opacity duration-500"
-          :class="{ loaded: imageLoaded }"
-          :src="props.content.frontmatter.cover"
-          :alt="props.content.frontmatter.title"
-          :aria-label="`文章「${props.content.frontmatter.title}」的封面图片`"
-          loading="lazy"
-          decoding="async"
-          @load="imageLoaded = true"
-          @error="imageError = true"
-        />
+        <ElyImage :image="coverImage" :previewable="false" />
       </div>
       <h2 class="elysium-ui__card--title m-0">
         <slot name="title">
@@ -246,14 +229,14 @@ const shouldAriaLabelHide = ref(false);
   }
 
   &--cover-container {
-    background-color: var(--gouache-paper);
-  }
+    :deep(.elysium-ui__image) {
+      max-width: 100%;
+    }
 
-  &--cover {
-    opacity: 0;
-
-    &.loaded {
-      opacity: 1;
+    // Elevate retry button above the z-2 card link when cover loading fails
+    :deep(.elysium-ui__button) {
+      position: relative;
+      z-index: 3;
     }
   }
 
@@ -334,7 +317,6 @@ const shouldAriaLabelHide = ref(false);
 @media (prefers-reduced-motion: reduce) {
   .elysium-ui__card__container,
   .elysium-ui__card--gouache-plane,
-  .elysium-ui__card--cover,
   .card-crosshair {
     transition: none !important;
   }
