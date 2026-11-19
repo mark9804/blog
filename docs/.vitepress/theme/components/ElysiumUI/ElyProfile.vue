@@ -133,7 +133,9 @@ function handleScrollIndicatorClick() {
       <div
         class="ely-frontispiece__content relative z-10 flex flex-col items-start px-9 py-11 sm:px-14 sm:py-14 gap-7"
       >
-        <div class="flex flex-col sm:flex-row sm:items-end gap-6 w-full">
+        <div
+          class="flex flex-col items-start sm:flex-row sm:items-end gap-6 w-full"
+        >
           <div class="ely-frontispiece__avatar-frame shrink-0">
             <img
               class="ely-frontispiece__avatar-img w-[88px] h-[88px] block object-cover"
@@ -142,7 +144,7 @@ function handleScrollIndicatorClick() {
             />
           </div>
 
-          <div class="flex flex-col gap-2 min-w-0">
+          <div class="flex flex-col gap-2 min-w-0 max-w-full">
             <h1 class="ely-frontispiece__name m-0">
               {{ displayName }}
             </h1>
@@ -273,6 +275,7 @@ function handleScrollIndicatorClick() {
 
   // Avatar with negative-space paper mat cutting into the gouache wash block
   &__avatar-frame {
+    width: fit-content;
     padding: 4px;
     background-color: var(--gouache-paper);
     border: 1px solid var(--color-accent-border-300);
