@@ -1,24 +1,48 @@
 ---
 title: 使 Vercel 在部署时克隆完整仓库
-description: Vercel 部署时默认浅克隆，但是可以通过 git pull <仓库地址> --unshallow <分支> 命令解决。
+description: Vercel 构建目录可能没有 Git remote 并浅克隆。显式指定仓库 URL 和当前 HEAD，用 git fetch --unshallow 补齐提交历史。
 tags:
   - Vercel
   - 前端
   - DevOps
-ai_usage: false
+ai_usage:
+  used: true
+  level: assist
+  summary: 原文由作者撰写，AI 协助复现浅克隆问题并整理本次更新。
+  llms:
+    - name: gpt-6.2-sol
+      summary: 复现 Git 行为并补充构建配置示例
 ---
 
 # 使 Vercel 在部署时克隆完整仓库
 
-根据 [Vercel 文档](https://vercel.com/docs/deployments/configure-a-build#configuring-a-build)，Vercel 在部署时默认只克隆最近的 10 次提交记录。
+Vercel 在从 Git 部署时默认使用深度为 10 的浅克隆。我的首页时间轴会用文章在 Git 中最早的提交时间排序。历史截断后，一批旧文章会被当成在浅克隆的边界提交里同时新增，构建照常成功，首页顺序却乱了。[Vercel 构建文档](https://vercel.com/docs/builds/configure-a-build)
 
-> When you make a deployment..., Vercel performs a "shallow clone" on your Git repository using the command `git clone --depth=10 (...)` and fetches ten levels of git commit history. This means that **only the latest ten commits are pulled** and not the entire repository history.
+## 2026-11-19 更新：显式指定仓库 URL 和当前 HEAD
 
-我的首页时间轴工具是基于 Git 的完整提交历史来实现的，浅克隆虽然不会报错，但是会让文章的展示顺序变得非常混乱。因此最后我使用 `git pull --unshallow <仓库地址> <分支>` 深克隆了整个仓库，解决了这个问题。
+后来我把构建命令换成了 `git fetch --unshallow`，结果发现 Vercel 还能阴我一招：克隆下来的仓库有可能不带原始仓库地址。省略仓库地址时，Git 会找当前分支关联的远端，缺省用 `origin`。于是这条命令就可能什么都没拉，但是返回退出码 `0`。（[Git fetch 文档](https://git-scm.com/docs/git-fetch)、[Vercel 社区实测](https://github.com/vercel/vercel/discussions/5737#discussioncomment-7984929)）
 
-（只想知道解决方案的可以退出了，这就是解决方案）
+我用这个仓库做了个深度为 10 的克隆，移除 `origin` 后重跑旧命令。命令执行成功，`git rev-parse --is-shallow-repository` 仍然输出 `true`，`git rev-list --count HEAD` 也仍然是 `10`。构建命令里的 `&&` 只看退出码，于是 VitePress 照常构建。线上有 78 篇文章的创建时间被算成了同一个边界提交的时间。
 
-## 使用完整 git 记录覆盖 shallow clone
+现在我在构建前判断仓库是否是浅克隆，再显式从 GitHub 补齐当前提交的历史。
+
+```sh
+if [ "$(git rev-parse --is-shallow-repository)" = true ]; then
+  git fetch --unshallow --no-tags https://github.com/mark9804/blog.git "$(git rev-parse HEAD)"
+fi
+```
+
+`$(git rev-parse HEAD)` 取的是 Vercel 正在构建的提交 SHA。`git fetch` 会补齐它的历史，当前 `HEAD` 保持原位。用到自己的项目时，换成对应的仓库 URL 即可。下面是本站 `vercel.json` 里的构建配置。
+
+```json [vercel.json]
+{
+  "framework": "vitepress",
+  "installCommand": "corepack pnpm install --frozen-lockfile",
+  "buildCommand": "if [ \"$(git rev-parse --is-shallow-repository)\" = true ]; then git fetch --unshallow --no-tags https://github.com/mark9804/blog.git \"$(git rev-parse HEAD)\"; fi && PLATFORM=vercel corepack pnpm build --base /"
+}
+```
+
+## 最初用 `git pull` 补齐历史
 
 有时一个有点年头或者积极开发的仓库可能会有成千上万条提交记录，但是通常在部署时只需要拉取最后一次提交就足够了。
 
@@ -40,23 +64,4 @@ ai_usage: false
 
 ## Vercel 环境变量？
 
-随后我在网上搜索了一下，在 Vercel 的 [这个 Discussion](https://github.com/vercel/vercel/discussions/5737) 中找到了类似的解决方案。另外也有人给出了使用 Vercel 环境变量 `VERCEL_DEEP_CLONE=true` 的解决方案。但是测试后发现**这个环境变量会让构建卡死**，log 提示 `There was a permanent problem cloning the repo.`。而 Vercel 的免费构建时间是有每月上限的（6000 小时 = 4 天 4 小时），因此要是一不注意这个月就别想构建了。
-
-因此目前来看，使用 `git pull --unshallow` 虽然不能满足模板化需求，但是至少可以正常工作。
-
-我的完整 `vercel.json` 文件如下：
-
-:::code-group
-
-```json [vercel.json]
-{
-  "github": {
-    "silent": true
-  },
-  "framework": "vitepress",
-  "installCommand": "git pull --unshallow https://github.com/mark9804/blog master && pnpm install",
-  "buildCommand": "vitepress build docs --base /"
-}
-```
-
-:::
+Vercel 的讨论帖里还有人提到 `VERCEL_DEEP_CLONE=true`。我当时试了一下，构建卡在克隆阶段，日志提示 `There was a permanent problem cloning the repo.`，就继续用了显式指定仓库地址和分支的 `git pull --unshallow`。[Vercel 讨论帖](https://github.com/vercel/vercel/discussions/5737)
