@@ -3,7 +3,13 @@ title: 在国内机器上编译 Flash Attention 并安装
 tags:
   - python
   - 深度学习
-ai_usage: false
+ai_usage:
+  used: true
+  level: pair
+  summary: 本文由人类作者撰写，AI 完成了代码编写与调试。
+  llms:
+    - name: claude-3.7-sonnet
+      summary: 代码编写与调试
 ---
 
 # 在国内机器上编译 Flash Attention 并安装

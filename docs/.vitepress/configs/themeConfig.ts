@@ -2,7 +2,15 @@ import type { AiUsageConfig } from "../theme/utils/aiUsageUtils.ts";
 import { tokenize } from "../theme/utils/tokenizer.ts";
 import { navConfig } from "./navConfig.ts";
 import { userProfile } from "./userProfile.ts";
-
+/*
+ai_usage: (false)
+  used: true | false
+  level: none | hint | assist | pair | copilot | auto
+  summary: string
+  llms:
+    - name: string
+      summary: string
+*/
 export const aiUsageConfig: AiUsageConfig = {
   enabled: true,
   defaultLevel: "undisclosed",
