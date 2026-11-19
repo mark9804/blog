@@ -20,6 +20,7 @@ type ImageLoadState = "loading" | "loaded" | "error";
 
 const props = withDefaults(defineProps<ImageProps>(), {
   lazy: true,
+  previewable: true,
 });
 
 const store = useImageStore();
@@ -65,7 +66,7 @@ function handleRetry(event: MouseEvent) {
 }
 
 function handleClick() {
-  if (state.value !== "loaded") return;
+  if (!props.previewable || state.value !== "loaded") return;
   if (gallery && gallery.images.value.length > 0) {
     store.openImagePreview(gallery.images.value, props.galleryIndex ?? 0);
   } else {
@@ -97,6 +98,7 @@ onMounted(() => {
       'elysium-ui__image--loading': state === 'loading',
       'elysium-ui__image--loaded': state === 'loaded',
       'elysium-ui__image--error': state === 'error',
+      'elysium-ui__image--previewable': props.previewable,
       'elysium-ui__image--auto-height': !explicitHeight,
     }"
     :style="containerStyle"
@@ -166,7 +168,7 @@ onMounted(() => {
     min-height: 168px;
   }
 
-  &--loaded {
+  &--previewable.elysium-ui__image--loaded {
     cursor: zoom-in;
 
     &:hover {
