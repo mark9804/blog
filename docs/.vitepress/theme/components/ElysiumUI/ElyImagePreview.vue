@@ -336,7 +336,7 @@ onUnmounted(() => {
             v-if="shouldShowNav"
             secondary
             size="icon"
-            class="elysium-ui__image-preview__button elysium-ui__image-preview__button__nav elysium-ui__image-preview__button__nav--prev -translate-y-1/2"
+            class="elysium-ui__image-preview__button elysium-ui__image-preview__button__nav elysium-ui__image-preview__button__nav--prev"
             aria-label="上一张图像"
             @click="imageStore.prevImagePreview()"
           >
@@ -347,7 +347,7 @@ onUnmounted(() => {
             v-if="shouldShowNav"
             secondary
             size="icon"
-            class="elysium-ui__image-preview__button elysium-ui__image-preview__button__nav elysium-ui__image-preview__button__nav--next -translate-y-1/2"
+            class="elysium-ui__image-preview__button elysium-ui__image-preview__button__nav elysium-ui__image-preview__button__nav--next"
             aria-label="下一张图像"
             @click="imageStore.nextImagePreview()"
           >
@@ -387,8 +387,14 @@ onUnmounted(() => {
 
   &__button {
     position: absolute;
-    background-color: var(--gouache-paper);
-    border: 1px solid var(--color-accent-border-300);
+    width: 36px;
+    height: 36px;
+    box-shadow: 3px 3px 0 0
+      color-mix(in srgb, var(--gouache-pigment) 26%, var(--gouache-paper));
+
+    &:not(:hover) {
+      border-color: var(--color-accent-border-400);
+    }
 
     &__nav {
       top: 50%;
